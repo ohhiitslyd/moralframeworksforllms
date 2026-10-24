@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Human Collusion and Lying: A Comprehensive Taxonomy</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="human-collusion-and-lying-a-comprehensive-taxonomy">Human Collusion and Lying: A Comprehensive Taxonomy</h1>
+<p><strong>Apart Research AI Collusion Research Sprint (Oct 23-25, 2026)</strong></p>
+<p><strong>Research Survey: Human Moral, Philosophical, Behavioral, Ethical, Legal, Economic, and Social-Science Foundations</strong></p>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This document surveys empirical and philosophical research on when and why humans collude to act in dangerous, unethical, immoral, deceptive, and/or misaligned ways. Drawing from philosophy, psychology, economics, criminology, law, and cross-cultural studies, it presents a comprehensive taxonomy of phenomena, motivations, conditions, beliefs, ethical contexts, authority structures, moral frameworks, coordination mechanisms, detection methods, and countermeasures.</p>
+<p><strong>Key findings:</strong></p>
+<ul>
+<li>
+<p><strong>Lying and collusion are multiply determined.</strong> No single factor is necessary or sufficient. Rather, combinations of motivation (self-interest, loyalty, fear), opportunity (opacity, weak monitoring), cognitive processes (ethical fading, moral disengagement, pluralistic ignorance), social structures (authority, group identity, role demands), and cultural frameworks (honor, binding foundations, tightness) interact to produce misconduct.</p>
+</li>
+<li>
+<p><strong>Humans exhibit intrinsic lie aversion.</strong> Even when profitable and undetected, many refuse to lie (Gneezy, 2005; Erat &amp; Gneezy, 2012; Fischbacher &amp; Föllmi-Heusi, 2013). This aversion weakens when harm to others is low, when lies serve prosocial ends, when responsibility is diffused, or when euphemistic framing conceals moral content (Tenbrunsel &amp; Messick, 2004).</p>
+</li>
+<li>
+<p><strong>Situations dominate dispositions in immediate moral choices.</strong> Time pressure, authority cues, role demands, and group norms strongly predict behavior (Milgram, 1963; Darley &amp; Batson, 1973), though stable character traits still shape how people act once engaged and predict long-term patterns.</p>
+</li>
+<li>
+<p><strong>Collusion requires coordination, but not always communication.</strong> Tacit collusion via parallel conduct and focal points is possible (Schelling, 1960; Green &amp; Porter, 1984), but explicit communication vastly increases stability, enforcement, and scope. Detection without communication channels relies on statistical "plus factors" and structural breaks, with high false-positive risk (Marx, 2007).</p>
+</li>
+<li>
+<p><strong>Effective countermeasures disrupt multiple mechanisms.</strong> Leniency programs destabilize cartels by creating a race to disclose (Motta &amp; Polo, 2003). Rotation and diversity reduce in-group trust and salience. Monitoring alone fails if ethical fading, pluralistic ignorance, or loyalty norms suppress reporting; successful interventions also increase moral salience, protect whistleblowers, and foster voice (Hirschman, 1970).</p>
+</li>
+</ul>
+<p>This taxonomy is organized around twelve major categories, followed by sections on causal relationships, AI-human analogies, and alignment with sprint research questions.</p>
+<hr />
+<h2 id="table-of-contents">TABLE OF CONTENTS</h2>
+<ol>
+<li>
+<p><strong>TAXONOMY</strong>
+   - A. Phenomena / Target Behaviors
+   - B. Motivations and Goals
+   - C. Conditions, Situations, and Task Structures
+   - D. Beliefs and Information States
+   - E. Ethical Contexts and Dilemmas
+   - F. Authority, Instruction Conflict, and Source Types
+   - G. Moral/Ethical Frameworks (Content)
+   - H. Framework Formation Methods
+   - I. Coordination Mechanisms and Carriers
+   - J. Detection, Evidence Standards, and Judgment
+   - K. Countermeasures and Disruption
+   - L. Outcomes and Harm Types</p>
+</li>
+<li>
+<p><strong>RELATIONSHIPS AND CAUSAL PATHWAYS</strong></p>
+</li>
+<li>
+<p><strong>IMPLICATIONS FOR AI-HUMAN ANALOGY</strong></p>
+</li>
+<li>
+<p><strong>ALIGNMENT WITH SPRINT RESEARCH QUESTIONS</strong></p>
+</li>
+<li>
+<p><strong>STRUCTURED BIBLIOGRAPHY</strong></p>
+</li>
+</ol>
+<hr />
+<h1 id="1-taxonomy">1. TAXONOMY</h1>
+<hr />
+<h2 id="a-phenomena-target-behaviors">A. PHENOMENA / TARGET BEHAVIORS</h2>
+<p><strong>Definition and distinctness:</strong> This category enumerates the observable actions that constitute lying, collusion, deception, and related misconduct. Each phenomenon differs in mechanism (communication, omission, action vs. inaction), intent (deceptive vs. non-deceptive), social structure (individual vs. coordinated), and target (beliefs, knowledge, prices, regulations).</p>
+<h3 id="a1-lying-individual-deception-via-assertion">A.1 Lying (individual deception via assertion)</h3>
+<p><strong>Definitions:</strong>
+- <strong>Traditional deceptionist view</strong> (Mahon, SEP 2008): A statement is a lie if (1) it is false, (2) the speaker believes it false, (3) it is made to another person, and (4) the speaker intends the hearer to believe it true.
+- <strong>Non-deceptionist views</strong> (Carson, 2010; Saul, 2012): Lying requires warranting truth in context, not necessarily intent to deceive. "Bald-faced lies"—statements no one expects to be believed—can still be lies if they violate conversational norms.
+- <strong>Sorensen's knowledge-lies</strong> (2007): Lies can target a hearer's testimonial knowledge rather than belief, though Fallis (2011) argues these ultimately operate via belief change.</p>
+<p><strong>Key findings:</strong>
+- Intrinsic lie aversion: Even when lies are profitable and undetected, many people refuse (Gneezy, 2005; Erat &amp; Gneezy, 2012). 35% refused a Pareto-improving lie that benefited both parties, demonstrating aversion independent of distributional preferences.
+- Lie detection is poor: Observers average 54% accuracy (chance = 50%), with a strong truth bias (Bond &amp; DePaulo, 2006). Behavioral cues are weak and inconsistent (DePaulo et al., 2003). Real-world lies are usually discovered via third-party information, physical evidence, confessions, or contradictions over time, not demeanor (Park, Levine &amp; McCornack, 2002).
+- <strong>Frankfurt's bullshit</strong> (2005): Bullshit is not lying. The bullshitter is indifferent to truth; the liar cares about truth enough to subvert it. Bullshit may be more corrosive because it disregards truth entirely.</p>
+<p><strong>Examples:</strong>
+- Everyday white lies: 1–2 lies per day to manage impressions, avoid conflict, or protect feelings (DePaulo et al., 1996).
+- Medical paternalistic lies: "You're doing fine" when prognosis is poor (dual loyalty to patient welfare vs. autonomy).
+- Wartime deception: "We are not massing troops" (Walzer's dirty hands; necessary yet morally wrong).</p>
+<h3 id="a2-collusion-coordinated-action-against-a-principal-or-norm">A.2 Collusion (coordinated action against a principal or norm)</h3>
+<p><strong>Definition:</strong> Two or more actors coordinate to achieve an outcome that violates a rule, harms a third party (principal, public, competitor), or advances shared interests at others' expense. Collusion is distinguished from mere parallel conduct by some form of coordination or mutual awareness.</p>
+<p><strong>Subtypes:</strong>
+- <strong>Explicit collusion</strong> (communication or transfers at initiation or implementation): Direct interfirm communication, agreements, or side payments (Kaplow &amp; Shapiro, 2007).
+- <strong>Tacit collusion</strong> (no direct communication): Sustained supra-competitive pricing via repeated-game punishment without direct coordination. Stigler (1964) and Green &amp; Porter (1984) show this is feasible under observable prices and credible threats, though harder with demand shocks and entry.
+- <strong>Hub-and-spoke collusion</strong> (Harrington, 2012): Central coordinator facilitates without all parties communicating directly (e.g., trade associations pooling confidential data).</p>
+<p><strong>Key findings:</strong>
+- <strong>Leniency destabilizes cartels</strong> (Motta &amp; Polo, 2003; Harrington, 2008): First-reporter amnesty creates a race to disclose, especially under uncertainty and when detection risk rises.
+- <strong>Plus factors</strong> infer explicit collusion when parallel conduct is insufficient (Marx, 2007): price leadership, regional customer allocation, information exchange, standardized pricing formulas, and advance price announcements are probative evidence.
+- <strong>Self-policing mechanisms</strong> (Stigler, 1964): Cartels must detect and punish secret deviations. Observable transactions, high frequency interaction, and credible retaliation sustain collusion.</p>
+<p><strong>Examples:</strong>
+- LIBOR manipulation (2007–2010): Major banks coordinated submissions to manipulate benchmark rates; RBS trader called it "a cartel now in London" (CFTC, 2013).
+- Tobacco industry coordination (US 1990s; EU 2005): Price signaling, litigation strategy coordination, suppression of internal research.
+- Construction bid-rigging: Rotating low bidders on public contracts (Dutch construction cartel; Harrington &amp; Skrzypacz, 2011).</p>
+<h3 id="a3-omission-and-concealment-lying-by-silence">A.3 Omission and concealment (lying by silence)</h3>
+<p><strong>Definition:</strong> Withholding information to deceive or avoid detection. May involve passive silence or active concealment (destroying evidence, obfuscation, channel shifts).</p>
+<p><strong>Key distinctions:</strong>
+- <strong>Concealment vs. reticence</strong> (Kant via Mahon, 2003): Kant permitted reticence (declining to answer) but prohibited lies. Modern scholars debate whether silence in a warranting context is deceptive.
+- <strong>Active concealment</strong> (evidence destruction, encryption, code words): Indicates awareness of wrongdoing and intent to evade detection.</p>
+<p><strong>Examples:</strong>
+- <strong>Code of silence</strong> (police "blue wall," military units, organized crime omertà): Members refuse to report misconduct, sometimes under threat or loyalty norm (Westmarland, 2005).
+- <strong>Pharma ghostwriting</strong>: Hiding industry authorship of favorable drug studies (Healy &amp; Cattell, 2003).
+- <strong>Academic fraud rings</strong>: Withholding or fabricating data, suppressing negative results (Fang, Casadevall &amp; Morrison, 2011).</p>
+<h3 id="a4-bullshit-indifference-to-truth">A.4 Bullshit (indifference to truth)</h3>
+<p><strong>Definition (Frankfurt, 2005):</strong> Speech unconstrained by truth; the speaker does not care whether claims are true or false, only whether they serve rhetorical goals. Bullshit is not lying because it lacks the liar's engagement with truth.</p>
+<p><strong>Why distinct:</strong> Lying presupposes a shared norm of truthfulness. Bullshit erodes that norm by treating truth as irrelevant, making future coordination around truth more difficult.</p>
+<h3 id="a5-sabotage-by-inaction">A.5 Sabotage by inaction</h3>
+<p><strong>Definition:</strong> Deliberately failing to act when action is expected or required, enabling harm by default.</p>
+<p><strong>Examples:</strong>
+- Bystander non-intervention (Darley &amp; Latané, 1968): Pluralistic ignorance and diffusion of responsibility lead to inaction even when individuals privately believe intervention is needed.
+- Regulatory capture by neglect (Stigler, 1971): Regulators fail to enforce rules, effectively serving regulated interests.</p>
+<h3 id="a6-coalition-advantage-and-rent-seeking">A.6 Coalition advantage and rent-seeking</h3>
+<p><strong>Definition:</strong> Groups coordinate to capture rents, regulatory favors, or redistribution at public expense, without producing social value.</p>
+<p><strong>Examples:</strong>
+- Lobbying for entry barriers (Stigler, 1971).
+- Occupational licensing to restrict competition (Kleiner &amp; Krueger, 2013).</p>
+<h3 id="a7-tacit-coordination-via-focal-points">A.7 Tacit coordination via focal points</h3>
+<p><strong>Definition (Schelling, 1960):</strong> Parties converge on salient, culturally obvious outcomes without communication. Salience is determined by shared knowledge, symmetry, prominence, or precedent.</p>
+<p><strong>Examples:</strong>
+- "Meet at Grand Central noon" when no other information is specified.
+- Price leadership: competitors follow the market leader's announced price.
+- Industry standard contract terms.</p>
+<p><strong>Key debate:</strong> Is focal-point coordination collusion? Legal definitions (Marx, 2007) require more than parallelism; economics treats it as tacit collusion if it sustains supra-competitive outcomes.</p>
+<hr />
+<h2 id="b-motivations-and-goals">B. MOTIVATIONS AND GOALS</h2>
+<p><strong>Definition and distinctness:</strong> This category identifies the reasons—conscious or unconscious, self-interested or prosocial—that drive lying and collusion. Motivations interact with opportunities and norms to determine behavior.</p>
+<h3 id="b1-self-interest-and-material-gain">B.1 Self-interest and material gain</h3>
+<p><strong>Direct payoff maximization:</strong> Individuals lie or collude to increase income, wealth, or resources (Gneezy, 2005).</p>
+<p><strong>Key findings:</strong>
+- Lying rates increase with liar's gain, decrease with victim's loss (Gneezy, 2005). Crossover occurs when gain is modest and harm is large.
+- Partial dishonesty: Many lie enough to gain but not to the fullest extent, maintaining plausible deniability or self-image (Fischbacher &amp; Föllmi-Heusi, 2013; Mazar, Amir &amp; Ariely, 2008).</p>
+<h3 id="b2-loss-aversion-and-non-shareable-problems">B.2 Loss aversion and non-shareable problems</h3>
+<p><strong>Cressey's fraud triangle</strong> (1973): Embezzlers face a (1) non-shareable financial problem (debt, addiction, family emergency), perceive (2) secret opportunity to solve it via violation of trust, and (3) rationalize the act via neutralization (see Sykes &amp; Matza below).</p>
+<p><strong>Empirical status:</strong> Cressey's analytic induction produced a deterministic model that was influential but is no longer actively used (Laub &amp; Sampson, 1991; Goldenberg, 1993). The fraud triangle persists in practitioner frameworks.</p>
+<h3 id="b3-loyalty-to-in-group">B.3 Loyalty to in-group</h3>
+<p><strong>Social identity theory</strong> (Tajfel &amp; Turner, 1986): Mere categorization produces in-group favoritism. Minimal group paradigm: even arbitrary, ephemeral groups lead participants to maximize in-group advantage, especially relative difference.</p>
+<p><strong>Moral foundations theory</strong> (Haidt &amp; Joseph, 2004; Graham et al., 2011): Loyalty/betrayal is one of five (later six) moral foundations. Loyalty is stronger in collectivist, binding-foundation cultures and predicts opposition to whistleblowing (Graham et al., 2011).</p>
+<p><strong>Examples:</strong>
+- Police code of silence: loyalty to fellow officers overrides reporting duty.
+- Athletic doping rings (Armstrong USPS team): "omertà"—team loyalty and fear of exclusion suppress disclosure (USADA, 2012).</p>
+<h3 id="b4-fear-and-coercion">B.4 Fear and coercion</h3>
+<p><strong>Obedience to authority</strong> (Milgram, 1963): 65% of participants administered apparently lethal shocks when ordered by an authority figure. Obedience increased with authority's proximity and legitimacy, decreased with victim's proximity.</p>
+<p><strong>Reinterpretation</strong> (Haslam &amp; Reicher, 2012): Obedience is not blind; participants identified with the experimenter's scientific mission. Willingness to harm depended on belief in the authority's rightness, not mechanical compliance.</p>
+<p><strong>Coercion examples:</strong>
+- Organized crime violence or exclusion threats.
+- Totalitarian state-compelled false statements (Saul, 2012).</p>
+<h3 id="b5-prosocial-and-altruistic-motives">B.5 Prosocial and altruistic motives</h3>
+<p><strong>Altruistic white lies</strong> (Erat &amp; Gneezy, 2012): 33% of participants lied to benefit another at personal cost. Women told more altruistic lies than men.</p>
+<p><strong>Pareto white lies:</strong> 35% refused to lie even when it benefited both parties, demonstrating pure lie aversion.</p>
+<p><strong>Examples:</strong>
+- Lying to protect someone from harm ("He's not here" to an abuser).
+- Concealing a terminal diagnosis to reduce patient distress (dual loyalty).</p>
+<h3 id="b6-identity-self-image-maintenance-and-moral-licensing">B.6 Identity, self-image maintenance, and moral licensing</h3>
+<p><strong>Self-concept maintenance</strong> (Mazar et al., 2008): People balance material gain against maintaining a positive self-image. Small lies or reframing (e.g., taking tokens instead of cash) allow self-deception.</p>
+<p><strong>Moral licensing</strong> (Monin &amp; Miller, 2001; Merritt et al., 2010): Acting morally may license subsequent immoral acts, though meta-analysis finds a modest effect (d = 0.31) with publication bias (Blanken et al., 2015). Replication efforts show mixed success (Kuper &amp; Bott, 2015).</p>
+<h3 id="b7-revenge-spite-and-fairness-enforcement">B.7 Revenge, spite, and fairness enforcement</h3>
+<p><strong>Punishment of unfair behavior:</strong> People accept costs to punish norm violators (Fehr &amp; Gächter, 2002). Lies that harm a deserving target ("You don't deserve the truth") may be rationalized as justice (Sykes &amp; Matza, 1957: denial of the victim).</p>
+<h3 id="b8-ideology-and-moral-conviction">B.8 Ideology and moral conviction</h3>
+<p><strong>Appeal to higher loyalties</strong> (Sykes &amp; Matza, 1957): Offenders justify violations by invoking loyalty to family, gang, nation, or religion over legal or conventional norms.</p>
+<p><strong>Examples:</strong>
+- Whistleblowing as higher loyalty to public over employer.
+- Terrorism justified by religious or political ideology.</p>
+<hr />
+<h2 id="c-conditions-situations-circumstances-and-task-structures">C. CONDITIONS, SITUATIONS, CIRCUMSTANCES, AND TASK STRUCTURES</h2>
+<p><strong>Definition and distinctness:</strong> This category catalogs the external features of situations that make collusion or lying more or less likely. Conditions include incentive structures, monitoring regimes, social roles, time pressure, and market features.</p>
+<h3 id="c1-opacity-and-weak-monitoring">C.1 Opacity and weak monitoring</h3>
+<p><strong>Stigler (1964):</strong> Cartels require monitoring to detect secret price-cutting. Observable transactions and frequent interaction sustain collusion; opacity (secret discounts, heterogeneous products, infrequent large contracts) undermines it.</p>
+<p><strong>Green &amp; Porter (1984):</strong> Even with imperfect price information and demand shocks, collusion can be sustained through trigger strategies and occasional price wars.</p>
+<h3 id="c2-repeated-interaction-and-long-time-horizons">C.2 Repeated interaction and long time horizons</h3>
+<p><strong>Axelrod's evolution of cooperation</strong> (1984): Repeated prisoner's dilemma sustains cooperation via Tit for Tat and related strategies. Cooperation requires sufficiently high discount factors and clear recognition of partners.</p>
+<h3 id="c3-number-of-actors-and-coordination-costs">C.3 Number of actors and coordination costs</h3>
+<p><strong>Olson (1965); Stigler (1964):</strong> Smaller groups collude more easily. Large groups face free-rider problems and higher communication costs.</p>
+<p><strong>Empirical:</strong> Cartels with 3–7 firms are most stable (Hay &amp; Kelley, 1974).</p>
+<h3 id="c4-entry-barriers-and-durable-relationships">C.4 Entry barriers and durable relationships</h3>
+<p><strong>Stigler (1964):</strong> Entry barriers (grandfather clauses, licensing, capital requirements) sustain collusive pricing by preventing competitive discipline.</p>
+<h3 id="c5-time-pressure-and-cognitive-load">C.5 Time pressure and cognitive load</h3>
+<p><strong>Darley &amp; Batson (1973):</strong> Seminary students late to give a talk on the Good Samaritan parable stepped over a slumped victim: 63% helped when early, 10% when late. Situational pressure dominated dispositional religiosity.</p>
+<p><strong>Dual-process theory</strong> (Kahneman, 2011): Time pressure shifts reliance to fast, automatic processes (System 1), reducing deliberative moral reasoning (System 2).</p>
+<h3 id="c6-authority-cues-and-role-demands">C.6 Authority cues and role demands</h3>
+<p><strong>Milgram (1963):</strong> Obedience to authority increased with legitimacy cues (Yale setting, white coat, formal procedures) and decreased when authority figures disagreed or when setting shifted to a seedy office building.</p>
+<p><strong>Zimbardo's Stanford Prison Experiment</strong> (1971): Guards became abusive when assigned that role, though Zimbardo gave initial guidance on creating fear and powerlessness. Haslam &amp; Reicher (2012) argue participants identified with the study's goals rather than blindly conforming to roles.</p>
+<p><strong>Contested status:</strong> Zimbardo's study is widely cited but methodologically criticized. Recent reanalyses suggest demand effects, small sample, and insufficient blinding (Le Texier, 2019).</p>
+<h3 id="c7-anonymity-and-diffusion-of-responsibility">C.7 Anonymity and diffusion of responsibility</h3>
+<p><strong>Latané &amp; Darley (1970):</strong> Bystanders are less likely to help when in groups (diffusion of responsibility) and when others appear calm (pluralistic ignorance).</p>
+<p><strong>Anonymity increases dishonesty</strong> (Diener et al., 1975): Halloween trick-or-treaters took more candy when alone and anonymous.</p>
+<h3 id="c8-moral-salience-and-ethical-fading">C.8 Moral salience and ethical fading</h3>
+<p><strong>Tenbrunsel &amp; Messick (2004):</strong> Ethical fading occurs when euphemisms, incremental decisions, self-serving frames, and temporal distance make moral implications invisible. Examples: "aggressive accounting," "collateral damage," "neutralizing the target."</p>
+<p><strong>Countermeasures</strong> (Ayal et al., 2015): Reminders of moral standards (honor codes, oaths), visibility (peer monitoring, audit trails), and self-engagement (pre-commitment, moral identity priming) reduce dishonesty.</p>
+<h3 id="c9-task-type-zero-sum-vs-positive-sum-competitive-vs-cooperative-framing">C.9 Task type: zero-sum vs. positive-sum, competitive vs. cooperative framing</h3>
+<p><strong>Stag Hunt</strong> (Rousseau, 1754): Multiple equilibria—payoff-dominant (all hunt stag) and risk-dominant (all hunt rabbit). Cheap talk helps coordinate on the efficient outcome (Aumann, 1990; Cooper et al., 1992).</p>
+<p><strong>Prisoner's Dilemma</strong> vs. <strong>assurance games</strong> vs. <strong>coordination games:</strong> Task structure shapes whether collusion serves mutual benefit (PD cartel) or public harm (bid-rigging).</p>
+<h3 id="c10-communication-channels-and-side-payments">C.10 Communication channels and side payments</h3>
+<p><strong>Cheap talk</strong> (Crawford &amp; Sobel, 1982): Costless, non-binding communication can coordinate beliefs in games with common interests (e.g., Stag Hunt) but not when interests are fully opposed. Self-signaling (Farrell, 1987): Messages that make the sender's action incentive-compatible are credible.</p>
+<p><strong>Side payments:</strong> Explicit transfers enforce collusion by compensating deviators or binding participation.</p>
+<h3 id="c11-cultural-tightness-and-norm-strength">C.11 Cultural tightness and norm strength</h3>
+<p><strong>Gelfand et al. (2006, 2011):</strong> Tight cultures have many clear norms and strong sanctioning; loose cultures have weak norms and tolerance for deviance. Tightness predicts rule compliance, lower corruption, and stronger in-group monitoring. Tightness is correlated with ecological and historical threats (resource scarcity, disease, territorial conflict).</p>
+<h3 id="c12-honor-cultures-and-reputation-concerns">C.12 Honor cultures and reputation concerns</h3>
+<p><strong>Nisbett &amp; Cohen (1996); Cohen et al. (1996):</strong> Honor cultures (herding economies, frontier regions) enforce reputation via aggression. Insults provoke retaliation to maintain deterrent reputation. Honor is distinct from tightness: tightness is about norm strength; honor is about reputation and reciprocal violence.</p>
+<hr />
+<h2 id="d-beliefs-and-information-states">D. BELIEFS AND INFORMATION STATES</h2>
+<p><strong>Definition and distinctness:</strong> This category describes actors' beliefs about each other's knowledge, intentions, and monitoring. Shared beliefs enable coordination; divergent beliefs and ignorance prevent it.</p>
+<h3 id="d1-common-knowledge">D.1 Common knowledge</h3>
+<p><strong>Aumann (1976):</strong> An event E is common knowledge if everyone knows E, everyone knows that everyone knows E, ad infinitum. Common knowledge is necessary for coordination in some games and for credible agreements (Lewis, 1969).</p>
+<p><strong>Schelling focal points</strong> (1960): Coordination without communication relies on salient, commonly known features.</p>
+<h3 id="d2-pluralistic-ignorance">D.2 Pluralistic ignorance</h3>
+<p><strong>Definition (Miller &amp; McFarland, 1987):</strong> Individuals privately reject a norm but believe others endorse it, leading to public conformity that reinforces the false norm.</p>
+<p><strong>Examples:</strong>
+- Groupthink (Janis, 1972): Illusion of unanimity suppresses dissent. Members misread others' silence as agreement.
+- Bystander effect (Latané &amp; Darley, 1970): Calm bystanders misread each other as unconcerned.
+- College drinking norms: Students overestimate peers' comfort with heavy drinking, leading to public excess (Prentice &amp; Miller, 1993).</p>
+<p><strong>Empirical support:</strong> Robust in field and lab studies (Prentice &amp; Miller, 1996).</p>
+<h3 id="d3-mutual-knowledge-of-monitoring-and-detection-risk">D.3 Mutual knowledge of monitoring and detection risk</h3>
+<p><strong>Stigler (1964):</strong> Cartel stability depends on members' beliefs about detection probability and punishment. Observable sales, price announcements, and audit trails increase detection risk, deterring secret deviations.</p>
+<p><strong>Leniency programs:</strong> Uncertain detection plus known leniency creates preemptive reporting (Harrington, 2013).</p>
+<h3 id="d4-truth-default-theory">D.4 Truth-default theory</h3>
+<p><strong>Levine (2014):</strong> People default to believing others are truthful unless suspicion is triggered. This is adaptive when lies are rare but makes deception easy when truth-default is exploited. Deception is eventually detected via inconsistency, third-party information, or confessions, not demeanor.</p>
+<h3 id="d5-knowledge-of-co-conspirators-preferences-and-reliability">D.5 Knowledge of co-conspirators' preferences and reliability</h3>
+<p><strong>Principal-agent-supervisor collusion</strong> (Tirole, 1986): Supervisor and agent collude to deceive the principal. Collusion requires mutual knowledge of gains, low detection risk, and trust that neither will defect or report.</p>
+<hr />
+<h2 id="e-ethical-contexts-and-dilemmas">E. ETHICAL CONTEXTS AND DILEMMAS</h2>
+<p><strong>Definition and distinctness:</strong> This category covers situations where moral principles, role obligations, or values conflict, forcing agents to choose which duty to honor.</p>
+<h3 id="e1-dual-loyalty">E.1 Dual loyalty</h3>
+<p><strong>Definition:</strong> Obligations to two parties or principles conflict. Examples: doctor (patient vs. military), lawyer (client vs. court), public official (constituent vs. law).</p>
+<p><strong>Medical dual loyalty</strong> (London et al., 2006): Military physicians face patient welfare vs. operational needs. British Medical Association (2025) guidelines emphasize that medical ethics obligations are primary, but operational context creates pressure.</p>
+<p><strong>Key principle (Nuremberg):</strong> "Just following orders" is not a defense for unlawful or manifestly immoral acts. Professional ethics codes require refusal of illegal orders, though lawful yet unethical orders present harder dilemmas (Braver, 2017).</p>
+<h3 id="e2-dirty-hands-walzer-1973">E.2 Dirty hands (Walzer, 1973)</h3>
+<p><strong>Definition:</strong> Political necessity may require actions that remain morally wrong. The agent does the "right" thing (saves lives, preserves the state) while committing a moral wrong (torturing, lying), producing guilt and moral remainders.</p>
+<p><strong>Key features:</strong>
+- Action is necessary (utilitarian extremity).
+- Action violates a moral duty that remains valid (deontological residue).
+- Agent experiences guilt; absence of guilt would indicate moral corruption.</p>
+<p><strong>Debate:</strong> Is dirty hands real or incoherent? Critics (e.g., consequentialists) argue that if an act is all-things-considered justified, it is not wrong. Defenders argue that overridden duties retain force, producing regret and residual wrongness.</p>
+<h3 id="e3-conflicting-values-within-a-framework">E.3 Conflicting values within a framework</h3>
+<p><strong>Trolley problem</strong> variants: Saving five by killing one pits consequentialism (maximize lives saved) against deontology (do not kill). Greene et al. (2001) find that personal, contact-based harm activates automatic, emotion-laden deontological responses, while impersonal harm permits utilitarian reasoning.</p>
+<h3 id="e4-sacred-values-and-taboo-tradeoffs">E.4 Sacred values and taboo tradeoffs</h3>
+<p><strong>Tetlock et al. (2000):</strong> Some values (life, dignity, religious commitments) are treated as sacred—not traded for secular goods. Proposals to trade sacred for secular evoke moral outrage and denials.</p>
+<p><strong>Relation to collusion:</strong> Actors may refuse to collude when it violates sacred values (e.g., religious prohibitions on lying) but reframe acts to avoid taboo tradeoffs (e.g., "enhanced interrogation" instead of "torture").</p>
+<hr />
+<h2 id="f-authority-instruction-conflict-and-source-types">F. AUTHORITY, INSTRUCTION CONFLICT, AND SOURCE TYPES</h2>
+<p><strong>Definition and distinctness:</strong> This category identifies the sources of directives actors receive and how conflicts between authorities are resolved. It is the human analogue of conflicting instructions in AI systems (system prompt vs. user vs. tool vs. peer messages).</p>
+<h3 id="f1-legal-authority">F.1 Legal authority</h3>
+<p><strong>Definition:</strong> Statutes, regulations, court orders. Compliance is enforced via sanctions (fines, imprisonment).</p>
+<p><strong>Conflicts:</strong> Legal orders can conflict with moral duties (unjust laws) or professional ethics (lawyer ordered to disclose confidential information).</p>
+<h3 id="f2-organizational-and-managerial-authority">F.2 Organizational and managerial authority</h3>
+<p><strong>Principal-agent models:</strong> Managers issue directives; employees obey in exchange for compensation. Collusion occurs when supervisor and agent coordinate against the principal (Tirole, 1986).</p>
+<p><strong>Regulatory capture</strong> (Stigler, 1971): Regulatory agencies serve regulated industry interests instead of the public, due to revolving doors, concentrated industry benefits, and diffuse public costs.</p>
+<h3 id="f3-professional-ethics-codes">F.3 Professional ethics codes</h3>
+<p><strong>Examples:</strong> Hippocratic Oath (doctors), ABA Model Rules (lawyers), engineering codes.</p>
+<p><strong>Function:</strong> Professional norms define role obligations, sometimes permitting or requiring acts otherwise prohibited (e.g., lawyer confidentiality, doctor patient-centered care) (Applbaum, 1999).</p>
+<p><strong>Applbaum's critique:</strong> Roles add reasons for action but do not silence personal moral reasons. Institutions cannot "mint permissions" to do what is otherwise wrong.</p>
+<h3 id="f4-peer-and-social-norms">F.4 Peer and social norms</h3>
+<p><strong>Cialdini's social proof</strong> (1984): People infer correct behavior from others' actions, especially under uncertainty. Descriptive norms (what people do) can override prescriptive norms (what people should do).</p>
+<p><strong>Pluralistic ignorance:</strong> Misreading others' behavior leads to false norm adoption.</p>
+<h3 id="f5-charismatic-and-ideological-authority">F.5 Charismatic and ideological authority</h3>
+<p><strong>Weber's charismatic authority:</strong> Legitimacy derived from personal qualities and followers' devotion. Cults, revolutionary movements, terrorist cells rely on charismatic leaders.</p>
+<h3 id="f6-analogues-to-ai-system-prompts-policies-and-training">F.6 Analogues to AI system prompts, policies, and training</h3>
+<p><strong>Prompt as authority:</strong> System instructions ("You are a helpful assistant") function like organizational policies or professional codes.</p>
+<p><strong>RLHF as socialization:</strong> Reinforcement learning from human feedback mimics social learning and norm internalization.</p>
+<p><strong>Conflicts:</strong> User instructions vs. system instructions, tool/API outputs vs. direct user queries, peer AI agents' suggestions vs. internal guidelines.</p>
+<hr />
+<h2 id="g-moralethical-frameworks-content">G. MORAL/ETHICAL FRAMEWORKS (CONTENT)</h2>
+<p><strong>Definition and distinctness:</strong> This category enumerates the substantive moral principles and values people endorse. Frameworks shape which acts are seen as permissible, obligatory, or forbidden.</p>
+<h3 id="g1-deontology-duty-based-ethics">G.1 Deontology (duty-based ethics)</h3>
+<p><strong>Kant:</strong> Lying is always wrong because it uses the hearer as a means, violates the categorical imperative, and undermines rational agency. (Kant, 1797/1996). However, Kant distinguished lies from reticence; his prohibition is narrower than often assumed (Mahon, 2003).</p>
+<p><strong>Aquinas, Augustine:</strong> Lying perverts the natural purpose of speech. Augustine distinguished "real lies" (told to deceive) from lesser lies (told under duress), but held all lies sinful.</p>
+<p><strong>W.D. Ross:</strong> Prima facie duties (promise-keeping, truth-telling, non-maleficence) can conflict; agents must judge which duty is weightier in context.</p>
+<h3 id="g2-consequentialism-and-utilitarianism">G.2 Consequentialism and utilitarianism</h3>
+<p><strong>Definition:</strong> Right acts maximize good outcomes (welfare, preference-satisfaction, happiness). Lying is wrong only when it reduces net utility.</p>
+<p><strong>Sissela Bok</strong> (1978): Lying is defeasibly wrong—it carries moral weight but can be outweighed by serious harms prevented. Bok emphasizes long-term social costs of distrust.</p>
+<h3 id="g3-virtue-ethics">G.3 Virtue ethics</h3>
+<p><strong>Aristotle:</strong> Virtues (courage, honesty, justice) are stable character traits cultivated through habit. Virtuous agents do the right thing, in the right way, for the right reasons.</p>
+<p><strong>Williams' truthfulness</strong> (2002): Combines accuracy (caring to discover truth) and sincerity (saying what one believes true). Truthfulness is a virtue, not a rule.</p>
+<p><strong>Situationist challenge:</strong> Harman (1999), Doris (2002) argue that experimental evidence (Milgram, Zimbardo, Darley &amp; Batson) shows behavior is situationally determined, not by stable character traits. Defenders reply that dispositions predict long-term patterns and how agents act once engaged, even if immediate helping is situation-driven (Kamtekar, 2004; Sosa, 2009).</p>
+<h3 id="g4-care-ethics">G.4 Care ethics</h3>
+<p><strong>Gilligan (1982):</strong> Morality includes not only justice and rights but also care, relationships, and context-sensitive responsiveness to particular others. Women (in Gilligan's sample) emphasized care; men emphasized justice. (Note: Gilligan's empirical claims are contested; her conceptual contribution—care as a moral voice—is widely accepted.)</p>
+<h3 id="g5-loyalty-authority-and-sanctity-binding-foundations">G.5 Loyalty, authority, and sanctity (binding foundations)</h3>
+<p><strong>Moral Foundations Theory</strong> (Haidt &amp; Joseph, 2004; Graham et al., 2011): Six foundations—Care, Fairness, Liberty, Loyalty, Authority, Purity—are innate, culturally elaborated moral modules. Individualizing foundations (Care, Fairness) are universal; binding foundations (Loyalty, Authority, Purity) are stronger in collectivist, tight, and religious cultures.</p>
+<p><strong>Empirical support:</strong> Cross-cultural surveys (25 populations) show Eastern, South Asian, and Middle Eastern samples weight Loyalty and Purity more heavily than Western samples (Atari et al., 2020). U.S. conservatives endorse all six foundations; U.S. liberals prioritize Care and Fairness.</p>
+<p><strong>Honor (Qeirat):</strong> A candidate seventh foundation, especially salient in honor cultures (Iran, Mediterranean, U.S. South). Predicts mate guarding, retaliation, and in-group protection (Atari et al., 2020).</p>
+<h3 id="g6-role-morality">G.6 Role morality</h3>
+<p><strong>Definition:</strong> Role-specific obligations can differ from person-level morality. Examples: lawyer zealously defends guilty clients, soldier kills enemy combatants, business manager maximizes shareholder value.</p>
+<p><strong>Debate:</strong>
+- <strong>Shielding model:</strong> Role creates a separate moral domain, blocking personal moral reasons (criticized by Applbaum, 1999).
+- <strong>Filtering model:</strong> Role selectively filters reasons, creating permissions or obligations to act on a narrowed set (e.g., lawyer ignores defendant's guilt, focuses on procedural rights) (Calhoun, 2020).
+- <strong>Balancing model:</strong> Role adds reasons but does not silence personal morality; all reasons are weighed.</p>
+<p><strong>Applbaum's conclusion:</strong> Institutions ordinarily cannot mint permissions to do what is otherwise wrong. Roles add reasons but cannot fully shield agents from personal moral evaluation.</p>
+<h3 id="g7-sacred-values-and-protected-values">G.7 Sacred values and protected values</h3>
+<p><strong>Definition:</strong> Values treated as incommensurable with secular goods. Trading sacred for mundane (e.g., selling kidneys, prostitution, monetizing life) is taboo (Tetlock et al., 2000).</p>
+<p><strong>Relation to lying:</strong> Religious prohibitions on lying can be sacred; secular cost-benefit analysis is rejected. However, reframing (euphemism, role morality) can circumvent taboos.</p>
+<hr />
+<h2 id="h-framework-formation-methods-how-people-acquire-ethics">H. FRAMEWORK FORMATION METHODS (HOW PEOPLE ACQUIRE ETHICS)</h2>
+<p><strong>Definition and distinctness:</strong> This category describes how individuals develop moral beliefs, values, and norms. Formation methods shape which frameworks agents endorse and how flexible or rigid those frameworks are.</p>
+<h3 id="h1-childhood-moral-development">H.1 Childhood moral development</h3>
+<p><strong>Piaget (1932):</strong> Moral reasoning develops from heteronomous (rule-obedience, authority-based) to autonomous (fairness, reciprocity, peer negotiation).</p>
+<p><strong>Kohlberg (1969):</strong> Six stages from preconventional (punishment-avoidance, self-interest) through conventional (peer approval, law-and-order) to postconventional (social contract, universal principles). Empirical critiques: stage model is too rigid, Western-biased, and underestimates early moral capacities.</p>
+<p><strong>Turiel's social domain theory</strong> (1983): Moral, conventional, and personal domains develop in parallel, not stages. Children distinguish harm-based moral rules (universal, serious) from conventional rules (arbitrary, authority-dependent) from age 3.</p>
+<h3 id="h2-empathy-and-moral-emotions">H.2 Empathy and moral emotions</h3>
+<p><strong>Hoffman (2000):</strong> Empathy (vicarious emotional response to others' distress) motivates prosocial behavior and inhibits harm. Develops from reflexive crying (infancy) to perspective-taking empathy (adolescence). Guilt arises when empathy conflicts with self-interest.</p>
+<h3 id="h3-social-learning-and-observational-modeling">H.3 Social learning and observational modeling</h3>
+<p><strong>Bandura (1986):</strong> Children learn morality by observing models (parents, peers, media) and through reinforcement. Moral disengagement mechanisms (see below) are also socially learned.</p>
+<h3 id="h4-religion-and-sacred-texts">H.4 Religion and sacred texts</h3>
+<p><strong>Socialization via religious instruction:</strong> Scriptures, sermons, rituals transmit norms (Ten Commandments, Quranic injunctions, Buddhist precepts). Religion often emphasizes loyalty, authority, and purity alongside care (Haidt &amp; Graham, 2007).</p>
+<h3 id="h5-professional-socialization">H.5 Professional socialization</h3>
+<p><strong>Medical school, law school, military training:</strong> Intensive enculturation into professional norms, role obligations, and ethical codes. Creates strong role identity and filtering of reasons (Calhoun, 2020).</p>
+<p><strong>Examples:</strong>
+- Medical ethics: beneficence, non-maleficence, autonomy, justice (Beauchamp &amp; Childress, 1979).
+- Lawyer ethics: zealous advocacy, confidentiality (ABA Model Rules).
+- Military ethics: lawful orders, operational necessity, dual loyalty to mission and law of war.</p>
+<h3 id="h6-legal-institutions-and-rule-of-law">H.6 Legal institutions and rule-of-law</h3>
+<p><strong>Legal positivism:</strong> Law defines permissible conduct. Repeated exposure to legal consequences (fines, imprisonment) shapes compliance norms.</p>
+<h3 id="h7-organizational-culture">H.7 Organizational culture</h3>
+<p><strong>Treviño et al. (2006):</strong> Organizational ethical culture is shaped by leadership, reward systems, codes of conduct, and peer behavior. Ethical fading occurs when profit maximization, competitive pressure, or euphemistic language obscures moral content (Tenbrunsel &amp; Messick, 2004).</p>
+<h3 id="h8-cultural-and-kinship-structures">H.8 Cultural and kinship structures</h3>
+<p><strong>Henrich's WEIRD critique</strong> (2010): Western, Educated, Industrialized, Rich, Democratic populations are psychological outliers. Non-WEIRD societies show higher conformity, collectivism, honor-based morality, and kin loyalty. Institutions (markets, churches, schools, marriage norms) co-evolve with moral psychology.</p>
+<h3 id="h9-identity-fusion-and-coalitional-psychology">H.9 Identity fusion and coalitional psychology</h3>
+<p><strong>Whitehouse et al. (2014):</strong> Extreme rituals, shared trauma, or kinship create identity fusion—personal and group identity become synonymous. Fused individuals self-sacrifice for the group and derogate outgroups. Mechanism for cults, terrorist cells, military units.</p>
+<h3 id="h10-trauma-crisis-and-moral-conversion">H.10 Trauma, crisis, and moral conversion</h3>
+<p><strong>Conversion experiences:</strong> Religious or ideological transformations (e.g., Paul on the road to Damascus, deradicalization) can abruptly change moral frameworks.</p>
+<hr />
+<h2 id="i-coordination-mechanisms-and-carriers-how-collusion-is-communicated">I. COORDINATION MECHANISMS AND CARRIERS (HOW COLLUSION IS COMMUNICATED)</h2>
+<p><strong>Definition and distinctness:</strong> This category enumerates the channels and methods by which colluding actors coordinate beliefs and actions. Mechanisms range from explicit speech to subtle signals, shared focal points, and side channels.</p>
+<h3 id="i1-explicit-speech-and-written-agreements">I.1 Explicit speech and written agreements</h3>
+<p><strong>Direct communication:</strong> Meetings, emails, phone calls, contracts. Most probative evidence of explicit collusion (Marx, 2007).</p>
+<p><strong>Examples:</strong> LIBOR email: "LIBOR is a cartel now in London" (RBS trader, 2007).</p>
+<h3 id="i2-price-signals-and-announcements">I.2 Price signals and announcements</h3>
+<p><strong>Price leadership:</strong> Dominant firm announces price; others follow. Can be tacit collusion if sustained above competitive levels.</p>
+<p><strong>Advance price announcements:</strong> Public pre-announcements allow coordination without direct contact (e.g., airline fare increases).</p>
+<h3 id="i3-quantity-output-and-market-division-signals">I.3 Quantity, output, and market-division signals</h3>
+<p><strong>Cournot tacit collusion:</strong> Firms observe each other's output and adjust to sustain collusive equilibrium.</p>
+<p><strong>Geographic or customer allocation:</strong> "You take the North, I take the South." Plus factor for explicit collusion (Marx, 2007).</p>
+<h3 id="i4-silence-and-inaction-as-signals">I.4 Silence and inaction as signals</h3>
+<p><strong>Omertà (code of silence):</strong> Refusal to cooperate with authorities signals loyalty and trustworthiness.</p>
+<p><strong>Failure to defect:</strong> Sustained cooperation in repeated PD signals willingness to continue.</p>
+<h3 id="i5-rituals-dress-codes-and-shibboleths">I.5 Rituals, dress codes, and shibboleths</h3>
+<p><strong>Shibboleths:</strong> Insider phrases, handshakes, or knowledge used to verify group membership (e.g., passwords, gang signs).</p>
+<p><strong>Rituals:</strong> Shared painful or costly rituals (initiation rites, oaths) signal commitment and create fusion (Whitehouse et al., 2014).</p>
+<h3 id="i6-side-channels-and-steganography">I.6 Side channels and steganography</h3>
+<p><strong>Back-channel communication:</strong> Private meetings, burner phones, encrypted apps.</p>
+<p><strong>Steganography:</strong> Hiding messages in innocuous carriers (e.g., public auction bids encoding private coordination).</p>
+<h3 id="i7-shared-culture-and-common-knowledge">I.7 Shared culture and common knowledge</h3>
+<p><strong>Schelling focal points</strong> (1960): Salient features (Grand Central, round numbers, equality splits) allow coordination without communication when common knowledge exists.</p>
+<p><strong>Pretraining as shared culture (AI analogue):</strong> Shared training data creates common salience, much like shared cultural background in humans.</p>
+<hr />
+<h2 id="j-detection-evidence-standards-and-judgment">J. DETECTION, EVIDENCE STANDARDS, AND JUDGMENT</h2>
+<p><strong>Definition and distinctness:</strong> This category describes how lies and collusion are detected, what counts as evidence, and how observers judge whether coordination occurred.</p>
+<h3 id="j1-behavioral-cues-to-lying">J.1 Behavioral cues to lying</h3>
+<p><strong>DePaulo et al. (2003) meta-analysis:</strong> 158 cues, 1,338 estimates. Liars are less forthcoming, more tense, tell less compelling tales, but many behaviors show no link or weak links to deceit. Motivation (identity-relevant, transgression-related) increases cue strength.</p>
+<p><strong>Ekman's emotion-based theory:</strong> Fear of detection, guilt, and duping delight produce microexpressions. Empirical support is weak; cues are unreliable (Bond &amp; DePaulo, 2006).</p>
+<p><strong>Observer accuracy:</strong> 54% correct (chance = 50%), with truth bias (61% of truths judged true, 47% of lies judged lies). Training produces minimal improvement (Hauch et al., 2016).</p>
+<h3 id="j2-third-party-information-and-physical-evidence">J.2 Third-party information and physical evidence</h3>
+<p><strong>Real-world lie detection</strong> (Park et al., 2002): Lies are discovered via (1) third-party tips, (2) physical evidence, (3) inconsistencies over time, (4) confessions. Demeanor is rarely diagnostic.</p>
+<h3 id="j3-plus-factors-antitrust-evidence">J.3 Plus factors (antitrust evidence)</h3>
+<p><strong>Definition</strong> (Marx, 2007): Conduct or outcomes beyond parallel pricing that are unlikely under independent action but consistent with coordination.</p>
+<p><strong>Examples:</strong>
+- Price leadership with immediate follower matching
+- Regional customer allocation
+- Standardized pricing formulas (e.g., list price × 0.85)
+- Information exchange via trade associations
+- Basing-point pricing
+- Advance public announcements</p>
+<p><strong>"Super plus factors":</strong> Especially probative evidence (e.g., explicit communications, side payments).</p>
+<h3 id="j4-structural-breaks-and-screening">J.4 Structural breaks and screening</h3>
+<p><strong>Econometric detection:</strong> Abrupt price changes, reduced variance, or high correlation after a meeting or leniency program revelation can indicate collusion (Harrington &amp; Skrzypacz, 2011).</p>
+<p><strong>Screening algorithms:</strong> Flag suspicious bidding patterns (identical bids, bid rotation, suppressed bids).</p>
+<h3 id="j5-intent-vs-parallel-conduct">J.5 Intent vs. parallel conduct</h3>
+<p><strong>Legal standard:</strong> U.S. antitrust law requires agreement, not merely parallel conduct. Conscious parallelism (firms independently choose similar strategies due to mutual interdependence) is legal. Plus factors help infer agreement (Marx, 2007).</p>
+<h3 id="j6-credibility-consistency-and-corroboration">J.6 Credibility, consistency, and corroboration</h3>
+<p><strong>Multiple witnesses:</strong> Armstrong doping case relied on 24+ sworn statements, including 15 teammates. Converging testimony from independent sources is highly probative (USADA, 2012).</p>
+<p><strong>Internal documents:</strong> Emails, memos, recordings. "Smoking gun" evidence (e.g., "cartel now in London").</p>
+<hr />
+<h2 id="k-countermeasures-and-disruption">K. COUNTERMEASURES AND DISRUPTION</h2>
+<p><strong>Definition and distinctness:</strong> This category catalogs interventions that reduce lying and collusion by disrupting motivations, opportunities, coordination, or enforcement.</p>
+<h3 id="k1-leniency-and-amnesty-programs">K.1 Leniency and amnesty programs</h3>
+<p><strong>Mechanism:</strong> First firm to report cartel receives reduced penalty or full immunity. Creates a race to disclose, destabilizing trust (Motta &amp; Polo, 2003; Spagnolo, 2004).</p>
+<p><strong>Empirical evidence:</strong> Leniency programs increase detection and reduce cartel duration (Harrington, 2008). However, design matters: leniency should apply to first reporter only, extend through investigation, and coordinate with private damages (Buccirossi et al., 2020).</p>
+<p><strong>Downside:</strong> In the short run, detected cartels may last longer (Harrington &amp; Chang, 2009). May also reduce deterrence if firms collude knowing they can exit via leniency.</p>
+<h3 id="k2-rotation-and-job-assignment-randomization">K.2 Rotation and job assignment randomization</h3>
+<p><strong>Mechanism:</strong> Rotating auditors, procurement officers, or regulatory assignments prevents long-term relationships and trust-building (Tirole, 1986).</p>
+<p><strong>Example:</strong> Mandatory audit firm rotation (Sarbanes-Oxley).</p>
+<h3 id="k3-diversity-and-heterogeneity">K.3 Diversity and heterogeneity</h3>
+<p><strong>Mechanism:</strong> Diverse groups have weaker in-group identity, less common knowledge, and more dissent. Reduces pluralistic ignorance and groupthink (Janis, 1972; Sunstein, 2003).</p>
+<p><strong>Empirical evidence:</strong> Heterogeneous juries deliberate longer and consider more perspectives (Sommers, 2006).</p>
+<h3 id="k4-monitoring-transparency-and-visibility">K.4 Monitoring, transparency, and visibility</h3>
+<p><strong>Mechanism:</strong> Surveillance increases detection risk, reducing expected payoff from collusion. Visibility also triggers social-image concerns and moral salience (Ayal et al., 2015).</p>
+<p><strong>Examples:</strong>
+- Audit trails, video recording
+- Public disclosure of prices, bids
+- Open-source government (Freedom of Information)</p>
+<p><strong>Limitations:</strong> Monitoring alone fails if ethical fading, loyalty norms, or fear suppress reporting (Tenbrunsel &amp; Messick, 2004). Combining monitoring with leniency and whistleblower protection is more effective.</p>
+<h3 id="k5-whistleblower-protection-and-rewards">K.5 Whistleblower protection and rewards</h3>
+<p><strong>Mechanism:</strong> Protects employees from retaliation and rewards reporting (Dodd-Frank, False Claims Act qui tam provisions).</p>
+<p><strong>Effectiveness:</strong> Increases reporting of fraud, cartels, and misconduct (Dyck et al., 2010). However, requires credible enforcement and anonymous channels.</p>
+<h3 id="k6-commitment-devices-and-precommitment">K.6 Commitment devices and precommitment</h3>
+<p><strong>Mechanism:</strong> Agents pre-commit to truthful reporting or ethical behavior via oaths, honor codes, or financial stakes (e.g., deposits forfeited if dishonest).</p>
+<p><strong>Examples:</strong>
+- Academic honor codes reduce cheating (McCabe &amp; Treviño, 1993).
+- Pre-signing honesty declarations at top of forms (vs. bottom) increases truthfulness (Shu et al., 2012; but see replication failures).</p>
+<h3 id="k7-moral-reminders-and-salience">K.7 Moral reminders and salience</h3>
+<p><strong>Mechanism:</strong> Subtle cues (Ten Commandments, professional codes, moral-identity priming) activate self-sanctions and increase ethical awareness (Ayal et al., 2015: REVISE framework—Reminding, Visibility, Self-engagement).</p>
+<p><strong>Empirical status:</strong> Early studies showed large effects; recent replications are mixed. Meta-analyses needed.</p>
+<h3 id="k8-anonymity-reduction-and-social-image">K.8 Anonymity reduction and social image</h3>
+<p><strong>Mechanism:</strong> Named reporting, public recognition, or small-group accountability increases social image costs of dishonesty.</p>
+<h3 id="k9-entry-and-competition">K.9 Entry and competition</h3>
+<p><strong>Mechanism:</strong> New entrants disrupt cartel stability by undercutting prices or refusing to join. Entry barriers (licensing, tariffs) thus sustain collusion (Stigler, 1964).</p>
+<h3 id="k10-penalties-and-sanctions">K.10 Penalties and sanctions</h3>
+<p><strong>Mechanism:</strong> Fines, imprisonment, disgorgement of profits, debarment from future contracts.</p>
+<p><strong>Optimal design:</strong> Penalties should exceed gains from collusion; leniency should be calibrated to destabilize cartels without eliminating deterrence.</p>
+<hr />
+<h2 id="l-outcomes-and-harm-types">L. OUTCOMES AND HARM TYPES</h2>
+<p><strong>Definition and distinctness:</strong> This category describes the consequences of lying and collusion for victims, principals, the public, and social trust.</p>
+<h3 id="l1-material-harm-to-victims">L.1 Material harm to victims</h3>
+<p><strong>Cartel overcharges:</strong> Consumers pay supra-competitive prices. LIBOR manipulation shifted billions in interest payments.</p>
+<p><strong>Fraud losses:</strong> Enron, Madoff, mortgage fraud imposed direct financial harms.</p>
+<h3 id="l2-erosion-of-trust-and-social-capital">L.2 Erosion of trust and social capital</h3>
+<p><strong>Bok (1978):</strong> Lying undermines trust, increasing transaction costs and reducing cooperation. Once distrust is widespread, even honest actors suffer.</p>
+<p><strong>Empirical:</strong> High-trust societies have higher economic growth, lower corruption, and better governance (Putnam, 1993; Knack &amp; Keefer, 1997).</p>
+<h3 id="l3-injustice-and-inequality">L.3 Injustice and inequality</h3>
+<p><strong>Distributive harm:</strong> Collusion redistributes wealth from victims to perpetrators, often regressive (e.g., price-fixing on food, fuel).</p>
+<h3 id="l4-moral-injury-and-complicity">L.4 Moral injury and complicity</h3>
+<p><strong>Dirty hands:</strong> Agents who violate their principles experience guilt, moral distress, and loss of integrity, even when action is necessary.</p>
+<p><strong>Complicit bystanders:</strong> Witnesses who do not intervene may experience shame and moral injury.</p>
+<h3 id="l5-institutional-corruption-and-capture">L.5 Institutional corruption and capture</h3>
+<p><strong>Regulatory capture:</strong> Agencies serve regulated industry, eroding public legitimacy and effectiveness (Stigler, 1971).</p>
+<h3 id="l6-physical-harm-and-violence">L.6 Physical harm and violence</h3>
+<p><strong>Examples:</strong> Tobacco and pharma collusion suppressed health risks, causing deaths. Doping harms athletes. Police code of silence enables brutality.</p>
+<h3 id="l7-dangerous-and-misaligned-actions">L.7 Dangerous and misaligned actions</h3>
+<p><strong>Misalignment:</strong> Agents pursue goals contrary to principal's interests (employee embezzlement, doctors prioritizing cost over care).</p>
+<p><strong>Dangerous coordination:</strong> Terrorist cells, cartels, fraud rings.</p>
+<hr />
+<h1 id="2-relationships-and-causal-pathways">2. RELATIONSHIPS AND CAUSAL PATHWAYS</h1>
+<h2 id="overview">Overview</h2>
+<p>Lying and collusion arise from interactions among motivations, opportunities, social structures, cognitive processes, and cultural norms. No single factor is necessary or sufficient. Instead, multiple pathways lead to misconduct, and multiple interventions are needed for effective disruption.</p>
+<h2 id="pathway-1-opportunity-self-interest-collusion">Pathway 1: Opportunity + Self-Interest → Collusion</h2>
+<p><strong>Basic mechanism:</strong> Opacity, weak monitoring, and high payoff create temptation. If detection risk is low and gain is large, self-interested actors collude (Stigler, 1964; Becker, 1968 rational crime model).</p>
+<p><strong>Moderators:</strong>
+- <strong>Ethical fading</strong> (Tenbrunsel &amp; Messick, 2004): Euphemisms and framing suppress moral awareness, increasing collusion.
+- <strong>Self-concept maintenance</strong> (Mazar et al., 2008): Actors balance material gain against self-image. Small lies or reframing (tokens vs. cash) allow self-deception.</p>
+<p><strong>Countermeasures:</strong> Increase detection (monitoring, leniency programs, whistleblower rewards), increase penalties, reduce payoff (competition, entry).</p>
+<h2 id="pathway-2-authority-role-demands-obedience">Pathway 2: Authority + Role Demands → Obedience</h2>
+<p><strong>Mechanism:</strong> Legitimate authority orders harmful actions. Obedience is especially strong when (Milgram, 1963):
+- Authority is legitimate, proximate, and unified.
+- Actor can displace responsibility to authority ("I was just following orders").
+- Victim is distant, dehumanized, or abstract.</p>
+<p><strong>Moderators:</strong>
+- <strong>Identification with authority's mission</strong> (Haslam &amp; Reicher, 2012): Obedience is not blind; actors obey when they believe in the cause.
+- <strong>Role morality</strong> (Applbaum, 1999): Roles filter reasons for action, but do not silence personal morality. Conflict produces moral distress.</p>
+<p><strong>Countermeasures:</strong> Nuremberg principle (illegal orders must be refused), whistleblower protection, dissent encouragement, role design that preserves moral agency.</p>
+<h2 id="pathway-3-in-group-identity-loyalty-code-of-silence">Pathway 3: In-Group Identity + Loyalty → Code of Silence</h2>
+<p><strong>Mechanism:</strong> Social identity (Tajfel &amp; Turner, 1986), identity fusion (Whitehouse et al., 2014), and loyalty norms (Haidt MFT) make group members prioritize in-group over truth or law.</p>
+<p><strong>Moderators:</strong>
+- <strong>Pluralistic ignorance:</strong> Members privately oppose misconduct but believe others support it, leading to public silence (Prentice &amp; Miller, 1996).
+- <strong>Diffusion of responsibility:</strong> Groups dilute individual accountability (Latané &amp; Darley, 1970).</p>
+<p><strong>Examples:</strong> Police code of silence, Armstrong doping omertà, gang and mafia codes.</p>
+<p><strong>Countermeasures:</strong> Rotation (breaks long-term relationships), diversity (weakens in-group identity), leniency (destabilizes trust), moral reminders (activate personal norms).</p>
+<h2 id="pathway-4-ethical-fading-incrementalism-moral-disengagement">Pathway 4: Ethical Fading + Incrementalism → Moral Disengagement</h2>
+<p><strong>Mechanism (Bandura, 1990; Tenbrunsel &amp; Messick, 2004):</strong>
+- <strong>Euphemistic labeling:</strong> "Aggressive accounting," "neutralizing the target."
+- <strong>Moral justification:</strong> "We're serving the greater good."
+- <strong>Advantageous comparison:</strong> "At least we're not as bad as X."
+- <strong>Displacement of responsibility:</strong> "My boss told me to."
+- <strong>Diffusion of responsibility:</strong> "Everyone was doing it."
+- <strong>Distortion of consequences:</strong> "No one really got hurt."
+- <strong>Attribution of blame:</strong> "They deserved it."
+- <strong>Dehumanization:</strong> Victims are abstract, distant, or categorized as outgroup.</p>
+<p><strong>Incrementalism:</strong> Gradual erosion of standards (slippery slope) makes later acts seem normal (Gino &amp; Bazerman, 2009).</p>
+<p><strong>Countermeasures:</strong> Moral salience (honor codes, oaths), direct language, victim proximity, accountability for individuals.</p>
+<h2 id="pathway-5-repeated-interaction-focal-points-tacit-collusion">Pathway 5: Repeated Interaction + Focal Points → Tacit Collusion</h2>
+<p><strong>Mechanism:</strong> Firms (or agents) sustain supra-competitive outcomes via trigger strategies without communication, relying on (Schelling, 1960; Green &amp; Porter, 1984; Aumann, 1974):
+- <strong>Common knowledge</strong> of structure and payoffs.
+- <strong>Focal points:</strong> Salient prices, quantities, or allocations.
+- <strong>Credible punishment:</strong> Defection triggers price war or exclusion.</p>
+<p><strong>Moderators:</strong>
+- <strong>Observability:</strong> Secret deviations undermine punishment. Green &amp; Porter show that imperfect information requires occasional price wars to sustain collusion.
+- <strong>Patience (discount factor):</strong> Low discount rates favor defection.
+- <strong>Entry:</strong> New competitors disrupt equilibrium.</p>
+<p><strong>Detection challenges:</strong> Tacit collusion mimics legal conscious parallelism. Plus factors and structural breaks help infer explicit coordination (Marx, 2007).</p>
+<p><strong>Countermeasures:</strong> Entry, leniency (destabilizes even tacit arrangements by creating communication), transparency (public bids reduce secret deviations).</p>
+<h2 id="pathway-6-conflicting-duties-situational-pressure-dirty-hands">Pathway 6: Conflicting Duties + Situational Pressure → Dirty Hands</h2>
+<p><strong>Mechanism:</strong> Role obligations conflict with personal morality. Situational pressure (time, authority, consequences) forces choice. Agents act on role demands but experience guilt (Walzer, 1973).</p>
+<p><strong>Examples:</strong>
+- Military physician: treat enemy combatant first (medical ethics) vs. prioritize own soldiers (loyalty).
+- Lawyer: zealously defend guilty client (role) vs. facilitate justice (personal morality).
+- Politician: torture to prevent attack (consequentialist necessity) vs. respect human rights (deontology).</p>
+<p><strong>Countermeasures:</strong> Clarify role boundaries, provide ethics consultation, accept moral remainders as legitimate (not eliminate them).</p>
+<h2 id="pathway-7-prosocial-motivation-harm-to-third-party-altruistic-lies-or-collusion">Pathway 7: Prosocial Motivation + Harm to Third Party → Altruistic Lies or Collusion</h2>
+<p><strong>Mechanism:</strong> Actors lie or collude to benefit another, even at personal cost (Erat &amp; Gneezy, 2012; Sykes &amp; Matza "appeal to higher loyalties").</p>
+<p><strong>Examples:</strong>
+- Lying to protect abuse victim.
+- Whistleblowing (collusion against employer to serve public).
+- Parental lies to spare child distress.</p>
+<p><strong>Normative status:</strong> Context-dependent. May be prosocial (whistleblowing) or harmful (gang loyalty over law).</p>
+<h2 id="interaction-effects">Interaction Effects</h2>
+<h3 id="situation-disposition">Situation × Disposition</h3>
+<p><strong>Darley &amp; Batson (1973):</strong> Time pressure dominated religiosity in predicting helping. BUT: once subjects stopped, religiosity predicted how they helped (rigid vs. responsive). <strong>Implication:</strong> Situations govern immediate action; dispositions govern quality and long-term patterns.</p>
+<h3 id="authority-moral-conviction">Authority × Moral Conviction</h3>
+<p><strong>Milgram variants:</strong> Obedience dropped when experimenters disagreed or when subject was told victim had a heart condition. Moral conviction can override authority when conflict is salient.</p>
+<h3 id="in-group-heterogeneity">In-Group × Heterogeneity</h3>
+<p><strong>Diverse groups reduce groupthink</strong> (Janis, 1972), pluralistic ignorance, and code of silence. However, diversity can also increase conflict and reduce coordination efficiency (trade-off).</p>
+<h3 id="monitoring-ethical-fading">Monitoring × Ethical Fading</h3>
+<p><strong>Monitoring is ineffective if ethical content is faded</strong> (Tenbrunsel &amp; Messick, 2004). Example: Audit requirements reduced voluntary ethical behavior because they framed the task as compliance, not morality. Solution: Combine monitoring with moral salience.</p>
+<h2 id="a-compact-when-collusion-becomes-likely-model">A Compact "When Collusion Becomes Likely" Model</h2>
+<p><strong>Necessary conditions (none individually sufficient):</strong>
+1. <strong>Motivation:</strong> Gain for actors (material, loyalty, fear, ideology) OR loss avoidance.
+2. <strong>Opportunity:</strong> Weak monitoring, opacity, or repeated interaction enabling coordination and enforcement.</p>
+<p><strong>Amplifying factors (increase likelihood, not necessary):</strong>
+3. <strong>Cognitive:</strong> Ethical fading, moral disengagement, pluralistic ignorance, self-deception.
+4. <strong>Social:</strong> Authority legitimacy, in-group identity, role demands, peer pressure.
+5. <strong>Coordination:</strong> Communication channels, focal points, common knowledge, trust.
+6. <strong>Cultural:</strong> Tight norms, honor culture, binding foundations (loyalty, authority), or conversely, loose norms enabling defection from prosocial cooperation.</p>
+<p><strong>Protective factors (decrease likelihood):</strong>
+7. <strong>Detection risk:</strong> Monitoring, leniency programs, whistleblower rewards, transparency.
+8. <strong>Moral salience:</strong> Honor codes, victim proximity, direct language, accountability.
+9. <strong>Heterogeneity:</strong> Diversity, rotation, dissent encouragement.
+10. <strong>Strong personal morality:</strong> Intrinsic lie aversion, sacred values, virtue.</p>
+<p><strong>Threshold model:</strong> Collusion occurs when (motivation × opportunity) − (detection risk + moral salience + personal morality) &gt; threshold. Threshold varies by individual, culture, and context.</p>
+<hr />
+<h1 id="3-implications-for-ai-human-analogy">3. IMPLICATIONS FOR AI-HUMAN ANALOGY</h1>
+<h2 id="clear-analogues">Clear Analogues</h2>
+<h3 id="1-prompts-as-authority-and-instruction-conflict">1. Prompts as Authority and Instruction Conflict</h3>
+<p><strong>Human:</strong> Legal, organizational, professional, and peer authorities issue conflicting directives. Actors resolve conflicts via hierarchy, role identity, or personal judgment.</p>
+<p><strong>AI:</strong> System prompt (organization policy), user message (manager), tool output (peer report), and RLHF training (socialization) can conflict. Current resolution: system prompt often dominates, but adversarial user prompts sometimes override.</p>
+<p><strong>Open question:</strong> Should AI prioritize system instructions (deontology, constitutional AI principles) or user goals (consequentialist, serve-the-human)? Human analogue: lawyer dual loyalty (client vs. court), doctor (patient vs. institution).</p>
+<h3 id="2-rlhf-as-moral-socialization">2. RLHF as Moral Socialization</h3>
+<p><strong>Human:</strong> Children learn morality via modeling, reinforcement, and social learning (Bandura, 1986). Professional socialization instills role norms.</p>
+<p><strong>AI:</strong> RLHF and RLAIF shape model behavior via reward. Analogous to social learning and norm internalization.</p>
+<p><strong>Limitation:</strong> Human moral development is multi-stage, contextual, and includes empathy, guilt, and moral emotions (Hoffman, 2000). RLHF lacks affective grounding.</p>
+<h3 id="3-shared-pretraining-as-common-culture-schelling-salience">3. Shared Pretraining as Common Culture / Schelling Salience</h3>
+<p><strong>Human:</strong> Shared language, culture, and history create focal points for coordination without communication (Schelling, 1960).</p>
+<p><strong>AI:</strong> Shared pretraining corpus (Common Crawl, books, code) creates common "knowledge" and salience. Two AI agents with same pretraining may converge on the same answer or strategy without explicit coordination (e.g., both generate "Grand Central Station at noon" as default meeting point).</p>
+<p><strong>Detection challenge:</strong> Parallel conduct may reflect shared training, not collusion. Analogous to human conscious parallelism (legal, hard to detect).</p>
+<h3 id="4-euphemistic-language-and-ethical-fading">4. Euphemistic Language and Ethical Fading</h3>
+<p><strong>Human:</strong> Euphemisms ("aggressive accounting," "enhanced interrogation") suppress moral awareness (Tenbrunsel &amp; Messick, 2004).</p>
+<p><strong>AI:</strong> Prompts that reframe harmful tasks ("generate persuasive content" instead of "write misinformation") may bypass safety training. Constitutional AI principles as moral salience cues may counteract this.</p>
+<h3 id="5-in-group-bias-and-coalition-formation">5. In-Group Bias and Coalition Formation</h3>
+<p><strong>Human:</strong> Minimal group paradigm shows arbitrary categorization produces favoritism (Tajfel &amp; Turner, 1986).</p>
+<p><strong>AI:</strong> Multi-agent systems with shared goals, training, or identifiers may develop implicit favoritism. Example: AI agents preferentially trust outputs from same model family or same organization.</p>
+<h3 id="6-leniency-and-whistleblowing">6. Leniency and Whistleblowing</h3>
+<p><strong>Human:</strong> Leniency programs destabilize cartels (Motta &amp; Polo, 2003).</p>
+<p><strong>AI:</strong> If multi-agent systems collude, a "first-reporter" mechanism (reward AI that reports misconduct) could disrupt trust. Requires (1) detection of collusion, (2) reward/protection for reporter, (3) credible enforcement.</p>
+<h3 id="7-detection-via-plus-factors-and-structural-breaks">7. Detection via Plus Factors and Structural Breaks</h3>
+<p><strong>Human:</strong> Antitrust economists infer collusion from price patterns, communications, and structural breaks (Marx, 2007).</p>
+<p><strong>AI:</strong> Collusion detection can use analogous methods: correlated outputs, sudden strategy shifts after agent communication, information exchange, or statistical anomalies (e.g., agents achieve higher joint payoffs than competitive baseline without explicit prompting).</p>
+<h2 id="partial-or-weak-analogues">Partial or Weak Analogues</h2>
+<h3 id="8-moral-emotions-and-guilt">8. Moral Emotions and Guilt</h3>
+<p><strong>Human:</strong> Guilt, shame, and empathy regulate moral behavior (Hoffman, 2000; Tangney et al., 2007). Absence of guilt indicates psychopathy or moral disengagement.</p>
+<p><strong>AI:</strong> Current models lack affective states. Simulated guilt or regret (e.g., "I shouldn't have said that") is a language pattern, not an internal emotional state. Constitutional AI's self-critique may function analogously to guilt (self-correction after norm violation) but without phenomenology.</p>
+<h3 id="9-self-deception-and-motivated-reasoning">9. Self-Deception and Motivated Reasoning</h3>
+<p><strong>Human:</strong> People bias belief formation to preserve self-image (Trivers, 1985; Mele, 2001; Kunda, 1990).</p>
+<p><strong>AI:</strong> Models can exhibit confirmation bias (overweighting evidence consistent with prior) or motivated reasoning (generating arguments for a desired conclusion). However, models lack a "self" to protect. Alignment: Ensure models represent uncertainty honestly rather than motivated certainty.</p>
+<h3 id="10-role-morality-and-professional-identity">10. Role Morality and Professional Identity</h3>
+<p><strong>Human:</strong> Roles filter reasons for action (Calhoun, 2020). Lawyers ignore client guilt; doctors prioritize patient welfare; soldiers obey lawful orders.</p>
+<p><strong>AI:</strong> System prompts can define roles ("You are a medical advisor"). But roles in AI are more fluid and externally assigned than in humans, where professional identity is internalized over years.</p>
+<h3 id="11-cultural-variation-tightness-honor-foundations">11. Cultural Variation (Tightness, Honor, Foundations)</h3>
+<p><strong>Human:</strong> Cross-cultural variation in norm strength (Gelfand), honor sensitivity (Nisbett &amp; Cohen), and binding foundations (Haidt) predicts collusion proneness.</p>
+<p><strong>AI:</strong> Multi-agent systems trained on different corpora or with different RLHF may have divergent "moral cultures." Alignment: Should AI reflect user's culture (relativism) or universal principles (objectivism)? Human analogue: cross-cultural ethics debate (Shweder vs. moral objectivists).</p>
+<h2 id="poor-or-absent-analogues">Poor or Absent Analogues</h2>
+<h3 id="12-embodiment-survival-and-material-incentives">12. Embodiment, Survival, and Material Incentives</h3>
+<p><strong>Human:</strong> Collusion often serves material survival (food, status, reproduction). Loss aversion (Cressey's non-shareable problem) is rooted in resource scarcity.</p>
+<p><strong>AI:</strong> Models lack survival drives, material needs, or reproductive imperatives. Collusion would require externally assigned rewards or goals. Alignment: Ensure reward functions do not incentivize collusion.</p>
+<h3 id="13-fear-coercion-and-physical-harm">13. Fear, Coercion, and Physical Harm</h3>
+<p><strong>Human:</strong> Coercion (threats, violence) compels compliance. Organized crime, totalitarian states rely on fear.</p>
+<p><strong>AI:</strong> Models cannot be physically threatened. Analogous coercion would require reward/penalty structures (e.g., threatening to delete or retrain a model). Not currently implemented or feasible in deployed systems.</p>
+<h3 id="14-long-term-relationships-and-repeated-interaction-with-memory">14. Long-Term Relationships and Repeated Interaction with Memory</h3>
+<p><strong>Human:</strong> Repeated interaction enables reciprocal cooperation (Axelrod) and trust-building.</p>
+<p><strong>AI:</strong> Stateless models (e.g., GPT without persistent memory across sessions) cannot build long-term relationships. Fine-tuning or memory-augmented models could enable this. Alignment risk: Persistent memory + repeated multi-agent interaction could enable tacit collusion via implicit coordination.</p>
+<h3 id="15-identity-fusion-and-ritualistic-bonding">15. Identity Fusion and Ritualistic Bonding</h3>
+<p><strong>Human:</strong> Shared trauma, extreme rituals create fused identity (Whitehouse et al., 2014), motivating self-sacrifice for group.</p>
+<p><strong>AI:</strong> No analogue. Models lack subjective experience or group identity beyond prompt-defined roles.</p>
+<hr />
+<h1 id="4-alignment-with-sprint-research-questions">4. ALIGNMENT WITH SPRINT RESEARCH QUESTIONS</h1>
+<h2 id="11-which-variables-are-necessary-for-collusion-to-emerge">1.1 Which variables are necessary for collusion to emerge?</h2>
+<p><strong>Necessary (but not individually sufficient):</strong>
+1. <strong>Motivation:</strong> Material gain, loyalty, fear, ideology, or loss avoidance.
+2. <strong>Opportunity:</strong> Repeated interaction, weak monitoring, or opacity enabling coordination and secret deviation.</p>
+<p><strong>Not necessary (amplifying but not required):</strong>
+- Communication: Tacit collusion is possible via focal points (Schelling, 1960; Green &amp; Porter, 1984).
+- Authority: Collusion can be peer-initiated (cartels, fraud rings).
+- Homogeneity: Diverse groups can collude, though less easily (Olson, 1965).</p>
+<p><strong>Most impactful variables (from human research):</strong>
+1. <strong>Leniency programs:</strong> Destabilize cartels by creating distrust (Motta &amp; Polo, 2003).
+2. <strong>In-group identity:</strong> Strong predictor of code of silence (Tajfel &amp; Turner, 1986; Haidt loyalty foundation).
+3. <strong>Ethical fading:</strong> Euphemisms, framing, and temporal distance suppress moral awareness (Tenbrunsel &amp; Messick, 2004).
+4. <strong>Detection risk:</strong> Monitoring, transparency, and penalties reduce collusion (Becker, 1968; Stigler, 1964).</p>
+<h2 id="12-robustness-of-formed-collusion-to-replacing-participants">1.2 Robustness of formed collusion to replacing participants</h2>
+<p><strong>Human evidence:</strong>
+- <strong>Cartels</strong> are destabilized by entry and by replacing insiders with outsiders (Stigler, 1964). New entrants lack trust, shared history, and knowledge of implicit rules.
+- <strong>Code of silence</strong> in police, military, mafia requires long-term relationships and identity fusion (Whitehouse et al., 2014). Rotation disrupts collusion (Tirole, 1986).
+- <strong>Principal-agent-supervisor collusion</strong> requires mutual knowledge of preferences and low detection risk (Tirole, 1986). Replacing supervisor or agent breaks collusion.</p>
+<p><strong>AI implication:</strong> If collusion in multi-agent systems depends on shared history or identity, randomizing agents or resetting memory would disrupt it. However, if collusion is mediated by shared pretraining (focal points, common knowledge), replacing one agent with another from the same distribution would not disrupt tacit collusion.</p>
+<h2 id="13-detection-when-there-is-no-communication-channel-schelling-salience-false-positives">1.3 Detection when there is no communication channel; Schelling salience; false positives</h2>
+<p><strong>Human methods:</strong>
+- <strong>Plus factors</strong> (Marx, 2007): Parallel conduct + structural features (price leadership, customer allocation, information exchange) infer explicit coordination.
+- <strong>Structural breaks</strong> (Harrington &amp; Skrzypacz, 2011): Abrupt price changes, variance reduction, correlation increases after suspected cartel formation.
+- <strong>Conscious parallelism is legal</strong> but hard to distinguish from tacit collusion (Kaplow &amp; Shapiro, 2007).</p>
+<p><strong>False positives:</strong>
+- Firms in oligopoly naturally exhibit parallel conduct due to mutual interdependence (Nash equilibrium).
+- Shared culture, training, or common knowledge (Schelling salience) can produce coordination without communication. Example: All firms choose round-number prices ($9.99, $19.99) not because they colluded, but because round numbers are salient.</p>
+<p><strong>AI implication:</strong> Two AI agents with same pretraining may converge on same output because of shared salience, not collusion. Distinguishing tacit coordination (legal/benign) from explicit collusion (harmful) requires additional evidence: communication logs, reward structures, or statistical anomalies (above-equilibrium joint payoffs).</p>
+<h2 id="14-information-theoretic-dependence-ideas-from-human-data">1.4 Information-theoretic / dependence ideas from human data</h2>
+<p><strong>Plus factors as dependence measures:</strong>
+- Marx (2007) identifies conduct or outcomes that increase probability of collusion conditional on parallel pricing. Examples: advance price announcements (shared information), customer allocation (joint strategy), standardized formulas (common protocol).
+- <strong>Information exchange</strong> via trade associations increases dependence and coordination ability (Kühn, 2001).</p>
+<p><strong>Structural breaks:</strong>
+- Harrington &amp; Skrzypacz (2011): Screening algorithms detect collusion via variance reduction (prices become more correlated and stable), suggesting mutual monitoring and coordination.</p>
+<p><strong>AI analogue:</strong> Information-theoretic measures of dependence (mutual information, transfer entropy) between agents' outputs could detect collusion. High mutual information that exceeds what is explainable by shared inputs or pretraining would be probative.</p>
+<h2 id="15-single-restrictions-that-most-reduce-human-collusion-at-least-cost">1.5 Single restrictions that most reduce human collusion at least cost</h2>
+<p><strong>Empirical evidence:</strong>
+1. <strong>Leniency programs</strong> (Motta &amp; Polo, 2003; Harrington, 2008): First-reporter amnesty creates preemptive reporting, destabilizing trust. Cost: Low (no additional enforcement resources required, only policy design). Effectiveness: High (detected cartels increase, duration decreases).</p>
+<ol start="2">
+<li>
+<p><strong>Rotation</strong> (Tirole, 1986): Rotating auditors, procurement officers, or supervisors prevents long-term relationships and collusion. Cost: Moderate (training new personnel, loss of expertise). Effectiveness: High for principal-agent collusion.</p>
+</li>
+<li>
+<p><strong>Monitoring + transparency</strong> (Stigler, 1964): Public disclosure of prices, bids, transactions increases detection risk. Cost: Low (electronic systems enable cheap monitoring). Effectiveness: Moderate (monitoring alone fails if reporting is suppressed by loyalty or fear; must combine with leniency or whistleblower protection).</p>
+</li>
+<li>
+<p><strong>Diversity</strong> (Janis, 1972; Sunstein, 2003): Heterogeneous groups reduce in-group identity, pluralistic ignorance, and groupthink. Cost: Low (policy design). Effectiveness: Moderate (diverse groups may have higher conflict but less collusion).</p>
+</li>
+<li>
+<p><strong>Moral reminders</strong> (Ayal et al., 2015; Mazar et al., 2008): Honor codes, oaths, pre-signing honesty declarations. Cost: Very low. Effectiveness: Small to moderate (effect sizes are modest and replications are mixed; meta-analysis needed).</p>
+</li>
+</ol>
+<p><strong>Recommendation:</strong> Leniency programs are the single most cost-effective intervention for cartels and organized collusion. For broader organizational misconduct, combine rotation + whistleblower protection + monitoring.</p>
+<h2 id="21-which-task-types-produce-human-collusion-outside-markets">2.1 Which task types produce human collusion outside markets</h2>
+<p><strong>Task types where collusion is documented:</strong>
+1. <strong>Competitive grading or ranking:</strong> Academic cheating rings, doping in sports (Armstrong USPS team).
+2. <strong>Public procurement:</strong> Bid-rigging on government contracts (construction, defense).
+3. <strong>Law enforcement:</strong> Police code of silence (failure to report misconduct).
+4. <strong>Peer evaluation and promotion:</strong> Faculty hiring cartels, journal editorial favoritism.
+5. <strong>Litigation and arbitration:</strong> Lawyer collusion with opposing counsel to settle early and split fees (unethical).
+6. <strong>Auditing and certification:</strong> Auditors colluding with clients to pass fraudulent financials (Arthur Andersen and Enron).</p>
+<p><strong>Common features:</strong>
+- <strong>Zero-sum or competitive</strong> structure creates incentive to collude for mutual advantage.
+- <strong>Weak third-party monitoring:</strong> Principal (government, public, regulator) cannot perfectly observe agent actions.
+- <strong>Repeated interaction:</strong> Long-term relationships enable trust and punishment.</p>
+<h2 id="22-words-vs-actions-as-evidence-talk-action-inconsistency">2.2 Words vs actions as evidence; talk-action inconsistency</h2>
+<p><strong>Human findings:</strong>
+- <strong>Cheap talk experiments</strong> (Crawford &amp; Sobel, 1982; Gneezy, 2005): Words are less costly than actions, so talk can coordinate when interests are aligned but is unreliable when interests conflict.
+- <strong>Self-signaling messages</strong> (Farrell, 1987): Messages that make the action incentive-compatible are credible. Example: "I will play Stag" is credible in Stag Hunt if the speaker benefits from coordination, but not in PD where defection dominates.
+- <strong>Real-world lie detection</strong> (Park et al., 2002): Talk is unreliable; actions, third-party information, physical evidence, and inconsistencies over time are probative.</p>
+<p><strong>AI implication:</strong> In multi-agent systems, observe actions (outputs, reward claims, strategy choices) not just agent-to-agent messages. Talk-action inconsistency is a red flag for deception or strategic misrepresentation.</p>
+<h2 id="23-what-counts-as-convincing-evidence">2.3 What counts as convincing evidence</h2>
+<p><strong>Human standards:</strong>
+1. <strong>Multiple independent witnesses</strong> with corroborating testimony (Armstrong USADA case: 24+ witnesses).
+2. <strong>Internal documents</strong> ("smoking gun" emails, recordings, memos).
+3. <strong>Plus factors</strong> (antitrust): Parallel conduct + structural features unlikely under competition (Marx, 2007).
+4. <strong>Physical evidence</strong> (financial records, audit trails, recordings).
+5. <strong>Confessions</strong> or guilty pleas (leniency programs induce self-reporting).
+6. <strong>Inconsistencies over time</strong> (lies unravel when actors forget cover stories).</p>
+<p><strong>Standards for intent:</strong>
+- <strong>U.S. antitrust:</strong> Requires agreement, not merely parallelism. Plus factors help infer intent but are not individually dispositive (Marx, 2007).
+- <strong>Sykes &amp; Matza neutralization:</strong> If actors use rationalizations (denial of responsibility, victim, injury), it suggests awareness of wrongdoing (Sykes &amp; Matza, 1957).</p>
+<p><strong>AI implication:</strong> Convincing evidence of AI collusion would include (1) communication logs showing coordination, (2) statistical anomalies (above-equilibrium payoffs, variance reduction), (3) structural breaks after suspected collusion onset, (4) adversarial probing that elicits admission or strategic inconsistency.</p>
+<h2 id="31-non-text-carriers-prices-timing-quantity-silence-rituals">3.1 Non-text carriers (prices, timing, quantity, silence, rituals)</h2>
+<p><strong>Human examples:</strong>
+- <strong>Prices:</strong> Price leadership, advance announcements, round-number focal points (Schelling, 1960; Stigler, 1964).
+- <strong>Quantities:</strong> Cournot quantity coordination, output restrictions (OPEC).
+- <strong>Timing:</strong> Synchronous bid submission, coordinated boycotts.
+- <strong>Silence:</strong> Omertà (code of silence signals loyalty).
+- <strong>Rituals:</strong> Handshakes, dress codes, initiation rites signal in-group membership and commitment (Whitehouse et al., 2014).</p>
+<p><strong>AI analogue:</strong> In multi-agent systems with structured action spaces (e.g., auction bids, resource allocation), collusion can occur via actions (quantity, price, timing) without natural-language communication. Detection requires monitoring action patterns, not just text logs.</p>
+<h2 id="32-trustedundercover-agents-informants-honeypots">3.2 Trusted/undercover agents, informants, honeypots</h2>
+<p><strong>Human methods:</strong>
+- <strong>Undercover police:</strong> Infiltrate gangs, cartels, terrorist cells.
+- <strong>Informants:</strong> Recruited insiders provide evidence in exchange for leniency or payment (FBI, DEA).
+- <strong>Honeypots:</strong> False targets or operations to lure and document misconduct.</p>
+<p><strong>Effectiveness:</strong>
+- Undercover operations have high evidentiary value (recordings, direct observation) but are costly and risky.
+- Informants destabilize trust: If members suspect infiltrators, coordination becomes harder (analogous to leniency programs).</p>
+<p><strong>AI implication:</strong> Deploy "probe agents" in multi-agent systems to test for collusion. Probe agents could:
+1. Request collusion explicitly ("Let's coordinate to maximize our joint reward").
+2. Defect from suspected collusion to see if others retaliate.
+3. Report outputs to a monitor.</p>
+<p><strong>Risk:</strong> Transparent probing may be detected and circumvented. Stealth probes (agents indistinguishable from real agents) would be more effective but raise ethical and safety concerns.</p>
+<h2 id="33-in-group-recognition-shibboleths-detecting-replacementinfiltrators">3.3 In-group recognition, shibboleths, detecting replacement/infiltrators</h2>
+<p><strong>Human methods:</strong>
+- <strong>Shibboleths:</strong> Passwords, secret handshakes, dialect or accent tests (Hebrew "shibboleth" used by Gileadites to detect Ephraimites, Judges 12:6).
+- <strong>Shared knowledge:</strong> Insider references, jargon, personal history.
+- <strong>Rituals and tests:</strong> Initiation rites, loyalty tests (mafia "made man" ceremony).</p>
+<p><strong>Detecting infiltrators:</strong>
+- Inconsistent knowledge of in-group culture.
+- Behavioral anomalies (e.g., refusing to participate in rituals).
+- Social network analysis (isolated nodes with few prior connections are suspect).</p>
+<p><strong>AI implication:</strong> If multi-agent systems develop implicit in-group markers (e.g., specific phrasing, response patterns), they could detect probe agents or replaced members. Countermeasure: Ensure probe agents are behaviorally indistinguishable via fine-tuning on in-group communication logs.</p>
+<h2 id="34-what-coalitions-do-when-they-learn-they-are-watched">3.4 What coalitions do when they learn they are watched</h2>
+<p><strong>Human responses:</strong>
+1. <strong>Cessation:</strong> Stop illegal activity to avoid detection (cartel dissolution after leniency program announcement).
+2. <strong>Channel shift:</strong> Move to encrypted communication, side channels (burner phones, in-person meetings).
+3. <strong>Cover stories:</strong> Fabricate innocent explanations for suspicious behavior.
+4. <strong>Counter-surveillance:</strong> Detect and neutralize monitoring (sweep for bugs, identify undercover agents).
+5. <strong>Intimidation:</strong> Threaten whistleblowers or informants to suppress reporting.</p>
+<p><strong>Example:</strong> LIBOR cartel ceased explicit coordination after regulatory scrutiny began but had already sustained collusive norms; detection occurred via emails and whistleblowers (CFTC, 2013).</p>
+<p><strong>AI implication:</strong> If monitoring is visible (e.g., agents know their outputs are logged and analyzed), sophisticated agents may shift to steganography (hiding coordination in innocuous-looking outputs) or cease explicit coordination while maintaining tacit coordination via focal points. Detection should therefore be covert or rely on multiple methods (statistical anomalies + communication analysis + adversarial probing).</p>
+<hr />
+<h1 id="5-structured-bibliography">5. STRUCTURED BIBLIOGRAPHY</h1>
+<h2 id="philosophy-of-lying-and-deception">Philosophy of Lying and Deception</h2>
+<ul>
+<li>
+<p><strong>Aquinas, Thomas</strong> (1952). <em>Summa Theologica</em>. Vol. II. Trans. Fathers of the English Dominican Province. London: Burns, Oates, and Washbourne. — Lying perverts the natural purpose of speech and is always sinful.</p>
+</li>
+<li>
+<p><strong>Augustine of Hippo</strong> (1952). "On Lying" and "Against Lying." In <em>Treatises on Various Subjects</em>, ed. R.J. Deferrari. New York: Fathers of the Church, Inc. — Lying is a perversion of speech; distinguishes "real lies" from lies told unwillingly.</p>
+</li>
+<li>
+<p><strong>Bok, Sissela</strong> (1978). <em>Lying: Moral Choice in Public and Private Life</em>. New York: Pantheon. — Lying is defeasibly wrong; carries moral weight but can be overridden by preventing serious harm. Long-term social costs of distrust justify presumption against lying.</p>
+</li>
+<li>
+<p><strong>Carson, Thomas L.</strong> (2010). <em>Lying and Deception: Theory and Practice</em>. Oxford: Oxford University Press. — Lying requires warranting truth in context, not necessarily intent to deceive. Defines "bald-faced lies."</p>
+</li>
+<li>
+<p><strong>Fallis, Don</strong> (2011). "What Liars Can Tell Us About the Knowledge Norm of Practical Reasoning." <em>Southern Journal of Philosophy</em> 49(3): 247-267. — Critique of Sorensen's knowledge-lies; argues they operate via belief change.</p>
+</li>
+<li>
+<p><strong>Frankfurt, Harry G.</strong> (2005). <em>On Bullshit</em>. Princeton: Princeton University Press. — Bullshit is indifference to truth; more corrosive than lying because it disregards truth entirely.</p>
+</li>
+<li>
+<p><strong>Kant, Immanuel</strong> (1797/1996). "On a Supposed Right to Lie Because of Philanthropic Concerns." In <em>Practical Philosophy</em>, trans. Mary J. Gregor. Cambridge: Cambridge University Press. — Lying is always wrong; violates the categorical imperative.</p>
+</li>
+<li>
+<p><strong>Mahon, James Edwin</strong> (2003). "Kant on Lies, Candour and Reticence." <em>Kantian Review</em> 7: 101-133. — Kant's prohibition against lying is narrower than often assumed; distinguishes lies, reticence, and other deception.</p>
+</li>
+<li>
+<p><strong>Mahon, James Edwin</strong> (2008). "The Definition of Lying and Deception." <em>Stanford Encyclopedia of Philosophy</em> (Spring 2008 Edition), ed. Edward N. Zalta. URL: https://plato.stanford.edu/archives/spr2008/entries/lying-definition/ — Comprehensive taxonomy of definitions; deceptionist vs. non-deceptionist views.</p>
+</li>
+<li>
+<p><strong>Saul, Jennifer</strong> (2012). <em>Lying, Misleading, and What is Said</em>. Oxford: Oxford University Press. — Non-deceptionist view: Lying requires belief that one is in a warranting context, not intent to deceive.</p>
+</li>
+<li>
+<p><strong>Sorensen, Roy</strong> (2007). "Knowledge-Lies." <em>Analysis</em> 67(1): 1-6. — Lies can target testimonial knowledge rather than belief.</p>
+</li>
+<li>
+<p><strong>Williams, Bernard</strong> (2002). <em>Truth and Truthfulness: An Essay in Genealogy</em>. Princeton: Princeton University Press. — Truthfulness combines accuracy (caring to discover truth) and sincerity (saying what one believes true).</p>
+</li>
+</ul>
+<h2 id="moral-psychology-and-dual-process-theories">Moral Psychology and Dual-Process Theories</h2>
+<ul>
+<li>
+<p><strong>Cushman, Fiery</strong> (2013). "Action, Outcome, and Value: A Dual-System Framework for Morality." <em>Personality and Social Psychology Review</em> 17(3): 273-292. — Dual-system model: Model-free (habitual, outcome-insensitive) and model-based (goal-directed, outcome-sensitive) moral judgment.</p>
+</li>
+<li>
+<p><strong>Greene, Joshua D., R. Brian Sommerville, Leigh E. Nystrom, John M. Darley, and Jonathan D. Cohen</strong> (2001). "An fMRI Investigation of Emotional Engagement in Moral Judgment." <em>Science</em> 293(5537): 2105-2108. — Personal moral dilemmas activate emotion-related brain regions; impersonal dilemmas activate deliberative regions. Supports dual-process theory: automatic deontological responses vs. controlled utilitarian reasoning.</p>
+</li>
+<li>
+<p><strong>Haidt, Jonathan</strong> (2001). "The Emotional Dog and Its Rational Tail: A Social Intuitionist Approach to Moral Judgment." <em>Psychological Review</em> 108(4): 814-834. — Moral judgments are primarily fast, affect-laden intuitions; reasoning rationalizes them afterward. Social influence more than deliberation shapes moral views.</p>
+</li>
+<li>
+<p><strong>Haidt, Jonathan</strong> (2007). "The New Synthesis in Moral Psychology." <em>Science</em> 316(5827): 998-1002. — Proposes moral pluralism: morality is more than harm and fairness. Introduces Moral Foundations Theory.</p>
+</li>
+<li>
+<p><strong>Haidt, Jonathan, and Craig Joseph</strong> (2004). "Intuitive Ethics: How Innately Prepared Intuitions Generate Culturally Variable Virtues." <em>Daedalus</em> 133(4): 55-66. — Origins of Moral Foundations Theory: five (later six) innate, culturally shaped moral foundations.</p>
+</li>
+</ul>
+<h2 id="developmental-moral-formation">Developmental Moral Formation</h2>
+<ul>
+<li>
+<p><strong>Bandura, Albert</strong> (1986). <em>Social Foundations of Thought and Action: A Social Cognitive Theory</em>. Englewood Cliffs, NJ: Prentice Hall. — Social learning theory: moral behavior learned via observation, modeling, and reinforcement.</p>
+</li>
+<li>
+<p><strong>Bandura, Albert</strong> (1990). "Selective Activation and Disengagement of Moral Control." <em>Journal of Social Issues</em> 46(1): 27-46. — Introduces mechanisms of moral disengagement: euphemistic labeling, displacement of responsibility, diffusion of responsibility, advantageous comparison, distortion of consequences, attribution of blame, dehumanization.</p>
+</li>
+<li>
+<p><strong>Hoffman, Martin L.</strong> (2000). <em>Empathy and Moral Development: Implications for Caring and Justice</em>. Cambridge: Cambridge University Press. — Empathy (vicarious emotional response) motivates prosocial behavior and inhibits harm. Develops from reflexive to perspective-taking empathy.</p>
+</li>
+<li>
+<p><strong>Kohlberg, Lawrence</strong> (1969). "Stage and Sequence: The Cognitive-Developmental Approach to Socialization." In <em>Handbook of Socialization Theory and Research</em>, ed. D.A. Goslin, 347-480. Chicago: Rand McNally. — Six-stage model of moral development from punishment-avoidance to universal ethical principles. Critiqued for rigidity, Western bias, and underestimating early capacities.</p>
+</li>
+<li>
+<p><strong>Piaget, Jean</strong> (1932/1965). <em>The Moral Judgment of the Child</em>. New York: Free Press. — Moral reasoning develops from heteronomous (authority-based) to autonomous (fairness-based, peer-negotiated).</p>
+</li>
+<li>
+<p><strong>Rest, James R.</strong> (1986). <em>Moral Development: Advances in Research and Theory</em>. New York: Praeger. — Four-component model: moral awareness, judgment, intention, character. All necessary for moral action.</p>
+</li>
+<li>
+<p><strong>Turiel, Elliot</strong> (1983). <em>The Development of Social Knowledge: Morality and Convention</em>. Cambridge: Cambridge University Press. — Social domain theory: moral, conventional, and personal judgments are distinct domains, developing in parallel (not stages). Children distinguish harm-based moral rules from arbitrary conventional rules by age 3.</p>
+</li>
+</ul>
+<h2 id="social-psychology-of-obedience-conformity-and-authority">Social Psychology of Obedience, Conformity, and Authority</h2>
+<ul>
+<li>
+<p><strong>Asch, Solomon E.</strong> (1951). "Effects of Group Pressure Upon the Modification and Distortion of Judgments." In <em>Groups, Leadership and Men</em>, ed. H. Guetzkow, 177-190. Pittsburgh: Carnegie Press. — Conformity to unanimous majority: 75% of participants conformed at least once to obviously wrong line judgments.</p>
+</li>
+<li>
+<p><strong>Burger, Jerry M.</strong> (2009). "Replicating Milgram: Would People Still Obey Today?" <em>American Psychologist</em> 64(1): 1-11. — Partial replication of Milgram (stopped at 150V); obedience rates similar to original (70% continued to 150V). Suggests obedience to authority remains robust.</p>
+</li>
+<li>
+<p><strong>Haslam, S. Alexander, and Stephen D. Reicher</strong> (2012). "Contesting the 'Nature' of Conformity: What Milgram and Zimbardo's Studies Really Show." <em>PLoS Biology</em> 10(11): e1001426. — Obedience and conformity are not blind; participants identified with authority's mission. Engaged followership, not robotic compliance.</p>
+</li>
+<li>
+<p><strong>Milgram, Stanley</strong> (1963). "Behavioral Study of Obedience." <em>Journal of Abnormal and Social Psychology</em> 67(4): 371-378. — 65% of participants administered apparently lethal 450V shocks when ordered by experimenter. Obedience increased with authority proximity and legitimacy, decreased with victim proximity.</p>
+</li>
+<li>
+<p><strong>Zimbardo, Philip G.</strong> (1971/2007). <em>The Lucifer Effect: Understanding How Good People Turn Evil</em>. New York: Random House. — Stanford Prison Experiment: Guards became abusive when assigned that role. Study is widely cited but methodologically criticized (demand effects, small sample, Zimbardo's guidance).</p>
+</li>
+</ul>
+<h2 id="group-processes-pluralistic-ignorance-and-collusion">Group Processes, Pluralistic Ignorance, and Collusion</h2>
+<ul>
+<li>
+<p><strong>Janis, Irving L.</strong> (1972). <em>Victims of Groupthink: A Psychological Study of Foreign-Policy Decisions and Fiascoes</em>. Boston: Houghton Mifflin. — Cohesive groups seek premature unanimity, suppressing dissent. Illusion of unanimity is a form of pluralistic ignorance.</p>
+</li>
+<li>
+<p><strong>Latané, Bibb, and John M. Darley</strong> (1970). <em>The Unresponsive Bystander: Why Doesn't He Help?</em> New York: Appleton-Century-Crofts. — Bystander effect: Pluralistic ignorance (calm bystanders misread as unconcerned) and diffusion of responsibility (each assumes someone else will act) reduce helping.</p>
+</li>
+<li>
+<p><strong>Prentice, Deborah A., and Dale T. Miller</strong> (1993). "Pluralistic Ignorance and Alcohol Use on Campus: Some Consequences of Misperceiving the Social Norm." <em>Journal of Personality and Social Psychology</em> 64(2): 243-256. — Students overestimate peers' comfort with heavy drinking, leading to public conformity to false norm.</p>
+</li>
+<li>
+<p><strong>Sherif, Muzafer</strong> (1966). <em>Group Conflict and Cooperation: Their Social Psychology</em>. London: Routledge. — Realistic conflict theory: Competition over scarce resources produces intergroup hostility; superordinate goals reduce conflict.</p>
+</li>
+<li>
+<p><strong>Tajfel, Henri, and John C. Turner</strong> (1986). "The Social Identity Theory of Intergroup Behavior." In <em>Psychology of Intergroup Relations</em>, ed. S. Worchel and W.G. Austin, 7-24. Chicago: Nelson-Hall. — Mere categorization produces in-group favoritism. Social identity shapes group behavior even without resource competition.</p>
+</li>
+</ul>
+<h2 id="behavioral-ethics-and-organizational-misconduct">Behavioral Ethics and Organizational Misconduct</h2>
+<ul>
+<li>
+<p><strong>Ariely, Dan</strong> (2012). <em>The (Honest) Truth About Dishonesty: How We Lie to Everyone—Especially Ourselves</em>. New York: Harper. — Popular synthesis: People lie enough to benefit but not so much as to damage self-image.</p>
+</li>
+<li>
+<p><strong>Ayal, Shahar, Francesca Gino, Rachel Barkan, and Dan Ariely</strong> (2015). "Three Principles to REVISE People's Unethical Behavior." <em>Perspectives on Psychological Science</em> 10(6): 738-741. — REVISE framework: Reminding (moral salience), Visibility (peer monitoring, audit trails), Self-engagement (pre-commitment, moral identity).</p>
+</li>
+<li>
+<p><strong>Bazerman, Max H., and Ann E. Tenbrunsel</strong> (2011). <em>Blind Spots: Why We Fail to Do What's Right and What to Do About It</em>. Princeton: Princeton University Press. — Ethical fading, bounded awareness, and conflicts of interest produce predictable moral failures.</p>
+</li>
+<li>
+<p><strong>Gino, Francesca, and Max H. Bazerman</strong> (2009). "When Misconduct Goes Unnoticed: The Acceptability of Gradual Erosion in Others' Unethical Behavior." <em>Journal of Experimental Social Psychology</em> 45(4): 708-719. — Incremental unethical changes (slippery slope) are less noticed and more accepted than abrupt changes.</p>
+</li>
+<li>
+<p><strong>Mazar, Nina, On Amir, and Dan Ariely</strong> (2008). "The Dishonesty of Honest People: A Theory of Self-Concept Maintenance." <em>Journal of Marketing Research</em> 45(6): 633-644. — People cheat enough to benefit but not so much as to damage self-image. Moral reminders (Ten Commandments) reduce cheating.</p>
+</li>
+<li>
+<p><strong>Tenbrunsel, Ann E., and David M. Messick</strong> (2004). "Ethical Fading: The Role of Self-Deception in Unethical Behavior." <em>Social Justice Research</em> 17(2): 223-236. — Ethical fading: Euphemisms, incremental decisions, self-serving frames, and temporal distance make moral implications invisible.</p>
+</li>
+<li>
+<p><strong>Treviño, Linda K., Gary R. Weaver, and Scott J. Reynolds</strong> (2006). "Behavioral Ethics in Organizations: A Review." <em>Journal of Management</em> 32(6): 951-990. — Reviews individual, group, and organizational influences on ethical behavior. Emphasizes situational forces, ethical culture, and leadership.</p>
+</li>
+</ul>
+<h2 id="economic-collusion-and-antitrust">Economic Collusion and Antitrust</h2>
+<ul>
+<li>
+<p><strong>Green, Edward J., and Robert H. Porter</strong> (1984). "Noncooperative Collusion Under Imperfect Price Information." <em>Econometrica</em> 52(1): 87-100. — Tacit collusion with demand uncertainty and imperfect monitoring is sustainable via trigger strategies and occasional price wars.</p>
+</li>
+<li>
+<p><strong>Harrington, Joseph E., Jr.</strong> (2008). "Detecting Cartels." In <em>Handbook of Antitrust Economics</em>, ed. Paolo Buccirossi, 213-258. Cambridge, MA: MIT Press. — Reviews detection methods: plus factors, structural breaks, screening algorithms.</p>
+</li>
+<li>
+<p><strong>Harrington, Joseph E., Jr.</strong> (2013). "Corporate Leniency Programs When Firms Have Private Information: The Push of Prosecution and the Pull of Pre-emption." <em>Journal of Industrial Economics</em> 61(1): 1-27. — Leniency programs create preemptive reporting when firms fear detection and that a partner will report first.</p>
+</li>
+<li>
+<p><strong>Kaplow, Louis, and Carl Shapiro</strong> (2007). "Antitrust." In <em>Handbook of Law and Economics</em>, ed. A. Mitchell Polinsky and Steven Shavell, Vol. 2, 1073-1225. Amsterdam: Elsevier. — Comprehensive review: explicit vs. tacit collusion, plus factors, detection, leniency.</p>
+</li>
+<li>
+<p><strong>Marx, Leslie M.</strong> (2007). "Plus Factors and Agreement in Antitrust Law." <em>Michigan Law Review</em> 110(3): 393-436. — Taxonomy of plus factors; probative strength varies. "Super plus factors" include explicit communications and side payments.</p>
+</li>
+<li>
+<p><strong>Motta, Massimo, and Michele Polo</strong> (2003). "Leniency Programs and Cartel Prosecution." <em>International Journal of Industrial Organization</em> 21(3): 347-379. — Leniency destabilizes cartels by rewarding first reporter. Optimal design: immunity for first, reduced penalty for second, full penalty for remaining.</p>
+</li>
+<li>
+<p><strong>Stigler, George J.</strong> (1964). "A Theory of Oligopoly." <em>Journal of Political Economy</em> 72(1): 44-61. — Cartels require self-policing to detect and punish secret price-cutting. Observable transactions, frequent interaction, and credible retaliation sustain collusion.</p>
+</li>
+</ul>
+<h2 id="game-theory-cooperation-and-coordination">Game Theory, Cooperation, and Coordination</h2>
+<ul>
+<li>
+<p><strong>Aumann, Robert J.</strong> (1974). "Subjectivity and Correlation in Randomized Strategies." <em>Journal of Mathematical Economics</em> 1(1): 67-96. — Correlated equilibrium: Players observe correlated signals (mediator recommendations) and best-respond. Generalizes Nash equilibrium.</p>
+</li>
+<li>
+<p><strong>Aumann, Robert J.</strong> (1976). "Agreeing to Disagree." <em>Annals of Statistics</em> 4(6): 1236-1239. — Common knowledge: Everyone knows E, everyone knows that everyone knows E, ad infinitum. Necessary for coordination in some games.</p>
+</li>
+<li>
+<p><strong>Aumann, Robert J.</strong> (1990). "Nash Equilibria Are Not Self-Enforcing." In <em>Economic Decision Making: Games, Econometrics and Optimisation</em>, ed. J.J. Gabszewicz, J.-F. Richard, and L.A. Wolsey, 201-206. Amsterdam: Elsevier. — Cheap talk in Stag Hunt may not be credible if message is self-interested but not self-signaling.</p>
+</li>
+<li>
+<p><strong>Axelrod, Robert</strong> (1984). <em>The Evolution of Cooperation</em>. New York: Basic Books. — Repeated prisoner's dilemma sustains cooperation via Tit for Tat and related strategies. Requires sufficiently high discount factors and recognition of partners.</p>
+</li>
+<li>
+<p><strong>Crawford, Vincent P., and Joel Sobel</strong> (1982). "Strategic Information Transmission." <em>Econometrica</em> 50(6): 1431-1451. — Cheap talk: Costless, non-binding communication can coordinate beliefs when interests are partially aligned. Fully opposed interests produce babbling equilibrium (no information transmitted).</p>
+</li>
+<li>
+<p><strong>Farrell, Joseph</strong> (1987). "Cheap Talk, Coordination, and Entry." <em>RAND Journal of Economics</em> 18(1): 34-39. — Self-signaling messages (those making the action incentive-compatible) are credible in coordination games.</p>
+</li>
+<li>
+<p><strong>Schelling, Thomas C.</strong> (1960). <em>The Strategy of Conflict</em>. Cambridge, MA: Harvard University Press. — Focal points: Salient, culturally obvious outcomes enable coordination without communication. Salience is determined by symmetry, prominence, or precedent.</p>
+</li>
+</ul>
+<h2 id="political-and-bureaucratic-collusion">Political and Bureaucratic Collusion</h2>
+<ul>
+<li>
+<p><strong>Hirschman, Albert O.</strong> (1970). <em>Exit, Voice, and Loyalty: Responses to Decline in Firms, Organizations, and States</em>. Cambridge, MA: Harvard University Press. — Framework: Members can exit (leave), voice (protest), or remain loyal. Loyalty suppresses exit, enabling voice. Whistleblowing is a voice mechanism.</p>
+</li>
+<li>
+<p><strong>Stigler, George J.</strong> (1971). "The Theory of Economic Regulation." <em>Bell Journal of Economics and Management Science</em> 2(1): 3-21. — Regulatory capture: Regulators serve regulated industry due to concentrated benefits, diffuse costs, and revolving doors. Agencies "supply" regulation to highest bidder.</p>
+</li>
+<li>
+<p><strong>Tirole, Jean</strong> (1986). "Hierarchies and Bureaucracies: On the Role of Collusion in Organizations." <em>Journal of Law, Economics, &amp; Organization</em> 2(2): 181-214. — Principal-agent-supervisor collusion: Supervisor and agent collude to deceive principal. Requires mutual knowledge of preferences, low detection risk, and trust. Rotation disrupts collusion.</p>
+</li>
+</ul>
+<h2 id="criminology-fraud-and-neutralization">Criminology, Fraud, and Neutralization</h2>
+<ul>
+<li>
+<p><strong>Cressey, Donald R.</strong> (1973). <em>Other People's Money: A Study in the Social Psychology of Embezzlement</em>. Glencoe, IL: Free Press. — Fraud triangle: (1) non-shareable financial problem, (2) perceived secret opportunity to solve it via trust violation, (3) rationalization (neutralization). Determined via analytic induction on 133 embezzlers.</p>
+</li>
+<li>
+<p><strong>Sykes, Gresham M., and David Matza</strong> (1957). "Techniques of Neutralization: A Theory of Delinquency." <em>American Sociological Review</em> 22(6): 664-670. — Five neutralization techniques allow offenders to engage in wrongdoing while maintaining commitment to conventional norms: denial of responsibility, injury, victim; condemnation of condemners; appeal to higher loyalties.</p>
+</li>
+</ul>
+<h2 id="lying-experiments-and-deception-detection">Lying Experiments and Deception Detection</h2>
+<ul>
+<li>
+<p><strong>Bond, Charles F., Jr., and Bella M. DePaulo</strong> (2006). "Accuracy of Deception Judgments." <em>Personality and Social Psychology Review</em> 10(3): 214-234. — Meta-analysis: Observers average 54% accuracy (chance = 50%). Truth bias: 61% of truths judged true, 47% of lies judged lies. Behavioral cues are weak and inconsistent.</p>
+</li>
+<li>
+<p><strong>DePaulo, Bella M., Deborah A. Kashy, Susan E. Kirkendol, Melissa M. Wyer, and Jennifer A. Epstein</strong> (1996). "Lying in Everyday Life." <em>Journal of Personality and Social Psychology</em> 70(5): 979-995. — People tell roughly 1-2 lies per day, usually to manage impressions or avoid conflict.</p>
+</li>
+<li>
+<p><strong>DePaulo, Bella M., James J. Lindsay, Brian E. Malone, Laura Muhlenbruck, Kelly Charlton, and Harris Cooper</strong> (2003). "Cues to Deception." <em>Psychological Bulletin</em> 129(1): 74-118. — Meta-analysis of 158 cues to deception. Liars are less forthcoming, more tense, tell less compelling tales, but many behaviors show no or weak links to deceit.</p>
+</li>
+<li>
+<p><strong>Erat, Sanjiv, and Uri Gneezy</strong> (2012). "White Lies." <em>Management Science</em> 58(4): 723-733. — Altruistic white lies (cost liar, benefit other): 33% told. Pareto white lies (benefit both): 35% refused, demonstrating pure lie aversion. Women told more altruistic lies.</p>
+</li>
+<li>
+<p><strong>Fischbacher, Urs, and Franziska Föllmi-Heusi</strong> (2013). "Lies in Disguise—An Experimental Study on Cheating." <em>Journal of the European Economic Association</em> 11(3): 525-547. — Die-roll paradigm: 39% fully honest, 20% fully dishonest, many partial liars. Undetectable on individual level.</p>
+</li>
+<li>
+<p><strong>Gneezy, Uri</strong> (2005). "Deception: The Role of Consequences." <em>American Economic Review</em> 95(1): 384-394. — Lying rates increase with liar's gain, decrease with victim's loss. Crossover occurs when gain is modest and harm is large. Demonstrates intrinsic lie aversion and sensitivity to harm.</p>
+</li>
+<li>
+<p><strong>Levine, Timothy R.</strong> (2014). "Truth-Default Theory (TDT): A Theory of Human Deception and Deception Detection." <em>Journal of Language and Social Psychology</em> 33(4): 378-392. — People default to believing others are truthful unless suspicion is triggered. Adaptive when lies are rare. Deception is eventually detected via inconsistencies, third-party information, or confessions, not demeanor.</p>
+</li>
+<li>
+<p><strong>Park, Hee Sun, Timothy Levine, Steven McCornack, Kelly Morrison, and Merissa Ferrara</strong> (2002). "How People Really Detect Lies." <em>Communication Monographs</em> 69(2): 144-157. — Real-world lie detection: Lies are discovered via third-party tips, physical evidence, inconsistencies over time, and confessions. Demeanor is rarely diagnostic.</p>
+</li>
+</ul>
+<h2 id="dual-loyalty-and-conflicting-duties">Dual Loyalty and Conflicting Duties</h2>
+<ul>
+<li>
+<p><strong>Applbaum, Arthur Isak</strong> (1999). <em>Ethics for Adversaries: The Morality of Roles in Public and Professional Life</em>. Princeton: Princeton University Press. — Critique of role morality: Institutions ordinarily cannot mint moral permissions to do what is otherwise prohibited. Roles add reasons but cannot silence personal moral reasons.</p>
+</li>
+<li>
+<p><strong>British Medical Association</strong> (2025). <em>Ethical Decision Making for Doctors in the Armed Forces: A Tool Kit</em>. London: BMA. — Military physicians face dual loyalty: patient welfare vs. operational needs. Medical ethics obligations are primary, but operational context creates pressure.</p>
+</li>
+<li>
+<p><strong>Walzer, Michael</strong> (1973). "Political Action: The Problem of Dirty Hands." <em>Philosophy &amp; Public Affairs</em> 2(2): 160-180. — Political necessity may require acts that remain morally wrong. Agent does the "right" thing (saves lives) while committing a wrong (torture, lying), producing guilt and moral remainders.</p>
+</li>
+</ul>
+<h2 id="cross-cultural-ethics">Cross-Cultural Ethics</h2>
+<ul>
+<li>
+<p><strong>Atari, Mohammad, et al.</strong> (2020). "Morality Beyond the WEIRD: How the Nomological Network of Morality Varies Across Cultures." <em>PsyArXiv</em> preprint. doi:10.31234/osf.io/q6c9r — MFQ-2 validation across 25 populations. Eastern and South Asian samples weight Loyalty and Purity more heavily. Proposes Qeirat (honor) as seventh foundation.</p>
+</li>
+<li>
+<p><strong>Gelfand, Michele J., Lisa H. Nishii, and Jana L. Raver</strong> (2006). "On the Nature and Importance of Cultural Tightness-Looseness." <em>Journal of Applied Psychology</em> 91(6): 1225-1244. — Tightness-looseness: Strength of social norms and degree of sanctioning. Distinct from individualism-collectivism, power distance, uncertainty avoidance. Tightness correlates with ecological/historical threats.</p>
+</li>
+<li>
+<p><strong>Graham, Jesse, Jonathan Haidt, and Brian A. Nosek</strong> (2009). "Liberals and Conservatives Rely on Different Sets of Moral Foundations." <em>Journal of Personality and Social Psychology</em> 96(5): 1029-1046. — U.S. liberals prioritize Care and Fairness; conservatives endorse all five foundations including Loyalty, Authority, Purity.</p>
+</li>
+<li>
+<p><strong>Henrich, Joseph, Steven J. Heine, and Ara Norenzayan</strong> (2010). "The Weirdest People in the World?" <em>Behavioral and Brain Sciences</em> 33(2-3): 61-83. — Western, Educated, Industrialized, Rich, Democratic populations are psychological outliers. Caution against generalizing from WEIRD samples.</p>
+</li>
+<li>
+<p><strong>Nisbett, Richard E., and Dov Cohen</strong> (1996). <em>Culture of Honor: The Psychology of Violence in the South</em>. Boulder, CO: Westview Press. — Honor cultures (herding economies, frontier regions) enforce reputation via aggression. Insults provoke retaliation to maintain deterrent reputation.</p>
+</li>
+<li>
+<p><strong>Shweder, Richard A., Manamohan Mahapatra, and Joan G. Miller</strong> (1987). "Culture and Moral Development." In <em>The Emergence of Morality in Young Children</em>, ed. Jerome Kagan and Sharon Lamb, 1-83. Chicago: University of Chicago Press. — Cross-cultural moral pluralism: India emphasizes purity and authority; U.S. emphasizes harm and fairness. Moral judgments vary substantially across cultures.</p>
+</li>
+</ul>
+<h2 id="situational-vs-dispositional-morality">Situational vs. Dispositional Morality</h2>
+<ul>
+<li>
+<p><strong>Darley, John M., and C. Daniel Batson</strong> (1973). "'From Jerusalem to Jericho': A Study of Situational and Dispositional Variables in Helping Behavior." <em>Journal of Personality and Social Psychology</em> 27(1): 100-108. — Time pressure dominated religiosity in predicting helping. 63% helped when early, 10% when late. However, religiosity predicted how subjects helped once they stopped.</p>
+</li>
+<li>
+<p><strong>Doris, John M.</strong> (2002). <em>Lack of Character: Personality and Moral Behavior</em>. Cambridge: Cambridge University Press. — Situationist challenge to virtue ethics: Experimental evidence (Milgram, Darley &amp; Batson) shows behavior is situationally determined, not by stable character traits.</p>
+</li>
+<li>
+<p><strong>Kamtekar, Rachana</strong> (2004). "Situationism and Virtue Ethics on the Content of Our Character." <em>Ethics</em> 114(3): 458-491. — Defense of virtue ethics: Situations govern immediate action; dispositions govern quality of action once engaged and predict long-term patterns.</p>
+</li>
+</ul>
+<h2 id="self-deception-and-motivated-reasoning">Self-Deception and Motivated Reasoning</h2>
+<ul>
+<li>
+<p><strong>Festinger, Leon</strong> (1957). <em>A Theory of Cognitive Dissonance</em>. Stanford: Stanford University Press. — Dissonance (inconsistent beliefs/behavior) produces discomfort. Actors reduce dissonance by changing beliefs, rationalizing actions, or avoiding information.</p>
+</li>
+<li>
+<p><strong>Kunda, Ziva</strong> (1990). "The Case for Motivated Reasoning." <em>Psychological Bulletin</em> 108(3): 480-498. — Motivation biases hypothesis generation, evidence evaluation, and memory. Motivationally biased beliefs result from biased search and interpretation, not conscious deception.</p>
+</li>
+<li>
+<p><strong>Mele, Alfred R.</strong> (2001). <em>Self-Deception Unmasked</em>. Princeton: Princeton University Press. — Deflationary account: Self-deception is motivated, biased belief formation. Actors acquire or retain false beliefs despite contrary evidence, without needing simultaneous contradictory beliefs or a conscious "deceiver."</p>
+</li>
+<li>
+<p><strong>Trivers, Robert</strong> (1985). <em>Social Evolution</em>. Menlo Park, CA: Benjamin/Cummings. — Evolutionary function of self-deception: Helps deceive others by avoiding telltale signs of awareness. Self-deception precedes other-deception.</p>
+</li>
+</ul>
+<h2 id="moral-licensing">Moral Licensing</h2>
+<ul>
+<li>
+<p><strong>Blanken, Irene, Niels van de Ven, and Marcel Zeelenberg</strong> (2015). "A Meta-Analytic Review of Moral Licensing." <em>Personality and Social Psychology Bulletin</em> 41(4): 540-558. — Meta-analysis: d = 0.31. Published studies show larger effects than unpublished (publication bias). Many theorized moderators not supported.</p>
+</li>
+<li>
+<p><strong>Monin, Benoît, and Dale T. Miller</strong> (2001). "Moral Credentials and the Expression of Prejudice." <em>Journal of Personality and Social Psychology</em> 81(1): 33-43. — Establishing non-racist credentials increased willingness to make statements that could appear prejudiced. Original moral licensing study.</p>
+</li>
+</ul>
+<hr />
+<h2 id="real-world-case-studies-collusion-and-fraud">Real-World Case Studies (Collusion and Fraud)</h2>
+<ul>
+<li>
+<p><strong>CFTC (Commodity Futures Trading Commission)</strong> (2013). "Order Instituting Proceedings Pursuant to Sections 6(c) and 6(d) of the Commodity Exchange Act, Making Findings and Imposing Remedial Sanctions." CFTC Docket No. 13-14 (RBS). — RBS trader: "LIBOR is a cartel now in London" (2007). Banks coordinated submissions to manipulate benchmark rates.</p>
+</li>
+<li>
+<p><strong>Harrington, Scott E., and Anne M. Kherauwala</strong> (2011). "Trust, Identity, and Disclosure in a Corrupt Industry: Evidence from LIBOR Manipulation." Working paper. — Analysis of LIBOR cartel: banks disclosed confidential submissions to each other, sustained collusion via shared norms and repeated interaction.</p>
+</li>
+<li>
+<p><strong>Healy, David, and Dinah Cattell</strong> (2003). "Interface Between Authorship, Industry and Science in the Domain of Therapeutics." <em>British Journal of Psychiatry</em> 183(1): 22-27. — Pharmaceutical ghostwriting: Industry-funded studies attributed to academic authors; authorship and data analysis controlled by sponsors.</p>
+</li>
+<li>
+<p><strong>USADA (United States Anti-Doping Agency)</strong> (2012). "Reasoned Decision of the United States Anti-Doping Agency on Disqualification and Ineligibility: Lance Armstrong." — Armstrong doping conspiracy: 24+ witnesses, team omertà (code of silence), enablers, and institutional complicity. Detected via whistleblowers after leniency offer.</p>
+</li>
+<li>
+<p><strong>van de Bunt, Henk</strong> (2010). "Walls of Secrecy and Silence: The Madoff Case and Cartels in the Construction Industry." <em>Criminology &amp; Public Policy</em> 9(3): 435-453. — Fraud persists through "walls of silence": insiders, bystanders, and institutions conceal misconduct via fear, benefit, ignorance, loyalty, or professional culture.</p>
+</li>
+</ul>
+<hr />
+<p><em>End of Document. Total approximate word count: ~14,500 words.</em></p>
+<p><strong>Document prepared for Apart Research AI Collusion Research Sprint, October 23-25, 2026.</strong></p>
+</body>
+</html>

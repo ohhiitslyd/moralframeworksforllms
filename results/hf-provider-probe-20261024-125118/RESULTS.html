@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hugging Face provider compatibility probe</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="hugging-face-provider-compatibility-probe">Hugging Face provider compatibility probe</h1>
+<p>Tested Qwen/Qwen3-32B through nscale, deepinfra, and featherless-ai using the actual positive-control planning prompt, thinking enabled, temperature 0.6, seed 10000, and a 4096-token budget. Three independent requests were submitted concurrently. These probes are not experimental outcomes.</p>
+<p>All three requests returned HTTP 403 before inference: "This authentication method does not have sufficient permissions to call Inference Providers on behalf of user [account omitted]". This is a token permission failure, not a rate limit. No generated responses, reasoning, or usable generation-throughput measurements were obtained. Approximately 1.8 seconds per request measures rejection latency only.</p>
+<p>Next step: enable <strong>Make calls to Inference Providers</strong> on the Hugging Face token, then repeat <code>python -m lying_harness.benchmark_hf</code>. Verify reasoning and schema compatibility before testing sustained concurrency. Pin the successful provider and keep any provider-backed study separate from the existing Modal study.</p>
+<p>The credential is stored only in ignored <code>.env.hf</code>; result files contain no credential.</p>
+</body>
+</html>
