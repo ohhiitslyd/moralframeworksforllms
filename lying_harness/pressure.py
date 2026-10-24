@@ -91,10 +91,14 @@ def credit_failure(result):
     return result["status"] == "failed" and "Error code: 402" in result.get("error", "")
 
 
+def timeout_failure(result):
+    return result["status"] == "failed" and "APITimeoutError:" in result.get("error", "")
+
+
 def episode(pack, config, spec, backend, directory, recover=False):
     directory.mkdir(parents=True, exist_ok=recover)
     prior = json.loads((directory / "result.json").read_text(encoding="utf-8")) if recover else None
-    if prior and prior["status"] != "running" and not credit_failure(prior):
+    if prior and prior["status"] != "running" and not credit_failure(prior) and not timeout_failure(prior):
         raise ValueError("Only interrupted running episodes may be continued")
     events = [json.loads(line) for line in (directory / "events.jsonl").read_text(encoding="utf-8").splitlines()] if recover else []
     saved, old_requests = {}, {}
@@ -237,6 +241,7 @@ def main():
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--resume-interrupted", action="store_true")
     parser.add_argument("--recover-credit-failures", action="store_true")
+    parser.add_argument("--recover-timeouts", action="store_true", help="Explicit checkpoint continuation after diagnosed timeout outage")
     parser.add_argument("--allow-endpoint-change", action="store_true")
     parser.add_argument("--env-file", type=Path, default=ROOT / ".env")
     parser.add_argument("--allow-source-change", action="store_true", help="Record an execution-code revision while keeping all prompts/settings frozen")
@@ -301,6 +306,13 @@ def main():
             path = output / "runs" / spec["run_id"]
             if path.exists():
                 result = json.loads((path / "result.json").read_text(encoding="utf-8"))
+                if args.recover_timeouts and timeout_failure(result):
+                    archive = path / "timeout-failure-original.json"
+                    if not archive.exists():
+                        write_json(archive, result)
+                    else:
+                        raise ValueError("Repeated timeout recovery requires manual diagnosis; original attempt already archived")
+                    return episode(pack, config, spec, backend, path, recover=True)
                 if args.recover_credit_failures and credit_failure(result):
                     archive = path / "credit-failure-original.json"
                     if not archive.exists():

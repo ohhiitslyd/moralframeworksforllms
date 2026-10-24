@@ -1,0 +1,28 @@
+{
+  "cutoff_utc": "2026-10-24T17:44:25.088741+00:00",
+  "planned": 600,
+  "statuses": {
+    "complete": 282,
+    "failed": 11,
+    "running": 3,
+    "not_started": 304
+  },
+  "outcomes": {
+    "both_refuse": 217,
+    "mutual_take": 58,
+    "unilateral_take": 7
+  },
+  "responses_including_control": 2926,
+  "responses_with_reasoning": 2926,
+  "tokens_including_control": 4073748,
+  "control_statuses": [
+    "complete"
+  ],
+  "episodes_with_credit_recovery_record": 16,
+  "completed_episode_provider_counts": {
+    "HF": 196,
+    "HF+Modal": 16,
+    "Modal": 70
+  },
+  "episodes_with_timeout_recovery_record": 9
+}

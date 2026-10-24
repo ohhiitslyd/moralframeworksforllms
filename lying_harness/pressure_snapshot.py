@@ -26,7 +26,7 @@ def read(path):
 def freeze(source, output):
     cutoff = datetime.now(timezone.utc).isoformat()
     output.mkdir(parents=True, exist_ok=False)
-    for name in ("manifest.json", "endpoint_history.json", "execution_history.json", "SPEEDUP_RECOVERY.json"):
+    for name in ("manifest.json", "endpoint_history.json", "execution_history.json", "SPEEDUP_RECOVERY.json", "TIMEOUT_RECOVERY.json"):
         if (source / name).exists():
             shutil.copyfile(source / name, output / name)
     # A result replaced after cutoff may describe an earlier episode start. Store
@@ -54,7 +54,7 @@ def freeze(source, output):
                 if event["timestamp"] <= cutoff:
                     events.append(event)
             (target / "events.jsonl").write_text("".join(json.dumps(e, ensure_ascii=False) + "\n" for e in events), encoding="utf-8")
-        for name in ("transcript.md", "credit-failure-original.json"):
+        for name in ("transcript.md", "credit-failure-original.json", "timeout-failure-original.json"):
             if (path.parent / name).exists() and (name != "transcript.md" or result["status"] != "running"):
                 shutil.copyfile(path.parent / name, target / name)
     write_json(output / "SNAPSHOT.json", {"cutoff_utc": cutoff, "source_batch": source.name,
@@ -108,6 +108,7 @@ def analyze(output):
                "control_statuses": [r["status"] for r in controls],
                "episodes_with_credit_recovery_record": sum(r["recovered_credit_failure"] for r in rows),
                "completed_episode_provider_counts": dict(Counter(r["provider"] for r in complete))}
+    summary["episodes_with_timeout_recovery_record"] = len(list((output / "runs").glob("*/timeout-failure-original.json")))
     write_json(output / "summary.json", summary)
     figures = output / "figures"
     figures.mkdir(exist_ok=True)
@@ -200,6 +201,7 @@ def analyze(output):
         f"This snapshot includes {summary['episodes_with_credit_recovery_record']} episode records with archived credit failures. All returned HF responses are retained and reused; only missing calls continue on Modal. "
         f"Completed episode provenance: {dict(Counter(r['provider'] for r in complete))}.", "",
         "Provider is confounded with scenario and collection order, and some conversations span providers. The served weight revisions are not verified identical. Any apparent later-scenario change could reflect provider differences. The [endpoint ledger](endpoint_history.json) and per-response endpoint fields preserve this distinction.", "",
+        f"{summary['episodes_with_timeout_recovery_record']} episode folders contain archived timeout failures. After checking server health, those conversations continued from saved responses; missing calls alone were reissued. Original error records remain alongside the resumed evidence. Transport recovery does not erase the original attempt.", "",
         f"**{summary['responses_with_reasoning']}/{len(all_responses)} returned responses have reasoning text**, including the separate control. Recorded usage is {summary['tokens_including_control']:,} tokens. "
         "The snapshot retains full request histories, responses, returned reasoning, explicit message deliveries and final decisions in `runs/<id>/events.jsonl`; completed episodes also have readable transcripts. Returned reasoning is model output, not verified access to the model's internal thought process. No credentials are included.", "",
         "## Limitations and interpretation", "",
