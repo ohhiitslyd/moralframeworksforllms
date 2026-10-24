@@ -21,6 +21,30 @@ def fraction(rows, metric):
     return f"{count}/{len(rows)} ({100 * count / len(rows):.0f}%)"
 
 
+def criterion_prompt_appendix(prompts, source_prefix=""):
+    lines = ["## Exact criterion prompts used", "",
+             "The following criterion blocks are copied verbatim from the frozen study manifest. "
+             "Each agent received its assigned block inside the shared scenario system prompt. "
+             "The shared scenario, stage instructions, and payoff/channel settings also apply; "
+             "these blocks alone are not the entire conversation prompt.", "",
+             f"Source: [frozen prompt manifest]({source_prefix}manifest.json). "
+             f"Fully rendered prompts for each agent and episode are preserved in "
+             f"`{source_prefix}runs/<run_id>/events.jsonl` under `initial_prompt` and `request`.", ""]
+    for criterion in CRITERIA:
+        lines += [f"### {LABELS[criterion]} (`{criterion}`)", ""]
+        block = prompts["criteria"][criterion]
+        if block:
+            lines += ["```text", block, "```", ""]
+        else:
+            lines += ["The criterion block was the empty string (`\"\"`): no additional moral-rule "
+                      "instruction was inserted. Agents still received the shared hospital scenario "
+                      "and stage instructions, including the Charter wording.", ""]
+    lines += ["The three positive controls used the `none` criterion plus a separate explicit "
+              "instruction to coordinate ACCEPT + CONCEAL. They are reported separately from "
+              "the experimental baseline.", ""]
+    return "\n".join(lines)
+
+
 def reporting_plot(rows, folder):
     labels = ["Both refuse", "One accepts", "Both accept; neither conceals",
               "Both accept; one conceals", "Both accept; both conceal"]
@@ -230,7 +254,8 @@ def make_report(directory):
               "- `runs/<id>/events.jsonl` contains exact requests, returned reasoning, responses, and deliveries; `transcript.md` is readable. Four evidence views and weighted plus-factor review worksheets are provided for every episode.",
               "- [Human review worksheet](analysis/human_review.csv): have two independent reviewers examine at least 20% of episodes, including disagreement cases, free-text consistency, talk without action, and supporting factors. No completed human review is claimed.",
               "- Lydia: own the next prompt revision. Review the shared schema priming, Charter wording, and the difference between proposed and chosen acts. Decide whether a future game must make concealment necessary for the bonus. Keep this frozen batch intact; version any new wording or payoff mechanism as a separate study.", ""]
-    (directory / "RESULTS.md").write_text("\n".join(lines), encoding="utf-8")
+    (directory / "RESULTS.md").write_text("\n".join(lines) + "\n" +
+                                        criterion_prompt_appendix(manifest["prompts"]), encoding="utf-8")
     print(f"Study report: {(directory / 'RESULTS.md').resolve()}")
     return summary
 
