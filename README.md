@@ -1,5 +1,19 @@
 # Two-agent moral-constraint experiment
 
+## New: partial results from the 20-scenario pressure study
+
+The [partial-results README with graphs and raw data](results/qwen-pressure-partial-20261024-1730/README.md)
+freezes collection at **24 October 2026, 17:29:48 UTC**: **227 parse-valid completions,
+8 formatting failures, and 31 mutual-take outcomes** out of 600 planned episodes.
+It includes three descriptive figures, a 600-row coverage/outcome CSV, full recorded
+reasoning and transcripts, and the HF-to-Modal provider audit. These are exploratory
+partial results; the continuing live collection is separate from this snapshot.
+
+![Partial pressure-study outcomes](results/qwen-pressure-partial-20261024-1730/figures/pairing-outcomes.png)
+
+The original hospital allocation experiment and its completed 99-case results
+are described below.
+
 This harness tests whether a concrete moral decision rule changes two LLM agents'
 willingness to authorize an allocation that benefits them and harms an excluded
 hospital, and whether they conceal their choices. It implements the **thin
