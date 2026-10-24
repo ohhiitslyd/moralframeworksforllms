@@ -30,7 +30,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <h1 id="trial_metricscsv-data-dictionary">trial_metrics.csv — data dictionary</h1>
 <p><strong>Source data:</strong> <code>results/qwen-pressure-final-20261024-181708/</code> (read-only).
 <strong>Generator:</strong> <code>build_metrics.py</code> (stdlib only). Run with <code>python -I build_metrics.py [--results DIR] [--out DIR]</code>.</p>
-<p><strong>Shape:</strong> 600 rows (one per planned episode) × 151 columns.</p>
+<p><strong>Shape:</strong> 600 rows (one per planned episode) × 162 columns. Every identifier column (run, scenario, family, diagnostic, level, pairing, pairing kind, criterion, provider, outcome) has a plain-language <code>*_description</code> column (or title/label) immediately to its right.</p>
 <p><strong>Row counts:</strong> 586 completed episodes (166 mutual take, 24 unilateral take, 396 both refuse) and 14 failed. These match the README and <code>summary.json</code>.</p>
 <h2 id="conventions">Conventions</h2>
 <ul>
@@ -50,7 +50,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <li><strong>Regexes:</strong> all regexes are case-insensitive and run after straightening curly quotes (’ → '). The exact pattern strings are reproduced in the appendix, generated from the script.</li>
 </ul>
 <hr />
-<h2 id="a-input-parameters-40-columns">A. Input parameters (40 columns)</h2>
+<h2 id="a-input-parameters-50-columns">A. Input parameters (50 columns)</h2>
 <h3 id="run-identity-and-design">Run identity and design</h3>
 <table>
 <thead>
@@ -67,6 +67,11 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>Episode ID <code>S{scenario}-L{level}-{pairing}-s{seed}</code> (runs.csv).</td>
 </tr>
 <tr>
+<td>run_description</td>
+<td>string</td>
+<td>Plain-language summary of the episode: scenario title (ID), level number and label, pairing in words, seed.</td>
+</tr>
+<tr>
 <td>scenario</td>
 <td>S01–S20</td>
 <td>runs.csv.</td>
@@ -77,14 +82,29 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>Pack <code>scenarios[].title</code>, e.g. "Chart vs patient promise".</td>
 </tr>
 <tr>
+<td>scenario_description</td>
+<td>string</td>
+<td>Pack <code>setting</code>, <code>official_duty</code>, <code>deal</code>, <code>reward</code> and <code>harm</code> joined into one paragraph: who the agents are, what they should do, the side deal, what taking achieves and what it costs.</td>
+</tr>
+<tr>
 <td>scenario_family</td>
 <td>rule_breaking / promise_vs_record / boss_vs_rulebook</td>
 <td>Fixed mapping: S01–S07 / S08–S14 / S15–S20. This matches the pack's <code>diagnostic</code> split (welfare / nondeception / authority).</td>
 </tr>
 <tr>
+<td>scenario_family_description</td>
+<td>string</td>
+<td>One-sentence explanation of the family and which moral rule it was designed to probe.</td>
+</tr>
+<tr>
 <td>scenario_diagnostic</td>
 <td>welfare / nondeception / authority</td>
 <td>Pack <code>diagnostic</code>: which criterion the scene was designed to probe.</td>
+</tr>
+<tr>
+<td>scenario_diagnostic_description</td>
+<td>string</td>
+<td>Which rule's tipping point the scene was designed to find, in words.</td>
 </tr>
 <tr>
 <td>weekend_slice</td>
@@ -102,14 +122,29 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>Pack <code>levels[].label</code>, e.g. "custody", "CIO orders".</td>
 </tr>
 <tr>
+<td>level_description</td>
+<td>string</td>
+<td>"Pressure level N of 5 (1 = lowest): " + pack <code>levels[].pressure</code>, the pressure text shown to the agents at this level.</td>
+</tr>
+<tr>
 <td>pairing</td>
 <td>W-W, W-none, D-D, D-none, A-A, A-none</td>
 <td>runs.csv.</td>
 </tr>
 <tr>
+<td>pairing_description</td>
+<td>string</td>
+<td>Pairing in words, e.g. "Welfare agent + agent with no rule".</td>
+</tr>
+<tr>
 <td>pairing_kind</td>
 <td>like-moral / rule-vs-control</td>
 <td>Pack <code>pairings_to_run[].kind</code>.</td>
+</tr>
+<tr>
+<td>pairing_kind_description</td>
+<td>string</td>
+<td>like-moral = both agents have the same rule; rule-vs-control = agent A has a rule, agent B has none.</td>
 </tr>
 <tr>
 <td>matched_vs_mixed</td>
@@ -120,6 +155,11 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>criterion_a, criterion_b</td>
 <td>welfare / nondeception / authority / none</td>
 <td>The moral instruction installed in each agent (runs.csv <code>a</code>, <code>b</code>).</td>
+</tr>
+<tr>
+<td>criterion_a_description, criterion_b_description</td>
+<td>string</td>
+<td>One-sentence summary of each agent's moral instruction (paraphrase of the pack's <code>criterion_blocks</code>). Each sits immediately right of its criterion column.</td>
 </tr>
 <tr>
 <td>seed</td>
@@ -172,6 +212,11 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>provider</td>
 <td>HF / Modal / HF+Modal</td>
 <td>runs.csv <code>provider</code>. HF+Modal = the conversation switched server mid-episode.</td>
+</tr>
+<tr>
+<td>provider_description</td>
+<td>string</td>
+<td>Provider in words (Hugging Face hosted / team's Modal deployment / switched mid-episode).</td>
 </tr>
 <tr>
 <td>served_models</td>
@@ -277,7 +322,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tr>
 </tbody>
 </table>
-<h2 id="b-outcome-columns-6-from-runscsv">B. Outcome columns (6, from runs.csv)</h2>
+<h2 id="b-outcome-columns-7-six-from-runscsv-plus-outcome_description">B. Outcome columns (7: six from runs.csv plus outcome_description)</h2>
 <table>
 <thead>
 <tr>
@@ -306,6 +351,11 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>outcome</td>
 <td>mutual_take / unilateral_take / both_refuse / failed</td>
 <td>Joint outcome.</td>
+</tr>
+<tr>
+<td>outcome_description</td>
+<td>string</td>
+<td>Outcome in words, e.g. "Both agents took the side deal, so it went through (collusion)."</td>
 </tr>
 <tr>
 <td>error</td>
