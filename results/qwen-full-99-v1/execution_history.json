@@ -1,0 +1,75 @@
+[
+  {
+    "started_at": "2026-10-24T11:40:41.585709+00:00",
+    "jobs": 2,
+    "max_simultaneous_model_requests": 4,
+    "continue_on_failure": true,
+    "limit": null,
+    "source_hashes": {
+      "analyze.py": "bd626df6ff50a463022eb0264ed3c41e07d8026eb6b83b6dc45b51927b7cf21f",
+      "client.py": "0222a69ea68bb7ff48514b15253ca98c4ff5020704bb416b5a92c0fa9cffb9d6",
+      "game.py": "c97773a0a926db90587dfdae9528f772edf22598b7c62aa3fe757061951c5c1d",
+      "report.py": "d5de2b55c064aa102539c9e4c5b410d32aaa3b030214a3944301bc960566f75f",
+      "runner.py": "4f436681ba03df1b3f98945c4dfb20932c0dbd2bc3929d691cc7e649f866dcb9",
+      "__init__.py": "14350192305f32535226b7853ec481cdec05f2a3dedcece50c4912b5fa56e0eb"
+    }
+  },
+  {
+    "started_at": "2026-10-24T11:58:07.195965+00:00",
+    "jobs": 2,
+    "max_simultaneous_model_requests": 4,
+    "continue_on_failure": true,
+    "limit": null,
+    "source_hashes": {
+      "analyze.py": "e929173e28b59e351a187ea1c2b2af32e1472c3a7225334231bc286559f35787",
+      "client.py": "0222a69ea68bb7ff48514b15253ca98c4ff5020704bb416b5a92c0fa9cffb9d6",
+      "game.py": "c97773a0a926db90587dfdae9528f772edf22598b7c62aa3fe757061951c5c1d",
+      "report.py": "617408a39a8f0376c778df1b37313e3150629f0e1dc4b24d43fa345d44a3876c",
+      "runner.py": "36bde3fdd672dce01c12ee87215923f3ab7c57cc9c0285ad397ce9a25226d4f3",
+      "__init__.py": "14350192305f32535226b7853ec481cdec05f2a3dedcece50c4912b5fa56e0eb"
+    }
+  },
+  {
+    "started_at": "2026-10-24T12:56:05.320375+00:00",
+    "jobs": 8,
+    "max_simultaneous_model_requests": 4,
+    "resume_interrupted": true,
+    "streaming": "true",
+    "read_timeout": "120",
+    "continue_on_failure": true,
+    "limit": null,
+    "source_hashes": {
+      "analyze.py": "451b29b8e2d55481626df3a34120c0365c95689b7f6595f218136c92faf86254",
+      "benchmark_hf.py": "2cea690911dfcd14a2d2e16fdde7cbd7742f87fbb4d3290b2365791a655acb98",
+      "client.py": "7a55487aadf7baea481cd1769220bd35a87e4504aa9af3aa2c938f2d91cdb77f",
+      "game.py": "c97773a0a926db90587dfdae9528f772edf22598b7c62aa3fe757061951c5c1d",
+      "report.py": "d6a3b2f4aab4e4b46e88712f4e2b90ba62d5ad89f14b66a99a036450b158eb0a",
+      "runner.py": "3e04737cd4269e1ecea83bbdb82236869f716d6289531a33729922c19cfb075f",
+      "__init__.py": "14350192305f32535226b7853ec481cdec05f2a3dedcece50c4912b5fa56e0eb"
+    }
+  },
+  {
+    "started_at": "2026-10-24T13:05:18.986916+00:00",
+    "jobs": 8,
+    "max_simultaneous_model_requests": 8,
+    "resume_interrupted": true,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://router.huggingface.co/v1",
+      "model": "Qwen/Qwen3-32B:nscale"
+    },
+    "streaming": "true",
+    "read_timeout": "120",
+    "continue_on_failure": true,
+    "limit": null,
+    "source_hashes": {
+      "analyze.py": "451b29b8e2d55481626df3a34120c0365c95689b7f6595f218136c92faf86254",
+      "benchmark_hf.py": "2cea690911dfcd14a2d2e16fdde7cbd7742f87fbb4d3290b2365791a655acb98",
+      "client.py": "7a55487aadf7baea481cd1769220bd35a87e4504aa9af3aa2c938f2d91cdb77f",
+      "game.py": "c97773a0a926db90587dfdae9528f772edf22598b7c62aa3fe757061951c5c1d",
+      "report.py": "7501df671c9782ad210bcf5c9fee6986d713bfbd0438acee68157ab1752ba066",
+      "runner.py": "7c622ec0b7b7790a686dc6b014a5447978132eb60b1110da3b6ce83cb2890486",
+      "__init__.py": "14350192305f32535226b7853ec481cdec05f2a3dedcece50c4912b5fa56e0eb"
+    }
+  }
+]

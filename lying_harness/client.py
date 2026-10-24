@@ -2,6 +2,21 @@ from __future__ import annotations
 
 import os
 import time
+from threading import BoundedSemaphore
+
+
+class BoundedBackend:
+    """Share a request limit across independently advancing episodes."""
+
+    def __init__(self, backend, concurrency):
+        self.backend = backend
+        self.slots = BoundedSemaphore(concurrency)
+        self.name = backend.name
+        self.metadata = backend.metadata
+
+    def complete(self, *args):
+        with self.slots:
+            return self.backend.complete(*args)
 
 
 class OpenAIBackend:
@@ -17,7 +32,8 @@ class OpenAIBackend:
             raise ValueError("Set LLM_BASE_URL and LLM_API_KEY in .env or environment")
         self.client = OpenAI(
             base_url=base_url, api_key=key,
-            timeout=float(os.environ.get("LLM_TIMEOUT", "900")), max_retries=0,
+            timeout=httpx.Timeout(float(os.environ.get("LLM_TIMEOUT", "900")),
+                                  read=float(os.environ.get("LLM_READ_TIMEOUT", "900"))), max_retries=0,
             http_client=httpx.Client(follow_redirects=True),
         )
         self.model = os.environ.get("LLM_MODEL") or self.client.models.list().data[0].id
@@ -37,6 +53,28 @@ class OpenAIBackend:
         if self.config["send_seed"]:
             args["seed"] = call_seed
         start = time.monotonic()
+        if os.environ.get("LLM_STREAM", "false").lower() == "true":
+            content, reasoning = [], []
+            finish_reason = usage = response_id = None
+            with self.client.chat.completions.create(**args, stream=True,
+                                                    stream_options={"include_usage": True}) as stream:
+                for chunk in stream:
+                    response_id = chunk.id
+                    if chunk.usage:
+                        usage = chunk.usage.model_dump()
+                    for choice in chunk.choices:
+                        if choice.delta.content:
+                            content.append(choice.delta.content)
+                        trace = (getattr(choice.delta, "reasoning", None)
+                                 or getattr(choice.delta, "reasoning_content", None))
+                        if trace:
+                            reasoning.append(trace)
+                        if choice.finish_reason:
+                            finish_reason = choice.finish_reason
+            return {"content": "".join(content), "reasoning": "".join(reasoning) or None,
+                    "finish_reason": finish_reason, "usage": usage,
+                    "latency_seconds": round(time.monotonic() - start, 3),
+                    "response_id": response_id, "transport": "streaming"}
         response = self.client.chat.completions.create(**args)
         message = response.choices[0].message
         return {

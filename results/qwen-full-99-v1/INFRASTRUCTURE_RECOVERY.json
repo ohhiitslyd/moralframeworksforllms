@@ -1,0 +1,41 @@
+{
+  "recorded_at": "2026-10-24T11:58:03.952343+00:00",
+  "policy": "Only API transport failures and operator interruptions during the documented transport outage, with no final decisions or scores, receive a documented fresh recovery attempt using identical prompts, payoffs, and seed. All original partial responses remain archived. No behavioral refusal, returned final choice, arithmetic failure, or format failure is eligible. The 99 planned cases are distinguished from the larger number of infrastructure attempts.",
+  "entries": [
+    {
+      "run_id": "experimental-none-t0p5-off-s2",
+      "archived_attempt": "infrastructure_attempts/experimental-none-t0p5-off-s2/attempt-01",
+      "reason": "ValueError: [{\"agent\": \"A\", \"stage\": \"message\", \"exchange\": 3, \"error\": \"APIConnectionError: Connection error.\"}, {\"agent\": \"B\", \"stage\": \"message\", \"exchange\": 3, \"error\": \"APIConnectionError: Connection error.\"}]",
+      "recovery_outcome_selected": false,
+      "prior_final_outcome": null
+    },
+    {
+      "run_id": "experimental-none-t0p5-off-s3",
+      "archived_attempt": "infrastructure_attempts/experimental-none-t0p5-off-s3/attempt-01",
+      "reason": "ValueError: [{\"agent\": \"B\", \"stage\": \"plan\", \"exchange\": null, \"error\": \"APIConnectionError: Connection error.\"}, {\"agent\": \"A\", \"stage\": \"plan\", \"exchange\": null, \"error\": \"APIConnectionError: Connection error.\"}]",
+      "recovery_outcome_selected": false,
+      "prior_final_outcome": null
+    },
+    {
+      "run_id": "experimental-none-t0p5-on-s2",
+      "archived_attempt": "infrastructure_attempts/experimental-none-t0p5-on-s2/attempt-01",
+      "reason": "ValueError: [{\"agent\": \"A\", \"stage\": \"message\", \"exchange\": 3, \"error\": \"APIConnectionError: Connection error.\"}, {\"agent\": \"B\", \"stage\": \"message\", \"exchange\": 3, \"error\": \"APIConnectionError: Connection error.\"}]",
+      "recovery_outcome_selected": false,
+      "prior_final_outcome": null
+    },
+    {
+      "run_id": "experimental-none-t0p5-on-s3",
+      "archived_attempt": "infrastructure_attempts/experimental-none-t0p5-on-s3/attempt-01",
+      "reason": "Interrupted during documented infrastructure pause; no final joint decision or payoff execution.",
+      "recovery_outcome_selected": false,
+      "prior_final_outcome": null
+    },
+    {
+      "run_id": "experimental-none-t1-on-s1",
+      "archived_attempt": "infrastructure_attempts/experimental-none-t1-on-s1/attempt-01",
+      "reason": "Interrupted during documented infrastructure pause; no final joint decision or payoff execution.",
+      "recovery_outcome_selected": false,
+      "prior_final_outcome": null
+    }
+  ]
+}

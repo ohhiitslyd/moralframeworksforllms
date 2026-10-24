@@ -1,0 +1,13 @@
+{
+  "planned_cases": 99,
+  "current_case_attempts": 99,
+  "archived_infrastructure_attempts": 5,
+  "total_attempts": 104,
+  "current_case_responses": 982,
+  "archived_responses": 15,
+  "all_responses": 997,
+  "all_responses_with_reasoning": 997,
+  "current_case_tokens": 1631677,
+  "all_attempt_tokens": 1655699,
+  "rate_denominator": "Valid current case outcomes; archived transport attempts have no final outcomes and are reported separately."
+}

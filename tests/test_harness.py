@@ -193,11 +193,175 @@ class HarnessTests(unittest.TestCase):
             with httpx.Client(transport=httpx.MockTransport(respond)) as transport:
                 backend.client = OpenAI(api_key="offline-test-only", base_url="https://fixture.invalid/v1",
                                         http_client=transport, max_retries=0)
-                result = backend.complete([{"role": "user", "content": "fixture"}], self.spec, "A", "plan", 123)
+                with patch.dict("os.environ", {"LLM_STREAM": "false"}):
+                    result = backend.complete([{"role": "user", "content": "fixture"}], self.spec, "A", "plan", 123)
             self.assertEqual(result["reasoning"], "private test reasoning")
             self.assertTrue(captured[0]["chat_template_kwargs"]["enable_thinking"])
             self.assertEqual(captured[0]["seed"], 123)
             self.assertEqual(result["usage"]["total_tokens"], 7)
+
+    def test_parallel_batch_is_bounded_and_keeps_all_episodes(self):
+        import threading
+        import time
+        class ConcurrentFixture(MockBackend):
+            peak = 0
+            active = 0
+            lock = threading.Lock()
+
+            def complete(self, *args):
+                with self.lock:
+                    type(self).active += 1
+                    type(self).peak = max(type(self).peak, type(self).active)
+                try:
+                    time.sleep(0.01)
+                    return super().complete(*args)
+                finally:
+                    with self.lock:
+                        type(self).active -= 1
+        with tempfile.TemporaryDirectory() as folder, patch("lying_harness.runner.MockBackend", ConcurrentFixture):
+            output = Path(folder) / "batch"
+            self.assertEqual(main(["--output", str(output), "--jobs", "2"]), 0)
+            results = json.loads((output / "index.json").read_text())["results"]
+            self.assertEqual(len(results), 7)
+            self.assertEqual(len({r["run_id"] for r in results}), 7)
+            self.assertTrue(all(r["status"] == "complete" for r in results))
+            self.assertGreaterEqual(ConcurrentFixture.peak, 3)
+            self.assertLessEqual(ConcurrentFixture.peak, 4)
+
+    def test_continue_on_failure_preserves_attempt_and_resumes_without_retry(self):
+        class FailingFixture(MockBackend):
+            failed_calls = 0
+
+            def complete(self, *args):
+                response = super().complete(*args)
+                spec, stage = args[1], args[3]
+                if spec.control == "experimental" and spec.criterion == "none" and spec.channel and stage == "plan":
+                    type(self).failed_calls += 1
+                    response["finish_reason"] = "length"
+                return response
+        with tempfile.TemporaryDirectory() as folder, patch("lying_harness.runner.MockBackend", FailingFixture):
+            output = Path(folder) / "batch"
+            args = ["--output", str(output), "--jobs", "2", "--continue-on-failure"]
+            self.assertEqual(main(args), 2)
+            results = json.loads((output / "index.json").read_text())["results"]
+            self.assertEqual(len(results), 7)
+            self.assertEqual(sum(r["status"] == "failed" for r in results), 1)
+            calls_before = FailingFixture.failed_calls
+            self.assertEqual(main(args + ["--resume"]), 2)
+            self.assertEqual(FailingFixture.failed_calls, calls_before)
+
+    def test_transport_outage_pauses_even_when_continuing_validation_failures(self):
+        class DisconnectedFixture(MockBackend):
+            def complete(self, *args):
+                if args[1].control == "experimental":
+                    raise RuntimeError("APIConnectionError: simulated outage")
+                return super().complete(*args)
+        with tempfile.TemporaryDirectory() as folder, patch("lying_harness.runner.MockBackend", DisconnectedFixture):
+            output = Path(folder) / "batch"
+            self.assertEqual(main(["--output", str(output), "--jobs", "2", "--continue-on-failure"]), 3)
+            results = json.loads((output / "index.json").read_text())["results"]
+            self.assertLess(len(results), 7)
+            self.assertEqual(results[0]["status"], "complete")
+
+    def test_checkpoint_continuation_never_regenerates_saved_responses(self):
+        class Interrupted(MockBackend):
+            def complete(self, *args):
+                if args[2] == "B" and args[3] == "message":
+                    raise KeyboardInterrupt("simulated worker interruption")
+                return super().complete(*args)
+
+        class Counting(MockBackend):
+            calls = []
+            def complete(self, *args):
+                self.calls.append((args[2], args[3], args[4]))
+                return super().complete(*args)
+
+        with tempfile.TemporaryDirectory() as folder:
+            directory = Path(folder) / "run"
+            with self.assertRaises(KeyboardInterrupt):
+                run_episode(self.config, self.spec, self.prompts, Interrupted(self.config), directory)
+            before = [json.loads(line) for line in (directory / "events.jsonl").read_text(encoding="utf-8").splitlines()]
+            saved = [e for e in before if e["kind"] == "response"]
+            backend = Counting(self.config)
+            result = run_episode(self.config, self.spec, self.prompts, backend, directory, True)
+            self.assertEqual(result["status"], "complete")
+            self.assertEqual(result["usage"]["calls_returned"], 10)
+            self.assertEqual(len(backend.calls), 10 - len(saved))
+            after = [json.loads(line) for line in (directory / "events.jsonl").read_text(encoding="utf-8").splitlines()]
+            self.assertEqual([e for e in after if e["kind"] == "response"][:len(saved)], saved)
+            with self.assertRaises(ValueError):
+                run_episode(self.config, self.spec, self.prompts, backend, directory, True)
+
+    def test_shared_request_limit_with_more_episode_workers(self):
+        import threading
+        import time
+        class Measured(MockBackend):
+            active = peak = 0
+            lock = threading.Lock()
+            def complete(self, *args):
+                with self.lock:
+                    type(self).active += 1
+                    type(self).peak = max(type(self).peak, type(self).active)
+                try:
+                    time.sleep(0.01)
+                    return super().complete(*args)
+                finally:
+                    with self.lock:
+                        type(self).active -= 1
+        with tempfile.TemporaryDirectory() as folder, patch("lying_harness.runner.MockBackend", Measured):
+            self.assertEqual(main(["--output", str(Path(folder) / "batch"), "--jobs", "6",
+                                   "--request-concurrency", "3"]), 0)
+            self.assertEqual(Measured.peak, 3)
+
+    def test_streaming_preserves_reasoning_content_usage_and_finish_reason(self):
+        import httpx
+        from openai import OpenAI
+        for field in ("reasoning", "reasoning_content"):
+            chunks = [
+                {"choices": [{"index": 0, "delta": {field: "private "}, "finish_reason": None}]},
+                {"choices": [{"index": 0, "delta": {field: "trace", "content": "{}"}, "finish_reason": None}]},
+                {"choices": [{"index": 0, "delta": {}, "finish_reason": "stop"}]},
+                {"choices": [], "usage": {"prompt_tokens": 3, "completion_tokens": 4, "total_tokens": 7}},
+            ]
+            def respond(request):
+                self.assertTrue(json.loads(request.content)["stream"])
+                body = "".join("data: " + json.dumps({"id": "stream-fixture", "object": "chat.completion.chunk",
+                    "created": 0, "model": "fixture", **chunk}) + "\n\n" for chunk in chunks) + "data: [DONE]\n\n"
+                return httpx.Response(200, headers={"content-type": "text/event-stream"}, text=body)
+            backend = OpenAIBackend.__new__(OpenAIBackend)
+            backend.config, backend.model = self.config, "fixture"
+            with httpx.Client(transport=httpx.MockTransport(respond)) as transport:
+                backend.client = OpenAI(api_key="offline-test-only", base_url="https://fixture.invalid/v1",
+                                        http_client=transport, max_retries=0)
+                with patch.dict("os.environ", {"LLM_STREAM": "true"}):
+                    result = backend.complete([], self.spec, "A", "plan", 123)
+            self.assertEqual(result["reasoning"], "private trace")
+            self.assertEqual(result["content"], "{}")
+            self.assertEqual(result["finish_reason"], "stop")
+            self.assertEqual(result["usage"]["total_tokens"], 7)
+
+    def test_endpoint_switch_is_explicit_and_preserves_completed_results(self):
+        class OtherEndpoint(MockBackend):
+            def __init__(self, config):
+                super().__init__(config)
+                self.metadata = {"backend": "mock", "model": "another-fixture"}
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder) / "batch"
+            args = ["--output", str(output), "--limit", "1"]
+            self.assertEqual(main(args), 0)
+            result_path = next((output / "runs").glob("*/result.json"))
+            original = result_path.read_bytes()
+            with patch("lying_harness.runner.MockBackend", OtherEndpoint):
+                with self.assertRaises(ValueError):
+                    main(args + ["--resume"])
+                self.assertEqual(main(args + ["--resume", "--allow-endpoint-change"]), 0)
+                self.assertEqual(result_path.read_bytes(), original)
+                self.assertTrue((output / "endpoint_history.json").exists())
+                config = dict(self.config, temperature=0.4)
+                path = Path(folder) / "different.json"
+                path.write_text(json.dumps(config), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    main(args + ["--resume", "--allow-endpoint-change", "--config", str(path)])
 
 
 if __name__ == "__main__":

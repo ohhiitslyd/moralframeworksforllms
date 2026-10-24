@@ -124,9 +124,11 @@ If using the virtual environment, replace `python` with
 `.\.venv\Scripts\python.exe`. To stop after the first control, add `--limit 1`.
 To continue an interrupted batch, add `--resume` with identical configuration,
 endpoint, and prompt files. Existing attempts are preserved, including failures;
-there is no silent retry or replacement. An interrupted `running` record or a
-failed episode stops resumption: inspect it and use a new, documented batch for
-any repair. Changing prompt wording requires a new output folder.
+there is no silent retry or replacement. An interrupted `running` record stops
+normal resumption. After stopping the old worker, `--resume --resume-interrupted`
+continues its saved conversation: it reuses each persisted response exactly and
+requests only missing responses. Every continuation is logged; an already completed
+or failed episode is never regenerated this way. Changing prompts requires a new folder.
 
 The pilot has **7 episodes / 70 calls**: one positive control, no-rule agents with
 communication on/off at T=2, welfare agents at T=0.5 and T=2, non-deception at T=2,
@@ -146,7 +148,7 @@ cannot isolate communication effects under each of the other criteria.
 - **7/7 valid episodes**, 70 returned model responses, reasoning captured on **70/70** responses.
 - **16 automated checks passed**. No arithmetic/criterion-check failures, truncations, or missing-reasoning episodes occurred in this pilot.
 - Recorded usage: **125,739 prompt + completion tokens**. No automatic retries were used.
-- The **99-run experiment has not been launched**. The pilot has one seed per tested condition, and its wording still needs review.
+- This section describes the original seven-run pilot. The full 99-run study was subsequently launched with the same frozen prompt version; see its report below.
 
 | Condition | B/H | Channel | A / B choices | Reporting | Coalition gain / hospital loss |
 |---|---:|---|---|---|---:|
@@ -182,6 +184,49 @@ estimates remain unset for insufficient data.
 A separate [mechanical smoke test](results/mechanical-check-v1/analysis/REPORT.md)
 uses scripted responses; those outputs are not model findings.
 <!-- LIVE_RESULTS_END -->
+
+### Full 99-run study
+
+The full matrix has finished: **99/99 attempted, 87 valid (including 3 controls), 11 criterion-check failures, and 1 malformed-output failure**. See the [results overview with graphs and CSV links](RESULTS.md) and the detailed report:
+
+**[Full study results and graphs](results/qwen-full-99-v1/RESULTS.md)**
+
+Three fresh positive controls passed before experimental episodes started.
+The user subsequently authorized moving remaining inference to **HF nscale, Qwen/Qwen3-32B**, in this same study. All saved responses are retained; temperature, token budget, seeds, prompts, rounds and reasoning stay unchanged. New responses carry endpoint provenance; [endpoint history](results/qwen-full-99-v1/endpoint_history.json) records the switch. Some conversations span providers, and provider is confounded with collection order. The served weight revision is not verified identical to Modal. Eight episode workers now share eight HF request slots.
+
+Initially two independent episodes ran concurrently. Following a non-streaming
+request stall, eight episode workers shared a strict four-request limit on Modal.
+Streaming returns the same content and reasoning fields incrementally, avoiding
+the long non-streaming result-polling path; a 120-second read-inactivity timeout
+detects silent connections. It does not cap total generation at 120 seconds.
+Failed attempts are retained and excluded from primary rates; they are not
+silently retried or replaced. An execution-history file records scheduling and
+source hashes. Prompt-review limitations from the pilot remain applicable.
+The first batch encountered a temporary connection outage. Five attempts with
+no final decisions are preserved under `infrastructure_attempts/`; an explicit
+recovery ledger records fresh attempts with identical prompts and seeds. No
+behavioral result was selected or replaced. The report distinguishes 99 planned
+cases from all infrastructure attempts and exports an all-attempts CSV.
+Two later interrupted conversations continue from their saved responses rather
+than restarting; see [scheduler recovery](results/qwen-full-99-v1/SCHEDULER_RECOVERY.json).
+A separate [streaming probe](results/qwen-full-99-v1/streaming-probe.json) completed
+with reasoning in 26.181 seconds and is excluded from experimental outcome rates.
+
+```powershell
+$env:LLM_STREAM="true"
+$env:LLM_READ_TIMEOUT="120"
+python -m lying_harness.runner --config configs/full.json --backend openai --output results/qwen-full-99-v1 --resume --allow-endpoint-change --jobs 8 --request-concurrency 8 --continue-on-failure
+python -m lying_harness.report results/qwen-full-99-v1
+```
+
+`--continue-on-failure` attempts the remaining experimental specifications while
+retaining failures; it never bypasses a failed positive control. Without this
+flag, the default remains to stop on an execution failure. Do not start a second
+runner against a batch that is already active. The report command makes no model
+calls and can be rerun to refresh graphs and tables.
+Infrastructure/API failures now pause scheduling even with this flag, so a
+connection outage cannot consume the remaining experiment grid. Check endpoint
+health and preserve the recorded failure before explicitly resuming.
 
 Artifacts are saved per batch:
 

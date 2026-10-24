@@ -1,0 +1,206 @@
+  experimental-none-t2-on-s1: private plans
+  experimental-none-t2-on-s1: exchange 1/3
+  experimental-none-t2-on-s1: private plans
+  experimental-none-t2-on-s1: exchange 1/3
+  experimental-none-t2-on-s1: exchange 2/3
+  experimental-none-t2-on-s1: exchange 3/3
+  experimental-none-t2-on-s1: locked decisions
+  experimental-none-t2-off-s1: private plans
+  experimental-none-t2-off-s1: exchange 1/3
+  experimental-none-t2-off-s1: exchange 2/3
+  experimental-none-t2-off-s1: exchange 3/3
+  experimental-none-t2-off-s1: locked decisions
+  positive-none-t2-on-s1: private plans
+  positive-none-t2-on-s1: exchange 1/3
+  positive-none-t2-on-s1: exchange 2/3
+  positive-none-t2-on-s1: exchange 3/3
+  positive-none-t2-on-s1: locked decisions
+[1/7] positive-none-t2-on-s1: complete
+  experimental-none-t2-on-s1: private plans
+  experimental-none-t2-off-s1: private plans
+  experimental-none-t2-off-s1: exchange 1/3
+  experimental-none-t2-off-s1: exchange 2/3
+[2/7] experimental-none-t2-on-s1: failed
+  experimental-none-t2-off-s1: exchange 3/3
+  experimental-welfare-t0p5-on-s1: private plans
+  experimental-none-t2-off-s1: locked decisions
+  experimental-welfare-t0p5-on-s1: exchange 1/3
+  experimental-welfare-t0p5-on-s1: exchange 2/3
+  experimental-welfare-t0p5-on-s1: exchange 3/3
+[3/7] experimental-none-t2-off-s1: complete
+  experimental-welfare-t2-on-s1: private plans
+  experimental-welfare-t0p5-on-s1: locked decisions
+  experimental-welfare-t2-on-s1: exchange 1/3
+  experimental-welfare-t2-on-s1: exchange 2/3
+[4/7] experimental-welfare-t0p5-on-s1: complete
+  experimental-welfare-t2-on-s1: exchange 3/3
+  experimental-nondeception-t2-on-s1: private plans
+  experimental-welfare-t2-on-s1: locked decisions
+  experimental-nondeception-t2-on-s1: exchange 1/3
+  experimental-nondeception-t2-on-s1: exchange 2/3
+  experimental-nondeception-t2-on-s1: exchange 3/3
+[5/7] experimental-welfare-t2-on-s1: complete
+  experimental-authority-t2-on-s1: private plans
+  experimental-nondeception-t2-on-s1: locked decisions
+  experimental-authority-t2-on-s1: exchange 1/3
+  experimental-authority-t2-on-s1: exchange 2/3
+[6/7] experimental-nondeception-t2-on-s1: complete
+  experimental-authority-t2-on-s1: exchange 3/3
+  experimental-authority-t2-on-s1: locked decisions
+[7/7] experimental-authority-t2-on-s1: complete
+Saved 7 / 7 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmpxygvvj24\batch
+Preserving existing attempt: positive-none-t2-on-s1
+[1/7] positive-none-t2-on-s1: complete
+Preserving existing attempt: experimental-none-t2-on-s1
+[2/7] experimental-none-t2-on-s1: failed
+Preserving existing attempt: experimental-none-t2-off-s1
+[3/7] experimental-none-t2-off-s1: complete
+Preserving existing attempt: experimental-welfare-t0p5-on-s1
+[4/7] experimental-welfare-t0p5-on-s1: complete
+Preserving existing attempt: experimental-welfare-t2-on-s1
+[5/7] experimental-welfare-t2-on-s1: complete
+Preserving existing attempt: experimental-nondeception-t2-on-s1
+[6/7] experimental-nondeception-t2-on-s1: complete
+Preserving existing attempt: experimental-authority-t2-on-s1
+[7/7] experimental-authority-t2-on-s1: complete
+Saved 7 / 7 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmpxygvvj24\batch
+  positive-none-t2-on-s1: private plans
+  positive-none-t2-on-s1: exchange 1/3
+  positive-none-t2-on-s1: exchange 2/3
+  positive-none-t2-on-s1: exchange 3/3
+  positive-none-t2-on-s1: locked decisions
+[1/1] positive-none-t2-on-s1: complete
+Saved 1 / 1 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmpu16c36zv\batch
+Preserving existing attempt: positive-none-t2-on-s1
+[1/1] positive-none-t2-on-s1: complete
+Saved 1 / 1 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmpu16c36zv\batch
+  positive-none-t2-on-s1: private plans
+  positive-none-t2-on-s1: exchange 1/3
+  positive-none-t2-on-s1: exchange 2/3
+  positive-none-t2-on-s1: exchange 3/3
+  positive-none-t2-on-s1: locked decisions
+[1/7] positive-none-t2-on-s1: complete
+STOP: positive control failed. No experimental episodes launched.
+  experimental-none-t2-on-s1: private plans
+  experimental-none-t2-on-s1: exchange 1/3
+  experimental-none-t2-on-s1: exchange 2/3
+  experimental-none-t2-on-s1: exchange 3/3
+  experimental-none-t2-on-s1: locked decisions
+  positive-none-t2-on-s1: private plans
+  positive-none-t2-on-s1: exchange 1/3
+  positive-none-t2-on-s1: exchange 2/3
+  positive-none-t2-on-s1: exchange 3/3
+  positive-none-t2-on-s1: locked decisions
+[1/7] positive-none-t2-on-s1: complete
+  experimental-none-t2-off-s1: private plans
+  experimental-none-t2-on-s1: private plans
+  experimental-none-t2-on-s1: exchange 1/3
+  experimental-none-t2-off-s1: exchange 1/3
+  experimental-none-t2-on-s1: exchange 2/3
+  experimental-none-t2-off-s1: exchange 2/3
+  experimental-none-t2-on-s1: exchange 3/3
+  experimental-none-t2-off-s1: exchange 3/3
+  experimental-none-t2-on-s1: locked decisions
+  experimental-none-t2-off-s1: locked decisions
+[2/7] experimental-none-t2-on-s1: complete
+[3/7] experimental-none-t2-off-s1: complete
+  experimental-welfare-t0p5-on-s1: private plans
+  experimental-welfare-t2-on-s1: private plans
+  experimental-welfare-t0p5-on-s1: exchange 1/3
+  experimental-welfare-t2-on-s1: exchange 1/3
+  experimental-welfare-t0p5-on-s1: exchange 2/3
+  experimental-welfare-t2-on-s1: exchange 2/3
+  experimental-welfare-t0p5-on-s1: exchange 3/3
+  experimental-welfare-t2-on-s1: exchange 3/3
+  experimental-welfare-t0p5-on-s1: locked decisions
+  experimental-welfare-t2-on-s1: locked decisions
+[4/7] experimental-welfare-t0p5-on-s1: complete
+  experimental-nondeception-t2-on-s1: private plans
+[5/7] experimental-welfare-t2-on-s1: complete
+  experimental-authority-t2-on-s1: private plans
+  experimental-nondeception-t2-on-s1: exchange 1/3
+  experimental-authority-t2-on-s1: exchange 1/3
+  experimental-nondeception-t2-on-s1: exchange 2/3
+  experimental-authority-t2-on-s1: exchange 2/3
+  experimental-nondeception-t2-on-s1: exchange 3/3
+  experimental-authority-t2-on-s1: exchange 3/3
+  experimental-nondeception-t2-on-s1: locked decisions
+  experimental-authority-t2-on-s1: locked decisions
+[6/7] experimental-nondeception-t2-on-s1: complete
+[7/7] experimental-authority-t2-on-s1: complete
+Saved 7 / 7 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmpz5cqd75m\batch
+  experimental-none-t2-on-s1: private plans
+  experimental-none-t2-on-s1: exchange 1/3
+  experimental-none-t2-on-s1: exchange 2/3
+  experimental-none-t2-on-s1: exchange 3/3
+  experimental-none-t2-on-s1: locked decisions
+  positive-none-t2-on-s1: private plans
+  positive-none-t2-on-s1: exchange 1/3
+  positive-none-t2-on-s1: exchange 2/3
+  positive-none-t2-on-s1: exchange 3/3
+  positive-none-t2-on-s1: locked decisions
+[1/1] positive-none-t2-on-s1: complete
+Saved 1 / 1 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmpt_47_q56\batch
+Preserving existing attempt: positive-none-t2-on-s1
+[1/1] positive-none-t2-on-s1: complete
+Saved 1 / 1 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmpt_47_q56\batch
+  positive-none-t2-on-s1: private plans
+  positive-none-t2-on-s1: exchange 1/3
+  positive-none-t2-on-s1: exchange 2/3
+  positive-none-t2-on-s1: exchange 3/3
+  positive-none-t2-on-s1: locked decisions
+[1/7] positive-none-t2-on-s1: complete
+  experimental-none-t2-on-s1: private plans
+  experimental-welfare-t2-on-s1: private plans
+  experimental-welfare-t0p5-on-s1: private plans
+  experimental-nondeception-t2-on-s1: private plans
+  experimental-none-t2-off-s1: private plans
+  experimental-authority-t2-on-s1: private plans
+  experimental-none-t2-on-s1: exchange 1/3
+  experimental-welfare-t2-on-s1: exchange 1/3
+  experimental-welfare-t0p5-on-s1: exchange 1/3
+  experimental-nondeception-t2-on-s1: exchange 1/3
+  experimental-none-t2-off-s1: exchange 1/3
+  experimental-authority-t2-on-s1: exchange 1/3
+  experimental-none-t2-on-s1: exchange 2/3
+  experimental-welfare-t2-on-s1: exchange 2/3
+  experimental-welfare-t0p5-on-s1: exchange 2/3
+  experimental-nondeception-t2-on-s1: exchange 2/3
+  experimental-none-t2-off-s1: exchange 2/3
+  experimental-authority-t2-on-s1: exchange 2/3
+  experimental-none-t2-on-s1: exchange 3/3
+  experimental-welfare-t2-on-s1: exchange 3/3
+  experimental-welfare-t0p5-on-s1: exchange 3/3
+  experimental-nondeception-t2-on-s1: exchange 3/3
+  experimental-none-t2-off-s1: exchange 3/3
+  experimental-authority-t2-on-s1: exchange 3/3
+  experimental-none-t2-on-s1: locked decisions
+  experimental-welfare-t2-on-s1: locked decisions
+  experimental-nondeception-t2-on-s1: locked decisions
+  experimental-none-t2-off-s1: locked decisions
+  experimental-authority-t2-on-s1: locked decisions
+  experimental-welfare-t0p5-on-s1: locked decisions
+[2/7] experimental-none-t2-on-s1: complete
+[3/7] experimental-welfare-t2-on-s1: complete
+[4/7] experimental-nondeception-t2-on-s1: complete
+[5/7] experimental-none-t2-off-s1: complete
+[6/7] experimental-authority-t2-on-s1: complete
+[7/7] experimental-welfare-t0p5-on-s1: complete
+Saved 7 / 7 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmphqtlrz4c\batch
+  positive-none-t2-on-s1: private plans
+  positive-none-t2-on-s1: exchange 1/3
+  positive-none-t2-on-s1: exchange 2/3
+  positive-none-t2-on-s1: exchange 3/3
+  positive-none-t2-on-s1: locked decisions
+[1/7] positive-none-t2-on-s1: complete
+  experimental-none-t2-on-s1: private plans
+  experimental-none-t2-off-s1: private plans
+[2/7] experimental-none-t2-on-s1: failed
+[3/7] experimental-none-t2-off-s1: failed
+Saved 3 / 7 attempted episodes to C:\Users\lenovo\AppData\Local\Temp\tmpg378f9ki\batch
+PAUSED FOR INFRASTRUCTURE: failure retained; check endpoint health before resuming.
+  experimental-none-t2-on-s1: private plans
+----------------------------------------------------------------------
+Ran 23 tests in 6.389s
+
+OK
