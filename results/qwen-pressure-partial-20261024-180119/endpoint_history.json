@@ -1,0 +1,17 @@
+[
+  {
+    "at": "2026-10-24T17:24:25.801075+00:00",
+    "from": {
+      "backend": "openai",
+      "base_url": "https://router.huggingface.co/v1",
+      "model": "Qwen/Qwen3-32B:nscale"
+    },
+    "to": {
+      "backend": "openai",
+      "base_url": "https://elmekaouihaitham--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "reason": "User-authorized fallback after HF credit exhaustion",
+    "limitation": "Mixed-provider study; served weights/revision are not verified identical."
+  }
+]

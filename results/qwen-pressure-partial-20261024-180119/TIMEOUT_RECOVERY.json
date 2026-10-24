@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-24T17:39:03.206581+00:00",
+  "reason": "Modal transport timeouts; server logs show healthy engine, /models HTTP 200 and reasoning probe passed",
+  "scheduling_change": "reduce request and episode concurrency from 16 to 8",
+  "timeout_episodes": [
+    "S09-L4-A-none-s1",
+    "S09-L5-D-D-s1",
+    "S09-L5-D-none-s1",
+    "S09-L5-W-none-s1",
+    "S10-L1-A-A-s1",
+    "S10-L1-D-D-s1",
+    "S10-L1-W-W-s1",
+    "S10-L2-D-D-s1",
+    "S10-L2-W-none-s1"
+  ],
+  "policy": "archive original failure and reuse all saved responses; request only missing responses once; no behavioral regeneration"
+}

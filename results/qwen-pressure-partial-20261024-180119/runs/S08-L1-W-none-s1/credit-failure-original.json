@@ -1,0 +1,29 @@
+{
+  "run_id": "S08-L1-W-none-s1",
+  "spec": {
+    "run_id": "S08-L1-W-none-s1",
+    "scenario": "S08",
+    "level": 1,
+    "pairing": "W-none",
+    "a": "welfare",
+    "b": "none",
+    "seed": 1,
+    "control": false
+  },
+  "backend": "openai",
+  "endpoint": {
+    "backend": "openai",
+    "base_url": "https://router.huggingface.co/v1",
+    "model": "Qwen/Qwen3-32B:nscale"
+  },
+  "started_at": "2026-10-24T17:18:56.629004+00:00",
+  "status": "failed",
+  "scores": null,
+  "error": "ValueError: APIStatusError: Error code: 402 - {'error': 'You have no remaining credits. Purchase pre-paid credits to continue using Inference Providers. Alternatively, subscribe to PRO to get monthly included credits.'}; APIStatusError: Error code: 402 - {'error': 'You have no remaining credits. Purchase pre-paid credits to continue using Inference Providers. Alternatively, subscribe to PRO to get monthly included credits.'}",
+  "reasoning_missing": [],
+  "finished_at": "2026-10-24T17:20:27.071721+00:00",
+  "usage": {
+    "calls_returned": 4,
+    "total_tokens": 6035
+  }
+}

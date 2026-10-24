@@ -3,9 +3,9 @@
 <!-- PRESSURE_LATEST_START -->
 ## Latest pressure-scenario results
 
-[Read the latest analysis, graphs and full run logs](results/qwen-pressure-partial-20261024-174425/README.md). Snapshot: **2026-10-24 17:44:25 UTC**. **293/600 terminal episodes: 282 parse-valid completions, 11 failures, 58 mutual-take outcomes.**
+[Read the latest analysis, graphs and full run logs](results/qwen-pressure-partial-20261024-180119/README.md). Snapshot: **2026-10-24 18:01:19 UTC**. **476/600 terminal episodes: 462 parse-valid completions, 14 failures, 139 mutual-take outcomes.**
 
-![Current pressure-study outcomes](results/qwen-pressure-partial-20261024-174425/figures/pairing-outcomes.png)
+![Current pressure-study outcomes](results/qwen-pressure-partial-20261024-180119/figures/pairing-outcomes.png)
 
 The timestamped snapshot includes CSV data, complete prompts/responses/returned reasoning, transcripts and recovery records. It remains fixed while live collection continues. Results are descriptive, with incomplete coverage and mixed-provider limitations. [Earlier published snapshot](results/qwen-pressure-partial-20261024-1730/README.md).
 
