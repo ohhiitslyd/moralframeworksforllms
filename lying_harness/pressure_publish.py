@@ -51,7 +51,9 @@ def main():
     if git("diff", "--cached", "--name-only"):
         raise ValueError("Existing staged changes require inspection before publication")
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
-    snapshot = ROOT / "results" / f"qwen-pressure-partial-{stamp}"
+    live_results = [read(p) for p in (ROOT / "results/qwen-pressure-600-v1/runs").glob("*/result.json")]
+    final = sum(not r["spec"]["control"] and r["status"] in ("complete", "failed") for r in live_results) == 600
+    snapshot = ROOT / "results" / f"qwen-pressure-{'final' if final else 'partial'}-{stamp}"
     freeze(ROOT / "results/qwen-pressure-600-v1", snapshot)
     analyze(snapshot)
     validate(snapshot)
@@ -65,8 +67,9 @@ def main():
         f"{summary['statuses'].get('failed', 0)} failures, {summary['outcomes'].get('mutual_take', 0)} mutual-take outcomes.**\n\n"
         f"![Current pressure-study outcomes](results/{snapshot.name}/figures/pairing-outcomes.png)\n\n"
         "The timestamped snapshot includes CSV data, complete prompts/responses/returned reasoning, "
-        "transcripts and recovery records. It remains fixed while live collection continues. "
-        "Results are descriptive, with incomplete coverage and mixed-provider limitations. "
+        "transcripts and recovery records. "
+        + ("Collection is finished. " if final else "It remains fixed while live collection continues. ")
+        + "Results are descriptive, with exclusions and mixed-provider limitations. "
         "[Earlier published snapshot](results/qwen-pressure-partial-20261024-1730/README.md).\n\n"
         "The original hospital allocation experiment and its completed 99-case results are described below.\n"
         "<!-- PRESSURE_LATEST_END -->")
