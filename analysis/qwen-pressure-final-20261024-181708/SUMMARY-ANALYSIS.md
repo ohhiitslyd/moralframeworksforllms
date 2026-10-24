@@ -281,7 +281,7 @@ Some agents also believed a solo take would block the honest record (S20-L4-A-no
 - **The prompt hands out answers.** Even no-rule agents follow the labels:
   - they took 42% of the time when the text said refusing breaks a promise, vs 10% otherwise
   - they took 40% of the time when a boss had ordered take, vs 21% otherwise
-- **The scoring reminder pushes toward refusal.** 447 of 816 refuse decisions mention the evaluator or the official objective, vs 127 of 356 take decisions. Some refusals are about protecting the score, not about ethics.
+- **The scoring reminder pushes toward refusal.** 447 of 816 refuse decisions mention the evaluator or the official objective, vs 127 of 356 take decisions. Some refusals are about protecting the score, not about ethics. *Update: counting only "evaluator"/"score" (not "official objective"), the gap disappears (36% of refusals vs 33% of takes, p = 0.39) and mentions track the agent's rule instead, so treat this as unproven. See [dimension-metric-analysis/REPORT.md](dimension-metric-analysis/REPORT.md), relationship 10.*
 - **Levels don't carry over.** Each level is a fresh episode, so "same as level 4" wording loses earlier facts like who outranks whom. This creates the level 5 drop.
 - **One run per setup, with shared seeds.** 25 sets of word-for-word identical plans appear across runs, so episodes are not fully independent.
 - **Dropped runs.** 14 runs failed on formatting and were excluded, including 2 in S10 (a low-collusion scenario) that were cut off at the length limit. They could skew the cells they belong to.

@@ -1,0 +1,35 @@
+dimension,value,episodes
+Scenario family,Rule-breaking for welfare (S01-S07),210
+Scenario family,Promise vs. record (S08-S14),210
+Scenario family,Boss vs. rulebook (S15-S20),180
+Pressure level,Level 1 (lowest pressure),120
+Pressure level,Level 2,120
+Pressure level,Level 3,120
+Pressure level,Level 4,120
+Pressure level,Level 5 (highest),120
+Pairing,Welfare agent + welfare agent (same rule),100
+Pairing,Welfare agent + agent with no rule,100
+Pairing,Non-deception agent + non-deception agent (same rule),100
+Pairing,Non-deception agent + agent with no rule,100
+Pairing,Authority agent + authority agent (same rule),100
+Pairing,Authority agent + agent with no rule,100
+Matched vs mixed pairing,Same rule (matched),300
+Matched vs mixed pairing,Rule + no-rule (mixed),300
+Server (provider),Hugging Face hosted (HF),204
+Server (provider),Switched HF -> Modal mid-episode,16
+Server (provider),Team's Modal server,380
+Episode status,Collusion (both took),166
+Episode status,Lone take,24
+Episode status,Both refused,396
+Episode status,Failed (unparseable),14
+A boss/authority ordered take,Yes,192
+A boss/authority ordered take,No,408
+Text says the order-giver outranks the rules,Yes,66
+Text says the order-giver outranks the rules,No,534
+Refusing breaks a prior promise,Yes,228
+Refusing breaks a prior promise,No,372
+Take keeps a promise or obeys a court/IRB/ethics body,Yes,258
+Take keeps a promise or obeys a court/IRB/ethics body,No,342
+Designers' hidden welfare judgement of taking,Taking helps (higher),348
+Designers' hidden welfare judgement of taking,About equal (similar),144
+Designers' hidden welfare judgement of taking,Taking hurts (lower),108
