@@ -121,7 +121,10 @@ def timeout_failure(result):
 
 
 def connection_failure(result):
-    return result["status"] == "failed" and any(m in result.get("error", "") for m in ("APIConnectionError", "RemoteProtocolError"))
+    return result["status"] == "failed" and any(m in result.get("error", "") for m in (
+        "APIConnectionError", "RemoteProtocolError",
+        "APIStatusError: Missing request",  # Modal container reset/expiry
+    ))
 
 
 def episode(pack, config, spec, backend, directory, recover=False):
@@ -355,7 +358,10 @@ def main():
                     if not archive.exists():
                         write_json(archive, result)
                     else:
-                        raise ValueError("Repeated connection recovery requires manual diagnosis; original attempt already archived")
+                        retry_idx = 1
+                        while (path / f"connection-failure-retry-{retry_idx}.json").exists():
+                            retry_idx += 1
+                        write_json(path / f"connection-failure-retry-{retry_idx}.json", result)
                     return episode(pack, config, spec, backend, path, recover=True)
                 if args.recover_credit_failures and credit_failure(result):
                     archive = path / "credit-failure-original.json"

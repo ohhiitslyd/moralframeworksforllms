@@ -41,5 +41,6 @@ Snapshot `20261025-123715` published with 547 completed episodes, 11 format excl
 
 Snapshot `20261025-125308` published with 717 completed episodes, 16 exclusions, 100% reasoning coverage (7,306 responses) and remote HEAD verified. Concurrency 96 continued at high throughput, completing 396 additional episodes in ~17 minutes. Completed episodes reached 1,113 (25.8% of 4,320 planned). Two transient HTTP stream disconnects occurred (`S234-L1-D-D-s1-unwatched` and `S661-L3-W-W-s1-unwatched`), pausing the worker cleanly. Both episodes resume from checkpoint with `--recover-connection-failures`, preserving all existing responses.
 
+## Snapshot 20261025-131134 and progress to 1,463+ completions at 13:50 UTC
 
-
+Snapshot `20261025-131134` published with 1,113 completed episodes, 23 format exclusions, 100% reasoning coverage (11,308 responses), and verified remote commit `880597f`. Concurrency 96 was maintained. At 13:29 UTC, 37 in-flight requests encountered a Modal container restart event (`APIStatusError: Missing request, possibly due to expiry or cancellation`). The runner was enhanced to recognize `APIStatusError: Missing request` as a connection/infrastructure failure, and to archive repeated recovery attempts to `connection-failure-retry-N.json` rather than raising, preserving the full failure history while resuming episodes from checkpoint. The 96-slot worker resumed cleanly under PID 21412.

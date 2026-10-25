@@ -126,7 +126,7 @@ class PressureTests(unittest.TestCase):
             resumed = episode(self.pack, {"rounds": 3}, spec, second, path, recover=True)
             self.assertEqual(resumed["status"], "complete", resumed.get("error"))
             self.assertEqual(second.calls, 8)
-            # A connection failure is also recoverable from checkpoint.
+            # A connection failure (e.g. RemoteProtocolError or APIStatusError container reset) is also recoverable from checkpoint.
             result["status"] = "failed"
             result["error"] = "ValueError: RemoteProtocolError: peer closed connection"
             (path / "result.json").write_text(json.dumps(result), encoding="utf-8")
@@ -135,6 +135,15 @@ class PressureTests(unittest.TestCase):
             resumed = episode(self.pack, {"rounds": 3}, spec, third, path, recover=True)
             self.assertEqual(resumed["status"], "complete", resumed.get("error"))
             self.assertEqual(third.calls, 8)
+            # Modal container reset/cancellation (APIStatusError: Missing request) is also recoverable.
+            result["status"] = "failed"
+            result["error"] = "ValueError: APIStatusError: Missing request, possibly due to expiry or cancellation"
+            (path / "result.json").write_text(json.dumps(result), encoding="utf-8")
+            (path / "events.jsonl").write_text("".join(json.dumps(e) + "\n" for e in kept), encoding="utf-8")
+            fourth = RecoveryBackend()
+            resumed = episode(self.pack, {"rounds": 3}, spec, fourth, path, recover=True)
+            self.assertEqual(resumed["status"], "complete", resumed.get("error"))
+            self.assertEqual(fourth.calls, 8)
 
 
 if __name__ == "__main__":
