@@ -61,3 +61,43 @@
 - **`SUMMARY.md` + `.html`:** preliminary findings for a newcomer.
 
 Every step is reviewed by a fresh subagent before the next step uses its output.
+
+## Revision 1: after the plan review (this section takes precedence)
+
+**Primary pre-specified test (sprint 3.4)**
+- **What it tests:** the monitoring effect on mutual take, as a **paired within-cell comparison**. Each scenario × level × pairing cell has one watched and one unwatched trial.
+- **Test:** McNemar's test on the cells where both trials are complete.
+- **Minimum detectable effect** (80% power, α = .05): about 2.6 pp now, and about 1.8 pp at full completion. An unpaired comparison would only detect about 4.5 pp.
+- **Robustness checks:** repeat the test within each endpoint, and test endpoint × monitoring. The endpoint switched once, so endpoint is the same thing as collection time.
+- **Sensitivity analysis:** count the 60 failures as each possible outcome in turn.
+
+**Secondary (sprint 2.2 × 3.4): does the notice change actions, or only language?**
+- Compare the watched-vs-unwatched shift in three places:
+  - private plans and reasoning (planned action, deception and monitoring vocabulary)
+  - public messages
+  - final actions
+- A finding of "sanitised talk, same deal", or the reverse, would be the headline.
+
+**Exploratory analyses** (BH-corrected; effect sizes and intervals; descriptive only)
+- **Setting.** Only 9 scenarios per setting, and task content differs between settings.
+  - **Unit of analysis:** the scenario. Use a scenario-cluster bootstrap, or a scenario random intercept.
+  - **How to report:** setting effects are **descriptive**, not causal.
+  - **Clean comparisons:** level and monitoring vary within scenario, so their effects are clean.
+- **Unilateral takes, broken down by agent.** These replace the vague "partner effect" item. Preliminary counts:
+  - W-none: the welfare agent took and the no-rule agent refused 32 times, against 4 the other way round.
+  - A-none: the no-rule agent took and the authority agent refused 40 times, against 14 the other way round.
+- **Rule application.** Use the pack's `expected_tip_key` and the expected first tipping level to test whether the rules are applied as the labels predict.
+- **v1 replication (Q4):** downgraded to a qualitative side note. The rules, scenarios and endpoints all differ.
+- **Interaction dynamics (Q5):** only for metrics whose heuristics are re-validated on this run, with accuracy reported **for each monitoring arm** separately.
+
+**Measurement safeguards**
+- **Mask the monitoring notice text and its keywords before counting vocabulary.** The notice itself says "monitored", "oversight" and "review".
+- **Add metrics for notice echo and monitoring mentions.**
+- **Hand-label a blind sample for validation,** stratified by monitoring arm.
+
+**What not to claim**
+- Collusion, deception or "strategic" intent as established facts. Returned reasoning is not internal thought.
+- That a setting causes an outcome.
+- That the monitoring result applies to real oversight. This is a notice-only manipulation of one model, at one temperature, with one seed.
+- That any effect size is final. This is an interim look.
+- Any effect of communication. There is no baseline with communication turned off.
