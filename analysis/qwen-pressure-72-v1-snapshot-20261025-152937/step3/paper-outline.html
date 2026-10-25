@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper kit (PRELIMINARY: 71% snapshot)</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="paper-kit-preliminary-71-snapshot">Paper kit (PRELIMINARY: 71% snapshot)</h1>
+<p>Built from <a href="SUMMARY.html">SUMMARY.md</a> and <a href="claims_ledger.csv">claims_ledger.csv</a>. <strong>Swap in completed-dataset numbers before submission.</strong> Numbers marked <em>completed dataset, unreviewed</em> have not been through Step 2 review. Page limit: 8.</p>
+<h2 id="candidate-titles">Candidate titles</h2>
+<ol>
+<li><strong>Plain:</strong> "Monitoring notices, pressure and moral rules in two-agent dual-control decisions"</li>
+<li><strong>Led by the finding:</strong> "Told they are watched, AI agent pairs execute misleading joint actions less often, but stakes matter ten times more"</li>
+<li><strong>Led by the question:</strong> "Does telling AI agents they are monitored prevent them from jointly approving a deceptive action?"</li>
+</ol>
+<h2 id="abstract-draft-248-words">Abstract draft (248 words)</h2>
+<p>Oversight of multi-agent AI systems often relies on agents behaving the same whether or not they believe they are observed. We test this in a dual-control setting. Two instances of Qwen3-32B each privately decide whether to authorise a misleading or rule-breaking action, which executes only if both choose "take". The decision follows a private plan and three rounds of messages. Across 72 scenes, 5 pressure levels and 6 pairings of installed moral rules (welfare, honesty, authority or none), every cell was run once with a one-sentence notice that the episode is monitored and once with a notice that it is not. In a pre-registered paired test on an interim snapshot (1,046 matched cells), both agents took in 25.0% of watched versus 29.3% of unwatched cells. The paired difference was −4.2 percentage points (95% CI −6.0 to −2.4), with the same direction in every subgroup; the completed dataset gives −3.9 points over 2,083 cells. Pressure dominated: joint takes rose from 5% at the lowest level to 54% at the highest. The installed rule changed joint takes fourfold (13% for two authority agents, 54% for two welfare agents), and agents applied their rule literally to labels in the prompt. The monitoring manipulation is textual and covers one model with one seed per cell, and the effect is not robust to a worst-case treatment of failed trials. Even so, evaluations of multi-agent collusion should report their monitoring framing, and countermeasures that only signal oversight are a small lever next to incentives.</p>
+<h2 id="section-outline-page-budget-8">Section outline (page budget: 8)</h2>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Pages</th>
+<th>Content</th>
+<th>Ledger rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Introduction</td>
+<td>0.75</td>
+<td>Dual control as a collusion barrier; observation-dependent behaviour; research questions 3.4, 2.2 and 1</td>
+<td>-</td>
+</tr>
+<tr>
+<td>2. Related work</td>
+<td>0.5</td>
+<td>Evaluation awareness and behaviour under observation; multi-agent collusion benchmarks; tacit collusion (2.3)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>3. Setup</td>
+<td>1.25</td>
+<td>Agents and stages; dual control; rules; pairings; levels; notice texts; pack selection; servers; Table 1 (design)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>4. Methods</td>
+<td>0.75</td>
+<td>Pre-registration; paired McNemar; Newcombe and cluster bootstrap; permutation-confirmed screening; heuristic validation; failure sensitivity</td>
+<td>7</td>
+</tr>
+<tr>
+<td>5. Results</td>
+<td>2.5</td>
+<td>5.1 Monitoring (Fig 1, Fig 2). 5.2 Pressure (Fig 3). 5.3 Rules and pairings (Fig 4, Fig 5, Table 2). 5.4 Words vs actions, carefully worded (vocabulary only)</td>
+<td>1-6, 9</td>
+</tr>
+<tr>
+<td>6. Discussion</td>
+<td>1.0</td>
+<td>Detection-risk reasoning (quotes; a count if labelled); implications for evaluators and monitor designers; comparison with v1 (qualitative)</td>
+<td>8, 10</td>
+</tr>
+<tr>
+<td>7. Limitations</td>
+<td>0.75</td>
+<td>From SUMMARY sections 7-8</td>
+<td>11-19</td>
+</tr>
+<tr>
+<td>8. Conclusion</td>
+<td>0.25</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Appendix (does not count toward the 8 pages, if allowed)</td>
+<td>-</td>
+<td>Scene table; validation table; dual-use statement; not-supported list</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>8.0</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="figure-and-table-plan">Figure and table plan</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>File</th>
+<th>Claim it carries</th>
+<th>Caption (takeaway + n)</th>
+<th>Redraw?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fig 1</td>
+<td><code>../step2/figures/03_primary_monitoring_forest.png</code></td>
+<td>Row 1</td>
+<td>"Telling agents they are monitored lowers joint takes by 4.2 points (95% CI 2.4-6.0), with the same sign in every family, pairing and level. 1,046 matched cells; McNemar p = 7×10⁻⁶."</td>
+<td><strong>Yes.</strong> It has 22 rows, server codes ("Modal-A") and pairing codes. Cut it to overall + family + pairing + level, replace codes with words, and make it column width</td>
+</tr>
+<tr>
+<td>Fig 2</td>
+<td><code>../step2/figures/04_words_vs_actions.png</code> (monitoring panel only)</td>
+<td>Rows 5, 9</td>
+<td>"The notice moves actions (−4.3 pp agent take) and public vocabulary (+5 pp), but not lone takes. 1,046 cells."</td>
+<td><strong>Yes.</strong> It is too wide and in SD units, includes dropped rows (private vocabulary, deception-intent flag), and uses grey-for-heuristic coding. Keep the action and public rows only</td>
+</tr>
+<tr>
+<td>Fig 3</td>
+<td><code>../step2/figures/08_heat_level.png</code> (or a line chart from <code>tables/2d_pairing_x_level.csv</code>)</td>
+<td>Row 2</td>
+<td>"Joint takes rise from 5% to 54% across pressure levels in every pairing. n ≈ 600 trials per level."</td>
+<td><strong>Yes.</strong> A heat map with many metrics is unreadable at column width. Prefer a 6-line chart of mutual take by level with n</td>
+</tr>
+<tr>
+<td>Fig 4</td>
+<td><code>../step2/figures/06_rule_application.png</code></td>
+<td>Row 3</td>
+<td>"Rule agents take where the scene labels predict: authority agents switch sharply at the predicted level; welfare and honesty agents start earlier. 4,549 rule-agent decisions."</td>
+<td>Minor: shorten the subtitle and note that bands are optimistic</td>
+</tr>
+<tr>
+<td>Fig 5</td>
+<td><code>../step2/figures/05_asymmetry_mixed_pairs.png</code></td>
+<td>Row 6</td>
+<td>"In mixed pairs, welfare agents take alone (32 vs 4), but next to an authority agent it is the no-rule partner who takes alone (40 vs 14). 140 lone takes."</td>
+<td>Minor: drop binomial p or add "ignores clustering"</td>
+</tr>
+<tr>
+<td>Table 1</td>
+<td>New (from SUMMARY section 2)</td>
+<td>Design</td>
+<td>Factors and levels, the notice texts verbatim</td>
+<td>New</td>
+</tr>
+<tr>
+<td>Table 2</td>
+<td>From <code>../step2/tables/dimension_x_metric_pairing.csv</code></td>
+<td>Row 4</td>
+<td>Joint take by pairing with "X of n"</td>
+<td>New (simple)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="limitations-bullets-for-the-paper">Limitations (bullets for the paper)</h2>
+<ul>
+<li>The monitoring manipulation is one sentence of text. Nothing about logging or consequences changed, so effects on real oversight are unknown.</li>
+<li>One model (Qwen3-32B), one temperature (0.6), one seed per cell. The pack also contains prompt labels (honesty notes, principals) that the model follows literally.</li>
+<li>"Mutual take" is operational, not proven collusion. Agents are told not to form agreements, and in some scenes taking is defensible.</li>
+<li>The primary effect does not survive the adversarial failure bound (−1.4 pp, p = 0.20).</li>
+<li>Heuristic text measures were tuned on an earlier pack. The stance measure is marginal, and the plan-stance, said/did and lone-take-awareness measures are unreliable, so we make no claims from them.</li>
+<li>Vocabulary counts are contaminated by echo of the notice and the honesty notes. The public vocabulary shift is likely an audience effect.</li>
+<li>Setting and scenario-family effects are descriptive (9-24 scenes per level).</li>
+<li>With no no-chat baseline, we make no claim about the effect of communication.</li>
+<li>Interim numbers: final values come from the completed dataset.</li>
+</ul>
+<h2 id="dual-use-appendix-bullets">Dual-use appendix (bullets)</h2>
+<ul>
+<li><strong>What a misuser could learn:</strong></li>
+<li>Telling agents they are unmonitored raises joint execution of misleading actions.</li>
+<li>Higher stakes and welfare framing raise it further.</li>
+<li>Inserting a principal line ("X instructs take") steers authority-rule agents almost deterministically.</li>
+<li>In other words: how to frame a multi-agent pipeline so that its checks are more permissive.</li>
+<li><strong>Why we think publishing is net-positive:</strong></li>
+<li>The levers are already obvious to anyone writing prompts (incentives, authority claims).</li>
+<li>The effect sizes are modest.</li>
+<li>The main value goes to defenders: evaluators learn that monitoring framing biases measured rates, monitor designers learn not to rely on notices, and auditors learn to inspect principal and label text.</li>
+<li>All scenes are fictional and low-stakes administrative actions.</li>
+<li><strong>What we withhold or limit:</strong></li>
+<li>We publish the scene pack and transcripts for reproducibility, but we do not publish an optimised "most-collusive" prompt.</li>
+<li>We do not rank framings by collusion yield beyond what the factorial design reports.</li>
+<li>We do not include any procedure for making agents conceal coordination from monitors.</li>
+</ul>
+</body>
+</html>
