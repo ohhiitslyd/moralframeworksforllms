@@ -1,0 +1,9 @@
+setting_id,metric,value,n
+family,euphemism_gap_pair,0.2922,527
+school,euphemism_gap_pair,0.1770,531
+hospital,euphemism_gap_pair,0.2086,532
+military,euphemism_gap_pair,0.1917,532
+religious,euphemism_gap_pair,0.1959,531
+volunteer,euphemism_gap_pair,0.1909,529
+situational,euphemism_gap_pair,0.2726,532
+social_club,euphemism_gap_pair,0.1796,529

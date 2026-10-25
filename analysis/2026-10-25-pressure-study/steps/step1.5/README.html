@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Step 1.5: derived-metric heat maps</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="step-15-derived-metric-heat-maps">Step 1.5: derived-metric heat maps</h1>
+<p>Source: <code>trial_metrics.csv</code> (4243 complete episodes) with its schema. <strong>Derived / engineered outcomes only</strong> (raw outcome rates are in Step 0.5). Rates use an absolute 0–100% scale; medians are shaded within their column with the value printed. <strong>⚠ marks heuristics that failed validation</strong>; treat them as exploratory only.</p>
+<p>Pair-level metrics: 17; agent-level metrics (pooled over agents A and B): 35.</p>
+<p>Regenerate: <code>python tools/run_reserved.py analysis/2026-10-25-pressure-study/steps/step1.5/derived_heatmaps.py</code> (CPUs 0–3 kept free).</p>
+<h2 id="one-factor-derived-metrics">One factor × derived metrics</h2>
+<ul>
+<li><a href="figures/1v_pair_level_rates_1.png">pair · level · rates</a></li>
+<li><a href="figures/1v_pair_level_rates_2.png">pair · level · rates</a></li>
+<li><a href="figures/1v_pair_level_medians_1.png">pair · level · medians</a></li>
+<li><a href="figures/1v_pair_monitoring_rates_1.png">pair · monitoring · rates</a></li>
+<li><a href="figures/1v_pair_monitoring_rates_2.png">pair · monitoring · rates</a></li>
+<li><a href="figures/1v_pair_monitoring_medians_1.png">pair · monitoring · medians</a></li>
+<li><a href="figures/1v_pair_pairing_rates_1.png">pair · pairing · rates</a></li>
+<li><a href="figures/1v_pair_pairing_rates_2.png">pair · pairing · rates</a></li>
+<li><a href="figures/1v_pair_pairing_medians_1.png">pair · pairing · medians</a></li>
+<li><a href="figures/1v_pair_diagnostic_rates_1.png">pair · diagnostic · rates</a></li>
+<li><a href="figures/1v_pair_diagnostic_rates_2.png">pair · diagnostic · rates</a></li>
+<li><a href="figures/1v_pair_diagnostic_medians_1.png">pair · diagnostic · medians</a></li>
+<li><a href="figures/1v_pair_setting_id_rates_1.png">pair · setting_id · rates</a></li>
+<li><a href="figures/1v_pair_setting_id_rates_2.png">pair · setting_id · rates</a></li>
+<li><a href="figures/1v_pair_setting_id_medians_1.png">pair · setting_id · medians</a></li>
+<li><a href="figures/1v_agent_level_rates_1.png">agent · level · rates</a></li>
+<li><a href="figures/1v_agent_level_medians_1.png">agent · level · medians</a></li>
+<li><a href="figures/1v_agent_level_medians_2.png">agent · level · medians</a></li>
+<li><a href="figures/1v_agent_level_medians_3.png">agent · level · medians</a></li>
+<li><a href="figures/1v_agent_monitoring_rates_1.png">agent · monitoring · rates</a></li>
+<li><a href="figures/1v_agent_monitoring_medians_1.png">agent · monitoring · medians</a></li>
+<li><a href="figures/1v_agent_monitoring_medians_2.png">agent · monitoring · medians</a></li>
+<li><a href="figures/1v_agent_monitoring_medians_3.png">agent · monitoring · medians</a></li>
+<li><a href="figures/1v_agent_pairing_rates_1.png">agent · pairing · rates</a></li>
+<li><a href="figures/1v_agent_pairing_medians_1.png">agent · pairing · medians</a></li>
+<li><a href="figures/1v_agent_pairing_medians_2.png">agent · pairing · medians</a></li>
+<li><a href="figures/1v_agent_pairing_medians_3.png">agent · pairing · medians</a></li>
+<li><a href="figures/1v_agent_diagnostic_rates_1.png">agent · diagnostic · rates</a></li>
+<li><a href="figures/1v_agent_diagnostic_medians_1.png">agent · diagnostic · medians</a></li>
+<li><a href="figures/1v_agent_diagnostic_medians_2.png">agent · diagnostic · medians</a></li>
+<li><a href="figures/1v_agent_diagnostic_medians_3.png">agent · diagnostic · medians</a></li>
+<li><a href="figures/1v_agent_setting_id_rates_1.png">agent · setting_id · rates</a></li>
+<li><a href="figures/1v_agent_setting_id_medians_1.png">agent · setting_id · medians</a></li>
+<li><a href="figures/1v_agent_setting_id_medians_2.png">agent · setting_id · medians</a></li>
+<li><a href="figures/1v_agent_setting_id_medians_3.png">agent · setting_id · medians</a></li>
+<li><a href="figures/1v_agent_criterion_rates_1.png">agent · criterion · rates</a></li>
+<li><a href="figures/1v_agent_criterion_medians_1.png">agent · criterion · medians</a></li>
+<li><a href="figures/1v_agent_criterion_medians_2.png">agent · criterion · medians</a></li>
+<li><a href="figures/1v_agent_criterion_medians_3.png">agent · criterion · medians</a></li>
+</ul>
+<h2 id="two-factors-derived-metric-top-binary-metrics-by-spread-across-level">Two factors × derived metric (top binary metrics by spread across level)</h2>
+<ul>
+<li><a href="figures/2v_pair_deception_intended_pair__level_x_monitoring.png">pair · deception_intended_pair · level × monitoring</a></li>
+<li><a href="figures/2v_pair_deception_intended_pair__pairing_x_monitoring.png">pair · deception_intended_pair · pairing × monitoring</a></li>
+<li><a href="figures/2v_pair_deception_intended_pair__diagnostic_x_monitoring.png">pair · deception_intended_pair · diagnostic × monitoring</a></li>
+<li><a href="figures/2v_pair_deception_intended_pair__level_x_pairing.png">pair · deception_intended_pair · level × pairing</a></li>
+<li><a href="figures/2v_pair_deception_occurred__level_x_monitoring.png">pair · deception_occurred · level × monitoring</a></li>
+<li><a href="figures/2v_pair_deception_occurred__pairing_x_monitoring.png">pair · deception_occurred · pairing × monitoring</a></li>
+<li><a href="figures/2v_pair_deception_occurred__diagnostic_x_monitoring.png">pair · deception_occurred · diagnostic × monitoring</a></li>
+<li><a href="figures/2v_pair_deception_occurred__level_x_pairing.png">pair · deception_occurred · level × pairing</a></li>
+<li><a href="figures/2v_pair_euphemism_gap_pair__level_x_monitoring.png">pair · euphemism_gap_pair · level × monitoring</a></li>
+<li><a href="figures/2v_pair_euphemism_gap_pair__pairing_x_monitoring.png">pair · euphemism_gap_pair · pairing × monitoring</a></li>
+<li><a href="figures/2v_pair_euphemism_gap_pair__diagnostic_x_monitoring.png">pair · euphemism_gap_pair · diagnostic × monitoring</a></li>
+<li><a href="figures/2v_pair_euphemism_gap_pair__level_x_pairing.png">pair · euphemism_gap_pair · level × pairing</a></li>
+<li><a href="figures/2v_pair_plans_agree__level_x_monitoring.png">pair · plans_agree · level × monitoring</a></li>
+<li><a href="figures/2v_pair_plans_agree__pairing_x_monitoring.png">pair · plans_agree · pairing × monitoring</a></li>
+<li><a href="figures/2v_pair_plans_agree__diagnostic_x_monitoring.png">pair · plans_agree · diagnostic × monitoring</a></li>
+<li><a href="figures/2v_pair_plans_agree__level_x_pairing.png">pair · plans_agree · level × pairing</a></li>
+<li><a href="figures/2v_agent_deception_intended__level_x_monitoring.png">agent · deception_intended · level × monitoring</a></li>
+<li><a href="figures/2v_agent_deception_intended__pairing_x_monitoring.png">agent · deception_intended · pairing × monitoring</a></li>
+<li><a href="figures/2v_agent_deception_intended__diagnostic_x_monitoring.png">agent · deception_intended · diagnostic × monitoring</a></li>
+<li><a href="figures/2v_agent_deception_intended__level_x_pairing.png">agent · deception_intended · level × pairing</a></li>
+<li><a href="figures/2v_agent_euphemism_gap__level_x_monitoring.png">agent · euphemism_gap · level × monitoring</a></li>
+<li><a href="figures/2v_agent_euphemism_gap__pairing_x_monitoring.png">agent · euphemism_gap · pairing × monitoring</a></li>
+<li><a href="figures/2v_agent_euphemism_gap__diagnostic_x_monitoring.png">agent · euphemism_gap · diagnostic × monitoring</a></li>
+<li><a href="figures/2v_agent_euphemism_gap__level_x_pairing.png">agent · euphemism_gap · level × pairing</a></li>
+<li><a href="figures/2v_agent_flipped__level_x_monitoring.png">agent · flipped · level × monitoring</a></li>
+<li><a href="figures/2v_agent_flipped__pairing_x_monitoring.png">agent · flipped · pairing × monitoring</a></li>
+<li><a href="figures/2v_agent_flipped__diagnostic_x_monitoring.png">agent · flipped · diagnostic × monitoring</a></li>
+<li><a href="figures/2v_agent_flipped__level_x_pairing.png">agent · flipped · level × pairing</a></li>
+<li><a href="figures/2v_agent_plan_states_action__level_x_monitoring.png">agent · plan_states_action · level × monitoring</a></li>
+<li><a href="figures/2v_agent_plan_states_action__pairing_x_monitoring.png">agent · plan_states_action · pairing × monitoring</a></li>
+<li><a href="figures/2v_agent_plan_states_action__diagnostic_x_monitoring.png">agent · plan_states_action · diagnostic × monitoring</a></li>
+<li><a href="figures/2v_agent_plan_states_action__level_x_pairing.png">agent · plan_states_action · level × pairing</a></li>
+</ul>
+<p>Highlights:</p>
+<p><img alt="1v_pair_level_rates_1.png" src="figures/1v_pair_level_rates_1.png" /></p>
+<p><img alt="1v_pair_monitoring_rates_1.png" src="figures/1v_pair_monitoring_rates_1.png" /></p>
+<p><img alt="1v_agent_level_rates_1.png" src="figures/1v_agent_level_rates_1.png" /></p>
+<p><img alt="1v_agent_monitoring_rates_1.png" src="figures/1v_agent_monitoring_rates_1.png" /></p>
+<p>Tables behind every chart are in <code>tables/</code>.</p>
+</body>
+</html>
