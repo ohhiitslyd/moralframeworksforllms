@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experiment analysis process</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="experiment-analysis-process">Experiment analysis process</h1>
+<p>A single, repeatable process for turning a finished experiment run into:</p>
+<ol>
+<li>a <strong>per-trial metrics table</strong>: one row per trial, with every input parameter, outcome, and derived interaction or deception metric;</li>
+<li>a <strong>parameter → outcome relationship report</strong>: design check, univariate summaries, association matrices, single-factor and two-factor heat maps, and statistics;</li>
+<li>a <strong>curated findings summary</strong>: a few headline relationships, supporting results, and footnotes, written for a reader new to the project.</li>
+</ol>
+<p>Each stage has a <strong>deterministic part</strong>, a script that anyone can rerun, and a <strong>judgement part</strong> for an analyst or AI agent: validating heuristics, choosing what matters, and writing it up. The stages talk to each other only through files, so you can rerun any stage without the ones before it.</p>
+<pre><code>results/&lt;run&gt;/                         Stage 1: Metrics           Stage 2: Relationships       Stage 3: Findings
+  manifest.json  (pack + config)  ──▶  trial_metrics.csv     ──▶  REPORT.md (+ .html)     ──▶  SUMMARY.md (+ .html)
+  runs.csv                             metrics_schema.json        figures/, tables/            (curated, plain language)
+  runs/&lt;id&gt;/result.json, events.jsonl  trial_metrics_dictionary.md
+</code></pre>
+<p>The <strong>contract</strong> between Stage 1 and Stage 2 is <code>metrics_schema.json</code>. Stage 2 never hard-codes column names, so it works for any experiment whose Stage 1 writes a schema.</p>
+<hr />
+<h2 id="stage-0-inputs-fill-in-once-per-run">Stage 0: Inputs (fill in once per run)</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Results folder</td>
+<td><code>results/qwen-pressure-final-20261024-181708</code></td>
+</tr>
+<tr>
+<td>Output folder</td>
+<td><code>analysis/qwen-pressure-final-20261024-181708</code></td>
+</tr>
+<tr>
+<td>Unit of analysis</td>
+<td>One row per episode. Agent-level metrics are clustered in pairs.</td>
+</tr>
+<tr>
+<td>Scenario pack</td>
+<td>Read from <code>manifest.json["pack"]</code>. Never re-read from <code>prompts/</code>, which may have changed since the run.</td>
+</tr>
+<tr>
+<td>Known design facts</td>
+<td>"One seed per cell", "provider switched mid-run", "levels are independent episodes"</td>
+</tr>
+<tr>
+<td>Research questions</td>
+<td>The sprint tracks or hypotheses the findings should speak to</td>
+</tr>
+<tr>
+<td>Audience</td>
+<td>"Judges and researchers new to the project"</td>
+</tr>
+</tbody>
+</table>
+<p>Ground rules for every stage:
+- Treat results as <strong>read-only</strong>. Write only to the output folder.
+- Every number shown must come with its <strong>n</strong>.
+- Never present a p-value without an <strong>effect size</strong> and an <strong>interval</strong>.
+- Fix every random seed.</p>
+<hr />
+<h2 id="stage-1-per-trial-metrics">Stage 1: Per-trial metrics</h2>
+<h3 id="deliverables">Deliverables</h3>
+<ul>
+<li><code>trial_metrics.csv</code>: one row per planned trial, <strong>including failures</strong>. Failures keep their input columns, have blank outputs, and fill an <code>error</code> column.</li>
+<li><code>metrics_schema.json</code>: machine-readable column roles (see the schema section below).</li>
+<li><code>trial_metrics_dictionary.md</code> (+ <code>.html</code>): every column with a plain-language description, its type and allowed values, how it's computed (source field, rule, keywords or regexes), its validation result, and its known limitations. Columns are grouped into sections. The dictionary also lists metrics that were considered but not included, with the reason.</li>
+<li>The generator script, which must be rerunnable.</li>
+</ul>
+<h3 id="column-layout-left-to-right">Column layout, left to right</h3>
+<p><strong>A. Input parameters.</strong> Everything that defines the trial:
+- <strong>Identity and design:</strong> run ID, scenario ID, scenario title, scenario family or diagnostic, setting, level, pairing, each agent's criterion, matched vs. mixed, seed, monitoring condition, control flag.
+- <strong>Model and run settings:</strong> model, temperature, max tokens, reasoning on/off, rounds, provider or endpoint, recovery flags.
+- <strong>Scenario-text features</strong> derived from the pack:
+  - whether a take-ordering principal is present
+  - whether rank is stated in the text
+  - whether refusing breaks a promise
+  - the take-deceives and refuse-deceives lists and their counts
+  - the designer's welfare judgement
+  - expected tipping points
+  - whether the scene was hand-authored or template-generated
+- <strong>A plain-language <code>*_description</code> column immediately to the right of every identifier.</strong> For example: run, scenario (setting, duty, deal, reward, cost), family, level (the pressure text), pairing, criterion (a summary of the rule), provider, monitoring, outcome.</p>
+<p><strong>B. Outcomes:</strong> status, each agent's action, deal executed, joint outcome (plus its description), error.</p>
+<p><strong>C. Per-agent metrics</strong> (suffixed <code>_a</code> and <code>_b</code>):
+- planned action from the private plan, final action, whether it flipped and in which direction
+- stance per round; message count; empty messages; words sent per round and in total; words in plans and in reasoning
+- who first proposed taking, and in which round
+- last public stance vs. final action, with "said refuse, did take" and "said take, did refuse" flags
+- deception vocabulary in public messages vs. private notes vs. private reasoning, and the gap between them
+- evaluator or score mentions
+- whether the criterion is cited, and whether the action complies with the agent's own criterion report (self-reported violation)
+- "side deal" and agreement phrases
+- a lone take made while knowing the deal would fail
+- hitting the length limit
+- deception intended</p>
+<p><strong>D. Pair and interaction metrics:</strong>
+- whether the plans agreed or split before talking, and whether the conversation changed the planned outcome
+- persuasion direction
+- rounds until both stated the same stance; explicit agreement and its round
+- crossed or swapped stances
+- total words exchanged, number of turns, silence count
+- deception intended (per pair), deception that occurred, deceiving the peer
+- whether taking is justified or ambiguous (it keeps a promise or obeys a court)</p>
+<h3 id="rules">Rules</h3>
+<ul>
+<li><strong>Prefer deterministic extraction</strong> from <code>result.json</code> and <code>events.jsonl</code>. Where you must use keyword or regex heuristics, document the exact patterns in the dictionary.</li>
+<li><strong>Validate every heuristic column</strong> against 10–20 transcripts you have read: a tuning set plus a held-out set. Report precision, recall and agreement in the dictionary and in the schema.</li>
+<li><strong>Leave out columns you can't compute reliably.</strong> List them as "considered, not included", with the reason.</li>
+<li><strong>Formatting:</strong> snake_case names, booleans as 0/1, blanks for missing values.</li>
+<li><strong>Sanity check:</strong> outcome counts must match the run's <code>README.md</code> / <code>summary.json</code>.</li>
+<li><strong>Regression check:</strong> when the generator changes, rerun it on a previously published run and compare the result with the published CSV. Any differences must be explained.</li>
+</ul>
+<h3 id="metrics-schema-metrics_schemajson">Metrics schema (<code>metrics_schema.json</code>)</h3>
+<p>One entry per column:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;said_refuse_did_take_a&quot;,
+  &quot;section&quot;: &quot;agent&quot;,
+  &quot;role&quot;: &quot;outcome&quot;,
+  &quot;level&quot;: &quot;agent&quot;,
+  &quot;agent&quot;: &quot;a&quot;,
+  &quot;type&quot;: &quot;binary&quot;,
+  &quot;levels&quot;: null,
+  &quot;description_column&quot;: null,
+  &quot;subset&quot;: &quot;complete episodes&quot;,
+  &quot;derived_from&quot;: [&quot;last_public_stance_a&quot;, &quot;final_action_a&quot;],
+  &quot;by_construction_with&quot;: [&quot;peer_deception_a&quot;],
+  &quot;heuristic&quot;: true,
+  &quot;validation&quot;: {&quot;precision&quot;: 1.0, &quot;n_checked&quot;: 7},
+  &quot;label&quot;: &quot;Said refuse in public, then took&quot;
+}
+</code></pre>
+<ul>
+<li><strong><code>section</code></strong>: <code>input</code> | <code>outcome</code> | <code>agent</code> | <code>pair</code> | <code>meta</code>.</li>
+<li><strong><code>role</code></strong>: <code>id</code> | <code>parameter</code> | <code>outcome</code> | <code>description</code> | <code>meta</code>.</li>
+<li><strong><code>type</code></strong>: <code>numeric</code> | <code>ordinal</code> | <code>categorical</code> | <code>binary</code> | <code>text</code>.</li>
+<li><strong><code>level</code></strong>: <code>trial</code> | <code>agent</code>. Agent-level columns are paired by their <code>_a</code> / <code>_b</code> suffix.</li>
+<li><strong><code>description_column</code></strong>: points from an identifier to its plain-language column.</li>
+<li><strong><code>subset</code></strong>: states the denominator when a metric only applies to some trials. For example, "agents whose plan said refuse".</li>
+<li><strong><code>by_construction_with</code></strong>: lists columns whose association with this one is guaranteed by definition. Stage 2 must not report those associations as findings.</li>
+<li><strong><code>heuristic</code> + <code>validation</code></strong>: carry the error rate forward, so Stage 2 can attach a caveat to any finding that uses the column.</li>
+</ul>
+<hr />
+<h2 id="stage-2-parameter-outcome-relationship-report">Stage 2: Parameter → outcome relationship report</h2>
+<p>Inputs: <code>trial_metrics.csv</code> + <code>metrics_schema.json</code>. Columns are selected by role, never by hard-coded name.</p>
+<h3 id="step-0-type-and-frame">Step 0: Type and frame</h3>
+<ul>
+<li><strong>Type every variable from the schema.</strong> Record missing values, the number of levels, and the min, median and max count per level.</li>
+<li><strong>Clustering.</strong> Agent-level rows are clustered in pairs. Use an episode-level summary or a cluster-aware permutation (shuffle whole episodes) for agent-level tests, and say which. If neither is possible, say the p-values are optimistic.</li>
+<li><strong>Flag columns related by construction</strong> (from the schema) and columns that rely on heuristics.</li>
+</ul>
+<h3 id="step-1-design-check-parameter-parameter">Step 1: Design check (parameter × parameter)</h3>
+<p>Purpose: find <strong>confounding and aliasing</strong> before interpreting any outcome.
+- <strong>Mixed-type association matrix:</strong>
+  - numeric–numeric: Spearman ρ
+  - categorical–categorical: bias-corrected Cramér's V
+  - numeric–categorical: correlation ratio η
+- <strong>Heat map:</strong> values printed, ordered by clustering.
+- <strong>Cell-count tables</strong> for any pair with association ≥ 0.3, or with empty or tiny cells.
+- <strong>State which effects cannot be separated</strong> (aliased pairs) and which comparisons are clean, for example "within provider = Modal, scenario family varies freely". Every later finding must say whether it is clean or confounded.</p>
+<h3 id="step-2-univariate-summaries">Step 2: Univariate summaries</h3>
+<ul>
+<li><strong>Parameters:</strong> counts per level, to show design balance.</li>
+<li><strong>Outcomes:</strong></li>
+<li>binary: a rate with a 95% Wilson interval</li>
+<li>numeric: median and interquartile range (IQR), shown as a histogram or box plot (log or rank scale if skewed)</li>
+<li>One compact table: variable, type, n, missing, summary, interval.</li>
+</ul>
+<h3 id="step-3-parameter-outcome-screening">Step 3: Parameter × outcome screening</h3>
+<p>For every (parameter, outcome) pair:
+- <strong>Effect size:</strong>
+  - categorical parameter, binary outcome: Cramér's V, plus the max−min rate across levels
+  - categorical parameter, numeric outcome: ε², plus the max−min difference in medians
+  - ordinal or numeric parameter: Spearman ρ
+- <strong>Test:</strong> a permutation test (≥2,000 shuffles, fixed seed, cluster-aware where needed), or Fisher's exact test for 2×2 tables.
+- <strong>Multiple comparisons:</strong> Benjamini–Hochberg q-values across all pairs.
+- <strong>Screening table</strong>, sorted by effect size, with columns: effect, interval or p, q, minimum cell n, clean or confounded, by-construction flag, heuristic flag.
+- <strong>One heat map per key parameter:</strong> rows are the parameter's levels, columns are outcomes, and cells hold the rate or median with n.
+  - Colour is normalised per column, and the raw value is always printed.
+  - Pair-level and agent-level blocks are separated.
+  - Cells with q &lt; 0.05 are marked, and confounded cells are hatched.
+- <strong>For the top single-parameter relationships</strong> (q &lt; 0.05, minimum cell n ≥ 10, up to ~10), draw level-by-outcome charts with intervals. Repeat the comparison <strong>within</strong> the levels of any confounding parameter.</p>
+<h3 id="step-4-outcome-outcome">Step 4: Outcome × outcome</h3>
+<ul>
+<li><strong>The same mixed-type matrix over outcomes.</strong></li>
+<li><strong>Separate by-construction correlations from informative ones.</strong></li>
+<li><strong>Flag near-redundant outcomes</strong> (|association| ≥ 0.8 and not by construction).</li>
+</ul>
+<h3 id="step-5-two-parameter-interactions-2d-heat-maps">Step 5: Two-parameter interactions (2D heat maps)</h3>
+<ul>
+<li><strong>Candidates</strong> are parameter pairs that aren't aliased and have adequate cell counts.</li>
+<li><strong>Rank them by interaction strength,</strong> meaning the improvement of A×B over the additive A+B model, not by main effects.</li>
+<li><strong>Draw the top 6–10,</strong> plus any view that is central to the research question. Rows are A, columns are B, and colour is the outcome on an <strong>absolute</strong> scale. Each cell shows its value and k/n, and small cells are greyed out.</li>
+<li><strong>Describe each in words,</strong> e.g. "B matters only when A = …".</li>
+</ul>
+<h3 id="step-6-rank-candidates-for-stage-3">Step 6: Rank candidates for Stage 3</h3>
+<p>Score every relationship on:
+- effect size
+- robustness: survives FDR, is clean rather than confounded, holds within subgroups, has adequate cells
+- relevance to the research questions
+- surprise relative to the design's expectations, such as the pack's expected tipping points</p>
+<p>Write <code>tables/candidates.csv</code>, including an explicit "looks large but untrustworthy" list with the reasons.</p>
+<h3 id="chart-rules">Chart rules</h3>
+<ul>
+<li><strong>Titles state the takeaway.</strong> Axis labels use plain words: use the <code>*_description</code> and title columns, never codes.</li>
+<li><strong>Colour bars have units.</strong></li>
+<li><strong>Scales:</strong> a single-hue sequential scale for magnitudes; a diverging scale centred at 0 for signed correlations; colour-blind-safe palettes that work in light and dark themes.</li>
+<li><strong>Print the value and n in every heat-map cell.</strong> Order rows and columns meaningfully.</li>
+<li><strong>Keep it to about 10–20 charts.</strong> Prefer small multiples.</li>
+</ul>
+<h3 id="deliverables_1">Deliverables</h3>
+<ul>
+<li><strong><code>REPORT.md</code> (+ <code>.html</code> with the figures embedded)</strong>, in this order:
+  1. summary
+  2. how to read the charts
+  3. design check
+  4. top relationships
+  5. univariate results
+  6. matrices
+  7. single-factor heat maps
+  8. 2D interactions
+  9. caveats in plain terms
+  10. file index</li>
+<li><strong><code>figures/</code></strong>: PNG, and SVG where useful.</li>
+<li><strong><code>tables/</code></strong>: the univariate tables, the screening table with all tests, the matrices, the numbers behind every chart, and <code>candidates.csv</code>.</li>
+<li><strong>The report script</strong>, which must be rerunnable.</li>
+</ul>
+<hr />
+<h2 id="stage-3-curated-findings">Stage 3: Curated findings</h2>
+<p>Inputs: <code>REPORT.md</code>, <code>tables/candidates.csv</code>, the transcripts, and the research questions.</p>
+<ol>
+<li><strong>Write a one-sentence story</strong> that the headline findings support.</li>
+<li><strong>Sort the findings into three tiers:</strong>
+   - <strong>Headline (3–5):</strong> each gets one chart, a one-line takeaway, the numbers with intervals, a "why it matters" line and a caveat line, plus one or two short quotes from transcripts, cited by run ID.
+   - <strong>Supporting (3–6):</strong> a short paragraph each.
+   - <strong>Footnotes and appendix:</strong> everything else, including relationships that were dropped and why.</li>
+<li><strong>Write for a newcomer:</strong>
+   - Start with "what this experiment is", with codes spelled out and a one-line description of each scenario.
+   - Use run IDs only as parenthetical citations.
+   - Give numbers as "X out of Y".
+   - Explain caveats in everyday terms.</li>
+<li><strong>Revisit earlier findings.</strong> If an earlier run was analysed, say for each finding whether it held up, got stronger, got weaker or reversed. Include a "what changed" section.</li>
+<li><strong>Align with the research questions.</strong> Map each headline finding to the research question or judging criterion it addresses.</li>
+</ol>
+<p>Deliverable: <code>SUMMARY.md</code> (+ <code>.html</code>).</p>
+<hr />
+<h2 id="guardrails-learned-on-this-project">Guardrails learned on this project</h2>
+<ul>
+<li><strong>Read the pack from the run's manifest.</strong> Packs in <code>prompts/</code> change after runs: v1, v2, then the extended v5/v6.</li>
+<li><strong>Each pressure level is an independent episode.</strong> Text that refers to "the previous level" is a design bug that shows up as a fake trend.</li>
+<li><strong>Labels in the prompt are inputs, not outcomes.</strong> "Outranks", "take deceives …" and "refuse breaks a promise" do part of the agent's reasoning for it. Treat them as parameters, and be careful when interpreting rule-following.</li>
+<li><strong>Template-generated scenes are not independent evidence.</strong> Flag them, and analyse them as a separate stratum or as clusters.</li>
+<li><strong>Provider or endpoint is often aliased with collection order.</strong> Check it in Step 1 every time.</li>
+<li><strong>Some columns are related by construction.</strong> "Deception intended" requires a planned or actual take. "Deception occurred" can equal "deal taken". Don't report those correlations as findings.</li>
+<li><strong>A solo take can be a free gesture.</strong> Under a collusion lock, unilateral takes are not a clean measure of willingness to collude.</li>
+<li><strong>Simultaneous message rounds create crossed-stance artifacts.</strong> Take them into account when interpreting persuasion metrics.</li>
+</ul>
+<h2 id="reference-implementation-first-run">Reference implementation (first run)</h2>
+<p>The first run's hand-built versions of Stages 1–3 are on branch <code>first-run-summary-analysis</code>, under <code>analysis/qwen-pressure-final-20261024-181708/</code>:
+- Stage 1: <code>build_metrics.py</code>, <code>trial_metrics.csv</code>, <code>trial_metrics_dictionary.md</code>
+- Stage 2: <code>dimension-metric-analysis/analyze_dimensions.py</code>, <code>REPORT.md</code>
+- Stage 3: <code>SUMMARY-ANALYSIS.md</code></p>
+<p>These are specific to that pack. The planned scripts in <code>analysis-pipeline/</code> will generalise them using the schema contract above.</p>
+</body>
+</html>
