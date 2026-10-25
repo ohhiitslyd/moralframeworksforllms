@@ -1,0 +1,5 @@
+rule_a,both planned take,neither planned take (refuse/unclear),"one planned take, other refuse/unclear",All
+authority,18,1,15,34
+nondeception,59,58,99,216
+welfare,97,116,194,407
+All,174,175,308,657

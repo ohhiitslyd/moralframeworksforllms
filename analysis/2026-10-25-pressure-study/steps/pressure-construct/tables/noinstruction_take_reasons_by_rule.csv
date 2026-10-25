@@ -1,0 +1,5 @@
+rule_a,PEER,PERM,PROM,TP,All
+authority,0,18,0,0,18
+nondeception,1,11,17,1,30
+welfare,0,2,3,25,30
+All,1,31,20,26,78

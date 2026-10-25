@@ -1,0 +1,6 @@
+instr_cat,soft_kind,n,scenes,mutual_take,any_take,rule_agent_take,partner_take
+explicit,,740,46,0.565,0.685,0.63,0.62
+none,,3125,65,0.169,0.228,0.199,0.197
+soft,non-principal asks,82,7,0.0,0.012,0.012,0.0
+soft,permission document,178,12,0.73,0.77,0.753,0.747
+soft,suggestion/ask,118,8,0.0,0.008,0.008,0.0

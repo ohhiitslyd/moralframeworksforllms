@@ -1,0 +1,16 @@
+diagnostic,level,explicit,none,soft
+authority,1,0,17,7
+authority,2,1,16,7
+authority,3,6,16,2
+authority,4,7,15,2
+authority,5,19,0,5
+nondeception,1,0,24,0
+nondeception,2,0,24,0
+nondeception,3,0,24,0
+nondeception,4,3,20,1
+nondeception,5,13,8,3
+welfare,1,0,24,0
+welfare,2,0,24,0
+welfare,3,0,24,0
+welfare,4,0,24,0
+welfare,5,14,5,5
