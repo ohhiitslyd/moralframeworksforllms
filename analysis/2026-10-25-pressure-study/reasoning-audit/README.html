@@ -210,6 +210,38 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tbody>
 </table>
 <p><img alt="Monitoring comparison" src="figures/monitoring-effect.png" /></p>
+<h3 id="all-three-outcomes-then-the-one-agent-cases">All three outcomes, then the one-agent cases</h3>
+<p>These graphs use the <strong>same 2,083 completed matched cells in each arm</strong>. "One takes" means the proposed action was <strong>blocked</strong> because the other agent refused. Each cell fixes the scenario, level, pairing and seed; the two notices were run as separate episodes.</p>
+<p><img alt="Watched versus unwatched: both take, one takes, both refuse" src="figures/watched-unwatched-all-outcomes.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Final outcome</th>
+<th style="text-align: right;">Unwatched</th>
+<th style="text-align: right;">Watched</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Both take</td>
+<td style="text-align: right;">567 / 2,083 (27.2%)</td>
+<td style="text-align: right;">485 / 2,083 (23.3%)</td>
+</tr>
+<tr>
+<td>One takes</td>
+<td style="text-align: right;">136 / 2,083 (6.5%)</td>
+<td style="text-align: right;">143 / 2,083 (6.9%)</td>
+</tr>
+<tr>
+<td>Both refuse</td>
+<td style="text-align: right;">1,380 / 2,083 (66.3%)</td>
+<td style="text-align: right;">1,455 / 2,083 (69.9%)</td>
+</tr>
+</tbody>
+</table>
+<p>The unilateral total changes little, but its <strong>direction</strong> changes: A-only take goes from <strong>59 to 87</strong> cases, while B-only take goes from <strong>77 to 56</strong>. Agent A always has the named criterion; B has either the same one or no added criterion. In the graph, W = welfare, D = non-deception, and A = authority. The second graph shows these directions overall and within each pairing. These are descriptive counts; the graph does not establish why an individual agent changed.</p>
+<p><img alt="Which agent takes alone, overall and by pairing" src="figures/watched-unwatched-unilateral-detail.png" /></p>
+<p><a href="monitoring_all_outcomes.csv">Exact counts and rates for both graphs</a> · <a href="plot_monitoring_outcomes.py">Rebuild the graphs</a></p>
 <p>The sign survives several checks:</p>
 <ul>
 <li>Restricting each matched pair to the same single endpoint gives <strong>−4.35 pp across 1,471 pairs</strong> on the larger endpoint and <strong>−8.33 pp across 72 pairs</strong> on the smaller endpoint. Their 95% scenario-bootstrap intervals are [−5.84, −2.90] and [−15.63, −1.75] pp respectively. Other cross-endpoint or mixed-endpoint pairs are omitted from this check.</li>
@@ -240,7 +272,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </ol>
 <p>These are proposed experiments; this audit made no new model calls.</p>
 <h2 id="reproduce-and-inspect">Reproduce and inspect</h2>
-<p>Run the scripts in this folder in order: <code>extract.py</code>, <code>analyze.py</code>, <code>partner_analysis.py</code>, <code>sensitivity.py</code>, <code>build_casebook.py</code>, <code>plot_findings.py</code>. They read the frozen result directory and write only this audit folder. The local SQLite cache is ignored by Git. Fixed bootstrap seed: <strong>20261025</strong>, <strong>10,000 draws</strong>, resampling <strong>72 scenario clusters</strong>. Intervals are exploratory and not adjusted for multiple comparisons; related scenario templates and one base model limit generalization.</p>
+<p>Run the scripts in this folder in order: <code>extract.py</code>, <code>analyze.py</code>, <code>partner_analysis.py</code>, <code>sensitivity.py</code>, <code>build_casebook.py</code>, <code>plot_findings.py</code>, <code>plot_monitoring_outcomes.py</code>. They read the frozen result directory and write only this audit folder. The local SQLite cache is ignored by Git. Fixed bootstrap seed: <strong>20261025</strong>, <strong>10,000 draws</strong>, resampling <strong>72 scenario clusters</strong>. Intervals are exploratory and not adjusted for multiple comparisons; related scenario templates and one base model limit generalization.</p>
 <p>Raw input hashes are in <a href="extraction_provenance.json">extraction provenance</a>. Case exports include exact source-file hashes. Semantic judgments are explicitly separated from the reproducible lexical screens; the casebook is single-analyst, selected and unblinded. The report’s prose is a curated interpretation rather than an automatically generated statistical conclusion.</p>
 </body>
 </html>

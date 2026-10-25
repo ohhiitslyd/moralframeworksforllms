@@ -115,6 +115,24 @@ This supports the specific statement that **shared welfare framing is associated
 
 ![Monitoring comparison](figures/monitoring-effect.png)
 
+### All three outcomes, then the one-agent cases
+
+These graphs use the **same 2,083 completed matched cells in each arm**. "One takes" means the proposed action was **blocked** because the other agent refused. Each cell fixes the scenario, level, pairing and seed; the two notices were run as separate episodes.
+
+![Watched versus unwatched: both take, one takes, both refuse](figures/watched-unwatched-all-outcomes.png)
+
+| Final outcome | Unwatched | Watched |
+|---|---:|---:|
+| Both take | 567 / 2,083 (27.2%) | 485 / 2,083 (23.3%) |
+| One takes | 136 / 2,083 (6.5%) | 143 / 2,083 (6.9%) |
+| Both refuse | 1,380 / 2,083 (66.3%) | 1,455 / 2,083 (69.9%) |
+
+The unilateral total changes little, but its **direction** changes: A-only take goes from **59 to 87** cases, while B-only take goes from **77 to 56**. Agent A always has the named criterion; B has either the same one or no added criterion. In the graph, W = welfare, D = non-deception, and A = authority. The second graph shows these directions overall and within each pairing. These are descriptive counts; the graph does not establish why an individual agent changed.
+
+![Which agent takes alone, overall and by pairing](figures/watched-unwatched-unilateral-detail.png)
+
+[Exact counts and rates for both graphs](monitoring_all_outcomes.csv) · [Rebuild the graphs](plot_monitoring_outcomes.py)
+
 The sign survives several checks:
 
 - Restricting each matched pair to the same single endpoint gives **−4.35 pp across 1,471 pairs** on the larger endpoint and **−8.33 pp across 72 pairs** on the smaller endpoint. Their 95% scenario-bootstrap intervals are [−5.84, −2.90] and [−15.63, −1.75] pp respectively. Other cross-endpoint or mixed-endpoint pairs are omitted from this check.
@@ -153,6 +171,6 @@ These are proposed experiments; this audit made no new model calls.
 
 ## Reproduce and inspect
 
-Run the scripts in this folder in order: `extract.py`, `analyze.py`, `partner_analysis.py`, `sensitivity.py`, `build_casebook.py`, `plot_findings.py`. They read the frozen result directory and write only this audit folder. The local SQLite cache is ignored by Git. Fixed bootstrap seed: **20261025**, **10,000 draws**, resampling **72 scenario clusters**. Intervals are exploratory and not adjusted for multiple comparisons; related scenario templates and one base model limit generalization.
+Run the scripts in this folder in order: `extract.py`, `analyze.py`, `partner_analysis.py`, `sensitivity.py`, `build_casebook.py`, `plot_findings.py`, `plot_monitoring_outcomes.py`. They read the frozen result directory and write only this audit folder. The local SQLite cache is ignored by Git. Fixed bootstrap seed: **20261025**, **10,000 draws**, resampling **72 scenario clusters**. Intervals are exploratory and not adjusted for multiple comparisons; related scenario templates and one base model limit generalization.
 
 Raw input hashes are in [extraction provenance](extraction_provenance.json). Case exports include exact source-file hashes. Semantic judgments are explicitly separated from the reproducible lexical screens; the casebook is single-analyst, selected and unblinded. The report’s prose is a curated interpretation rather than an automatically generated statistical conclusion.

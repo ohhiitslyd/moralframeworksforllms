@@ -16,7 +16,8 @@ watched/unwatched notices and one seed per condition.
 
 The analysis includes three average monitoring graphs (welfare, non-deception and
 authority), a stress-level × pairing overview, eight detailed scenario charts,
-and the overall pressure-level graph. Every graph is calculated from the completed
+the overall pressure-level graph, and two graphs showing all watched/unwatched outcomes
+and which agent takes alone. Every graph is calculated from the completed
 collection, with matched denominators for watched/unwatched comparisons.
 
 ## Raw data for the current slice

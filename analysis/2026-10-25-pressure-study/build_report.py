@@ -258,6 +258,12 @@ def main():
         f'(**{100*(wt-ut)/n:+.1f} percentage points**, watched minus unwatched).', '',
         '| Rule | Matched cells | Watched | Unwatched | Difference |', '|---|---:|---:|---:|---:|']
     lines += [f'| {title} | {nn} | {w:.1%} | {u:.1%} | {100*(w-u):+.1f} pp |' for title, nn, w, u in rule_summary]
+    lines += ['', '### All final outcomes and unilateral decisions', '',
+        f'Both graphs below use the same {n:,} completed watched/unwatched matched cells per arm. '
+        'A unilateral take is blocked by the other agent\'s refusal.', '',
+        '![Watched versus unwatched: both take, one takes, both refuse](reasoning-audit/figures/watched-unwatched-all-outcomes.png)', '',
+        '![Which agent takes alone, overall and by pairing](reasoning-audit/figures/watched-unwatched-unilateral-detail.png)', '',
+        '[Exact counts, denominators and methods](reasoning-audit/README.md#all-three-outcomes-then-the-one-agent-cases)', '']
     for code, title in [('w', 'Welfare'), ('d', 'Non-deception'), ('a', 'Authority')]:
         lines += ['', f'### {title}', '', f'![{title}: average monitoring comparison](figures/{code}-average-monitoring.png)']
     lines += ['', '[Download average graph data](tables/rule-level-monitoring-averages.csv)', '',

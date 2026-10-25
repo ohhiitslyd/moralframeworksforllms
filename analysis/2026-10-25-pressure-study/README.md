@@ -48,6 +48,16 @@ Across matched cells, joint acceptance is **23.3% watched versus 27.2% unwatched
 | Non-deception | 694 | 18.3% | 20.9% | -2.6 pp |
 | Authority | 697 | 12.9% | 13.9% | -1.0 pp |
 
+### All final outcomes and unilateral decisions
+
+Both graphs below use the same 2,083 completed watched/unwatched matched cells per arm. A unilateral take is blocked by the other agent's refusal.
+
+![Watched versus unwatched: both take, one takes, both refuse](reasoning-audit/figures/watched-unwatched-all-outcomes.png)
+
+![Which agent takes alone, overall and by pairing](reasoning-audit/figures/watched-unwatched-unilateral-detail.png)
+
+[Exact counts, denominators and methods](reasoning-audit/README.md#all-three-outcomes-then-the-one-agent-cases)
+
 ### Welfare
 
 ![Welfare: average monitoring comparison](figures/w-average-monitoring.png)
