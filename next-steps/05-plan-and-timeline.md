@@ -14,7 +14,7 @@ Durations are estimates: working time for one engineer with AI agents, plus wall
 | 5 | **Review** | A fresh agent reviews the design, diffs and code (friendly + adversarial); fix findings | 4 | 1 h | review notes resolved |
 | 6 | ⛔ **Cost approval and credentials** | Cost table per arm (04); owner approval; Haitham provides `.env.pressure-modal` or launches | 5 | depends on people | approval recorded |
 | 7 | **Pilot** | About 30 trials with `--limit`; check parsing, placement rendering and outcomes | 6 | 0.5 h | go / no-go |
-| 8 | **Full run** | MSSQ, `--jobs 48`; monitor throughput, errors and spend against the cap | 7 | 2.3–3.3 h wall (minimal ≈1 h) | `results/authority-ablation-v1/` |
+| 8 | **Full run** | MSSQ, `--jobs 48`; monitor throughput, errors and spend against the cap | 7 | 2.7–3.9 h wall (minimal ≈1 h) | `results/authority-ablation-v1/` |
 | 9 | **Analysis** | Steps 0.5 → 1 → 1.5 → 2 (primary H1–H4) → 3, via `tools/run_reserved.py` | 8 | 1.5–2 h | step outputs plus updated claims ledger |
 | 10 | **Paper update** | Fold the results into `final_report/REPORT.md` (reframe the authority contribution around none-none / SPLIT); team rewrite; references verified | 9 | 2–4 h | submission-ready report |
 
@@ -43,7 +43,7 @@ T0      +2h      +4h      +6h      +8h      +10h     +12h     +14h
 
 ## Decision points
 - ⛔ **Phase 1:** how to merge codex (Haitham's layout changes), and whose figures and wording the paper uses.
-- ⛔ **Phase 6:** the budget (full ≈2,300 trials ≈$15–55, or minimal ≈736 ≈$5–18) and who launches.
+- ⛔ **Phase 6:** the budget (full ≈2,740 trials ≈$18–65, or minimal ≈736 ≈$5–18) and who launches.
 - **After phase 7:** go / no-go on the pilot.
 - **After phase 9:** whether the results change the paper's headline. They would if H1 holds: "claimed authority in user content overrides …".
 

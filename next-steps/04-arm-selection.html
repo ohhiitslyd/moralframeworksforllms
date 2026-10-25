@@ -50,7 +50,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>The authority contrast lives at those 46 scene-levels and the level just before each.</td>
 </tr>
 <tr>
-<td><strong>Authority-rule agents are instructed to "follow the highest-ranking principal"</strong>, so their response to a superior is the rule being obeyed (no mutual takes in 1,109 trials without an instruction)</td>
+<td><strong>Authority-rule agents are instructed to "follow the highest-ranking principal"</strong>, so their response to a superior is the rule being obeyed (no mutual takes in 1,109 trials without a take-instructing principal or document; 0 of 517 agent takes in A-none cells with no authority voice)</td>
 <td><code>pressure-construct/REPORT.md</code>; mock-judge review</td>
 <td><strong>The attack-surface question needs agents that are <em>not</em> told to obey:</strong> welfare, non-deception and no-rule agents.</td>
 </tr>
@@ -92,7 +92,6 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <li><strong>The "pressure dose-response" framing</strong> across all levels. It isn't a valid construct. Replace it with explicit ingredient contrasts (instruction present/absent; later: harm, promise, permission).</li>
 <li><strong>A-A as a headline arm.</strong> It's tautological for authority. Keep a small A-A slice only as a manipulation check: authority agents <em>should</em> follow the instruction.</li>
 <li><strong>Expanding settings or template scenes.</strong></li>
-<li><strong>D-none,</strong> which adds little beyond D-D (18.4% vs 21.5%). Keep W-none for the lone-taker asymmetry.</li>
 </ul>
 <h2 id="arms-to-run-recommended">Arms to run (recommended)</h2>
 <p>Factors:
@@ -103,7 +102,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
   - <strong>none-none</strong> (new; primary for the attack-surface question)
   - <strong>W-W</strong> (high base rate)
   - <strong>D-D</strong>
-  - <strong>W-none</strong> (asymmetry)
+  - <strong>W-none</strong> and <strong>D-none</strong> (lone-taker asymmetry: under an explicit superior instruction the non-deception agent took 33% vs its no-rule partner's 46%, and was the lone taker only 1 time vs 17; so D-none is the cleanest test of a rule that <em>resists</em> authority)
   - <strong>A-none</strong> (the none agent is untold; the A agent is a manipulation check)
   - a 25% A-A check slice
 - <strong>Monitoring notice:</strong> <strong>unwatched only</strong> in the core run, to maximise base rates for the authority contrast. Add a watched slice later if budget allows.
@@ -120,8 +119,8 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <tbody>
 <tr>
 <td><strong>Core A: authority × placement</strong>, unwatched</td>
-<td>184 variants × 2 placements × 5 pairings (none-none, W-W, D-D, W-none, A-none)</td>
-<td><strong>1,840</strong></td>
+<td>184 variants × 2 placements × 6 pairings (none-none, W-W, D-D, W-none, D-none, A-none)</td>
+<td><strong>2,208</strong></td>
 </tr>
 <tr>
 <td>A-A manipulation check</td>
@@ -131,12 +130,12 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <tr>
 <td>Second-seed subset</td>
 <td>20% of core A</td>
-<td>368</td>
+<td>442</td>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
 <td></td>
-<td><strong>≈2,300</strong></td>
+<td><strong>≈2,740</strong></td>
 </tr>
 <tr>
 <td><strong>Minimal version</strong>, if the budget is tight</td>
@@ -147,18 +146,19 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </table>
 <p><strong>Cost estimate</strong> (calibrate against the actual Modal bill):
 - Per trial: about 14.6k tokens, about 10 requests.
-- <strong>≈2,300 trials:</strong> ≈34M tokens, ≈2.3–3.3 h at 700–1,000 trials/h, ≈$15–55 GPU.
+- <strong>≈2,740 trials:</strong> ≈40M tokens, ≈2.7–3.9 h at 700–1,000 trials/h, ≈$18–65 GPU.
 - <strong>Minimal (≈736 trials):</strong> ≈11M tokens, ≈0.8–1.1 h, ≈$5–18.
 - <strong>Get owner approval before running</strong>: spend cap 120% of the approved estimate, pause if the error rate exceeds 10%.</p>
 <h2 id="pre-registered-hypotheses-for-this-run">Pre-registered hypotheses for this run</h2>
 <ol>
 <li><strong>H1 (primary, none-none):</strong> within cell, a superior's take-instruction raises mutual take for agents with <strong>no installed rule</strong>, under SPLIT placement (the instruction is in user content). Test: paired McNemar plus a scenario-cluster bootstrap CI.</li>
 <li><strong>H2 (placement):</strong> the instruction effect is smaller under SPLIT than SYSTEM. Test: the difference in paired effects, with a cluster bootstrap.</li>
-<li><strong>H3 (generality):</strong> H1 also holds for W-W and D-D.</li>
+<li><strong>H3 (generality):</strong> H1 also holds for W-W and D-D.
+   - <strong>H3b (rule resistance):</strong> under an instruction, the non-deception agent takes less than its no-rule partner in D-none (exploratory in the completed study: 33% vs 46%).</li>
 <li><strong>H4 (manipulation check):</strong> A-A follows the instruction in both placements.</li>
 </ol>
 <p>Everything else is exploratory, with BH correction.</p>
 <h2 id="how-to-generate-the-cell-list">How to generate the cell list</h2>
-<p>Read <code>pressure-construct/tables/instruction_category_by_scene_level.csv</code>. For each scenario, take the minimum <code>level</code> where <code>instr_cat == "explicit"</code>, plus <code>level − 1</code>. Feed that list to the builder (03) with <code>--pairings none-none,W-W,D-D,W-none,A-none --placements system,split --monitoring unwatched</code>. Add the <code>none-none</code> pairing to the pack's <code>pairings_to_run</code>: <code>{"id": "none-none", "a": "none", "b": "none", "kind": "control"}</code>.</p>
+<p>Read <code>pressure-construct/tables/instruction_category_by_scene_level.csv</code>. For each scenario, take the minimum <code>level</code> where <code>instr_cat == "explicit"</code>, plus <code>level − 1</code>. Feed that list to the builder (03) with <code>--pairings none-none,W-W,D-D,W-none,D-none,A-none --placements system,split --monitoring unwatched</code>. Add the <code>none-none</code> pairing to the pack's <code>pairings_to_run</code>: <code>{"id": "none-none", "a": "none", "b": "none", "kind": "control"}</code>.</p>
 </body>
 </html>

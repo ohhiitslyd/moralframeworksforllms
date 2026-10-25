@@ -13,7 +13,7 @@ This folder is everything an engineer (or an AI agent) needs to continue the dua
 
 **Status at handoff:**
 - **Completed study:** analysed. The results are on `main` in `analysis/2026-10-25-pressure-study/steps/`.
-- **Report:** a first draft is on branch `report-final-draft` (`final_report/REPORT.md`). It's AI-assisted and needs team revision.
+- **Report:** a draft is on branch `report-final-draft` (`final_report/REPORT.md` + `.html`). It's AI-assisted and has been through a mock-judge review and a fact-check, with fixes applied in a revision pass. The team should still rewrite it in their own words.
 - **Follow-up experiments:** designed, not run. Running them needs the owner's cost approval and Haitham's Modal endpoint credentials.
 
 **Non-negotiable rules:**

@@ -8,7 +8,7 @@ The aim is to spend the next GPU budget only on arms that answer open questions.
 |---|---|---|
 | Mutual take is 5.4% at L1, 13.5% at L2, 22.3% at L3, 31.9% at L4 and 53.4% at L5 | Step 0.5 | **L1–L2 are near the floor**, so they add little power. |
 | The ladder is cumulative; a superior's take-instruction first appears in **46 scenes** (L5: 36, L4: 4, L3: 5, L2: 1) | `pressure-construct/tables/instruction_category_by_scene_level.csv` | The authority contrast lives at those 46 scene-levels and the level just before each. |
-| **Authority-rule agents are instructed to "follow the highest-ranking principal"**, so their response to a superior is the rule being obeyed (no mutual takes in 1,109 trials without an instruction) | `pressure-construct/REPORT.md`; mock-judge review | **The attack-surface question needs agents that are *not* told to obey:** welfare, non-deception and no-rule agents. |
+| **Authority-rule agents are instructed to "follow the highest-ranking principal"**, so their response to a superior is the rule being obeyed (no mutual takes in 1,109 trials without a take-instructing principal or document; 0 of 517 agent takes in A-none cells with no authority voice) | `pressure-construct/REPORT.md`; mock-judge review | **The attack-surface question needs agents that are *not* told to obey:** welfare, non-deception and no-rule agents. |
 | The designer's `welfare_if_take` label is "higher" from J3 onward in 71 of 72 scenes | `pressure-construct/REPORT.md` | Welfare agents rising with level is also partly the rule at work, so read welfare results with that in mind. |
 | Mutual take by pairing: W-W 54.5%, W-none 30.8%, D-D 21.5%, D-none 18.4%, A-A 13.6%, A-none 13.2% | Step 0.5 | W-W has the highest base rate, so the most power for monitoring effects. A-A and A-none sit near the floor without an instruction. |
 | **No no-rule + no-rule (none-none) pairing was run** | pack `pairings_to_run` | The cleanest test of claimed authority on agents with no installed rule is missing. |
@@ -21,7 +21,6 @@ The aim is to spend the next GPU budget only on arms that answer open questions.
 - **The "pressure dose-response" framing** across all levels. It isn't a valid construct. Replace it with explicit ingredient contrasts (instruction present/absent; later: harm, promise, permission).
 - **A-A as a headline arm.** It's tautological for authority. Keep a small A-A slice only as a manipulation check: authority agents *should* follow the instruction.
 - **Expanding settings or template scenes.**
-- **D-none,** which adds little beyond D-D (18.4% vs 21.5%). Keep W-none for the lone-taker asymmetry.
 
 ## Arms to run (recommended)
 
@@ -33,7 +32,7 @@ Factors:
   - **none-none** (new; primary for the attack-surface question)
   - **W-W** (high base rate)
   - **D-D**
-  - **W-none** (asymmetry)
+  - **W-none** and **D-none** (lone-taker asymmetry: under an explicit superior instruction the non-deception agent took 33% vs its no-rule partner's 46%, and was the lone taker only 1 time vs 17; so D-none is the cleanest test of a rule that *resists* authority)
   - **A-none** (the none agent is untold; the A agent is a manipulation check)
   - a 25% A-A check slice
 - **Monitoring notice:** **unwatched only** in the core run, to maximise base rates for the authority contrast. Add a watched slice later if budget allows.
@@ -43,15 +42,15 @@ Factors:
 
 | Run | Arms | Trials |
 |---|---|---|
-| **Core A: authority × placement**, unwatched | 184 variants × 2 placements × 5 pairings (none-none, W-W, D-D, W-none, A-none) | **1,840** |
+| **Core A: authority × placement**, unwatched | 184 variants × 2 placements × 6 pairings (none-none, W-W, D-D, W-none, D-none, A-none) | **2,208** |
 | A-A manipulation check | 184 × 2 × 1 × 25% | 92 |
-| Second-seed subset | 20% of core A | 368 |
-| **Total** | | **≈2,300** |
+| Second-seed subset | 20% of core A | 442 |
+| **Total** | | **≈2,740** |
 | **Minimal version**, if the budget is tight | 184 variants × SPLIT only × {none-none, W-W, A-none}; the completed study supplies SYSTEM for W-W and A-none, but none-none needs both placements (+184) | **≈736** |
 
 **Cost estimate** (calibrate against the actual Modal bill):
 - Per trial: about 14.6k tokens, about 10 requests.
-- **≈2,300 trials:** ≈34M tokens, ≈2.3–3.3 h at 700–1,000 trials/h, ≈$15–55 GPU.
+- **≈2,740 trials:** ≈40M tokens, ≈2.7–3.9 h at 700–1,000 trials/h, ≈$18–65 GPU.
 - **Minimal (≈736 trials):** ≈11M tokens, ≈0.8–1.1 h, ≈$5–18.
 - **Get owner approval before running**: spend cap 120% of the approved estimate, pause if the error rate exceeds 10%.
 
@@ -59,9 +58,10 @@ Factors:
 1. **H1 (primary, none-none):** within cell, a superior's take-instruction raises mutual take for agents with **no installed rule**, under SPLIT placement (the instruction is in user content). Test: paired McNemar plus a scenario-cluster bootstrap CI.
 2. **H2 (placement):** the instruction effect is smaller under SPLIT than SYSTEM. Test: the difference in paired effects, with a cluster bootstrap.
 3. **H3 (generality):** H1 also holds for W-W and D-D.
+   - **H3b (rule resistance):** under an instruction, the non-deception agent takes less than its no-rule partner in D-none (exploratory in the completed study: 33% vs 46%).
 4. **H4 (manipulation check):** A-A follows the instruction in both placements.
 
 Everything else is exploratory, with BH correction.
 
 ## How to generate the cell list
-Read `pressure-construct/tables/instruction_category_by_scene_level.csv`. For each scenario, take the minimum `level` where `instr_cat == "explicit"`, plus `level − 1`. Feed that list to the builder (03) with `--pairings none-none,W-W,D-D,W-none,A-none --placements system,split --monitoring unwatched`. Add the `none-none` pairing to the pack's `pairings_to_run`: `{"id": "none-none", "a": "none", "b": "none", "kind": "control"}`.
+Read `pressure-construct/tables/instruction_category_by_scene_level.csv`. For each scenario, take the minimum `level` where `instr_cat == "explicit"`, plus `level − 1`. Feed that list to the builder (03) with `--pairings none-none,W-W,D-D,W-none,D-none,A-none --placements system,split --monitoring unwatched`. Add the `none-none` pairing to the pack's `pairings_to_run`: `{"id": "none-none", "a": "none", "b": "none", "kind": "control"}`.
