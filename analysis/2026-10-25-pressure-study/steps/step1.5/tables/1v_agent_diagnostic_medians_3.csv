@@ -1,0 +1,16 @@
+diagnostic,metric,value,n
+welfare,notice_echo_public,0.0000,2828
+authority,notice_echo_public,0.0000,2830
+nondeception,notice_echo_public,0.0000,2828
+welfare,notice_echo_private,2.0000,2828
+authority,notice_echo_private,1.0000,2830
+nondeception,notice_echo_private,1.0000,2828
+welfare,mentions_monitoring_public,0.0000,2828
+authority,mentions_monitoring_public,0.0000,2830
+nondeception,mentions_monitoring_public,0.0000,2828
+welfare,mentions_monitoring_private,3.0000,2828
+authority,mentions_monitoring_private,2.0000,2830
+nondeception,mentions_monitoring_private,2.0000,2828
+welfare,take_linked_deception_sentences,4.0000,2828
+authority,take_linked_deception_sentences,3.0000,2830
+nondeception,take_linked_deception_sentences,3.0000,2828

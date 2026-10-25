@@ -1,0 +1,7 @@
+pairing,metric,value,n
+A-A,euphemism_gap_pair,0.0996,713
+D-D,euphemism_gap_pair,0.1810,707
+W-W,euphemism_gap_pair,0.4394,710
+A-none,euphemism_gap_pair,0.1236,704
+D-none,euphemism_gap_pair,0.1570,707
+W-none,euphemism_gap_pair,0.2806,702
