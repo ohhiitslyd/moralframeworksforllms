@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Development workflow</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="development-workflow">Development workflow</h1>
+<p>Standing instructions for any AI agent (or person) doing work in this project. They apply to general development and to every increment of work: experiment design, research, analysis, coding, batch runs, reports and documentation.</p>
+<h2 id="the-prompt-verbatim">The prompt (verbatim)</h2>
+<blockquote>
+<p>For each change, create a branch named in the format [category]-[item], where "category" is the major category of change, and "item" is the specific increment we're working on. Create a local worktree for the branch whose name is in the format [project-name]-[branch-name]. Monitor our work and be alert to make sure work is done in an appropriate worktree and branch; periodically notify me to confirm the branch and alert me if anything seems wrong. For each change, use the development process: experimental design-&gt;review experimental design-&gt;code design-&gt;review design-&gt;implement-&gt;review implementation-&gt;test design-&gt;review test design-&gt;run unit test-&gt;integrate tests-&gt;review test results-&gt;analysis-&gt;review analysis-&gt;reports-&gt;review reports. For large blocks of work, break work down into the smallest feasible increment of functionality; then analyze the increments to identify dependencies; then for each increment, implement using parallel subagents, running any steps in parallel which are (a) not dependent on each other, (b) not blocked by other work, and (c) not changing the same parts of the project. When changes are done, prompt me to review the results by providing links to HTML and markdown reports which I can review.</p>
+<p>Use your own judgment about which changes should be in their own worktree and branch, vs. which ones can be implemented in the same worktree and branch; with the caveat that in general we want small, incremental changes in each branch so that humans can understand, diagnose, and correct errors after the fact, and so that pull requests form a coherent, easy-to-follow chronology and documentation of change history. For each change, branch, and worktree, once minor changes are complete, tested, and reviewed by AI agents, you can commit, push, create pull requests, and merge the pull requests. Include complete documentation and test results in the pull request. For major changes or sets of pull requests, provide summary reports in html and markdown, and prompt me to review them before performing all of the merges. Finally, when working on a single unit of work, commit frequently, so that each commit and its title forms a fine-grained, easy-to-follow, and well-documented history of changes within the individual branch or pull request.</p>
+<p>For all reviews and discrete units of work, use fresh subagents, striking a good balance between parallelism and short context length (which saves money), with adequate intelligence, context, and knowledge to perform effectively.</p>
+</blockquote>
+<h2 id="quick-reference">Quick reference</h2>
+<p><strong>Naming</strong></p>
+<table>
+<thead>
+<tr>
+<th>Thing</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Branch</td>
+<td><code>[category]-[item]</code></td>
+<td><code>analysis-pipeline</code>, <code>docs-prompt-library</code>, <code>prompts-self-contained-levels</code></td>
+</tr>
+<tr>
+<td>Worktree folder</td>
+<td><code>[project-name]-[branch-name]</code> (next to the main checkout)</td>
+<td><code>hackathon-lying-agent-experiment-analysis-pipeline</code></td>
+</tr>
+</tbody>
+</table>
+<p>Suggested categories: <code>analysis</code>, <code>prompts</code>, <code>harness</code>, <code>results</code>, <code>docs</code>, <code>tests</code>, <code>infra</code>.</p>
+<p><strong>Process for each change.</strong> Each review is done by a fresh subagent.</p>
+<ol>
+<li>Experimental design, then review it.</li>
+<li>Code design, then review it.</li>
+<li>Implement, then review the implementation.</li>
+<li>Test design, then review it.</li>
+<li>Run the unit tests, then the integration tests, then review the test results.</li>
+<li>Analysis, then review it.</li>
+<li>Reports, then review them.</li>
+</ol>
+<p>Skip the steps that don't apply, and say which ones you skipped and why. For example, a documentation-only change has no experimental design and no tests.</p>
+<p><strong>Large work</strong></p>
+<ol>
+<li>Break it into the smallest increments that still deliver something useful.</li>
+<li>Map the dependencies between increments.</li>
+<li>Run increments in parallel with subagents only when they are independent, not blocked, and don't touch the same files.</li>
+</ol>
+<p><strong>Commits and PRs</strong></p>
+<ul>
+<li>Commit often. Each commit title should describe one step.</li>
+<li>Each PR is small and self-contained, and its description includes documentation and test results.</li>
+<li><strong>Minor changes:</strong> after AI review and passing tests, you may commit, push, open a PR and merge it.</li>
+<li><strong>Major changes or sets of PRs:</strong> write HTML and Markdown summary reports and ask the user to review them <strong>before</strong> merging.</li>
+<li>When finished, give the user links to the HTML and Markdown reports.</li>
+</ul>
+<p><strong>Monitoring.</strong> Check the branch and worktree before you edit anything. From time to time, tell the user which branch is active, and flag any mismatch.</p>
+<h2 id="using-subagents">Using subagents</h2>
+<ul>
+<li><strong>Fresh context per task.</strong> Give each review or unit of work a new subagent. Brief it with the goal, the files to read, the constraints, and the deliverable. Don't pass along the whole conversation.</li>
+<li><strong>Reviews should be independent.</strong> Give the reviewer the artefact and the criteria, not your own conclusion.</li>
+<li><strong>Choose capability to fit the task.</strong> Use a strong model for design, analysis and review, and a cheaper one for mechanical work such as searching, reformatting or running commands.</li>
+<li><strong>Read only the result.</strong> Don't read a subagent's transcript into your own context. Relay what matters to the user.</li>
+</ul>
+</body>
+</html>

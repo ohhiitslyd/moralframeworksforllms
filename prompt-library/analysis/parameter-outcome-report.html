@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parameter → outcome relationship report</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="parameter-outcome-relationship-report">Parameter → outcome relationship report</h1>
+<p><strong>Use it for:</strong> helping a human quickly understand which experiment parameters (fewer than about 30) matter for which outcome metrics (fewer than about 20), through charts and summary statistics.
+<strong>Pipeline stage:</strong> Stage 2 of <a href="../../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a>. The full step-by-step specification is there. This page is the standalone, copy-paste version.</p>
+<hr />
+<h2 id="prompt">Prompt</h2>
+<p>You are analysing an experiment's results so a human can quickly understand which parameters matter for which outcomes, visually and with summary statistics.</p>
+<p><strong>Inputs (fill in)</strong>
+- Data file: <code>&lt;path&gt;</code>. One row per <code>&lt;unit&gt;</code>.
+- Clustering: <code>&lt;e.g. two agent rows per episode / none&gt;</code>
+- Parameters: <code>&lt;list, or "schema role = parameter"&gt;</code>. Outcomes: <code>&lt;list, or "schema role = outcome"&gt;</code>
+- Data dictionary or schema: <code>&lt;path&gt;</code>
+- Known design facts: <code>&lt;e.g. one seed per cell; provider switched mid-run&gt;</code>
+- Output folder: <code>&lt;path&gt;</code>. Audience: <code>&lt;who&gt;</code></p>
+<p><strong>Ground rules</strong>
+- Treat the data as read-only.
+- Put everything in one rerunnable script, with fixed random seeds.
+- Every number comes with its n.
+- Never give a p-value without an effect size and an interval.</p>
+<p><strong>Steps</strong>
+0. <strong>Type the variables.</strong> Mark each as numeric, ordinal, categorical or binary. Record missingness, levels and cell counts. Flag outcomes that only apply to a subset, outcomes related by construction, heuristic columns (with their accuracy), and clustering.
+1. <strong>Design check (parameter × parameter).</strong>
+   - Build a mixed-type association matrix: Spearman ρ, bias-corrected Cramér's V, correlation ratio η.
+   - Draw cell-count tables for associated or sparse pairs.
+   - State which effects are aliased and which comparisons are clean.
+2. <strong>Univariate summaries.</strong>
+   - Parameter balance.
+   - Binary outcome rates with Wilson intervals; medians and IQRs, with histograms.
+   - One summary table.
+3. <strong>Parameter × outcome screening.</strong>
+   - Effect sizes: V plus rate spread, ε² plus median spread, or ρ.
+   - Permutation tests, cluster-aware where needed.
+   - Benjamini–Hochberg q-values.
+   - A screening table, plus one heat map per key parameter: values and n printed, colour normalised per column, significant cells marked, confounded cells hatched.
+   - Level-by-outcome charts for the top relationships, with the comparison repeated <em>within</em> the levels of any confounder.
+4. <strong>Outcome × outcome.</strong>
+   - Draw the association matrix.
+   - Separate by-construction correlations from informative ones.
+   - Flag redundant outcomes.
+5. <strong>Two-parameter interactions.</strong>
+   - Use only pairs that aren't aliased.
+   - Rank them by interaction strength (A×B vs. additive A+B), not by main effects.
+   - Draw 6–10 2D heat maps on an <strong>absolute</strong> colour scale, each cell showing its value and k/n, with small cells greyed out.
+   - Describe each in words.
+6. <strong>Filter and curate.</strong>
+   - Rank by effect size, robustness, relevance and surprise.
+   - Tier the results: headline (3–5), supporting (3–6), appendix.
+   - List the relationships that look large but aren't trustworthy, and why.</p>
+<p><strong>Chart rules</strong>
+- Titles state the takeaway.
+- Axis labels in plain words; no codes.
+- Colour bars with units.
+- A sequential scale for magnitudes and a diverging scale centred at 0 for signed values. Colour-blind safe.
+- Value and n printed in every cell.
+- Rows and columns ordered meaningfully.
+- About 10–20 charts.</p>
+<p><strong>Deliverables</strong>
+- <code>REPORT.md</code> + HTML, containing:
+  1. summary
+  2. how to read the charts
+  3. design check
+  4. headline relationships
+  5. supporting relationships
+  6. univariate results
+  7. matrices
+  8. 2D interactions
+  9. caveats in plain terms
+  10. file index
+- <code>figures/</code>, <code>tables/</code> (CSV) and the script.</p>
+<p><strong>Report back:</strong> files, one line per headline relationship, the aliased pairs, and anything you could not analyse reliably, with the reason.</p>
+</body>
+</html>

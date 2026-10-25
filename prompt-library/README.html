@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompt library</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="prompt-library">Prompt library</h1>
+<p>Reusable prompts for this project. Each one is meant to be copied into an AI agent session, or followed by an agent that is pointed at the file. The library only adds new files. Existing prompts stay where they are and are linked from here.</p>
+<table>
+<thead>
+<tr>
+<th>Prompt</th>
+<th>Use it for</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Starter research prompt</strong></td>
+<td>Survey human and AI collusion and deception research, build a taxonomy, and propose experiments aligned with the sprint</td>
+<td><a href="../starter-prompts/starter-prompts.txt"><code>starter-prompts/starter-prompts.txt</code></a> (original location, unchanged)</td>
+</tr>
+<tr>
+<td><strong>Development workflow</strong></td>
+<td>Standing process for all work (design, research, analysis, coding, batch runs): branch and worktree naming, staged reviews, parallel subagents, commits, PRs, review gates</td>
+<td><a href="workflow/development-workflow.html"><code>workflow/development-workflow.md</code></a></td>
+</tr>
+<tr>
+<td><strong>Batch runs and major compute</strong></td>
+<td>Review simulations, batch jobs and analyses for performance, reliability, parallelism, cost and experimental design; estimate cost and get approval before paid runs; MSSQ scheduling with longest jobs first; check alignment with the sprint's criteria and research questions</td>
+<td><a href="workflow/batch-runs-and-compute.html"><code>workflow/batch-runs-and-compute.md</code></a></td>
+</tr>
+<tr>
+<td><strong>Experiment analysis process</strong></td>
+<td>The end-to-end process from a finished run to findings (Stages 1–3) and the contract between the stages</td>
+<td><a href="../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a></td>
+</tr>
+<tr>
+<td><strong>Per-trial metrics table</strong></td>
+<td>Stage 1: one row per trial with inputs, outcomes and interaction and deception metrics, plus a dictionary and schema</td>
+<td><a href="analysis/per-trial-metrics.html"><code>analysis/per-trial-metrics.md</code></a></td>
+</tr>
+<tr>
+<td><strong>Parameter → outcome report</strong></td>
+<td>Stage 2: design check, matrices, screening, single-factor and 2D heat maps, statistics, curation</td>
+<td><a href="analysis/parameter-outcome-report.html"><code>analysis/parameter-outcome-report.md</code></a></td>
+</tr>
+<tr>
+<td><strong>Plain-language rewrite</strong></td>
+<td>Stage 3: make a findings report readable for newcomers</td>
+<td><a href="analysis/plain-language-rewrite.html"><code>analysis/plain-language-rewrite.md</code></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="conventions">Conventions</h2>
+<ul>
+<li><strong>One prompt per file.</strong> Each file has a short header (what it's for, which pipeline stage, where it came from), followed by the prompt itself.</li>
+<li><strong>Placeholders</strong> look like <code>&lt;RESULTS_DIR&gt;</code>. Fill them in before use.</li>
+<li><strong>Every prompt has an <code>.html</code> copy</strong> for easy reading.</li>
+<li><strong>Add new prompts</strong> as new files, in a folder named for their category (<code>workflow/</code>, <code>analysis/</code>, <code>research/</code>, <code>design/</code>, …), and list them in the table above.</li>
+</ul>
+</body>
+</html>
