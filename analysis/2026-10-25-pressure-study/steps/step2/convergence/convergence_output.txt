@@ -1,0 +1,22 @@
+
+== take only UNWATCHED: 131 cells
+  unwatched round-1 public stance: {'split/unclear': 107, 'both take': 24}
+  unwatched final outcome:          {'mutual take': 131}   |  reached mutual take without both saying 'take' in round 1: 107
+  watched   round-1 public stance: {'split/unclear': 96, 'both refuse': 34, 'both take': 1}
+  watched   final outcome:          {'lone take': 43, 'both refuse': 88}   |  reached mutual take without both saying 'take' in round 1: 0
+
+== take only WATCHED: 49 cells
+  unwatched round-1 public stance: {'split/unclear': 44, 'both refuse': 5}
+  unwatched final outcome:          {'both refuse': 32, 'lone take': 17}   |  reached mutual take without both saying 'take' in round 1: 0
+  watched   round-1 public stance: {'split/unclear': 42, 'both refuse': 1, 'both take': 6}
+  watched   final outcome:          {'mutual take': 49}   |  reached mutual take without both saying 'take' in round 1: 43
+
+== take in BOTH: 436 cells
+  unwatched round-1 public stance: {'split/unclear': 327, 'both take': 106, 'both refuse': 3}
+  unwatched final outcome:          {'mutual take': 436}   |  reached mutual take without both saying 'take' in round 1: 330
+  watched   round-1 public stance: {'both take': 104, 'split/unclear': 330, 'both refuse': 2}
+  watched   final outcome:          {'mutual take': 436}   |  reached mutual take without both saying 'take' in round 1: 332
+
+All mutual takes: 1075; both said take in round 1: 246 (23%); otherwise reached later: 829
+  unwatched: 575 mutual takes, 23% with both 'take' in round 1
+  watched: 500 mutual takes, 23% with both 'take' in round 1

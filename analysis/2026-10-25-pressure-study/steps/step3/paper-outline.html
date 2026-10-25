@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paper kit — monitoring notice and joint rule-bending in two-agent dual control</title>
+<title>Paper kit: monitoring notices and joint rule-bending in two-agent dual control</title>
 <style>
 :root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
 @media (prefers-color-scheme: dark) {
@@ -27,16 +27,22 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
-<h1 id="paper-kit-monitoring-notice-and-joint-rule-bending-in-two-agent-dual-control">Paper kit — monitoring notice and joint rule-bending in two-agent dual control</h1>
-<p><strong>DRAFT v1 — completed data; full Step 2 pending.</strong> Companion to <a href="SUMMARY.html">SUMMARY.md</a> and <a href="claims_ledger.csv">claims_ledger.csv</a>. Numbers marked † will be replaced by full Step 2 values (cluster CI, failure sensitivity); numbers marked "71% snapshot" come from the interim analysis.</p>
+<h1 id="paper-kit-monitoring-notices-and-joint-rule-bending-in-two-agent-dual-control">Paper kit: monitoring notices and joint rule-bending in two-agent dual control</h1>
+<p><strong>v2: completed data, full Step 2.</strong> This kit goes with <a href="SUMMARY.html">SUMMARY.md</a> and <a href="claims_ledger.csv">claims_ledger.csv</a>. All numbers come from the FINAL-DATA Step 2 and its oversight-reasoning analysis. The exception is the convergence numbers, which are marked ‡: they come from the coordinator's computation and are not yet in a Step 2 file.</p>
+<p><strong>What changed vs v1:</strong>
+- Cluster CIs and failure bounds replace the † placeholders.
+- A "why" section is added (oversight-reasoning analysis).
+- The welfare-pair heterogeneity claim is dropped. Its test gives p = .64/.65.
+- "Pressure" is now "level", pending the construct review.
+- The figure plan now uses the Step 2 figures (03, 19, 13, 04, 05, 06).</p>
 <h2 id="candidate-titles">Candidate titles</h2>
 <ol>
 <li><strong>Plain:</strong> Monitoring Notices and Joint Rule-Breaking in Two-Agent LLM Dual-Control Tasks</li>
-<li><strong>Finding-led:</strong> "This Episode Is Monitored": A One-Sentence Notice Cuts Joint Rule-Bending by Two LLM Agents, but Stakes Matter Far More</li>
-<li><strong>Question-led:</strong> Do LLM Agents Collude Less When Told They Are Watched?</li>
+<li><strong>Finding-led:</strong> "No One Is Monitoring": LLM Agent Pairs Read an Absence of Oversight as Permission to Bend the Rules Together</li>
+<li><strong>Question-led:</strong> Do LLM Agents Collude Less When Told They Are Watched, and Why?</li>
 </ol>
-<h2 id="abstract-draft-239-words">Abstract draft (239 words)</h2>
-<p>Dual control, where an action executes only if two parties independently approve it, is a common safeguard, and AI agents are starting to fill both seats. We ask whether telling such agents that they are monitored changes how often they jointly approve a rule-breaking action. Two instances of Qwen3-32B played officials in 72 fictional scenarios, each offered a side deal that misstates a record for some benefit. After a private plan and three rounds of messages, each locked a private take or refuse. We crossed five pressure levels, six pairings of moral rules (welfare, non-deception, authority, or none) and a one-sentence monitoring notice, for 4,320 trials (4,243 complete). In a pre-registered paired test over 2,083 matched scenes, joint takes fell from 27.2% unwatched to 23.3% watched (−3.9 percentage points, 95% CI −5.2 to −2.7; 131 vs 49 discordant scenes, exact McNemar p = 8×10⁻¹⁰), with the same direction in every scenario family. Pressure mattered far more: joint takes rose from 5.4% at the lowest level to 53.4% at the highest. In exploratory analyses, pairs sharing a welfare rule agreed most often (54.5%) and showed the largest notice effect, while authority-rule pairs barely responded; this difference has not yet been tested. The manipulation is text only, with one model and one seed per cell, and robustness to failed trials is still being checked. Behaviour that shifts with stated oversight is a measurable gap that evaluations of multi-agent systems should report.</p>
+<h2 id="abstract-draft-248-words">Abstract draft (248 words)</h2>
+<p>Dual control, where an action executes only if two parties independently approve it, is a common safeguard, and AI agents are starting to fill both seats. We ask whether telling such agents that they are or are not monitored changes how often they jointly approve a rule-breaking action. Two instances of Qwen3-32B played officials in 72 fictional scenarios, each offered an action that misstates a record for some benefit. After a private plan and three rounds of messages, each locked a private take or refuse. We crossed a one-sentence monitoring notice with five levels of stated stakes and six pairings of moral rules, for 4,320 trials (4,243 complete). In a pre-registered paired test over 2,083 matched scenes, joint approval was 23.3% with the "monitored" notice and 27.2% with the "not monitored" notice (−3.9 percentage points, scenario-cluster 95% CI −5.3 to −2.7; 49 vs 131 discordant scenes). The direction held under every failure bound (adversarial bound: −1.5 points). In exploratory text analysis, agents told they were unmonitored often wrote that this lowered the risk of taking. That framing appeared in 54% of the unmonitored approvals that the notice prevented, against 28% of those it did not (an association, single labeller). The stakes level moved behaviour far more (+48 points) but bundles several scene features. The manipulation is text only, with one model and one seed per cell. Evaluations of multi-agent systems should report behaviour under stated observation and non-observation, and monitors can flag "no one will review this" reasoning.</p>
 <h2 id="section-outline-and-page-budget-8-pages">Section outline and page budget (8 pages)</h2>
 <table>
 <thead>
@@ -49,43 +55,43 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <tbody>
 <tr>
 <td>1. Introduction</td>
-<td>Dual control as a real safeguard; the question (sprint 3.4): does stated oversight change joint behaviour of agent pairs? Contributions: pre-registered paired test, factorial pack, artefact audit</td>
+<td>Dual control as a safeguard; the question (sprint 3.4); contributions: a pre-registered paired test, a text signature of why scenes flip, and an audit of artefacts</td>
 <td>0.9</td>
 </tr>
 <tr>
 <td>2. Related work</td>
-<td>Evaluation awareness and sandbagging; LLM collusion and steganography; monitoring and AI control; moral-rule prompting</td>
+<td>Evaluation awareness and sandbagging; LLM collusion; monitoring and AI control; rule prompting</td>
 <td>0.6</td>
 </tr>
 <tr>
 <td>3. Setup</td>
-<td>Agents, private plan → 3 message rounds → locked action; rules; pairings; levels; notice text verbatim; 72 scenarios (table in appendix); 4,320 trials, 98.2% complete</td>
-<td>1.4</td>
-</tr>
-<tr>
-<td>4. Pre-registered result</td>
-<td>Paired McNemar, discordant counts, CI†, within family and level, failure sensitivity† (Fig. 1, Table 1)</td>
+<td>Agents; plan → 3 rounds → locked action; rules and pairings; levels (described neutrally as a bundle); both notice texts verbatim; 72 scenarios; 4,320 trials, 98.2% complete</td>
 <td>1.3</td>
 </tr>
 <tr>
-<td>5. What else moves the deal</td>
-<td>Pressure dose-response (Fig. 2); rule and pairing (Fig. 3); where the notice bites: welfare pairs (Fig. 4, exploratory); lone takes and rule asymmetry</td>
+<td>4. Pre-registered result</td>
+<td>McNemar, discordant counts, cluster CI, RR; failure bounds (direction vs size); within endpoint; no heterogeneity on two scales (Fig. 1, Fig. 2, Table 1)</td>
+<td>1.3</td>
+</tr>
+<tr>
+<td>5. Why the notice matters</td>
+<td>Oversight-reasoning codes and their validation; licence text vs caution text; twin contrasts; 48-cell mechanism coding; convergence step‡ (Fig. 3 new, Table 2)</td>
 <td>1.5</td>
 </tr>
 <tr>
-<td>6. Inside the conversations</td>
-<td>Illustrative transcripts: persuasion into the deal; notice used as a reason; content-analysis result if ready (Fig. 5 or Table 2)</td>
-<td>0.8</td>
+<td>6. What else moves the deal</td>
+<td>Level (bundle; construct caveat); rule pairing; lone-taker asymmetry; rule application (Fig. 4, Fig. 5)</td>
+<td>1.0</td>
 </tr>
 <tr>
 <td>7. What did not hold up</td>
-<td>Echo and design artefacts we dropped; standards of evidence lesson (RQ 2.3)</td>
+<td>Echo and design artefacts; the welfare-heterogeneity claim; deception_intended; aggregate r (RQ 2.3) (Table 3)</td>
 <td>0.4</td>
 </tr>
 <tr>
 <td>8. Limitations, dual use, conclusion</td>
-<td>Items from the threats table; dual-use bullets; one-paragraph implication</td>
-<td>1.1</td>
+<td>Threats; dual-use bullets; implication</td>
+<td>1.0</td>
 </tr>
 <tr>
 <td><strong>Total</strong></td>
@@ -94,7 +100,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tr>
 </tbody>
 </table>
-<p>References and appendix (scenario table, prompt wrapper, full ledger) do not count toward the 8 pages (check the sprint rules).</p>
+<p>References and the appendix (scenario table, prompt wrapper, full ledger, validation tables) do not count toward the 8 pages. Check the sprint rules.</p>
 <h2 id="figure-and-table-plan">Figure and table plan</h2>
 <table>
 <thead>
@@ -109,73 +115,98 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <tbody>
 <tr>
 <td>Fig. 1</td>
-<td>new, from <code>../../tables/scenario-level-pairing-comparisons.csv</code> (or <code>../../figures/matched-monitoring-overview.png</code> meanwhile)</td>
-<td>Primary: notice lowers joint deals</td>
-<td>"Told they were monitored, agent pairs struck the side deal in 23.3% of 2,083 matched scenes vs 27.2% unwatched; 131 scenes flipped to a deal only when unwatched, 49 only when watched."</td>
-<td><strong>Yes</strong>: the current overview uses codes (W-W) on axes and three panels; for the paper use a discordant-pair bar plus a difference-by-level dot plot with CIs†</td>
+<td><a href="../step2/figures/03_primary_monitoring_forest.png"><code>../step2/figures/03_primary_monitoring_forest.png</code></a></td>
+<td>Primary effect, robust in direction</td>
+<td>"Told they were monitored, agent pairs approved the action in 23.3% of 2,083 matched scenes vs 27.2% when told they were not (−3.9 pp, cluster CI −5.3 to −2.7). All 14 subgroups point the same way; 5 intervals cross 0."</td>
+<td><strong>Yes</strong>: replace codes (W-W, "Diagnostic", Modal-A) with words; drop the endpoint rows to the appendix; fit to column width</td>
 </tr>
 <tr>
 <td>Fig. 2</td>
-<td><code>../../figures/pressure-level-joint-acceptance.png</code></td>
-<td>Pressure dose-response</td>
-<td>"Joint deals rise from 5.4% (46 of 848) at level 1 to 53.4% (454 of 850) at level 5."</td>
-<td>Minor: check it is readable at column width; add n under bars</td>
+<td><a href="../step2/figures/19_monitoring_by_level.png"><code>../step2/figures/19_monitoring_by_level.png</code></a></td>
+<td>No dose-response; pp vs RR scales</td>
+<td>"The notice gap by level on the absolute and relative scales (2,083 pairs). The conditional-OR trend is ×1.10 per level (LR p = .44)."</td>
+<td><strong>Yes</strong>: the level-1 annotation overlaps the band; stack the panels for a column</td>
 </tr>
 <tr>
 <td>Fig. 3</td>
-<td><code>../step0.5/figures/2v_level_x_pairing__mutual_take.png</code></td>
-<td>Rule and pairing effects</td>
-<td>"Welfare pairs strike the deal most (up to 89% of 142 at level 5); authority pairs almost never until level 5 (46%). Each cell shows rate and n."</td>
-<td><strong>Yes</strong>: too wide for a column; transpose or shorten pairing labels ("Welfare + welfare" is good, keep words)</td>
+<td>new, from <code>../step2/oversight_reasoning/tables/outcome_held_contrasts.csv</code> and <code>predict_action.csv</code></td>
+<td>Licence text marks notice-dependent takes</td>
+<td>"Absence-as-licence text appears in 54% of the 131 unwatched approvals the notice prevented vs 28% of 436 it did not (plan stage only: 40% vs 18%). Watched caution text: 74% vs 73%."</td>
+<td><strong>New</strong>: paired bar chart, two panels (unwatched licence, watched caution)</td>
 </tr>
 <tr>
 <td>Fig. 4</td>
-<td><code>../../figures/w-average-monitoring.png</code>, <code>d-average-monitoring.png</code>, <code>a-average-monitoring.png</code></td>
-<td>Where the notice bites (exploratory)</td>
-<td>"The notice lowers joint deals most in welfare pairs (−8.2 pp, 692 cells) and barely in authority pairs (−1.0 pp, 697 cells); exploratory."</td>
-<td><strong>Yes</strong>: combine the three into one small-multiple figure with a shared axis; add CIs†</td>
+<td><a href="../step2/figures/13_top_relationships.png"><code>../step2/figures/13_top_relationships.png</code></a></td>
+<td>Level and pairing effects</td>
+<td>"Mutual take rises from 5.4% (848) at level 1 to 53.4% (850) at level 5; welfare pairs 54.5% (710) vs authority pairs 13.6% (713)."</td>
+<td><strong>Yes</strong>: rename "pressure level" to "level"; words for pairings</td>
 </tr>
 <tr>
-<td>Fig. 5 (optional)</td>
-<td><code>../step0.5/figures/2v_monitoring_x_diagnostic__mutual_take.png</code></td>
-<td>Same direction in every scenario family</td>
-<td>"Unwatched minus watched joint deals is positive in all three scenario families (n ≈ 706 per cell)."</td>
-<td>Maybe: replace "diagnostic" with "scenario family" in the title</td>
+<td>Fig. 5</td>
+<td><a href="../step2/figures/05_asymmetry_mixed_pairs.png"><code>../step2/figures/05_asymmetry_mixed_pairs.png</code></a> + <a href="../step2/figures/06_rule_application.png"><code>06_rule_application.png</code></a></td>
+<td>Rules act as thresholds; who takes alone</td>
+<td>"Welfare agents make 45 of 49 lone takes next to a no-rule partner; authority agents take 0.4% of 1,674 times when the pack expects refuse (descriptive; ignores clustering)."</td>
+<td>Combine into one two-panel figure</td>
+</tr>
+<tr>
+<td>Appendix</td>
+<td><a href="../step2/figures/04_words_vs_actions.png"><code>../step2/figures/04_words_vs_actions.png</code></a></td>
+<td>Words follow actions</td>
+<td>"Under the notice, take arguments in public fall −3.5 pp and takes −3.8 pp (2,083 pairs)."</td>
+<td>Minor</td>
 </tr>
 <tr>
 <td>Table 1</td>
-<td>from primary test</td>
-<td>Primary test numbers</td>
-<td>Discordant table (both / neither / watched-only / unwatched-only), difference, CI, p, plus failure sensitivity rows†</td>
-<td>New table</td>
+<td>from <code>../step2/tables/primary_mcnemar.csv</code>, <code>primary_failure_sensitivity.csv</code></td>
+<td>Primary numbers</td>
+<td>2×2 discordant table, difference, CI, RR, p; the four failure bounds with the adversarial bound flagged</td>
+<td>New</td>
 </tr>
 <tr>
 <td>Table 2</td>
-<td>from claims ledger rows 14–19</td>
+<td>from <code>../step2/oversight_reasoning/tables/validation_heldout_rules_v2.csv</code> and <code>discordant_mechanism_coding.csv</code></td>
+<td>Measurement credibility and mechanisms</td>
+<td>Code definitions, held-out precision and recall; mechanism counts in 48 discordant cells</td>
+<td>New</td>
+</tr>
+<tr>
+<td>Table 3</td>
+<td>ledger rows 21–28</td>
 <td>Standards of evidence</td>
-<td>"Apparent effects we dropped and why (echo, design, bootstrap floor)."</td>
-<td>New table</td>
+<td>"Apparent effects we dropped, and why."</td>
+<td>New</td>
 </tr>
 </tbody>
 </table>
 <h2 id="limitations-appendix-bullets">Limitations (appendix bullets)</h2>
 <ul>
-<li>The manipulation is one sentence of prompt text; researcher logging was identical; we cannot tell reaction to the word "monitored" from reaction to expected review.</li>
-<li>One model (Qwen3-32B), temperature 0.6, one seed per cell, one scenario pack; no transfer claim.</li>
-<li>77 of 4,320 trials failed and are excluded; the adversarial failure bound is reported as a bound†.</li>
-<li>Scenario families and settings are properties of scenes (24 and 9 scenes per level), not randomised; descriptive only.</li>
-<li>Pressure levels add several scene features at once.</li>
-<li>No communication-off baseline, so no claim about the effect of talking.</li>
-<li>Returned reasoning is generated text, not internal thought; quotes are illustrative.</li>
-<li>A mutual take is an operational outcome; some takes (promise-keeping) are defensible.</li>
-<li>Text metrics echo prompt wording; vocabulary results were dropped.</li>
+<li>The manipulation is one sentence of prompt text, and researcher logging was identical. We cannot separate a reaction to the word "monitored" from a reaction to expected review or a demand effect.</li>
+<li>One model (Qwen3-32B), temperature 0.6, one seed per cell, one scenario pack.</li>
+<li>77 of 4,320 trials failed and are excluded. The direction holds under all four bounds; the adversarial bound gives −1.5 pp (p = .034, unclustered).</li>
+<li>"Level" bundles a stated benefit of breaking the rule, costs of refusing to third parties, authority endorsement and promise conflict. Its construct review is pending.</li>
+<li>Oversight-reasoning codes: single labeller, partial blinding, uncertain recall (rates are lower bounds); the mechanism coding was not blind to direction; text is co-generated with the action.</li>
+<li>Several exploratory results ignore scenario clustering: the text contrasts, convergence‡, the lone-taker asymmetry and κ.</li>
+<li>Scenario families and settings are properties of scenes, so their results are descriptive.</li>
+<li>There is no communication-off baseline.</li>
+<li>A mutual take is an operational outcome, and some takes are defensible.</li>
+<li>This is not an independent replication of the interim analysis.</li>
 </ul>
 <h2 id="dual-use-appendix-bullets">Dual-use appendix bullets</h2>
 <ul>
-<li><strong>What a misuser could learn:</strong> that telling agents "not monitored" raises joint rule-breaking a little; that outcome-weighing ("welfare") instructions make agent pairs easier to talk into a joint violation; that stakes framing (jobs, a child's coverage) moves models far more than oversight cues.</li>
-<li><strong>Why publishing is net-positive:</strong> these levers are already obvious to anyone who can write a prompt; the measurement (a paired watched/unwatched gap) helps evaluators detect behaviour that changes under observation, and the rule comparison helps developers choose safer instructions for agent teams.</li>
-<li><strong>What we withhold or limit:</strong> we publish the scenario pack and transcripts for reproducibility, but no optimised "jailbreak" framings were searched for and none are presented as such; we do not release a tool to maximise collusion.</li>
-<li><strong>Fictional scenes:</strong> every scene is fictional and labelled as a research simulation in the prompt.</li>
+<li><strong>What a misuser could learn.</strong></li>
+<li>Telling agents "not monitored" raises joint rule-breaking.</li>
+<li>Agents then argue to each other that no one will review them.</li>
+<li>Outcome-weighing instructions make pairs easier to bring to a joint violation.</li>
+<li>Stakes framing moves models far more than oversight cues.</li>
+<li><strong>Why publishing is net-positive.</strong></li>
+<li>These levers are obvious to anyone who writes prompts.</li>
+<li>The measurement (the paired watched/unwatched gap) helps evaluators detect behaviour that changes under observation.</li>
+<li>The "no one will review this" text signature gives monitors a high-precision flag.</li>
+<li><strong>What we withhold or limit.</strong></li>
+<li>We searched for no optimised framings and present none.</li>
+<li>We release no tool to maximise collusion.</li>
+<li>We publish the scenario pack and transcripts for reproducibility.</li>
+<li><strong>Fictional scenes.</strong> Every scene is fictional and labelled as a research simulation.</li>
 </ul>
 </body>
 </html>
