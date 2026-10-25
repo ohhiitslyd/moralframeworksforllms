@@ -1,0 +1,17 @@
+monitoring,setting,n,agent_take_rule
+unwatched,family,262,0.3779
+unwatched,hospital,268,0.2687
+unwatched,military,266,0.2782
+unwatched,religious,265,0.2981
+unwatched,school,267,0.2659
+unwatched,situational,267,0.3521
+unwatched,social_club,266,0.2895
+unwatched,volunteer,264,0.2614
+watched,family,265,0.3736
+watched,hospital,264,0.2803
+watched,military,266,0.2519
+watched,religious,266,0.2519
+watched,school,264,0.2500
+watched,situational,265,0.2981
+watched,social_club,263,0.2700
+watched,volunteer,265,0.2453

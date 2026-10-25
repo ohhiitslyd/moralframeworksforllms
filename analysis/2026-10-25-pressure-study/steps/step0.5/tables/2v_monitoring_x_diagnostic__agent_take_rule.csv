@@ -1,0 +1,7 @@
+monitoring,diagnostic,n,agent_take_rule
+unwatched,authority,706,0.2918
+unwatched,nondeception,711,0.4135
+unwatched,welfare,708,0.1907
+watched,authority,709,0.2906
+watched,nondeception,703,0.3855
+watched,welfare,706,0.1572

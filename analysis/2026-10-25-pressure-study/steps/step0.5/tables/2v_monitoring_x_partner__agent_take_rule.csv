@@ -1,0 +1,5 @@
+monitoring,partner,n,agent_take_rule
+unwatched,no rule,1058,0.2703
+unwatched,same rule,1067,0.3271
+watched,no rule,1055,0.2493
+watched,same rule,1063,0.3057

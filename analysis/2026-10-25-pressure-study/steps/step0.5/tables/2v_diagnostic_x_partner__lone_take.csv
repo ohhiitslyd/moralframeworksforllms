@@ -1,0 +1,7 @@
+diagnostic,partner,n,lone_take
+authority,no rule,706,0.0822
+authority,same rule,709,0.0310
+nondeception,no rule,703,0.1465
+nondeception,same rule,711,0.0422
+welfare,no rule,704,0.0639
+welfare,same rule,710,0.0338

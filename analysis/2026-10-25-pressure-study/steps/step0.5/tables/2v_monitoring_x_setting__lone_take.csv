@@ -1,0 +1,17 @@
+monitoring,setting,n,lone_take
+unwatched,family,262,0.0916
+unwatched,hospital,268,0.0299
+unwatched,military,266,0.0526
+unwatched,religious,265,0.0830
+unwatched,school,267,0.0787
+unwatched,situational,267,0.0712
+unwatched,social_club,266,0.0677
+unwatched,volunteer,264,0.0455
+watched,family,265,0.0830
+watched,hospital,264,0.0568
+watched,military,266,0.0677
+watched,religious,266,0.0564
+watched,school,264,0.0795
+watched,situational,265,0.0377
+watched,social_club,263,0.1141
+watched,volunteer,265,0.0491

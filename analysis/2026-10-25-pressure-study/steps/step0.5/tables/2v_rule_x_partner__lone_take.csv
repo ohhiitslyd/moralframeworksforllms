@@ -1,0 +1,7 @@
+rule,partner,n,lone_take
+authority,no rule,704,0.1179
+authority,same rule,713,0.0365
+nondeception,no rule,707,0.1047
+nondeception,same rule,707,0.0396
+welfare,no rule,702,0.0698
+welfare,same rule,710,0.0310

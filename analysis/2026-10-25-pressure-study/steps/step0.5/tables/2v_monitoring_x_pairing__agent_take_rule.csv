@@ -1,0 +1,13 @@
+monitoring,pairing,n,agent_take_rule
+unwatched,A-A,358,0.1564
+unwatched,A-none,352,0.1591
+unwatched,D-D,353,0.2380
+unwatched,D-none,352,0.2557
+unwatched,W-W,356,0.5871
+unwatched,W-none,354,0.3955
+watched,A-A,355,0.1521
+watched,A-none,352,0.1648
+watched,D-D,354,0.2373
+watched,D-none,355,0.2366
+watched,W-W,354,0.5282
+watched,W-none,348,0.3477

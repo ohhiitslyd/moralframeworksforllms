@@ -1,0 +1,16 @@
+level,rule,n,lone_take
+1,authority,283,0.0247
+1,nondeception,283,0.0671
+1,welfare,282,0.0248
+2,authority,282,0.0461
+2,nondeception,286,0.0594
+2,welfare,282,0.0355
+3,authority,282,0.0851
+3,nondeception,281,0.0569
+3,welfare,280,0.0643
+4,authority,284,0.0739
+4,nondeception,284,0.0704
+4,welfare,284,0.0845
+5,authority,286,0.1538
+5,nondeception,280,0.1071
+5,welfare,284,0.0423

@@ -1,0 +1,7 @@
+diagnostic,partner,n,agent_take_rule
+authority,no rule,706,0.2635
+authority,same rule,709,0.3188
+nondeception,no rule,703,0.3784
+nondeception,same rule,711,0.4205
+welfare,no rule,704,0.1378
+welfare,same rule,710,0.2099

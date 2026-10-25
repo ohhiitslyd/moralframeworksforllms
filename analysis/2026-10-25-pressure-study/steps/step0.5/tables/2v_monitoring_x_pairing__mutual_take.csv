@@ -1,0 +1,13 @@
+monitoring,pairing,n,mutual_take
+unwatched,A-A,358,0.1397
+unwatched,A-none,352,0.1335
+unwatched,D-D,353,0.2238
+unwatched,D-none,352,0.1989
+unwatched,W-W,356,0.5758
+unwatched,W-none,354,0.3503
+watched,A-A,355,0.1324
+watched,A-none,352,0.1307
+watched,D-D,354,0.2062
+watched,D-none,355,0.1690
+watched,W-W,354,0.5141
+watched,W-none,348,0.2644
