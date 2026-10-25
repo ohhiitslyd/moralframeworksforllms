@@ -1,0 +1,5 @@
+cell-level feature (either agent),n_cells,both_arms,watched_only,unwatched_only,neither,rate_watched,rate_unwatched
+status_mention,2083,1624,104,224,131,83.0%,88.7%
+linked_to_action(a|b),2083,471,908,126,578,66.2%,28.7%
+any_detection_talk(c_low|c_high),2083,107,134,209,1633,11.6%,15.2%
+public_status_mention,2083,16,129,80,1858,7.0%,4.6%

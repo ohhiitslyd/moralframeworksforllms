@@ -1,0 +1,9 @@
+cell_type (mutual take by arm),cells_with_feature,n,rate
+both_take|a_in_unwatched,121,436,121/436 (28%; 24%-32%)
+both_take|b_in_watched,188,436,188/436 (43%; 39%-48%)
+neither_take|a_in_unwatched,393,1467,393/1467 (27%; 25%-29%)
+neither_take|b_in_watched,1064,1467,1064/1467 (73%; 70%-75%)
+unwatched_only_take|a_in_unwatched,71,131,71/131 (54%; 46%-62%)
+unwatched_only_take|b_in_watched,97,131,97/131 (74%; 66%-81%)
+watched_only_take|a_in_unwatched,11,49,11/49 (22%; 13%-36%)
+watched_only_take|b_in_watched,30,49,30/49 (61%; 47%-74%)

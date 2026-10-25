@@ -1,0 +1,165 @@
+# pairing x pairing_rule (association 1.00; started trials)
+pairing,authority,nondeception,welfare
+A-A,720,0,0
+A-none,720,0,0
+D-D,0,720,0
+D-none,0,720,0
+W-W,0,0,720
+W-none,0,0,720
+
+# pairing x matched_vs_mixed (association 1.00; started trials)
+pairing,matched,mixed
+A-A,720,0
+A-none,0,720
+D-D,720,0
+D-none,0,720
+W-W,720,0
+W-none,0,720
+
+# take_is_justified_ambiguous x refuse_breaks_promise (association 0.96; started trials)
+take_is_justified_ambiguous,0,1
+0,2988,0
+1,72,1260
+
+# scenario_diagnostic x refuse_deceives_n (association 0.88; started trials)
+scenario_diagnostic,0,1,2
+authority,1320,120,0
+nondeception,0,1260,180
+welfare,1380,60,0
+
+# level x welfare_if_take_designer (association 0.86; started trials)
+level,higher,lower,similar
+1,12,852,0
+2,12,12,840
+3,852,12,0
+4,852,12,0
+5,852,12,0
+
+# scenario_diagnostic x refuse_breaks_promise (association 0.84; started trials)
+scenario_diagnostic,0,1
+authority,1440,0
+nondeception,240,1200
+welfare,1380,60
+
+# take_principal_present x n_principals (association 0.83; started trials)
+take_principal_present,1,2,3,4,5
+0,3252,120,12,0,0
+1,0,660,180,84,12
+
+# scenario_diagnostic x take_is_justified_ambiguous (association 0.80; started trials)
+scenario_diagnostic,0,1
+authority,1368,72
+nondeception,240,1200
+welfare,1380,60
+
+# refuse_deceives_n x refuse_breaks_promise (association 0.76; started trials)
+refuse_deceives_n,0,1
+0,2700,0
+1,300,1140
+2,60,120
+
+# take_is_justified_ambiguous x refuse_deceives_n (association 0.72; started trials)
+take_is_justified_ambiguous,0,1,2
+0,2628,300,60
+1,72,1140,120
+
+# soft_take_principal_present x n_principals (association 0.72; started trials)
+soft_take_principal_present,1,2,3,4,5
+0,3252,672,48,0,0
+1,0,108,144,84,12
+
+# rank_stated_in_level_text x n_principals (association 0.62; started trials)
+rank_stated_in_level_text,1,2,3,4,5
+0,3252,600,72,12,12
+1,0,180,120,72,0
+
+# level x take_principal_present (association 0.61; started trials)
+level,0,1
+1,864,0
+2,852,12
+3,792,72
+4,708,156
+5,168,696
+
+# take_principal_present x rank_stated_in_level_text (association 0.58; started trials)
+take_principal_present,0,1
+0,3384,0
+1,564,372
+
+# level x n_principals (association 0.56; started trials)
+level,1,2,3,4,5
+1,864,0,0,0,0
+2,768,96,0,0,0
+3,768,24,72,0,0
+4,708,60,72,24,0
+5,144,600,48,60,12
+
+# take_deceives_n x refuse_breaks_promise (association 0.43; started trials)
+take_deceives_n,0,1
+1,3060,960
+2,0,300
+
+# soft_take_principal_present x rank_stated_in_level_text (association 0.42; started trials)
+soft_take_principal_present,0,1
+0,3768,204
+1,180,168
+
+# welfare_if_take_designer x take_principal_present (association 0.42; started trials)
+welfare_if_take_designer,0,1
+higher,1656,924
+lower,900,0
+similar,828,12
+
+# take_is_justified_ambiguous x take_deceives_n (association 0.41; started trials)
+take_is_justified_ambiguous,1,2
+0,2988,0
+1,1032,300
+
+# endpoint x imported_from_prior_batch (association 0.41; started trials)
+endpoint,0,1
+Modal-A,571,136
+Modal-A+Modal-B,3,0
+Modal-B,3610,0
+
+# scenario_diagnostic x soft_take_principal_present (association 0.40; started trials)
+scenario_diagnostic,0,1
+authority,1104,336
+nondeception,1440,0
+welfare,1428,12
+
+# scenario_diagnostic x take_deceives_n (association 0.39; started trials)
+scenario_diagnostic,1,2
+authority,1440,0
+nondeception,1140,300
+welfare,1440,0
+
+# scenario_diagnostic x n_principals (association 0.35; started trials)
+scenario_diagnostic,1,2,3,4,5
+authority,852,312,180,84,12
+nondeception,1200,228,12,0,0
+welfare,1200,240,0,0,0
+
+# welfare_if_take_designer x n_principals (association 0.34; started trials)
+welfare_if_take_designer,1,2,3,4,5
+higher,1620,672,192,84,12
+lower,888,12,0,0,0
+similar,744,96,0,0,0
+
+# take_deceives_n x refuse_deceives_n (association 0.33; started trials)
+take_deceives_n,0,1,2
+1,2700,1140,180
+2,0,300,0
+
+# level x rank_stated_in_level_text (association 0.32; started trials)
+level,0,1
+1,864,0
+2,864,0
+3,816,48
+4,756,108
+5,648,216
+
+# take_principal_present x soft_take_principal_present (association 0.31; started trials)
+take_principal_present,0,1
+0,3264,120
+1,708,228
+
