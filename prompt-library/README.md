@@ -33,6 +33,12 @@ Reusable prompts for this project. Each one is meant to be copied into an AI age
 |---|---|---|
 | **Step 2: analyse and report** | One-, two- and three-variable analysis: design check and completion, pre-registered (paired) primary test with power, correlation matrices, screening, single-factor and 2D heat maps, words vs. actions, sensitivity, ranked candidates. The owner's original prompts are in its appendix. | [`analysis/step2-analyze-and-report.md`](analysis/step2-analyze-and-report.md) |
 
+### Experiments (follow-up designs)
+
+| Prompt | Use it for | Location |
+|---|---|---|
+| **Authority ablation (± instruction placement)** | Randomise a superior's take-instruction independently of justification level, and optionally move the scenario from the system prompt to a user turn; includes pre-registration, validation, cost gate, launch and analysis. Designed, not run. | [`experiments/authority-ablation.md`](experiments/authority-ablation.md) |
+
 ### Analysis, Step 3 (`PROCESS.md` Stage 3): Findings
 
 | Prompt | Use it for | Location |
