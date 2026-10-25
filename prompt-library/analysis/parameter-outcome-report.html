@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parameter → outcome relationship report</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="parameter-outcome-relationship-report">Parameter → outcome relationship report</h1>
+<p><strong>Use it for:</strong> helping a human quickly understand which experiment parameters (fewer than about 30) matter for which outcome metrics (fewer than about 20), through charts and summary statistics.
+<strong>Pipeline stage:</strong> Stage 2 of <a href="../../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a>. This page is the standalone, copy-paste version. <strong>If <code>PROCESS.md</code> is available, it takes precedence.</strong>
+<strong>Origin:</strong> generalised from the dimension-by-metric analysis of the first pressure-pack run (branch <code>first-run-summary-analysis</code>).</p>
+<hr />
+<h2 id="prompt">Prompt</h2>
+<p>You are analysing an experiment's results so a human can quickly understand which parameters matter for which outcomes, visually and with summary statistics. Stop once you've produced ranked candidates. Choosing headline findings and writing the narrative is Stage 3.</p>
+<p><strong>Inputs (fill in)</strong>
+- Data file: <code>&lt;path&gt;</code>. One row per <code>&lt;unit&gt;</code>.
+- Clustering: <code>&lt;e.g. "per-agent columns _a/_b, two agents per episode"; "scenario / template"; or "none"&gt;</code>
+- Parameters: <code>&lt;list, or "schema role = parameter"&gt;</code>. Outcomes: <code>&lt;list, or "schema role = outcome"&gt;</code>
+- Schema or dictionary: <code>&lt;path to metrics_schema.json / dictionary&gt;</code>
+- Known design facts: <code>&lt;e.g. one seed per cell; provider switched mid-run&gt;</code>
+- Output folder: <code>&lt;path&gt;</code>. Audience: <code>&lt;who&gt;</code></p>
+<p><strong>Ground rules</strong>
+- Treat the input data as read-only.
+- Put everything in one rerunnable script, with fixed random seeds.
+- Every number comes with its n.
+- Never give a p-value without an effect size and a 95% interval. Get intervals for rates from the Wilson method, and for other effect sizes from a cluster bootstrap.</p>
+<p><strong>Steps</strong></p>
+<ol start="0">
+<li>
+<p><strong>Type and reshape</strong>
+   - <strong>Type each variable</strong> as numeric, ordinal, categorical or binary, and record missingness, levels and cell counts.
+   - <strong>Flag four kinds of column:</strong> outcomes that apply only to a subset (state their denominator); outcomes related by construction (from the schema's <code>by_construction_with</code>), which must never be reported as findings; heuristic columns, with their validated accuracy; and clusters.
+   - <strong>Reshape per-agent <code>_a</code> / <code>_b</code> columns to long format</strong> (one row per agent) for agent-level analysis.</p>
+</li>
+<li>
+<p><strong>Design check (parameter × parameter)</strong>
+   - <strong>Build a mixed-type association matrix:</strong> Spearman ρ (numeric–numeric), bias-corrected Cramér's V (categorical–categorical), correlation ratio η (numeric–categorical).
+   - <strong>Draw cell-count tables</strong> for every pair with association ≥ 0.3, or with empty or tiny cells.
+   - <strong>State which effects are aliased,</strong> and which comparisons are clean (e.g. "within provider X, family varies freely").</p>
+</li>
+<li>
+<p><strong>Univariate summaries</strong>
+   - <strong>Parameters:</strong> counts per level, to show balance.
+   - <strong>Outcomes:</strong> binary rates with 95% Wilson intervals; numeric medians and IQRs, with histograms (log or rank scale if skewed).
+   - <strong>One summary table.</strong></p>
+</li>
+<li>
+<p><strong>Parameter × outcome screening</strong>
+   - <strong>Effect sizes, on a comparable scale:</strong> V for categorical × binary; √ε² (η-like) for categorical × numeric; |ρ| for ordinal or numeric parameters. Also report the raw max−min spread of rates or medians, so readers see magnitudes.
+   - <strong>p-values:</strong></p>
+<ul>
+<li>Use Fisher's exact test for 2×2 tables.</li>
+<li>Otherwise use permutation tests, with at least <strong>20·m/α shuffles for m tests</strong>, so BH can still detect a single real effect. For example, 600 tests need about 240,000 shuffles. Stop early once p is clearly above 0.1, use an exact or asymptotic p where it's valid, and report the shuffle count.</li>
+<li><strong>Make the tests cluster-aware:</strong> permute whole episodes for episode-level parameters; for agent-level parameters (such as each agent's criterion in mixed pairings), permute within episodes; treat scenario or template as a stratum.</li>
+<li><strong>Correct for multiple comparisons:</strong> Benjamini–Hochberg q-values across all pairs.</li>
+<li><strong>Screening table,</strong> sorted by the comparable effect size. Columns: effect, interval, p, q, minimum cell n, clean or confounded, by-construction flag, heuristic flag.</li>
+<li><strong>One single-factor heat map per key parameter.</strong> Rows are the parameter's levels and columns are outcomes; print the value and n in each cell. Use an absolute colour scale per outcome type (rates 0–1). If you do normalise colour per column, mark cells that aren't significant so trivial differences don't look large. Mark cells with q &lt; 0.05, and hatch confounded cells.</li>
+<li><strong>Top relationships</strong> (q &lt; 0.05 and minimum cell n ≥ 10): draw level-by-outcome charts with intervals, and repeat each comparison <strong>within</strong> the levels of any confounder.</li>
+</ul>
+</li>
+<li>
+<p><strong>Outcome × outcome</strong>
+   - <strong>Build the same association matrix over outcomes.</strong>
+   - <strong>Separate by-construction correlations from informative ones.</strong>
+   - <strong>Flag redundant outcomes</strong> (|association| ≥ 0.8 and not by construction).</p>
+</li>
+<li>
+<p><strong>Two-parameter interactions</strong>
+   - <strong>Candidates:</strong> only parameter pairs that aren't aliased and have adequate cell counts.
+   - <strong>Interaction strength:</strong> for binary outcomes, the likelihood-ratio (deviance) improvement of A×B over additive A+B on the <strong>logit</strong> scale; for numeric outcomes, the same on the rank scale. Penalise by the extra degrees of freedom, and get a permutation p-value.
+   - <strong>Draw 2D heat maps</strong> only for the pairs that pass (at most 6–10), plus any pair central to the research question. Use an <strong>absolute</strong> colour scale, print the value and k/n in each cell, and grey out small cells. If no pair passes, say so.
+   - <strong>Describe each map in words,</strong> e.g. "B matters only when A = …".</p>
+</li>
+<li>
+<p><strong>Rank candidates for Stage 3</strong> (do not choose headlines here)
+   - <strong>Score every relationship</strong> on effect size, robustness (FDR, clean vs. confounded, holds within subgroups, cell sizes), relevance to the research questions, and surprise relative to the design's expectations.
+   - <strong>Write <code>tables/candidates.csv</code>,</strong> including a "looks large but untrustworthy" list with the reasons.</p>
+</li>
+</ol>
+<p><strong>Chart rules</strong>
+- Titles state the takeaway.
+- Axis labels in plain words, never codes.
+- Colour bars with units.
+- A sequential scale for magnitudes; a diverging scale centred at 0 for signed values; colour-blind safe.
+- Value and n printed in every cell.
+- Rows and columns ordered meaningfully.
+- About 10–20 charts.</p>
+<p><strong>Deliverables</strong>
+- <strong><code>REPORT.md</code> + HTML,</strong> with these sections:
+  1. summary
+  2. how to read the charts
+  3. design check
+  4. top-ranked relationships (from <code>candidates.csv</code>)
+  5. univariate results
+  6. matrices
+  7. single-factor heat maps
+  8. 2D interactions
+  9. caveats in plain terms
+  10. file index
+- <strong><code>figures/</code>, <code>tables/</code> (CSV, including <code>candidates.csv</code>) and the script.</strong></p>
+<p><strong>Report back:</strong> files; one line per top candidate; the aliased pairs; and anything you couldn't analyse reliably, with the reason.</p>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Batch runs and major compute</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="batch-runs-and-major-compute">Batch runs and major compute</h1>
+<p>Standing instructions for planning, reviewing and running simulations, batch jobs, large data analyses, and anything that uses cloud or paid resources. Use this together with the <a href="development-workflow.html">development workflow</a>.</p>
+<p><strong>Origin:</strong> the project owner's standing instructions (2026-10-25).</p>
+<h2 id="the-prompt-verbatim">The prompt (verbatim)</h2>
+<blockquote>
+<p>Please review all planned simulations, batch jobs, or data analysis processes for performance, reliability, parallelism, total runtime, correctness, and cost. FOR ALL REVIEWS - USE SUBAGENTS AND RUN IN PARALLEL, striking a good balance between parallelism and short context length (which saves money), with adequate intelligence, context, and knowledge to perform effectively. Review code to optimize the use of parallelism and threads where possible. For any LLM or cloud invocations, review LLM parameters, settings, and limitations to ensure (a) experimental validity, (b) consistency with known good practices, (c) appropriately-sized limits, such as maximum context length (max_length), model type, version, and size, maximum prompt length, number(s) of iterations, and any other parameter, ensuring to balance experimental validity, statistical significance, and adequate performance with cost, speed, and total runtime. When invoking cloud services, optimize for parallelism, analyzing the total run stream for dependencies, and then within each group of independent jobs, running as many jobs in parallel as possible, up to the limits of local machine performance and resources (like RAM and CPU), internet bandwidth, cloud capacity, cloud budget, and monitoring for timeouts or other errors from cloud services. Before every significant run involving cloud or other paid resources, estimate the runtime, total number of requests, total number of tokens, and estimated total cost, and prompt me to review and approve these.</p>
+<p>Also rigorously review experimental design, including the design, selection, and permutation of input parameters, data sets, parameters, and experimental arms, reviewing both for excessive / superfluous processing which can be omitted, and also poorly designed / underpowered / low value / misaligned experimental arms which don't provide overall project value. For every change, before running major jobs, review the entire project end-to-end for alignment with the three evaluation criteria in https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25#guidelines and the three major research questions (and their subquestions) in https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25#resources, focusing on how we can achieve "5" ratings in all three guideline areas, and address the specific research questions, and interests, areas of focus, or research areas of the judges listed in this page, with an emphasis on judges involved with AI frontier labs or AI safety research organizations. For all reviews and discrete units of work, use fresh subagents, striking a good balance between parallelism and short context length (which saves money), with adequate intelligence, context, and knowledge to perform effectively.</p>
+<p>For batch runs, estimate the runtime of each major category or type of job, and each major set of runtime parameters. Run batch jobs in parallel, running the longest-run-time jobs first, and using an MSSQ (Multiple Server, Single Queue) architecture so that no single long-running job can block any other job, and that one thread doesn't block another one, and that as the batch completes, there are no single long-running jobs blocking other jobs.</p>
+</blockquote>
+<h2 id="checklist-before-any-significant-run">Checklist before any significant run</h2>
+<p>Run each review with its own fresh subagent, in parallel.</p>
+<table>
+<thead>
+<tr>
+<th>Review</th>
+<th>What to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Performance and parallelism</strong></td>
+<td>Use of threads and processes; independent groups of jobs; local limits (CPU, RAM, bandwidth) and cloud limits (rate limits, concurrency, budget)</td>
+</tr>
+<tr>
+<td><strong>Reliability</strong></td>
+<td>Timeout and retry policy (retry infrastructure failures only, never rerun a behavioural outcome); checkpoint and resume; monitoring and alerts for cloud errors</td>
+</tr>
+<tr>
+<td><strong>LLM and cloud parameters</strong></td>
+<td>Model, version and size; temperature; prompt length; the <strong>context window</strong> and the <strong>output-token cap</strong> (<code>max_tokens</code>; check these separately, since "max_length" can mean either); number of iterations and seeds. Check each for experimental validity, good practice and cost.</td>
+</tr>
+<tr>
+<td><strong>Experimental design</strong></td>
+<td>Parameters, datasets and arms. Remove superfluous processing. Flag arms that are underpowered, low-value or misaligned with the research questions. Check statistical power.</td>
+</tr>
+<tr>
+<td><strong>Correctness</strong></td>
+<td>Prompts render as intended. Run IDs are unique and resumable. Outputs are parsed and validated. A small pilot runs cleanly first.</td>
+</tr>
+<tr>
+<td><strong>End-to-end alignment</strong></td>
+<td>The sprint's three judging criteria (aim for 5s), its three major research questions and their sub-questions, and the interests of the judges, especially those at frontier AI labs and AI safety organisations</td>
+</tr>
+</tbody>
+</table>
+<h2 id="estimate-then-ask-for-approval">Estimate, then ask for approval</h2>
+<p>Before any run that uses paid or cloud resources, give the user a table like this and <strong>wait for approval</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Job type / parameter set</th>
+<th>Jobs</th>
+<th>Requests</th>
+<th>Input tokens</th>
+<th>Output tokens</th>
+<th>Est. runtime (wall-clock at planned parallelism)</th>
+<th>Est. cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>State your assumptions: tokens per request, latency, concurrency and price per token. Estimate separately for each major job type and each major set of runtime parameters.</p>
+<p><strong>What counts as significant:</strong> any run that uses paid or cloud resources beyond a smoke test. Default threshold: more than 50 requests or more than $1 estimated (adjust with the user). Pilots above that threshold need approval too.</p>
+<p><strong>Spend cap:</strong>
+- <strong>The approved estimate is a cap.</strong> Stop and ask the user before continuing if cost so far reaches <strong>120% of the approved estimate</strong>, or if the projected total would exceed it.
+- <strong>Pause and report on errors.</strong> Do the same if the infrastructure error rate (timeouts, rate limits, connection errors) goes above <strong>10%</strong> over a rolling window.
+- <strong>Track spend against the cap.</strong> Report cost so far against the cap at each progress update.</p>
+<h2 id="scheduling-multiple-server-single-queue-mssq">Scheduling: Multiple Server, Single Queue (MSSQ)</h2>
+<ul>
+<li><strong>One shared queue, several workers.</strong> All jobs go into one queue, and a pool of workers (threads, processes or cloud slots) takes the next job as soon as it becomes free. No job is ever tied to a particular worker.</li>
+<li><strong>Longest jobs first.</strong> Order the queue by estimated runtime, longest first, so the batch doesn't end with one long job running while every other worker sits idle.</li>
+<li><strong>Respect dependencies.</strong> Split the run into dependency groups. Within each group, run as many jobs in parallel as the local and cloud limits allow.</li>
+<li><strong>No blocking.</strong> A slow or failing job must never block another worker. Use per-job timeouts and isolate failures.</li>
+<li><strong>Monitor the run.</strong> Track throughput, error rates (timeouts, rate limits, connection errors) and cost so far. When any of them drifts from the estimate, alert the user. If a spend-cap or error threshold is crossed, pause and ask.</li>
+</ul>
+</body>
+</html>

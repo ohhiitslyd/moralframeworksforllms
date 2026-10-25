@@ -173,7 +173,12 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <h3 id="step-0-type-and-frame">Step 0: Type and frame</h3>
 <ul>
 <li><strong>Type every variable from the schema.</strong> Record missing values, the number of levels, and the min, median and max count per level.</li>
-<li><strong>Clustering.</strong> Agent-level rows are clustered in pairs. Use an episode-level summary or a cluster-aware permutation (shuffle whole episodes) for agent-level tests, and say which. If neither is possible, say the p-values are optimistic.</li>
+<li><strong>Clustering.</strong></li>
+<li>Reshape the <code>_a</code> / <code>_b</code> columns to long format (one row per agent).</li>
+<li>Permute whole episodes for episode-level parameters, and permute within episodes for agent-level parameters (such as each agent's criterion in mixed pairings).</li>
+<li>Treat scenario or template as a stratum.</li>
+<li>Get intervals for effect sizes from a cluster bootstrap.</li>
+<li>If a cluster-aware method isn't possible, say the p-values are optimistic.</li>
 <li><strong>Flag columns related by construction</strong> (from the schema) and columns that rely on heuristics.</li>
 </ul>
 <h3 id="step-1-design-check-parameter-parameter">Step 1: Design check (parameter × parameter)</h3>
@@ -197,9 +202,9 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <p>For every (parameter, outcome) pair:
 - <strong>Effect size:</strong>
   - categorical parameter, binary outcome: Cramér's V, plus the max−min rate across levels
-  - categorical parameter, numeric outcome: ε², plus the max−min difference in medians
+  - categorical parameter, numeric outcome: √ε² (η-like, so it's on the same scale as V and |ρ| for ranking), plus the max−min difference in medians
   - ordinal or numeric parameter: Spearman ρ
-- <strong>Test:</strong> a permutation test (≥2,000 shuffles, fixed seed, cluster-aware where needed), or Fisher's exact test for 2×2 tables.
+- <strong>Test:</strong> Fisher's exact test for 2×2 tables; otherwise a permutation test with a fixed seed and <strong>at least 20·m/α shuffles for m tests</strong>, so the BH correction can still detect a single real effect. Stop early once p is clearly above 0.1, use an exact or asymptotic p where it's valid, and report the shuffle count.
 - <strong>Multiple comparisons:</strong> Benjamini–Hochberg q-values across all pairs.
 - <strong>Screening table</strong>, sorted by effect size, with columns: effect, interval or p, q, minimum cell n, clean or confounded, by-construction flag, heuristic flag.
 - <strong>One heat map per key parameter:</strong> rows are the parameter's levels, columns are outcomes, and cells hold the rate or median with n.
@@ -216,8 +221,8 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <h3 id="step-5-two-parameter-interactions-2d-heat-maps">Step 5: Two-parameter interactions (2D heat maps)</h3>
 <ul>
 <li><strong>Candidates</strong> are parameter pairs that aren't aliased and have adequate cell counts.</li>
-<li><strong>Rank them by interaction strength,</strong> meaning the improvement of A×B over the additive A+B model, not by main effects.</li>
-<li><strong>Draw the top 6–10,</strong> plus any view that is central to the research question. Rows are A, columns are B, and colour is the outcome on an <strong>absolute</strong> scale. Each cell shows its value and k/n, and small cells are greyed out.</li>
+<li><strong>Rank them by interaction strength, not by main effects.</strong> For binary outcomes, use the likelihood-ratio (deviance) improvement of A×B over additive A+B on the <strong>logit</strong> scale; for numeric outcomes, use the same on the rank scale. Penalise by the extra degrees of freedom, and get a permutation p-value.</li>
+<li><strong>Draw only the pairs that pass (at most 6–10),</strong> plus any view that is central to the research question. If none pass, say so. Rows are A, columns are B, and colour is the outcome on an <strong>absolute</strong> scale. Each cell shows its value and k/n, and small cells are greyed out.</li>
 <li><strong>Describe each in words,</strong> e.g. "B matters only when A = …".</li>
 </ul>
 <h3 id="step-6-rank-candidates-for-stage-3">Step 6: Rank candidates for Stage 3</h3>

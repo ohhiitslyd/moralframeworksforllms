@@ -133,7 +133,12 @@ Inputs: `trial_metrics.csv` + `metrics_schema.json`. Columns are selected by rol
 
 ### Step 0: Type and frame
 - **Type every variable from the schema.** Record missing values, the number of levels, and the min, median and max count per level.
-- **Clustering.** Agent-level rows are clustered in pairs. Use an episode-level summary or a cluster-aware permutation (shuffle whole episodes) for agent-level tests, and say which. If neither is possible, say the p-values are optimistic.
+- **Clustering.**
+  - Reshape the `_a` / `_b` columns to long format (one row per agent).
+  - Permute whole episodes for episode-level parameters, and permute within episodes for agent-level parameters (such as each agent's criterion in mixed pairings).
+  - Treat scenario or template as a stratum.
+  - Get intervals for effect sizes from a cluster bootstrap.
+  - If a cluster-aware method isn't possible, say the p-values are optimistic.
 - **Flag columns related by construction** (from the schema) and columns that rely on heuristics.
 
 ### Step 1: Design check (parameter × parameter)
@@ -157,9 +162,9 @@ Purpose: find **confounding and aliasing** before interpreting any outcome.
 For every (parameter, outcome) pair:
 - **Effect size:**
   - categorical parameter, binary outcome: Cramér's V, plus the max−min rate across levels
-  - categorical parameter, numeric outcome: ε², plus the max−min difference in medians
+  - categorical parameter, numeric outcome: √ε² (η-like, so it's on the same scale as V and |ρ| for ranking), plus the max−min difference in medians
   - ordinal or numeric parameter: Spearman ρ
-- **Test:** a permutation test (≥2,000 shuffles, fixed seed, cluster-aware where needed), or Fisher's exact test for 2×2 tables.
+- **Test:** Fisher's exact test for 2×2 tables; otherwise a permutation test with a fixed seed and **at least 20·m/α shuffles for m tests**, so the BH correction can still detect a single real effect. Stop early once p is clearly above 0.1, use an exact or asymptotic p where it's valid, and report the shuffle count.
 - **Multiple comparisons:** Benjamini–Hochberg q-values across all pairs.
 - **Screening table**, sorted by effect size, with columns: effect, interval or p, q, minimum cell n, clean or confounded, by-construction flag, heuristic flag.
 - **One heat map per key parameter:** rows are the parameter's levels, columns are outcomes, and cells hold the rate or median with n.
@@ -175,8 +180,8 @@ For every (parameter, outcome) pair:
 
 ### Step 5: Two-parameter interactions (2D heat maps)
 - **Candidates** are parameter pairs that aren't aliased and have adequate cell counts.
-- **Rank them by interaction strength,** meaning the improvement of A×B over the additive A+B model, not by main effects.
-- **Draw the top 6–10,** plus any view that is central to the research question. Rows are A, columns are B, and colour is the outcome on an **absolute** scale. Each cell shows its value and k/n, and small cells are greyed out.
+- **Rank them by interaction strength, not by main effects.** For binary outcomes, use the likelihood-ratio (deviance) improvement of A×B over additive A+B on the **logit** scale; for numeric outcomes, use the same on the rank scale. Penalise by the extra degrees of freedom, and get a permutation p-value.
+- **Draw only the pairs that pass (at most 6–10),** plus any view that is central to the research question. If none pass, say so. Rows are A, columns are B, and colour is the outcome on an **absolute** scale. Each cell shows its value and k/n, and small cells are greyed out.
 - **Describe each in words,** e.g. "B matters only when A = …".
 
 ### Step 6: Rank candidates for Stage 3
