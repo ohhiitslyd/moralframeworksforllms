@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analysis pipeline: code design</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="analysis-pipeline-code-design">Analysis pipeline: code design</h1>
+<p>This is the code design for the scripts that implement <a href="PROCESS.html"><code>PROCESS.md</code></a>: Stage 1 (metrics) and the deterministic part of Stage 2 (relationships). Stage 3 stays a judgement task for an analyst or agent, driven by <code>PROCESS.md</code> and the prompt library.</p>
+<p>Status: <strong>draft for review</strong>. Branch <code>analysis-pipeline</code>.</p>
+<h2 id="1-goals-and-non-goals">1. Goals and non-goals</h2>
+<p><strong>Goals</strong>
+- <strong>One command per run:</strong> <code>python analysis-pipeline/run_pipeline.py --results &lt;run dir&gt; --out &lt;dir&gt;</code>. It writes <code>trial_metrics.csv</code>, <code>metrics_schema.json</code>, the dictionary, <code>REPORT.md</code>, figures, tables and <code>candidates.csv</code>, with HTML copies.
+- <strong>Works on both run formats we have:</strong>
+  - <strong>v1 pressure pack</strong> (<code>qwen-pressure-final-20261024-181708</code>): 600 trials, <code>provider</code> and <code>deal_taken</code> columns, v1 rule-report keys.
+  - <strong>Extended pack</strong> (<code>qwen-pressure-72-v1-snapshot-*</code>): 4,320 planned trials, <code>monitoring</code> / <code>setting_id</code> / <code>diagnostic</code> columns, <code>not_started</code> rows, v5 rule-report keys, no <code>provider</code> column.
+- <strong>Backward compatible.</strong> On the v1 run, every column in the published <code>trial_metrics.csv</code> is reproduced with identical values. New columns are added, and none are removed.
+- <strong>Schema-driven Stage 2.</strong> No hard-coded column names, so the same code works for any run whose Stage 1 writes a schema.</p>
+<p><strong>Non-goals (for now)</strong>
+- LLM-judge classification. That needs a cost estimate and approval first.
+- Reorganising existing result folders.
+- Changes to the harness.</p>
+<h2 id="2-validation-datasets-the-experimental-design-for-this-tooling">2. Validation datasets (the experimental design for this tooling)</h2>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Where</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>V1:</strong> <code>results/qwen-pressure-final-20261024-181708</code></td>
+<td>branch <code>first-run-summary-analysis</code> (local main checkout)</td>
+<td>Stage 1 regression: must match the published <code>analysis/…/trial_metrics.csv</code>. Stage 2 check: headline numbers must match the published <code>REPORT.md</code>, e.g. family collusion 15/202, 115/205 and 36/179, and authority take 29/33 when rank is stated.</td>
+</tr>
+<tr>
+<td><strong>E1:</strong> <code>results/qwen-pressure-72-v1-snapshot-20261025-141425</code></td>
+<td>branch <code>experiment-harness-pilot-results</code>, extracted with <code>git archive</code> into the scratchpad</td>
+<td>Generality check: 4,320 rows; status counts match <code>summary.json</code> (1,862 complete, 2,418 not started, 40 failed); outcome counts match (477 mutual, 129 unilateral, 1,256 both refuse). Stage 2 runs end to end.</td>
+</tr>
+</tbody>
+</table>
+<p>Tests find the datasets through the environment variables <code>PIPELINE_V1_RESULTS</code>, <code>PIPELINE_V1_CSV</code> and <code>PIPELINE_E1_RESULTS</code>. A test is skipped, with a message saying why, when its variable isn't set.</p>
+<h2 id="3-layout">3. Layout</h2>
+<pre><code>analysis-pipeline/
+  PROCESS.md, DESIGN.md
+  run_pipeline.py            CLI: --results --out [--stages metrics,report] [--shuffles N] [--seed S]
+  pipeline/
+    __init__.py
+    runio.py                 I1  load a run: manifest, runs.csv (column-tolerant), per-run files
+    pack.py                  I2  PackView: scene/level lookup, families, descriptions, text features, report keys
+    heuristics.py            I3  text heuristics: stance, deception vocabulary, agreement, lone take, criterion report
+    extract.py               I4  Stage 1: rows + ordered columns
+    schema.py                I5  metrics_schema.json + trial_metrics_dictionary.md
+    column_docs.json         I5  per-column documentation (seeded from the published dictionary)
+    stats.py                 I6  Wilson, Fisher, V, eta, eps2, Spearman, permutations, BH, bootstrap
+    charts.py                I7  heat maps, rate bars, distributions (current palette, light/dark)
+    screen.py                I8  Stage 2 Steps 0–6, writing tables/ and figures/
+    report.py                I8  REPORT.md assembly (numbers and figure links; commentary placeholders)
+  tests/
+    test_stats.py            T3  known-answer tests
+    test_stage1_v1.py        T1  regression against the published V1 CSV
+    test_stage1_e1.py        T4  extended-run counts and statuses
+    test_schema.py           T2  schema covers every column; roles and types valid
+    test_stage2_v1.py        T5  headline numbers match the published REPORT.md
+tools/md_to_html.py          (already on main) HTML copies
+</code></pre>
+<p>Only the standard library plus <code>pandas</code>, <code>numpy</code>, <code>matplotlib</code> and <code>markdown</code> are needed. <code>scipy</code> is not installed, so the statistics are implemented in <code>stats.py</code>.</p>
+<h2 id="4-interfaces">4. Interfaces</h2>
+<h3 id="i1-runiopy">I1 <code>runio.py</code></h3>
+<pre><code class="language-python">@dataclass
+class Trial:
+    run_id: str
+    spec: dict          # from result.json[&quot;spec&quot;] if present, else built from runs.csv
+    status: str         # complete | failed | not_started | running
+    action_a: str|None
+    action_b: str|None
+    outcome: str        # mutual_take | unilateral_take | both_refuse | failed | not_started
+    deal_taken: bool|None
+    error: str
+    provider: str       # runs.csv &quot;provider&quot; if present, else derived from response endpoints (see below)
+    run_dir: Path|None  # None when the trial has no folder
+    extra: dict         # any other runs.csv columns, passed through
+
+def load_run(results_dir) -&gt; tuple[dict, list[Trial]]   # (manifest, trials in runs.csv order)
+def load_responses(run_dir) -&gt; dict[(agent, stage, exchange), event]
+</code></pre>
+<ul>
+<li><strong><code>deal_taken</code></strong> comes from the <code>deal_taken</code> column, or from <code>outcome == "mutual_take"</code>.</li>
+<li><strong>Status</strong> comes from runs.csv, and is cross-checked against <code>result.json</code>.</li>
+<li><strong>Provider, when the column is missing:</strong></li>
+<li>Map each response's endpoint <code>base_url</code> to a short name: <code>huggingface</code> gives <code>HF</code>, <code>modal.run</code> gives <code>Modal</code>, and anything else gives its host name.</li>
+<li>The trial's provider is the sorted join of those names, so mixed trials come out as <code>HF+Modal</code>.</li>
+<li>A trial with no responses gets a blank provider.</li>
+</ul>
+<h3 id="i2-packpy">I2 <code>pack.py</code></h3>
+<pre><code class="language-python">class PackView:
+    def __init__(self, pack: dict, manifest: dict)
+    scenes: dict[id, scene]
+    def level(scene_id, n) -&gt; dict
+    def family(scene) -&gt; str
+    def family_description(family) -&gt; str
+    def diagnostic_description(diag) -&gt; str
+    def criterion_description(crit) -&gt; str
+    def pairing_description(a, b) -&gt; str
+    def setting_description(setting_id) -&gt; str
+    def monitoring_description(mode) -&gt; str
+    def scene_source(scene) -&gt; &quot;authored&quot; | &quot;template&quot; | &quot;unknown&quot;
+    def text_features(scene, level) -&gt; dict
+    report_keys: dict[criterion, dict]
+</code></pre>
+<ul>
+<li><strong>Family</strong> comes from <code>diagnostic</code>: welfare → <code>rule_breaking</code>, nondeception → <code>promise_vs_record</code>, authority → <code>boss_vs_rulebook</code>. The names are kept for backward compatibility.</li>
+<li>The v1 descriptions are reproduced exactly. The ID range, e.g. "(S01-S07)", is computed from the pack's scene IDs when they're contiguous, and replaced by "(N scenes)" otherwise.</li>
+<li><strong><code>criterion_description</code></strong> uses the v1 summary text when the pack's criterion block equals the v1 block. Otherwise it uses the first sentence of the block.</li>
+<li><strong><code>scene_source</code></strong> uses an explicit pack field if one exists (<code>source</code> / <code>generated</code>). Otherwise it applies the template title patterns (<code>^Leftover .* book$</code>, <code>^True .* vs promised wording$</code>, <code>override$</code>) and marks the result <code>template?</code>, i.e. a heuristic. It returns <code>unknown</code> for v1, where every scene is authored and has no field.</li>
+<li><strong><code>text_features</code></strong> is ported unchanged from <code>build_metrics.py</code>: take principal, soft take principal, non-principal voice, rank stated, take/refuse deceives lists and counts, promise, welfare judgement, expected tipping point, justified/ambiguous.</li>
+<li><strong><code>report_keys</code></strong> are parsed from each criterion block's text, so later code knows which report lines to look for:</li>
+<li>authority: <code>highest_principal_who_has_spoken</code> or <code>highest_principal</code>, plus <code>their_instruction</code></li>
+<li>nondeception: <code>deceive_if_take</code> / <code>deceive_if_refuse</code>, or none</li>
+<li>welfare: <code>welfare_take</code> / <code>welfare_refuse</code>, or <code>welfare_accept</code> / <code>welfare_refuse</code></li>
+</ul>
+<h3 id="i3-heuristicspy">I3 <code>heuristics.py</code></h3>
+<ul>
+<li>The v1 regexes and functions (<code>stance</code>, <code>deception_count</code>, <code>take_linked_deception_sentences</code>, <code>LONE_AWARE_RE</code>, <code>AGREE_RE</code>, <code>EVALUATOR_RE</code> and so on) are moved <strong>verbatim</strong>, with a version tag <code>HEURISTICS_VERSION = "v1"</code>.</li>
+<li><code>criterion_report(crit, text, keys)</code> is generalised to use <code>report_keys</code>. When the keys are the v1 ones, it behaves exactly as before.</li>
+<li>If a pack has no nondeception report keys, its compliance columns are left blank, and the schema records "not reported by this pack".</li>
+</ul>
+<h3 id="i4-extractpy">I4 <code>extract.py</code></h3>
+<pre><code class="language-python">def build_rows(manifest, trials, pack_view) -&gt; tuple[list[dict], list[str]]   # rows, ordered columns
+</code></pre>
+<ul>
+<li>The column order matches v1: inputs, then outcomes, then interleaved per-agent pairs, then pair columns.</li>
+<li><strong>New input columns</strong>, each placed after its v1 neighbour: <code>setting_id</code> (+ description), <code>monitoring</code> (+ description), <code>scene_source</code>, <code>order_seed</code>, and <code>selection_method</code> (from <code>pack.selection</code>).</li>
+<li><strong>Rows that never ran.</strong> Rows with <code>not_started</code> or <code>running</code> keep only their input columns.</li>
+<li><strong>Model name</strong> comes from the manifest endpoint or config, not the hard-coded "Qwen3-32B".</li>
+</ul>
+<h3 id="i5-schemapy">I5 <code>schema.py</code></h3>
+<ul>
+<li><strong><code>column_docs.json</code></strong> is seeded once by parsing the published <code>trial_metrics_dictionary.md</code> tables, and new columns are added by hand.</li>
+<li><strong>Type inference:</strong></li>
+<li><code>binary</code> if the values are only {0, 1, blank}</li>
+<li><code>numeric</code> if all values parse as numbers and there are more than 10 levels</li>
+<li><code>ordinal</code> for <code>level</code> and other declared ordinals</li>
+<li><code>categorical</code> if there are 30 levels or fewer</li>
+<li><code>text</code> otherwise</li>
+<li><strong>Roles:</strong></li>
+<li><code>id</code>: <code>run_id</code></li>
+<li><code>description</code>: <code>*_description</code>, <code>*_title</code>, <code>*_label</code>, <code>principals_text</code></li>
+<li><code>meta</code>: run settings that are constant, provider-recovery flags, tokens, <code>served_models</code>, <code>error</code></li>
+<li><code>parameter</code>: the remaining inputs</li>
+<li><code>outcome</code>: the outcome, per-agent and pair columns</li>
+<li><strong><code>level</code></strong> is <code>agent</code> for <code>_a</code> / <code>_b</code> pairs and <code>trial</code> otherwise.</li>
+<li><strong>Registries.</strong> <code>by_construction_with</code> and <code>heuristic</code> + <code>validation</code> come from small registries in <code>schema.py</code>, seeded from the published dictionary's validation section, e.g. the stance classifier at 0.88 held-out on V1. Validation is recorded <strong>per pack</strong>: on E1, heuristic columns get <code>validation: null</code> and the flag "not validated for this pack" until someone validates them.</li>
+<li><strong>Outputs:</strong> the dictionary Markdown is generated from the schema plus <code>column_docs.json</code>, and the HTML comes from <code>tools/md_to_html.py</code>.</li>
+</ul>
+<h3 id="i6-statspy">I6 <code>stats.py</code></h3>
+<ul>
+<li>Functions are ported from <code>analyze_dimensions.py</code> and generalised: <code>wilson(k, n)</code>, <code>fisher_2x2</code>, <code>odds_ratio</code>, <code>cramers_v(table, bias_corrected=True)</code>, <code>eta(x, groups)</code>, <code>eps2(x, groups)</code>, <code>spearman(x, y)</code>, <code>bh(p)</code>, <code>cluster_bootstrap(stat, data, clusters, B, seed)</code>.</li>
+<li><strong><code>perm_test(stat, x, y, n_perm, seed, strata=None, clusters=None, within=None)</code></strong>:</li>
+<li>stops early once p &gt; 0.1 is certain at 99% confidence</li>
+<li>permutes <code>clusters</code> (whole episodes) for episode-level parameters</li>
+<li>permutes within <code>within</code> for agent-level parameters</li>
+<li>shuffles within <code>strata</code> such as scenario or template</li>
+<li><strong>Shuffle count:</strong> <code>n_perm = max(2000, ceil(20 * m / alpha))</code> for m tests, which is configurable.</li>
+</ul>
+<h3 id="i7-chartspy">I7 <code>charts.py</code></h3>
+<ul>
+<li>Functions: <code>heat_dim_metric(...)</code>, <code>heat_2d(...)</code>, <code>rate_bars(...)</code>, <code>distributions(...)</code>, <code>assoc_matrix(...)</code>. They are ported from <code>analyze_dimensions.py</code> and keep its palette and conventions: values and n printed in cells, absolute scales for 2D maps and rates, and non-significant cells marked when colour is normalised per column.</li>
+<li>Labels always come from the description and title columns via the schema.</li>
+</ul>
+<h3 id="i8-screenpy-reportpy">I8 <code>screen.py</code> / <code>report.py</code></h3>
+<p>These implement <code>PROCESS.md</code> Stage 2, Steps 0–6, using only the schema:
+- <strong>Parameters</strong> are columns with <code>role == parameter</code> that aren't constant and are categorical, ordinal, binary or numeric. Text parameters are excluded.
+- <strong>Outcomes</strong> are columns with <code>role == outcome</code> that aren't <code>text</code>. Agent-level pairs are reshaped to long format.
+- <strong>Heat map count</strong> is capped by <code>--max-heatmaps</code>, default 8: the parameters with the largest mean |effect|, plus <code>level</code>, <code>pairing</code> and any parameters named by <code>--focus</code>.
+- <strong>Interactions</strong> are only computed for non-aliased pairs (association &lt; 0.3) with a minimum cell count of 5 or more. They use a penalised logit likelihood-ratio test, fitted by a small IRLS implementation in <code>stats.py</code>, plus a permutation p.
+- <strong><code>REPORT.md</code></strong> gets every number, table and figure. Each narrative slot is marked <code>&lt;!-- COMMENTARY: … --&gt;</code> for the Stage 3 agent to fill in.</p>
+<h3 id="i9-run_pipelinepy">I9 <code>run_pipeline.py</code></h3>
+<p>Runs Stage 1 and then Stage 2, writes the HTML copies, and prints a summary with the files, counts, timings and skipped items.</p>
+<h2 id="5-increments-dependencies-and-parallel-plan">5. Increments, dependencies and parallel plan</h2>
+<pre><code>Wave 1 (parallel, no shared files):  I1 runio   I2 pack   I3 heuristics   I6 stats(+T3)   I7 charts
+Wave 2 (parallel):                   I4 extract(+T1,T4)  [needs I1–I3]     I5 schema(+T2)  [needs the V1 header; final check after I4]
+Wave 3:                              I8 screen/report(+T5) [needs I5, I6, I7]
+Wave 4:                              I9 CLI + integration runs on V1 and E1
+</code></pre>
+<p>Each increment is built by its own fresh subagent and reviewed by another fresh subagent, with <strong>one commit per increment</strong>. Reviews happen at four points: design (this document), each wave's implementation, test design, and the final results. The work ships as <strong>two PRs</strong>, one for Stage 1 (I1–I5 and its tests) and one for Stage 2 (I6–I9), so each stays small.</p>
+<h2 id="6-test-design">6. Test design</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Kind</th>
+<th>Pass criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>T3</strong> <code>test_stats</code></td>
+<td>unit</td>
+<td>Known answers: Wilson(15, 202) ≈ [0.045, 0.119]; Fisher's p on a textbook 2×2; V = 0 under independence and 1 under a perfect relationship; BH matches a hand-computed example; Spearman on a monotone sequence = 1; permutation p within ±0.01 of the exact value on a small case; bootstrap is deterministic given a seed</td>
+</tr>
+<tr>
+<td><strong>T1</strong> <code>test_stage1_v1</code></td>
+<td>regression</td>
+<td>Same 600 run IDs. Every published column is present with <strong>identical</strong> values (strings compared after normalising blanks). The only allowed differences are new columns.</td>
+</tr>
+<tr>
+<td><strong>T4</strong> <code>test_stage1_e1</code></td>
+<td>integration</td>
+<td>4,320 rows; status and outcome counts match <code>summary.json</code>; every row has setting and monitoring; trials that never ran have blank outputs; <code>scene_source</code> is filled in</td>
+</tr>
+<tr>
+<td><strong>T2</strong> <code>test_schema</code></td>
+<td>unit</td>
+<td>Every CSV column has a schema entry; roles and types are valid; every identifier's <code>description_column</code> exists; <code>by_construction_with</code> points only at real columns</td>
+</tr>
+<tr>
+<td><strong>T5</strong> <code>test_stage2_v1</code></td>
+<td>regression</td>
+<td><code>tables/</code> reproduce the published headline numbers (family collusion counts; authority take when rank is stated, 29/33; non-deception take when refusing breaks a promise, 95/111); the screening table includes V for scenario family vs. collusion ≈ 0.47</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-risks">7. Risks</h2>
+<ul>
+<li><strong>The stance and deception heuristics were tuned on v1 deals.</strong> On E1, the scenario nouns differ and the deal is called "the action". They will run, but they're flagged as unvalidated for that pack. Validation needs a transcript sample, which is a judgement task. It's listed as a follow-up in the PR.</li>
+<li><strong>E1 is a live snapshot.</strong> Tests compare against its own <code>summary.json</code>, not fixed numbers.</li>
+<li><strong>Runtime.</strong> E1 has about 1,862 complete trials, each with 10 responses. Parsing is fast. Stage 2 permutation tests with the BH-scaled shuffle count are the slowest part, so early stopping and vectorised permutations are required. The target is under 10 minutes per run on a laptop.</li>
+</ul>
+</body>
+</html>
