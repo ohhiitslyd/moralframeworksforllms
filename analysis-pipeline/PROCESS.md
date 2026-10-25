@@ -225,6 +225,7 @@ Write `tables/candidates.csv`, including an explicit "looks large but untrustwor
 - **Colour bars have units.**
 - **Scales:** a single-hue sequential scale for magnitudes; a diverging scale centred at 0 for signed correlations; colour-blind-safe palettes that work in light and dark themes.
 - **Print the value and n in every heat-map cell.** Order rows and columns meaningfully.
+- **Legible on screen.** Size the cell numbers to the cell, never below 10 pt for values at the saved size. Show the value bold, with n on a smaller second line. On large heat maps, enlarge the figure or cells instead of shrinking the text, and split very wide maps into chunks. Open the saved image to check it before reporting.
 - **Keep it to about 10–20 charts.** Prefer small multiples.
 
 ### Deliverables

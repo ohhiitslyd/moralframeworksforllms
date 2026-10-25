@@ -87,27 +87,37 @@ def rate_table(keys):
     return {k: {o: acc[k][o] / n[k] for o, _ in OUTCOMES} for k in n}, n
 
 
+def cell_fonts(n_rows, n_cols, row_h, col_w):
+    """Annotation font sizes scaled to the cell size; never below 10 pt for values."""
+    fs = max(10.0, min(16.0, 0.36 * 72 * min(row_h, col_w / 1.8)))
+    return fs, max(8.0, 0.68 * fs)
+
+
 def draw(mat, nmat, rlabels, clabels, title, subtitle, xlabel, ylabel, fname):
-    h = max(3.2, 0.55 * len(rlabels) + 1.8)
-    w = max(6.5, 1.45 * len(clabels) + 3.2)
+    row_h = 0.8 if len(rlabels) <= 20 else 0.5
+    col_w = 1.7
+    fs, fs_n = cell_fonts(len(rlabels), len(clabels), row_h, col_w)
+    h = max(3.6, row_h * len(rlabels) + 2.2)
+    w = max(7.5, col_w * len(clabels) + 3.8)
     fig, ax = plt.subplots(figsize=(w, h))
     im = ax.imshow(np.ma.masked_invalid(mat), cmap="Blues", vmin=0, vmax=1, aspect="auto")
     for i in range(mat.shape[0]):
         for j in range(mat.shape[1]):
             if np.isnan(mat[i, j]):
-                ax.text(j, i, "—", ha="center", va="center", fontsize=8, color="#888")
+                ax.text(j, i, "—", ha="center", va="center", fontsize=fs, color="#888")
                 continue
             v = mat[i, j]
-            ax.text(j, i, f"{v:.0%}\nn={int(nmat[i, j])}", ha="center", va="center", fontsize=8,
-                    color="white" if v > 0.55 else "#1f2328")
-    ax.set_xticks(range(len(clabels)), clabels, rotation=30, ha="right", fontsize=9)
-    ax.set_yticks(range(len(rlabels)), rlabels, fontsize=9)
+            col = "white" if v > 0.55 else "#1f2328"
+            ax.text(j, i - 0.13, f"{v:.0%}", ha="center", va="center", fontsize=fs, fontweight="bold", color=col)
+            ax.text(j, i + 0.27, f"n={int(nmat[i, j])}", ha="center", va="center", fontsize=fs_n, color=col)
+    ax.set_xticks(range(len(clabels)), clabels, rotation=30, ha="right", fontsize=11)
+    ax.set_yticks(range(len(rlabels)), rlabels, fontsize=11)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
-    fig.suptitle(title, fontsize=12, fontweight="bold", x=0.01, ha="left")
-    ax.set_title(subtitle, fontsize=8.5, loc="left", color="#59636e")
+    fig.suptitle(title, fontsize=14, fontweight="bold", x=0.01, ha="left")
+    ax.set_title(subtitle, fontsize=10, loc="left", color="#59636e")
     cb = fig.colorbar(im, ax=ax, fraction=0.035, pad=0.02)
-    cb.set_label("Rate among complete trials (absolute 0–100%)", fontsize=8)
+    cb.set_label("Rate among complete trials (absolute 0–100%)", fontsize=10)
     cb.ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
     fig.tight_layout()
     fig.savefig(FIG / fname, dpi=150)
