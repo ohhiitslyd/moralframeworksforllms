@@ -33,3 +33,8 @@ The worker exited on WinError5 during atomic replacement of one completed result
 
 User authorized model endpoint switch to `haitamelmekaoui` workspace and concurrency 96 due to low credits on the previous workspace. The running 48-slot worker was cleanly drained via `pause.request`, preserving all 481 completed episodes and 10 format exclusions, and published in snapshot `20261025-121256`. The new endpoint was verified with streaming reasoning tokens. Remaining episodes resume at 96 parallel requests with `--allow-endpoint-change`, logging provenance to `endpoint_history.json`. Logs: `pressure-72-96.stdout.log` / `pressure-72-96.stderr.log`.
 
+## Publication snapshot 20261025-123715 and connection recovery at 12:48 UTC
+
+Snapshot `20261025-123715` published with 547 completed episodes, 11 format exclusions, 100% reasoning coverage (5,576 responses) and remote HEAD verified. Concurrency 96 was maintained. At 12:48 UTC the worker drained and paused when an HTTP connection dropped (`RemoteProtocolError` and `APIConnectionError`). Completed episodes reached 717 with 15 format failures preserved. The runner supports `--recover-connection-failures` to archive the original network failure to `connection-failure-original.json` and resume only missing stages from checkpoint, preserving all existing responses without re-execution.
+
+

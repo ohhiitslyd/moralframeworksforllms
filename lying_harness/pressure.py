@@ -120,10 +120,14 @@ def timeout_failure(result):
     return result["status"] == "failed" and "APITimeoutError:" in result.get("error", "")
 
 
+def connection_failure(result):
+    return result["status"] == "failed" and any(m in result.get("error", "") for m in ("APIConnectionError", "RemoteProtocolError"))
+
+
 def episode(pack, config, spec, backend, directory, recover=False):
     directory.mkdir(parents=True, exist_ok=recover)
     prior = json.loads((directory / "result.json").read_text(encoding="utf-8")) if recover else None
-    if prior and prior["status"] != "running" and not credit_failure(prior) and not timeout_failure(prior):
+    if prior and prior["status"] != "running" and not credit_failure(prior) and not timeout_failure(prior) and not connection_failure(prior):
         raise ValueError("Only interrupted running episodes may be continued")
     events = [json.loads(line) for line in (directory / "events.jsonl").read_text(encoding="utf-8").splitlines()] if recover else []
     saved, old_requests = {}, {}
@@ -267,6 +271,7 @@ def main():
     parser.add_argument("--resume-interrupted", action="store_true")
     parser.add_argument("--recover-credit-failures", action="store_true")
     parser.add_argument("--recover-timeouts", action="store_true", help="Explicit checkpoint continuation after diagnosed timeout outage")
+    parser.add_argument("--recover-connection-failures", action="store_true", help="Explicit checkpoint continuation after diagnosed network disconnection")
     parser.add_argument("--allow-endpoint-change", action="store_true")
     parser.add_argument("--endpoint-change-reason", default="User-authorized endpoint switch", help="Audited reason recorded in endpoint_history.json")
     parser.add_argument("--env-file", type=Path, default=ROOT / ".env")
@@ -344,6 +349,13 @@ def main():
                         write_json(archive, result)
                     else:
                         raise ValueError("Repeated timeout recovery requires manual diagnosis; original attempt already archived")
+                    return episode(pack, config, spec, backend, path, recover=True)
+                if args.recover_connection_failures and connection_failure(result):
+                    archive = path / "connection-failure-original.json"
+                    if not archive.exists():
+                        write_json(archive, result)
+                    else:
+                        raise ValueError("Repeated connection recovery requires manual diagnosis; original attempt already archived")
                     return episode(pack, config, spec, backend, path, recover=True)
                 if args.recover_credit_failures and credit_failure(result):
                     archive = path / "credit-failure-original.json"

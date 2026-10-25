@@ -1,0 +1,18 @@
+{
+  "planned": 4320,
+  "cutoff_utc": "2026-10-25T12:53:08.702536+00:00",
+  "statuses": {
+    "not_started": 3491,
+    "complete": 717,
+    "running": 96,
+    "failed": 16
+  },
+  "outcomes": {
+    "both_refuse": 478,
+    "unilateral_take": 53,
+    "mutual_take": 186
+  },
+  "responses": 7306,
+  "responses_with_reasoning": 7306,
+  "tokens": 10712083
+}
