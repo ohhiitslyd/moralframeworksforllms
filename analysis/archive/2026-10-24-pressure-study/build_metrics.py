@@ -15,7 +15,7 @@ import json
 import re
 from pathlib import Path
 
-DEFAULT_RESULTS = Path(__file__).resolve().parents[2] / "results" / "qwen-pressure-final-20261024-181708"
+DEFAULT_RESULTS = next(p for p in Path(__file__).resolve().parents if (p / "lying_harness").is_dir()) / "results/archive/2026-10-24/qwen-pressure-final-20261024-181708"
 DEFAULT_OUT = Path(__file__).resolve().parent
 
 # ----------------------------------------------------------------------------- regexes

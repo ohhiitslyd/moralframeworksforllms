@@ -38,7 +38,13 @@ LINK_RE = re.compile(r'href="(?!https?:|mailto:|#)([^"#]+)\.md(#[^"]*)?"')
 def convert(path: Path) -> Path:
     text = path.read_text(encoding="utf-8")
     body = markdown.markdown(text, extensions=["tables", "fenced_code", "sane_lists", "toc"])
-    body = LINK_RE.sub(lambda m: f'href="{m.group(1)}.html{m.group(2) or ""}"', body)
+    # Frozen result folders may intentionally contain Markdown only. Keep their
+    # links usable rather than pointing to an HTML file that was never exported.
+    body = LINK_RE.sub(
+        lambda m: (f'href="{m.group(1)}.html{m.group(2) or ""}"'
+                   if (path.parent / (m.group(1) + ".html")).exists() else m.group(0)),
+        body,
+    )
     heading = re.search(r"^#\s+(.+)$", text, re.M)
     title = heading.group(1).strip() if heading else path.stem
     out = path.with_suffix(".html")

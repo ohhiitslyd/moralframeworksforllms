@@ -1,6 +1,6 @@
 # trial_metrics.csv — data dictionary
 
-**Source data:** `results/qwen-pressure-final-20261024-181708/` (read-only).
+**Source data:** `results/archive/2026-10-24/qwen-pressure-final-20261024-181708/` (read-only).
 **Generator:** `build_metrics.py` (stdlib only). Run with `python -I build_metrics.py [--results DIR] [--out DIR]`.
 
 **Shape:** 600 rows (one per planned episode) × 162 columns. Every identifier column (run, scenario, family, diagnostic, level, pairing, pairing kind, criterion, provider, outcome) has a plain-language `*_description` column (or title/label) immediately to its right.

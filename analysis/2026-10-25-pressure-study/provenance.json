@@ -1,0 +1,15 @@
+{
+  "source_commit": "82b644ce5439c6fc6f28e4cdeaedf032a28cc848",
+  "original_directory": "results/qwen-pressure-72-v1-snapshot-20261025-164207",
+  "current_directory": "results/2026-10-25-pressure-study",
+  "cutoff_utc": "2026-10-25T16:42:07.460485+00:00",
+  "manifest_sha256": "6db5f603f077bd17e7b7bdd784f2245bbe567ac9c7649913658058524667196d",
+  "raw_checksums_sha256": "b09c281d96a38e02f93b0b98d62b5108e0651bd373dcdb927278e33601e93380",
+  "planned_comparisons": 2160,
+  "matched_comparisons": 2083,
+  "unavailable_comparisons": 77,
+  "both_joint_accept": 436,
+  "neither_joint_accept": 1467,
+  "watched_only_joint_accept": 49,
+  "unwatched_only_joint_accept": 131
+}

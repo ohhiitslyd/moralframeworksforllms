@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Results layout and provenance</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="results-layout-and-provenance">Results layout and provenance</h1>
+<p>Cleanup was performed on <code>codex/resolve-pressure-merge</code> in an isolated checkout. The original experiment checkout, environments, outputs and local studio work were left in place.</p>
+<h2 id="canonical-completed-study">Canonical completed study</h2>
+<p>The full 4,320-episode run is <code>results/2026-10-25-pressure-study/</code>. It is the frozen <code>20261025-164207</code> snapshot from commit <code>82b644ce5439c6fc6f28e4cdeaedf032a28cc848</code>. Its 4,243 completed and 77 failed episodes account for every planned episode. The snapshot still contains its original generic partial-snapshot policy text; the saved terminal counts establish collection completion. No metadata was rewritten.</p>
+<p>The main report is <code>analysis/2026-10-25-pressure-study/README.md</code>. Graphs are regenerated from the completed evidence, not copied from the earlier partial analysis.</p>
+<h2 id="directory-map">Directory map</h2>
+<table>
+<thead>
+<tr>
+<th>Previous directory</th>
+<th>Current directory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results/hf-provider-probe-20261024-125118/</code></td>
+<td><code>results/archive/2026-10-24/hf-provider-probe-20261024-125118/</code></td>
+</tr>
+<tr>
+<td><code>results/hf-provider-probe-20261024-130409/</code></td>
+<td><code>results/archive/2026-10-24/hf-provider-probe-20261024-130409/</code></td>
+</tr>
+<tr>
+<td><code>results/mechanical-check-v1/</code></td>
+<td><code>results/archive/2026-10-24/mechanical-check-v1/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-full-99-v1/</code></td>
+<td><code>results/archive/2026-10-24/qwen-full-99-v1/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pilot-v1/</code></td>
+<td><code>results/archive/2026-10-24/qwen-pilot-v1/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-115759/</code></td>
+<td><code>results/archive/2026-10-25/progress-115759/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-121256/</code></td>
+<td><code>results/archive/2026-10-25/progress-121256/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-123715/</code></td>
+<td><code>results/archive/2026-10-25/progress-123715/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-125308/</code></td>
+<td><code>results/archive/2026-10-25/progress-125308/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-131134/</code></td>
+<td><code>results/archive/2026-10-25/progress-131134/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-135352/</code></td>
+<td><code>results/archive/2026-10-25/progress-135352/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-141425/</code></td>
+<td><code>results/archive/2026-10-25/progress-141425/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-145559/</code></td>
+<td><code>results/archive/2026-10-25/progress-145559/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-152937/</code></td>
+<td><code>results/archive/2026-10-25/progress-152937/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-155819/</code></td>
+<td><code>results/archive/2026-10-25/progress-155819/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-161829/</code></td>
+<td><code>results/archive/2026-10-25/progress-161829/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-72-v1-snapshot-20261025-164207/</code></td>
+<td><code>results/2026-10-25-pressure-study/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-final-20261024-181708/</code></td>
+<td><code>results/archive/2026-10-24/qwen-pressure-final-20261024-181708/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-partial-20261024-1730/</code></td>
+<td><code>results/archive/2026-10-24/qwen-pressure-partial-20261024-1730/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-partial-20261024-174425/</code></td>
+<td><code>results/archive/2026-10-24/qwen-pressure-partial-20261024-174425/</code></td>
+</tr>
+<tr>
+<td><code>results/qwen-pressure-partial-20261024-180119/</code></td>
+<td><code>results/archive/2026-10-24/qwen-pressure-partial-20261024-180119/</code></td>
+</tr>
+<tr>
+<td><code>analysis/qwen-pressure-final-20261024-181708/</code></td>
+<td><code>analysis/archive/2026-10-24-pressure-study/</code></td>
+</tr>
+</tbody>
+</table>
+<p>All moved raw result files keep their original Git blob and byte contents. Run IDs and within-snapshot paths are unchanged, so checksum manifests remain valid. Historical analysis documents and the metrics builder have updated paths; data tables and plots are retained. Earlier project-level reports are under <code>docs/archive/</code>.</p>
+<p>Transient process logs and local shortcuts are ignored by Git. They were not deleted from the experiment checkout. This branch does not rename any live output directory or change collection behavior.</p>
+<h2 id="validation">Validation</h2>
+<ul>
+<li>All 25 unit tests pass.</li>
+<li>All 80,381 moved raw result files retain their original Git blob hashes.</li>
+<li>All 13,017 checksums in the completed collection pass after the move.</li>
+<li>All 124 links in the new Markdown and HTML navigation pages resolve in the staged tree.</li>
+<li>All 4,320 final CSV rows are checked against their saved result records before plotting.</li>
+<li>The report contains 13 figures, each exported as PNG and SVG, plus four CSV tables.</li>
+</ul>
+<p>Run <code>python tools/verify_results_layout.py</code> to repeat the raw-file and link checks.</p>
+</body>
+</html>

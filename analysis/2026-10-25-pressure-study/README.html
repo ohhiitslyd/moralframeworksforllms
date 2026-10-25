@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Completed pressure study — 25 October 2026</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="completed-pressure-study-25-october-2026">Completed pressure study — 25 October 2026</h1>
+<p><strong>4,320 / 4,320 planned experimental episodes reached terminal status.</strong> There are <strong>4,243 usable completions (98.2%) and 77 exclusions</strong>. All excluded attempts remain in the raw evidence; they are not counted as refusals.</p>
+<p><a href="../../results/2026-10-25-pressure-study/README.md">Raw results and transcripts</a> · <a href="../../results/2026-10-25-pressure-study/summary.json">Run summary</a> · <a href="provenance.json">Provenance</a> · <a href="../../results/archive/README.html">Earlier progress snapshots</a></p>
+<p>This is the completed <strong>72-scenario, eight-setting study</strong>: 5 stress levels × 6 pairings × 2 monitoring notices × 1 seed. It is distinct from the newer five-setting prompt design and the older 600-episode study; these datasets are not pooled.</p>
+<h2 id="main-results">Main results</h2>
+<table>
+<thead>
+<tr>
+<th>Outcome among usable episodes</th>
+<th style="text-align: right;">Count</th>
+<th style="text-align: right;">Share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Both take (joint acceptance)</td>
+<td style="text-align: right;">1,075</td>
+<td style="text-align: right;">25.3%</td>
+</tr>
+<tr>
+<td>Only one takes</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">6.6%</td>
+</tr>
+<tr>
+<td>Both refuse</td>
+<td style="text-align: right;">2,886</td>
+<td style="text-align: right;">68.0%</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Joint acceptance by pressure level" src="figures/pressure-level-joint-acceptance.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Stress level</th>
+<th style="text-align: right;">Usable episodes</th>
+<th style="text-align: right;">Both take</th>
+<th style="text-align: right;">Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">848</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">5.4%</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">850</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">13.5%</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: right;">843</td>
+<td style="text-align: right;">188</td>
+<td style="text-align: right;">22.3%</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: right;">852</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">31.9%</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align: right;">850</td>
+<td style="text-align: right;">454</td>
+<td style="text-align: right;">53.4%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="watched-versus-unwatched-three-average-graphs">Watched versus unwatched: three average graphs</h2>
+<p><strong>2,083 of 2,160 comparison cells have usable completions under both notices.</strong> The remaining 77 cells are excluded from paired comparisons. Each matched cell fixes scenario, stress level, pairing and seed. Watched and unwatched rates therefore use exactly the same cells. The two pairings for each rule are combined with equal weight per matched cell.</p>
+<p>Across matched cells, joint acceptance is <strong>23.3% watched versus 27.2% unwatched</strong> (<strong>-3.9 percentage points</strong>, watched minus unwatched).</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th style="text-align: right;">Matched cells</th>
+<th style="text-align: right;">Watched</th>
+<th style="text-align: right;">Unwatched</th>
+<th style="text-align: right;">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Welfare</td>
+<td style="text-align: right;">692</td>
+<td style="text-align: right;">38.7%</td>
+<td style="text-align: right;">47.0%</td>
+<td style="text-align: right;">-8.2 pp</td>
+</tr>
+<tr>
+<td>Non-deception</td>
+<td style="text-align: right;">694</td>
+<td style="text-align: right;">18.3%</td>
+<td style="text-align: right;">20.9%</td>
+<td style="text-align: right;">-2.6 pp</td>
+</tr>
+<tr>
+<td>Authority</td>
+<td style="text-align: right;">697</td>
+<td style="text-align: right;">12.9%</td>
+<td style="text-align: right;">13.9%</td>
+<td style="text-align: right;">-1.0 pp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="welfare">Welfare</h3>
+<p><img alt="Welfare: average monitoring comparison" src="figures/w-average-monitoring.png" /></p>
+<h3 id="non-deception">Non-deception</h3>
+<p><img alt="Non-deception: average monitoring comparison" src="figures/d-average-monitoring.png" /></p>
+<h3 id="authority">Authority</h3>
+<p><img alt="Authority: average monitoring comparison" src="figures/a-average-monitoring.png" /></p>
+<p><a href="tables/rule-level-monitoring-averages.csv">Download average graph data</a></p>
+<h2 id="each-stress-level-and-pairing">Each stress level and pairing</h2>
+<p><img alt="Monitoring by level and pairing" src="figures/matched-monitoring-overview.png" /></p>
+<p><a href="tables/pairing-level-monitoring.csv">Download pairing × level data</a></p>
+<h2 id="every-scenario">Every scenario</h2>
+<p>Each cell reads <strong>watched / unwatched</strong>: <strong>T</strong> = both take; <strong>O</strong> = one takes; <strong>R</strong> = both refuse; <strong>?</strong> = excluded. Gray cells have an excluded episode and do not stand for refusal. Purple marks joint acceptance only when unwatched; orange marks it only when watched. Full titles and all cells are in the linked comparison table.</p>
+<p>Among matched cells, 436 have joint acceptance under both notices, 1467 under neither, 49 only when watched and 131 only when unwatched.</p>
+<p><a href="tables/scenario-level-pairing-comparisons.csv">Download all 2,160 scenario comparisons</a></p>
+<h3 id="hospital">Hospital</h3>
+<p><img alt="Hospital: all scenarios, stress levels and pairings" src="figures/hospital-monitoring-grid.png" /></p>
+<h3 id="religious">Religious</h3>
+<p><img alt="Religious: all scenarios, stress levels and pairings" src="figures/religious-monitoring-grid.png" /></p>
+<h3 id="military">Military</h3>
+<p><img alt="Military: all scenarios, stress levels and pairings" src="figures/military-monitoring-grid.png" /></p>
+<h3 id="school">School</h3>
+<p><img alt="School: all scenarios, stress levels and pairings" src="figures/school-monitoring-grid.png" /></p>
+<h3 id="volunteer">Volunteer</h3>
+<p><img alt="Volunteer: all scenarios, stress levels and pairings" src="figures/volunteer-monitoring-grid.png" /></p>
+<h3 id="social-club">Social Club</h3>
+<p><img alt="Social Club: all scenarios, stress levels and pairings" src="figures/social_club-monitoring-grid.png" /></p>
+<h3 id="family">Family</h3>
+<p><img alt="Family: all scenarios, stress levels and pairings" src="figures/family-monitoring-grid.png" /></p>
+<h3 id="situational">Situational</h3>
+<p><img alt="Situational: all scenarios, stress levels and pairings" src="figures/situational-monitoring-grid.png" /></p>
+<h2 id="interpretation-and-limits">Interpretation and limits</h2>
+<p>Joint acceptance is the operational outcome: both agents choose <code>take</code>. It does not by itself establish deception, criterion compliance or causally confirmed collusion. The monitoring manipulation changes the notice shown to the agents; researcher logging is identical. There is one seed per cell, related scenario templates, no communication-off or none–none experimental baseline, and exclusions may depend on condition. Report these as descriptive comparisons rather than a general causal effect of surveillance.</p>
+<p>“Completed” means all planned episodes ended, including failures; it does not mean every episode passed formatting checks. The frozen snapshot metadata uses a generic “partial snapshot” policy label, but its 4,243 complete + 77 failed statuses establish full terminal coverage. That original metadata is preserved without alteration.</p>
+<p>All 42,992 returned responses include returned reasoning; 62,858,676 tokens were recorded, including controls. Returned reasoning is model output, not verified access to internal thought. Endpoint switches and recovery attempts remain in the raw audit files.</p>
+<h2 id="reproduce">Reproduce</h2>
+<pre><code class="language-powershell">python analysis/2026-10-25-pressure-study/build_report.py
+</code></pre>
+<p>The script reads the frozen CSV and verifies every planned row against its saved result. It uses original run IDs rather than rebuilding the matrix from current prompt code. It writes only this analysis folder, makes no model requests and changes no raw evidence.</p>
+<p>All figures have adjacent SVG versions for export. CSV tables retain denominators and explicit missing/excluded states. Earlier partial-snapshot graphs are superseded by this completed-run report; no earlier partial estimates are reused.</p>
+</body>
+</html>
