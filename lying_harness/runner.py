@@ -219,7 +219,7 @@ def render_transcript(events, result, path):
 
 
 def execute_batch(config, specs, prompts, backend, output, jobs=1, continue_on_failure=False,
-                  resume_interrupted=False):
+                  resume_interrupted=False, should_pause=None):
     """Gate on controls, then schedule independent episodes with bounded concurrency."""
     completed = {}
     failed = False
@@ -254,6 +254,8 @@ def execute_batch(config, specs, prompts, backend, output, jobs=1, continue_on_f
     controls = [spec for spec in specs if spec.control == "positive"]
     experiments = [spec for spec in specs if spec.control != "positive"]
     for spec in controls:
+        if should_pause and should_pause():
+            return 4
         result = existing(spec)
         if result is None:
             result = run_episode(config, spec, prompts, backend, output / "runs" / spec.run_id, resume_interrupted)
@@ -285,6 +287,8 @@ def execute_batch(config, specs, prompts, backend, output, jobs=1, continue_on_f
 
         def fill_slots():
             while not stop and len(pending) < jobs:
+                if should_pause and should_pause():
+                    break
                 spec = next(iterator, None)
                 if spec is None:
                     break
@@ -313,6 +317,8 @@ def execute_batch(config, specs, prompts, backend, output, jobs=1, continue_on_f
               "STOP: failure retained; already-running episodes finished, no further episodes launched.", flush=True)
     if infrastructure_stop:
         return 3
+    if should_pause and should_pause() and len(completed) < len(specs):
+        return 4
     return 2 if failed else 0
 
 
