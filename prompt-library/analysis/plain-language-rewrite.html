@@ -29,11 +29,11 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <body>
 <h1 id="plain-language-rewrite-of-a-findings-report">Plain-language rewrite of a findings report</h1>
 <p><strong>Use it for:</strong> rewriting a technical analysis so that a smart reader with no background on the experiment can follow it.
-<strong>Pipeline stage:</strong> Stage 3 of <a href="../../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a>.
+<strong>Pipeline stage:</strong> a <strong>Stage 3 helper</strong>. The full Stage 3 (one-sentence story, tiered headline findings, transcript quotes, mapping to research questions, <code>SUMMARY.md</code>) is defined in <a href="../../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a>. Use this prompt for the final readability pass, or to rewrite an existing report.
 <strong>Origin:</strong> the prompt that produced the accessible version of <code>SUMMARY-ANALYSIS.md</code> on branch <code>first-run-summary-analysis</code>.</p>
 <hr />
 <h2 id="prompt">Prompt</h2>
-<p>Rewrite <code>&lt;REPORT&gt;</code> so that someone with no background on this experiment can follow it. The reader is smart but hasn't seen the harness, the scenario pack, or AI-safety jargon.</p>
+<p>Rewrite <code>&lt;REPORT&gt;</code> so that someone with no background on this experiment can follow it. The reader is smart but hasn't seen the harness, the scenario pack, or AI-safety jargon. If an earlier version exists, compare against <code>&lt;EARLIER_REPORT&gt;</code> (leave it blank if there's none). Save the result as <code>&lt;OUTPUT&gt;</code> (e.g. <code>SUMMARY.md</code>) plus an <code>.html</code> copy.</p>
 <ol>
 <li><strong>Open with a short "What this experiment is" section</strong> in plain language:
    - who the agents are
@@ -42,14 +42,13 @@ hr { border: 0; border-top: 1px solid var(--border); }
    - what the moral instructions are
    - what the pressure levels do
    - what the evaluator is</li>
-<li><strong>Replace codes with words, or define each one where it first appears.</strong> This covers criteria, pairings, levels, scenario IDs (give each scenario a one-line plain description), outcome names, provider, seed, and any statistical terms.</li>
+<li><strong>Replace codes with words, or define each one where it first appears.</strong> This covers criteria, pairings, levels, scenario IDs (give each scenario a one-line plain description), outcome names, provider, seed, and statistical terms.</li>
 <li><strong>Keep run IDs, but only as parenthetical citations,</strong> never as the subject of a sentence.</li>
 <li><strong>For each finding, add one sentence on why it matters</strong> for the research question.</li>
 <li><strong>Give numbers as "X out of Y"</strong> with a plain explanation. Keep tables only if they're simple, and label every column in words.</li>
 <li><strong>Keep the caveats, explained in everyday terms.</strong> For example: "the runs that colluded most were also run on a different server, so we can't tell which caused it".</li>
 <li><strong>Keep the same findings, and add no new analysis claims.</strong> Aim for roughly the original length, or slightly longer.</li>
-<li><strong>If an earlier version of the analysis exists,</strong> add a short "What changed" section near the top, and say for each finding whether it held up, got stronger, got weaker or reversed.</li>
+<li><strong>If <code>&lt;EARLIER_REPORT&gt;</code> is given,</strong> add a short "What changed" section near the top, and say for each finding whether it held up, got stronger, got weaker or reversed.</li>
 </ol>
-<p>Return the full rewritten report.</p>
 </body>
 </html>

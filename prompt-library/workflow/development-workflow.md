@@ -2,6 +2,8 @@
 
 Standing instructions for any AI agent (or person) doing work in this project. They apply to general development and to every increment of work: experiment design, research, analysis, coding, batch runs, reports and documentation.
 
+**Origin:** the project owner's standing instructions (2026-10-25).
+
 ## The prompt (verbatim)
 
 > For each change, create a branch named in the format [category]-[item], where "category" is the major category of change, and "item" is the specific increment we're working on. Create a local worktree for the branch whose name is in the format [project-name]-[branch-name]. Monitor our work and be alert to make sure work is done in an appropriate worktree and branch; periodically notify me to confirm the branch and alert me if anything seems wrong. For each change, use the development process: experimental design->review experimental design->code design->review design->implement->review implementation->test design->review test design->run unit test->integrate tests->review test results->analysis->review analysis->reports->review reports. For large blocks of work, break work down into the smallest feasible increment of functionality; then analyze the increments to identify dependencies; then for each increment, implement using parallel subagents, running any steps in parallel which are (a) not dependent on each other, (b) not blocked by other work, and (c) not changing the same parts of the project. When changes are done, prompt me to review the results by providing links to HTML and markdown reports which I can review.
@@ -44,10 +46,11 @@ Skip the steps that don't apply, and say which ones you skipped and why. For exa
 - Commit often. Each commit title should describe one step.
 - Each PR is small and self-contained, and its description includes documentation and test results.
 - **Minor changes:** after AI review and passing tests, you may commit, push, open a PR and merge it.
-- **Major changes or sets of PRs:** write HTML and Markdown summary reports and ask the user to review them **before** merging.
+- **Major changes or sets of PRs:** write HTML and Markdown summary reports and ask the user to review them **before any of the merges**.
+- **What counts as major:** any change to experimental design, harness behaviour, prompts sent to models, published results, or interpretation of findings; anything that triggers a paid or cloud run; and any set of related PRs. Everything else (docs, refactors with passing regression tests, tooling) is minor. When unsure, treat it as major.
 - When finished, give the user links to the HTML and Markdown reports.
 
-**Monitoring.** Check the branch and worktree before you edit anything. From time to time, tell the user which branch is active, and flag any mismatch.
+**Monitoring.** Check the branch and worktree before you edit anything. From time to time, tell the user which branch and worktree are active and ask them to confirm. Flag any mismatch immediately.
 
 ## Using subagents
 

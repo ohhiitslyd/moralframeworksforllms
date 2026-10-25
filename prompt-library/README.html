@@ -65,21 +65,21 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tr>
 <tr>
 <td><strong>Parameter → outcome report</strong></td>
-<td>Stage 2: design check, matrices, screening, single-factor and 2D heat maps, statistics, curation</td>
+<td>Stage 2: design check, matrices, screening, single-factor and 2D heat maps, statistics, ranked candidates for Stage 3</td>
 <td><a href="analysis/parameter-outcome-report.html"><code>analysis/parameter-outcome-report.md</code></a></td>
 </tr>
 <tr>
 <td><strong>Plain-language rewrite</strong></td>
-<td>Stage 3: make a findings report readable for newcomers</td>
+<td>Stage 3 helper: final readability pass on a findings report (the full Stage 3 steps are in <code>PROCESS.md</code>)</td>
 <td><a href="analysis/plain-language-rewrite.html"><code>analysis/plain-language-rewrite.md</code></a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="conventions">Conventions</h2>
 <ul>
-<li><strong>One prompt per file.</strong> Each file has a short header (what it's for, which pipeline stage, where it came from), followed by the prompt itself.</li>
+<li><strong>One prompt per file.</strong> Each file in <code>prompt-library/</code> has a short header (what it's for, which pipeline stage, origin), followed by the prompt itself. Prompts kept in their original locations, such as <code>starter-prompts/</code>, are linked as they are.</li>
 <li><strong>Placeholders</strong> look like <code>&lt;RESULTS_DIR&gt;</code>. Fill them in before use.</li>
-<li><strong>Every prompt has an <code>.html</code> copy</strong> for easy reading.</li>
+<li><strong>HTML copies.</strong> Every Markdown file in <code>prompt-library/</code> has an <code>.html</code> copy. Regenerate the copies whenever you edit the Markdown, with <code>python tools/md_to_html.py . &lt;file.md&gt; ...</code> from the repo root (needs the <code>markdown</code> package), and commit both in the same commit.</li>
 <li><strong>Add new prompts</strong> as new files, in a folder named for their category (<code>workflow/</code>, <code>analysis/</code>, <code>research/</code>, <code>design/</code>, …), and list them in the table above.</li>
 </ul>
 </body>
