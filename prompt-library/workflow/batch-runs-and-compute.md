@@ -11,6 +11,8 @@ Standing instructions for planning, reviewing and running simulations, batch job
 > Also rigorously review experimental design, including the design, selection, and permutation of input parameters, data sets, parameters, and experimental arms, reviewing both for excessive / superfluous processing which can be omitted, and also poorly designed / underpowered / low value / misaligned experimental arms which don't provide overall project value. For every change, before running major jobs, review the entire project end-to-end for alignment with the three evaluation criteria in https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25#guidelines and the three major research questions (and their subquestions) in https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25#resources, focusing on how we can achieve "5" ratings in all three guideline areas, and address the specific research questions, and interests, areas of focus, or research areas of the judges listed in this page, with an emphasis on judges involved with AI frontier labs or AI safety research organizations. For all reviews and discrete units of work, use fresh subagents, striking a good balance between parallelism and short context length (which saves money), with adequate intelligence, context, and knowledge to perform effectively.
 >
 > For batch runs, estimate the runtime of each major category or type of job, and each major set of runtime parameters. Run batch jobs in parallel, running the longest-run-time jobs first, and using an MSSQ (Multiple Server, Single Queue) architecture so that no single long-running job can block any other job, and that one thread doesn't block another one, and that as the batch completes, there are no single long-running jobs blocking other jobs.
+>
+> Also when running things locally, leave at least 1 vCore free (I prefer vCore #0) for system tasks.
 
 ## Checklist before any significant run
 
@@ -49,4 +51,10 @@ State your assumptions: tokens per request, latency, concurrency and price per t
 - **Longest jobs first.** Order the queue by estimated runtime, longest first, so the batch doesn't end with one long job running while every other worker sits idle.
 - **Respect dependencies.** Split the run into dependency groups. Within each group, run as many jobs in parallel as the local and cloud limits allow.
 - **No blocking.** A slow or failing job must never block another worker. Use per-job timeouts and isolate failures.
+- **Reserve a core locally.** Leave at least one logical CPU free for system tasks, preferably CPU 0.
+  - Size local worker pools at most `max(1, os.cpu_count() - 1)`.
+  - Pin processes away from CPU 0. Child processes inherit the setting.
+    - Python with psutil (Linux and Windows; not available on macOS): `psutil.Process().cpu_affinity(list(range(1, os.cpu_count())))`.
+    - Windows PowerShell: `$n=[Environment]::ProcessorCount; (Get-Process -Id $pid).ProcessorAffinity = ((1 -shl $n) - 1) -band (-bnot 1)`. Bit 0 is CPU 0, and the mask covers at most 64 CPUs.
+  - Pass this rule to any subagent that runs local compute.
 - **Monitor the run.** Track throughput, error rates (timeouts, rate limits, connection errors) and cost so far. When any of them drifts from the estimate, alert the user. If a spend-cap or error threshold is crossed, pause and ask.
