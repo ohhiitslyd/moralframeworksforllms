@@ -18,6 +18,23 @@ authority), a stress-level × pairing overview, eight detailed scenario charts,
 and the overall pressure-level graph. Every graph is calculated from the completed
 collection, with matched denominators for watched/unwatched comparisons.
 
+## Raw data for the current slice
+
+The current slice is the completed **72-scenario, eight-setting collection**
+(4,320 planned experimental episodes), frozen on **25 October 2026 at 16:42:07 UTC**.
+Its raw data is in **[`results/2026-10-25-pressure-study/`](results/2026-10-25-pressure-study/)**,
+relative to the repository root on this branch.
+
+- [Episode index (`runs.csv`)](results/2026-10-25-pressure-study/runs.csv): find an episode by scenario, stress level, pairing, monitoring notice and run ID.
+- [Per-episode raw records (`runs/`)](results/2026-10-25-pressure-study/runs/): each `<run_id>/events.jsonl` contains requests, responses, returned reasoning and delivered peer messages; `<run_id>/result.json` contains status, final decisions, outcomes and errors; `<run_id>/transcript.md` is the readable transcript.
+- [Frozen prompts and configuration (`manifest.json`)](results/2026-10-25-pressure-study/manifest.json).
+- [File-integrity checksums (`SHA256SUMS.json`)](results/2026-10-25-pressure-study/SHA256SUMS.json).
+
+For example, the [S001, level 1, welfare–welfare, watched raw event log](results/2026-10-25-pressure-study/runs/S001-L1-W-W-s1-watched/events.jsonl)
+is one episode in this slice. All 77 excluded attempts remain in the raw collection.
+The analysis folder contains derived graphs and tables; earlier progress snapshots
+are under `results/archive/2026-10-25/`.
+
 ## Project layout
 
 | Folder | Purpose |

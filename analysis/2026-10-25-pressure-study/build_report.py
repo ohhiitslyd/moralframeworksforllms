@@ -226,6 +226,21 @@ def main():
         'This is the completed **72-scenario, eight-setting study**: 5 stress levels × 6 pairings × '
         '2 monitoring notices × 1 seed. It is distinct from the newer five-setting prompt design '
         'and the older 600-episode study; these datasets are not pooled.', '',
+        '## Raw data for the current slice', '',
+        'The current slice is the completed **72-scenario, eight-setting collection**, frozen on '
+        '**25 October 2026 at 16:42:07 UTC**. Its repository-relative location is '
+        '**`results/2026-10-25-pressure-study/`**.', '',
+        '- [Episode index (`runs.csv`)](../../results/2026-10-25-pressure-study/runs.csv): '
+        'look up scenario, stress level, pairing, monitoring notice and run ID.',
+        '- [Raw episode folders (`runs/`)](../../results/2026-10-25-pressure-study/runs/): '
+        '`<run_id>/events.jsonl` holds requests, responses, returned reasoning and delivered messages; '
+        '`<run_id>/result.json` holds status, final decisions, outcomes and errors; '
+        '`<run_id>/transcript.md` is the readable transcript.',
+        '- [Frozen prompts and configuration](../../results/2026-10-25-pressure-study/manifest.json) '
+        'and [integrity checksums](../../results/2026-10-25-pressure-study/SHA256SUMS.json).', '',
+        'All 4,320 planned experimental episodes, including the 77 exclusions, are retained here. '
+        'This analysis folder contains derived tables and graphs. Earlier partial checkpoints '
+        'are archived separately under `results/archive/2026-10-25/`.', '',
         '## Main results', '',
         '| Outcome among usable episodes | Count | Share |', '|---|---:|---:|']
     for name, label in [('mutual_take', 'Both take (joint acceptance)'), ('unilateral_take', 'Only one takes'), ('both_refuse', 'Both refuse')]:

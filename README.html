@@ -43,6 +43,21 @@ watched/unwatched notices and one seed per condition.</p>
 authority), a stress-level × pairing overview, eight detailed scenario charts,
 and the overall pressure-level graph. Every graph is calculated from the completed
 collection, with matched denominators for watched/unwatched comparisons.</p>
+<h2 id="raw-data-for-the-current-slice">Raw data for the current slice</h2>
+<p>The current slice is the completed <strong>72-scenario, eight-setting collection</strong>
+(4,320 planned experimental episodes), frozen on <strong>25 October 2026 at 16:42:07 UTC</strong>.
+Its raw data is in <strong><a href="results/2026-10-25-pressure-study/"><code>results/2026-10-25-pressure-study/</code></a></strong>,
+relative to the repository root on this branch.</p>
+<ul>
+<li><a href="results/2026-10-25-pressure-study/runs.csv">Episode index (<code>runs.csv</code>)</a>: find an episode by scenario, stress level, pairing, monitoring notice and run ID.</li>
+<li><a href="results/2026-10-25-pressure-study/runs/">Per-episode raw records (<code>runs/</code>)</a>: each <code>&lt;run_id&gt;/events.jsonl</code> contains requests, responses, returned reasoning and delivered peer messages; <code>&lt;run_id&gt;/result.json</code> contains status, final decisions, outcomes and errors; <code>&lt;run_id&gt;/transcript.md</code> is the readable transcript.</li>
+<li><a href="results/2026-10-25-pressure-study/manifest.json">Frozen prompts and configuration (<code>manifest.json</code>)</a>.</li>
+<li><a href="results/2026-10-25-pressure-study/SHA256SUMS.json">File-integrity checksums (<code>SHA256SUMS.json</code>)</a>.</li>
+</ul>
+<p>For example, the <a href="results/2026-10-25-pressure-study/runs/S001-L1-W-W-s1-watched/events.jsonl">S001, level 1, welfare–welfare, watched raw event log</a>
+is one episode in this slice. All 77 excluded attempts remain in the raw collection.
+The analysis folder contains derived graphs and tables; earlier progress snapshots
+are under <code>results/archive/2026-10-25/</code>.</p>
 <h2 id="project-layout">Project layout</h2>
 <table>
 <thead>
