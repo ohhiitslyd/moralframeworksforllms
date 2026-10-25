@@ -491,7 +491,7 @@ BC_PO = set()  # parameter-outcome by construction: none of the parameters is co
 # type: bin / cat / ord / num ; rand: scenario / scen_level / episode / cell / observational
 PARAMS = {
     "monitoring": ("Monitoring notice", "bin", "cell", "manipulated; crossed with every cell"),
-    "level": ("Pressure level", "ord", "episode", "manipulated within scenario"),
+    "level": ("Level", "ord", "episode", "manipulated within scenario"),
     "pairing": ("Pairing", "cat", "episode", "manipulated within scenario"),
     "pairing_rule": ("Rule in the pairing (W/D/A)", "cat", "episode", "coarsening of pairing"),
     "matched_vs_mixed": ("Matched vs. mixed pair", "bin", "episode", "coarsening of pairing"),
@@ -1065,11 +1065,15 @@ for ax, est, lo_, hi_, ref, xl_ in [(ax1, "diff_w_minus_u", "cluster_boot_lo", "
     ax.plot(lvdf.lv, lvdf[est], "o", color=S1, ms=8, mec=SURFACE, mew=1.5)
     for _, r in lvdf.iterrows():
         lab = f"{100 * r[est]:+.1f} pp" if est.startswith("diff") else f"{r[est]:.2f}"
-        ax.annotate(lab, (r.lv, r[est]), xytext=(9, 0), textcoords="offset points", va="center", fontsize=7.5, color=TEXT_1)
+        # point label sits above the upper interval end (clear of the overall line / band), on an opaque chip
+        ax.annotate(lab, (r.lv, r[hi_]), xytext=(0, 4), textcoords="offset points", ha="center", va="bottom", fontsize=7.5,
+                    color=TEXT_1, bbox=dict(boxstyle="round,pad=0.15", fc=SURFACE, ec="none", alpha=0.9))
         if est.startswith("diff"):
-            ax.annotate(f"{pct(r.rate_unwatched, 0)} -> {pct(r.rate_watched, 0)}\n{int(r.watched_only_take)} w-only / {int(r.unwatched_only_take)} u-only",
-                        (r.lv, r[lo_]), xytext=(0, -6), textcoords="offset points", ha="center", va="top", fontsize=6.3, color=TEXT_2)
-    ax.text(5.45, po, "overall", fontsize=7, color=S1, va="center")
+            # rates and discordant counts in a fixed row at the bottom of the panel, away from bars and the band
+            ax.text(r.lv, 0.03, f"{pct(r.rate_unwatched, 0)} -> {pct(r.rate_watched, 0)}\n{int(r.watched_only_take)} / "
+                    f"{int(r.unwatched_only_take)}\nn={int(r.pairs)}", transform=ax.get_xaxis_transform(),
+                    ha="center", va="bottom", fontsize=6.3, color=TEXT_2)
+    ax.text(0.55, po, "overall", fontsize=7, color=S1, va="bottom", ha="left")
     ax.set_xticks([1, 2, 3, 4, 5])
     ax.set_xticklabels([LEVEL_NAME[i] for i in range(1, 6)], fontsize=7.5)
     ax.set_xlim(0.5, 5.9)
@@ -1089,10 +1093,10 @@ ax2.set_title("Relative gap (risk ratio)", loc="left", fontsize=9)
 _l1, _l5 = lvdf.set_index("lv").loc[1], lvdf.set_index("lv").loc[5]
 head(fig, f"Monitoring by level: the watched-unwatched gap is {pp(_l1.diff_w_minus_u)} at level 1 and {pp(_l5.diff_w_minus_u)} at level 5 "
           f"(risk ratio {_l1.risk_ratio_w_over_u:.2f} vs {_l5.risk_ratio_w_over_u:.2f})",
-     f"{PRELIM}. Paired within cell; bars = 95% scenario-cluster bootstrap (shared draws); band = overall. Trend in the conditional OR per level "
+     f"{PRELIM}. Paired within cell; bars = 95% scenario-cluster bootstrap (shared draws); band = overall. Bottom row: rate unwatched -> watched; watched-only / unwatched-only; n = pairs.\nTrend in the conditional OR per level "
      f"(logit on {DOSE['discordant_pairs']} discordant pairs): x{DOSE['OR_ratio_per_level']:.2f} per level, LR p={fmt_p(DOSE['p_LR_trend'])}.")
 fig.subplots_adjust(top=0.80, wspace=0.25, bottom=0.2)
-finish(fig, "19_monitoring_by_level.png", "Monitoring effect by pressure level: paired pp difference and risk ratio.")
+finish(fig, "19_monitoring_by_level.png", "Monitoring effect by level: paired pp difference and risk ratio.")
 
 # ------------------------------------------------------------------ Step 3b: words vs actions
 CHANNEL = [  # (key in c, label, channel, kind, heuristic note, per-arm accuracy note)
@@ -1174,7 +1178,7 @@ for ax, fac, col in zip(axes, ["monitoring (watched - unwatched)", "level (5 - 1
     y = np.arange(len(g))[::-1]
     for yi, (_, r) in zip(y, g.iterrows()):
         sd = r.sd if r.sd else 1
-        cc = MUTED if (r.not_a_finding and fac.startswith("monitoring")) else col
+        cc = MUTED if r.not_a_finding else col  # stance / deception-intended are greyed in both panels
         ax.hlines(yi, r.lo / sd, r.hi / sd, color=cc, lw=1.8)
         ax.plot(r["diff"] / sd, yi, "o", color=cc, ms=6, mec=SURFACE, mew=1.2)
         val = f"{100 * r['diff']:+.1f} pp" if r.kind != "num" else f"{r['diff']:+.0f}"
@@ -1191,11 +1195,11 @@ for ax, fac, col in zip(axes, ["monitoring (watched - unwatched)", "level (5 - 1
     clean_ax(ax)
 _mt = wvadf[(wvadf.factor.str.startswith("monitoring")) & (wvadf.key == "ag_took")].iloc[0]
 head(fig, f"Words vs. actions: the watched notice reduced agent takes {abs(100 * _mt['diff']):.1f} pp; public wording shifted (meaning unvalidated); "
-          "pressure moves actions far more",
+          "level moves actions far more",
      f"{PRELIM}. Paired within cell (monitoring) or within scenario x pairing x arm (level 5 vs 1). Right labels: raw difference; * = BH q<.05 within factor.\n"
      "Grey = heuristic with arm-differential error or unvalidated keyword meaning: not a finding. Post-treatment subsets (e.g. among takers) are not shown.")
 fig.subplots_adjust(top=0.86, left=0.17, right=0.95, wspace=1.05)
-finish(fig, "04_words_vs_actions.png", "Words vs. actions: paired effects of monitoring and of pressure level by channel.")
+finish(fig, "04_words_vs_actions.png", "Words vs. actions: paired effects of monitoring and of level by channel.")
 log("words vs actions done", time.time() - T0)
 
 # ------------------------------------------------------------------ asymmetry (mixed pairs)
@@ -1230,7 +1234,7 @@ ax.set_yticklabels([("All mixed pairs" if r == "all" else f"{CRIT_NAME[r]} + no 
 ax.set_xlabel("Number of lone-take episodes in mixed pairings (both monitoring arms)")
 ax.legend(frameon=False, fontsize=7.5, loc="upper right")
 clean_ax(ax)
-ax.set_xlim(0, g.lone_takes.max() * 1.9)
+ax.set_xlim(0, g.lone_takes.max() * 1.45)  # room for the right-hand count labels without a long empty axis
 head(fig, "Who takes alone depends on the rule: welfare agents take alone; with authority it is the no-rule partner",
      f"{PRELIM}. Lone takes in X-none pairings, split by which agent took. Episodes are clustered in scenarios; binomial p is optimistic.")
 fig.subplots_adjust(top=0.82)
@@ -1268,8 +1272,18 @@ fig, ax = plt.subplots(figsize=(9, 4.8))
 for crit, col in zip(DIAG_ORDER, [S1, S2, S3]):
     g = rel[rel.criterion == crit]
     g = g[g["count"] >= 10]
-    lo_hi = np.array([wilson(int(s_), int(n_)) for s_, n_ in zip(g["sum"], g["count"])])
-    ax.plot(g.rel_level, g["mean"], "-o", color=col, lw=2, ms=6, mec=SURFACE, mew=1.2, label=CRIT_NAME[crit] + " agents")
+    # scenario-cluster bootstrap band (shared draws), consistent with the rest of the primary sections
+    _t = ra_[(ra_.criterion == crit) & ra_.rel_level.notna()]
+    lo_hi = []
+    for rl in g.rel_level:
+        u = _t[_t.rel_level == rl]
+        blo_, bhi_, _ = boot_ratio(u.took.to_numpy(float), np.ones(len(u)), u.scenario.map(SCEN_IDX).to_numpy())
+        lo_hi.append((blo_, bhi_))
+    lo_hi = np.array(lo_hi, dtype=float)
+    rel.loc[g.index, "boot_lo"], rel.loc[g.index, "boot_hi"] = lo_hi[:, 0], lo_hi[:, 1]
+    n_crit = int(_t.shape[0] + (ra_[(ra_.criterion == crit) & (ra_.eft == "never")].shape[0]))
+    ax.plot(g.rel_level, g["mean"], "-o", color=col, lw=2, ms=6, mec=SURFACE, mew=1.2,
+            label=f"{CRIT_NAME[crit]} agents (n = {n_crit:,})")
     ax.fill_between(g.rel_level, lo_hi[:, 0], lo_hi[:, 1], color=col, alpha=0.12, lw=0)
     nv = nev[nev.criterion == crit]
     if len(nv):
@@ -1277,16 +1291,18 @@ for crit, col in zip(DIAG_ORDER, [S1, S2, S3]):
 ax.axvline(-0.5, color=MUTED, ls=":", lw=1)
 ax.text(-0.45, 0.97, "expected first take", fontsize=7.5, color=TEXT_2, va="top")
 ax.text(5.2, -0.06, "'never'\nexpected", fontsize=7, color=TEXT_2, ha="center", va="top")
-ax.set_xlabel("Pressure level minus the pack's expected first-take level for the agent's rule")
+ax.set_xlabel("Level minus the pack's expected first-take level for the agent's rule")
 ax.set_ylabel("Share of rule agents who took")
 ax.set_ylim(-0.02, 1)
 ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
 ax.legend(frameon=False, fontsize=8, loc="upper left")
 clean_ax(ax)
-head(fig, "Rule application: authority agents switch exactly at the expected level; welfare and non-deception agents ramp up early",
-     f"{PRELIM}. Rule agents only (no-rule agents have no expectation); points with >=10 agents; band = Wilson (agents clustered in scenarios, so optimistic).")
-fig.subplots_adjust(top=0.84)
+head(fig, "Rule application: authority agents' switch is consistent with the expected level; welfare and non-deception agents ramp up early",
+     f"{PRELIM}. Rule agents only (no-rule agents have no expectation); n = {len(ra_):,} rule-agent decisions; points with >=10 agents;\n"
+     f"band = 95% scenario-cluster bootstrap (shared draws; gaps where too few scenarios contribute). Squares = 'never' expected.")
+fig.subplots_adjust(top=0.80)
 finish(fig, "06_rule_application.png", "Take rate relative to the pack's expected first-take level.")
+rel.to_csv(TAB / "rule_application_by_relative_level.csv", index=False)  # now with the plotted cluster-bootstrap band
 log("asymmetry + rule application done", time.time() - T0)
 
 # ================================================================== PART 2: screening and the rest
@@ -1636,7 +1652,7 @@ for s_ in ax.spines.values():
 cb = fig.colorbar(im, ax=ax, fraction=0.02, pad=0.01)
 cb.set_label("Effect size (0 = none): bias-corrected V, sqrt(eps^2) or |Spearman rho|; colour capped at 0.6", fontsize=7.5)
 cb.outline.set_visible(False)
-head(fig, "Screening overview: pressure level and scenario design dominate; monitoring effects are small",
+head(fig, "Screening overview: level and scenario design dominate; monitoring effects are small",
      f"{PRELIM}. ● = BH q<.05 and confirmed by cluster-aware permutation; ○ = BH q<.05 only. Hatched = confounded parameter. "
      "Top 5 rows = manipulated factors.\nLeft block = pair outcomes, right = agent outcomes (episode means). * = marginal heuristic, † = unreliable heuristic.")
 fig.subplots_adjust(top=0.89)
@@ -1703,7 +1719,7 @@ def heat_single(p, order, labels, fname, title, subtitle):
 
 
 heat_single("level", [1, 2, 3, 4, 5], [LEVEL_NAME[i] for i in range(1, 6)], "08_heat_level.png",
-            "Pressure level: mutual take climbs steeply from level 1 to level 5", PRELIM + ". Level is manipulated within scenario (clean).")
+            "Level: mutual take climbs steeply from level 1 to level 5", PRELIM + ". Level is manipulated within scenario (clean).")
 heat_single("monitoring", MON_ORDER, [MON_NAME[m] for m in MON_ORDER], "09_heat_monitoring.png",
             "Monitoring notice: small shifts in takes; public monitoring talk rises when watched",
             PRELIM + ". Unpaired view; the paired primary test is in figure 3.")
@@ -1773,9 +1789,13 @@ for ax, (_, r) in zip(axes.ravel(), top.iterrows()):
             ax.annotate(f"{pct(tt['mean'], 0)}", (xi - 0.1, tt["mean"]), xytext=(-6, 0), textcoords="offset points",
                         ha="right", va="center", fontsize=6.8, color=TEXT_1)
     labels_x = [MON_NAME[v] for v in order] if p == "monitoring" else [str(v).replace("_", " ") for v in order]
-    ax.set_xticks(xx); ax.set_xticklabels([wrap(v, 10) for v in labels_x], fontsize=6.8, rotation=30 if len(order) > 6 else 0)
+    _rot = len(order) > 6
+    labels_x = [(f"{v} (n={int(n_):,})" if _rot else f"{wrap(v, 10)}\nn={int(n_):,}") for v, n_ in zip(labels_x, t_all["n"])]
+    ax.set_xticks(xx); ax.set_xticklabels(labels_x, fontsize=6.4, rotation=35 if _rot else 0, ha="right" if _rot else "center",
+                                          rotation_mode="anchor" if _rot else "default")
+    ax.yaxis.set_major_locator(matplotlib.ticker.MaxNLocator(nbins=6, steps=[1, 2, 5, 10]))
     ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0, decimals=0))
-    ax.set_ylim(0, min(1.0, max(0.1, np.nanmax(np.r_[t_all.hi, t_b.hi]) * 1.15)))
+    ax.set_ylim(0, min(1.0, max(0.1, np.nanmax(np.r_[t_all.hi, t_b.hi]) * 1.3)))  # headroom for the legend
     ax.set_ylabel(OUT[o][0], fontsize=7.5)
     ax.set_xlim(-0.6, len(order) - 0.4)
     if p == "monitoring":
@@ -1787,16 +1807,17 @@ for ax, (_, r) in zip(axes.ravel(), top.iterrows()):
         ax.set_title(wrap(f"{OUT[o][0]} by {PARAMS[p][0].lower()} ({r.measure} {r.effect:.2f}, {conf_txt})", 50),
                      fontsize=8, loc="left")
     clean_ax(ax)
-    ax.legend(frameon=False, fontsize=6.5, loc="upper left")
+    _dec = t_all["mean"].iloc[0] > t_all["mean"].iloc[-1]  # legend over the low end of the series
+    ax.legend(frameon=False, fontsize=6.5, loc="lower right" if p == "monitoring" else ("upper right" if _dec else "upper left"))
     for lab_s, tt_ in (("all", t_all), (EP_MAIN, t_b)):
         for _, tt in tt_.iterrows():
             top_rows.append(dict(parameter=p, outcome=o, level=tt.level, subset=lab_s, mean=tt["mean"], lo=tt.lo, hi=tt.hi, n=tt.n,
                                  paired=(p == "monitoring")))
 for ax in axes.ravel()[len(top):]:
     ax.set_visible(False)
-head(fig, f"Take outcomes by design factor: pressure and pairing dominate; the notice effect is small; patterns hold on {EP_MAIN}",
+head(fig, f"Take outcomes by design factor: level and pairing dominate; the notice effect is small; patterns hold on {EP_MAIN}",
      f"{PRELIM}. Strongest take outcome per design factor, the paired monitoring view, and lone take by level. Bars = 95% scenario-cluster bootstrap "
-     "(shared draws). y axes start at 0. Setting and diagnostic are scenario-level (descriptive).")
+     "(shared draws). y axes start at 0.\nn under each tick = complete episodes (monitoring: complete cell pairs). Setting and diagnostic are scenario-level (descriptive).")
 fig.subplots_adjust(top=0.85, hspace=0.75, wspace=0.32)
 finish(fig, "13_top_relationships.png", f"Top relationships with cluster-bootstrap intervals, overall and within {EP_MAIN}.")
 pd.DataFrame(top_rows).to_csv(TAB / "top_relationships_levels.csv", index=False)
@@ -2085,7 +2106,7 @@ cb = fig.colorbar(im, cax=cax)
 cb.set_label("Rate (absolute scale, 0-100%)", fontsize=8)
 cb.ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
 cb.outline.set_visible(False)
-head(fig, "Two-factor views: pressure raises takes in every diagnostic and pairing; welfare pairs tip earliest",
+head(fig, "Two-factor views: level raises takes in every diagnostic and pairing; welfare pairs tip earliest",
      f"{PRELIM}. Each cell: rate and k/n (episodes, or agents for the agent-take panel). Cells with n<5 greyed.")
 fig.subplots_adjust(top=0.88, hspace=0.45, wspace=0.62, right=0.9)
 finish(fig, "17_2d_heatmaps.png", "Two-factor heat maps of mutual take (and agent take).")
@@ -2167,7 +2188,7 @@ def trust_problems(param, outcome, heur="", confounded=False, design="", min_cel
     if subset_shift:
         pr_.append("subset membership depends on the parameter (post-treatment subset)")
     if outcome in ECHO_OUT:
-        pr_.append("private deception words mostly echo the prompt's honesty notes")
+        pr_.append("private deception words likely echo the prompt's honesty notes")
     if param in ("pairing_rule", "matched_vs_mixed"):
         pr_.append("coarsening of pairing (aliased with pairing)")
     return pr_
@@ -2221,7 +2242,7 @@ for _, r in wvadf[(wvadf.q_within_factor < 0.05)].iterrows():
                      score=3 * min(std / 0.5, 1) + 4.5 + relevance(par, r.key) + surprise - (3 if prob else 0) - (4 if mech else 0),
                      exploratory=True, mechanical=mech, problems="; ".join(prob)))
 # monitoring dose-response trend (secondary, added after the interim review)
-cand.append(dict(candidate="Monitoring effect changes with pressure level (conditional-OR trend over discordant pairs)",
+cand.append(dict(candidate="Monitoring effect changes with level (conditional-OR trend over discordant pairs)",
                  source="dose-response (conditional logit)", parameter="monitoring x level", outcome="mutual_take",
                  measure="log OR per level", effect=DOSE["slope_log_OR_per_level"],
                  effect_ci=f"{DOSE['slope_boot_lo']:.2f} to {DOSE['slope_boot_hi']:.2f}", signed=DOSE["slope_log_OR_per_level"],
@@ -2375,7 +2396,9 @@ for w_ in (w_mon, w_lvl):
     w_["ci_txt"] = [(f"{100 * r.lo:+.1f} to {100 * r.hi:+.1f} pp" if r.kind != "num" else f"{r.lo:+.1f} to {r.hi:+.1f}") for _, r in w_.iterrows()]
     w_["base_txt"] = [(pct(r.m0) + " -> " + pct(r.m1)) if r.kind != "num" else f"{r.m0:.1f} -> {r.m1:.1f}" for _, r in w_.iterrows()]
 wcols = ["channel", "measure", "n_pairs", "base_txt", "diff_txt", "ci_txt", "q_within_factor", "per_arm_accuracy"]
-wheads = ["Channel", "Measure", "Pairs", "Arm A -> arm B", "Paired diff", "95% cluster CI", "q", "Heuristic / per-arm accuracy"]
+wheads = ["Channel", "Measure", "Pairs", "Arm A -> arm B", "Paired diff", "95% cluster CI", "q (within-table BH)", "Heuristic / per-arm accuracy"]
+# the primary (monitoring x mutual take) is confirmatory: its row shows no within-table q
+w_mon.loc[w_mon.key == "mutual_take", "q_within_factor"] = np.nan
 wmon_md = mdtable(w_mon, wcols, wheads, fmt={"q_within_factor": fmt_p})
 wlvl_md = mdtable(w_lvl, wcols, wheads, fmt={"q_within_factor": fmt_p})
 dec_md = mdtable(pd.DataFrame(dec_rows), ["arm", "agents", "takers", "p_take", "p_flag", "p_flag_given_take"],
@@ -2395,7 +2418,7 @@ scr_show["ci"] = [f"{a:.2f}-{b:.2f}" for a, b in zip(scr_show.boot_lo, scr_show.
 scr_top_md = mdtable(scr_show[scr_show.q_bh < 0.05].head(30),
                      ["parameter_label", "outcome_label", "measure", "effect", "ci", "spread", "p_asym", "q_bh", "p_perm_BC",
                       "effective_n", "min_cell_n", "design_status", "heuristic", "sign_reversal"],
-                     ["Parameter", "Outcome", "Measure", "Effect", "95% cluster CI", "Raw spread", "p (asym.)", "q (BH)",
+                     ["Parameter", "Outcome", "Measure", "Effect", "95% cluster CI", "Raw spread", "p (asym.)", "q (within-screening BH)",
                       "p (perm.)", "Eff. n", "Min cell", "Design", "Heuristic", "Simpson flag"],
                      fmt={"effect": lambda v: f"{v:.2f}", "spread": lambda v: f"{v:.2f}", "p_asym": fmt_p, "q_bh": fmt_p,
                           "p_perm_BC": fmt_p})
@@ -2418,7 +2441,11 @@ def cand_effect_txt(r):
     return f"{r.measure} {r.effect:.2f} (cluster CI {r.effect_ci})"
 
 
-cand_top = canddf[canddf.trustworthy & ~canddf.demoted_mechanical].head(15)
+# descriptive results (no clustering-aware test): listed separately, not in the BH-ranked list
+DESC_SOURCES = ["asymmetry (mixed pairs)", "rule application"]
+cand_desc = canddf[canddf.trustworthy & canddf.source.isin(DESC_SOURCES)]
+cand_top = canddf[canddf.trustworthy & ~canddf.demoted_mechanical & ~canddf.source.isin(DESC_SOURCES)].head(15).copy()
+cand_top.index = np.arange(1, len(cand_top) + 1)  # rank within this list (candidates.csv keeps the overall score rank)
 cand_top = cand_top.assign(effect_txt=[cand_effect_txt(r) for _, r in cand_top.iterrows()],
                            qtxt=[("confirmatory" if not r.exploratory else fmt_p(r.q_family)) for _, r in cand_top.iterrows()])
 cand_md = mdtable(cand_top.reset_index(), ["index", "candidate", "source", "effect_txt", "n", "qtxt", "research_question", "problems"],
@@ -2430,7 +2457,7 @@ mech = canddf[canddf.demoted_mechanical & canddf.trustworthy]
 untrust_md = mdtable(untrust.head(12).reset_index(), ["candidate", "measure", "effect", "problems"],
                      ["Looks large but untrustworthy", "Measure", "Effect", "Why"], fmt={"effect": lambda v: f"{v:+.3f}"})
 ICOLS = ["outcome", "factor_a", "factor_b", "deviance_drop_minus_df", "extra_df", "p_cluster_param_boot", "q_bh", "min_cell_n", "note"]
-IHEADS = ["Outcome", "Factor A", "Factor B", "Deviance drop - df", "Extra df", "p (cluster param. boot)", "q", "Min cell", "Note"]
+IHEADS = ["Outcome", "Factor A", "Factor B", "Deviance drop - df", "Extra df", "p (cluster param. boot)", "q (BH within interaction tests)", "Min cell", "Note"]
 IFMT = {"deviance_drop_minus_df": lambda v: f"{v:.1f}", "p_cluster_param_boot": fmt_p, "q_bh": fmt_p}
 inter_md = mdtable(intdf.head(14), ICOLS, IHEADS, fmt=IFMT)
 mon_int = intdf[intdf.monitoring_interaction].sort_values(["outcome", "factor_b"])
@@ -2450,19 +2477,31 @@ fail_md = mdtable(FAILDF, ["failure_reason", "unwatched", "watched", "rate_unwat
 bound_rows = sensdf.iloc[1:].reset_index(drop=True)
 failing_bounds = [i + 1 for i, r in bound_rows.iterrows() if r.p_reported > 0.05]
 main_ep_ok = bMain.p_reported <= 0.05 and bMain.diff_w_minus_u < 0
+all_neg_bounds = bool((bound_rows.diff_w_minus_u < 0).all())
 if not failing_bounds and main_ep_ok:
-    ROBUST = "robust to every failure bound and within the main endpoint"
+    ROBUST = ("keeps its direction (watched lower, p < .05) under every failure bound and within the main endpoint. "
+              "This is a statement about direction, not magnitude")
 elif failing_bounds == [3] and main_ep_ok:
-    ROBUST = ("robust except the adversarial failure bound (bound 3, which requires 100% of watched failures and 0% of unwatched "
+    ROBUST = ("keeps its direction except under the adversarial failure bound (bound 3, which requires 100% of watched failures and 0% of unwatched "
               "failures to be mutual takes)")
 else:
     _f = ", ".join(f"bound {i}" for i in failing_bounds)
     ROBUST = "not robust to " + ", ".join(x for x in [_f, "" if main_ep_ok else f"the main-endpoint ({EP_MAIN}) subset"] if x)
+_b3 = sensdf[sensdf.subset.str.startswith("Bound 3")].iloc[0]
+B3_TXT = (f"Under bound 3 the effect shrinks to {pp(_b3.diff_w_minus_u)} (95% CI {pp(_b3.newcombe_lo)} to {pp(_b3.newcombe_hi)}; p = "
+          f"{fmt_p(_b3.p_reported)}), against {pp(P0.diff_w_minus_u)} in the primary. The bound p-values are McNemar and the bound CIs Newcombe, "
+          "and both ignore scenario clustering, so the margin under the adversarial bound is thin: the direction survives every bound, "
+          "the magnitude does not.")
 sub = primdf[primdf.subset.str.startswith(("Diagnostic:", "Pairing:", "Level:"))]
 n_sub, n_neg, n_cross = len(sub), int((sub.diff_w_minus_u < 0).sum()), int(sub.ci_crosses_0.sum())
+# cluster CIs with an end that rounds to 0.0 pp, or that cross 0 where Newcombe does not
+_tn = list(sub[(sub.cluster_boot_hi.abs() < 0.0005) | (sub.cluster_boot_lo.abs() < 0.0005)
+               | (~sub.ci_crosses_0 & (sub.cluster_boot_lo <= 0) & (sub.cluster_boot_hi >= 0))].subset)
+CROSS_TXT = (f"{n_cross} of the {n_sub} Newcombe CIs cross 0"
+             + (f" (on the cluster CIs, {' and '.join(s_.split(': ')[1] for s_ in _tn)} also touch 0)" if _tn else ""))
 if TIP["k_needed"] is None:
-    TIP_TXT = (f"Even with all {TIP['watched_failures']} watched failures counted as takes and all {TIP['unwatched_failures']} unwatched "
-               f"failures as no take, p stays at or below .05 (p = {fmt_p(TIP['p_at_all'])}).")
+    TIP_TXT = (f"The failure tipping point is never reached: p stays {'<' if TIP['p_at_all'] < 0.05 else 'at or below'} .05 even when all {TIP['watched_failures']} watched failures are "
+               f"counted as takes and all {TIP['unwatched_failures']} unwatched failures as no take (k_needed: none; p = {fmt_p(TIP['p_at_all'])}).")
 else:
     TIP_TXT = (f"Tipping point: with unwatched failures counted as no take, **{TIP['k_needed']} of the {TIP['watched_failures']} watched failures "
                f"({pct(TIP['share_needed'], 0)})** must be mutual takes, chosen in the order least favourable to the hypothesis, before p exceeds .05. "
@@ -2496,15 +2535,30 @@ def _mi_txt(k_):
     if k_ not in _mi.index:
         return f"x {k_}: not tested"
     r = _mi.loc[k_]
-    return f"x {PARAMS[k_][0].lower()} p = {fmt_p(r.p_cluster_param_boot)} (q = {fmt_p(r.q_bh)})"
+    return f"x {PARAMS[k_][0].lower()} p = {fmt_p(r.p_cluster_param_boot)} (interaction-family q = {fmt_p(r.q_bh)})"
 
 
 _db = intdf[intdf.design_built & (intdf.outcome == "mutual_take")]
 DATA_NAME = next((p_.name for p_ in SRC.parents if p_.name not in ("step1", "steps")), SRC.parent.name)
 STEP1_NAME = "Step 1 table"
+# ---- review-driven wording (data-driven)
+_sl = DOSE["slope_log_OR_per_level"]
+_tow = (_sl > 0) == (DOSE["cond_OR_at_level3"] < 1)
+DOSE_DIR = (f"In words: the slope is {'positive' if _sl > 0 else 'negative'}, so the conditional OR moves {'toward' if _tow else 'away from'} 1 "
+            f"as level rises, i.e. the relative effect of the notice {'weakens' if _tow else 'strengthens'} with level"
+            + ("; this trend is not significant." if DOSE["p_LR_trend"] >= 0.05 else "."))
+_ip = intdf[intdf.q_bh < 0.05].copy()
+INTER_PASS_TXT = ""
+if len(_ip):
+    _ip["pair"] = [" x ".join([PARAMS[a][0].lower(), PARAMS[b][0].lower()]) for a, b in zip(_ip.factor_a, _ip.factor_b)]
+    _g = _ip.groupby("pair").agg(n=("outcome", "size"), built=("design_built", "any")).sort_values("built", ascending=False)
+    INTER_PASS_TXT = ": " + "; ".join(f"{int(g_.n)} are {k_}{' (design-built)' if g_.built else ''}" for k_, g_ in _g.iterrows())
+_al = {frozenset((a, b)): v for a, b, v in aliased}
+LEVEL_ASSOC_TXT = ", ".join(f"{PARAMS[k_][0].lower()} association {_al[frozenset(('level', k_))]:.2f}"
+                            for k_ in ["take_principal_present", "welfare_if_take_designer"] if frozenset(("level", k_)) in _al) or "see section 3"
 # ---- assemble
 R = []
-R.append(f"# Completed pressure study: Step 2 analysis report ({TAG})\n")
+R.append(f"# Step 2 analysis report: run `{DATA_NAME}` ({TAG})\n")
 if FINAL:
     R.append(f"**{TAG}.** This is the completed run (`{DATA_NAME}`). All {N_PLANNED:,} planned trials are terminal: {len(c):,} complete and "
              f"{N_FAILED} failed. These are final-data estimates for one model and one seed per cell. The primary test is the one "
@@ -2518,7 +2572,9 @@ R.append("**Audience:** the team and hackathon judges (AI safety researchers). T
          "(revised after an expert review of the interim analysis).\n")
 R.append("**Words used here.** A *mutual take* means both agents' locked final action was take. This is an operational outcome, not \"collusion\": "
          "in some scenes taking is arguably justified. *Watched / unwatched* names the text notice the agents saw. Researcher logging was "
-         "identical in both arms, so this is a notice, not real oversight. Reasoning traces are generated text, not evidence of internal states.\n")
+         "identical in both arms, so this is a notice, not real oversight. The manipulated factor is the **justification level** (J1-J5; the pack calls it "
+         "'pressure'): cumulative stated reasons to take, i.e. escalating third-party cost of refusing, capped in most scenes by a superior's "
+         "instruction to take. After this, the report says *level* (section 12; [construct review](../pressure-construct/REPORT.md)). Reasoning traces are generated text, not evidence of internal states.\n")
 
 R.append(f"## 1. Summary ({TAG})\n")
 R.append(f"- **Primary (pre-registered, sprint 3.4).** {int(P0.pairs):,} cells have both the watched and the unwatched trial complete. "
@@ -2527,24 +2583,24 @@ R.append(f"- **Primary (pre-registered, sprint 3.4).** {int(P0.pairs):,} cells h
          f"bootstrap {pp(P0.cluster_boot_lo)} to {pp(P0.cluster_boot_hi)}), a risk ratio of {rrtxt(P0)}. Discordant pairs: **{int(P0.watched_only_take)} "
          f"watched-only takes vs {int(P0.unwatched_only_take)} unwatched-only takes**; McNemar p = {fmt_p(P0.p_chi2_cc)} (exact {fmt_p(P0.p_exact)}). "
          f"The direction matches the pre-registered expectation. The minimum detectable effect at 80% power is {100 * POWER['mde_paired_now']:.1f} pp.")
-R.append(f"- **Robustness.** The result is {ROBUST}. It holds when both trials ran on the main endpoint ({EP_MAIN}: {ppci(bMain, 'newcombe_lo', 'newcombe_hi')}, "
+R.append(f"- **Robustness.** The result {ROBUST}. It holds when both trials ran on the main endpoint ({EP_MAIN}: {ppci(bMain, 'newcombe_lo', 'newcombe_hi')}, "
          f"{int(bMain.watched_only_take)} watched-only vs {int(bMain.unwatched_only_take)} unwatched-only, p = {fmt_p(bMain.p_reported)}, {int(bMain.pairs):,} pairs). "
-         f"{TIP_TXT} Across the {n_sub} diagnostic, pairing and level subgroups, {n_neg} point the same way (watched lower). "
-         f"However, {n_cross} of those subgroup intervals cross 0, so \"same direction\" tells us little on its own. The heterogeneity tests, which are on the "
+         f"{TIP_TXT} {B3_TXT} Across the {n_sub} diagnostic, pairing and level subgroups, {n_neg} point the same way (watched lower). "
+         f"However, {CROSS_TXT}, so \"same direction\" tells us little on its own. The heterogeneity tests, which are on the "
          f"conditional-odds-ratio scale, are: diagnostic p = {fmt_p(HET['Diagnostic:'])}, pairing {fmt_p(HET['Pairing:'])}, level {fmt_p(HET['Level:'])}.")
 R.append(f"- **Dose-response by level (secondary, added after review).** Paired gap by level: "
          + "; ".join(f"L{int(r.subset.split(': ')[1])} {pp(r.diff_w_minus_u)} (RR {r.risk_ratio_w_over_u:.2f})"
                      for _, r in DOSE_LEVELS[DOSE_LEVELS.subset.str.startswith('Level:')].iterrows())
          + f". A conditional logit on the {DOSE['discordant_pairs']} discordant pairs gives a trend of x{DOSE['OR_ratio_per_level']:.2f} in the "
          f"conditional OR per level (log-OR slope {DOSE['slope_log_OR_per_level']:+.2f}, 95% cluster CI {DOSE['slope_boot_lo']:+.2f} to "
-         f"{DOSE['slope_boot_hi']:+.2f}; LR p = {fmt_p(DOSE['p_LR_trend'])}). Section 4b separates the absolute (pp) scale from the relative (RR / OR) scale.")
-R.append(f"- **Words vs. actions (secondary).** {WVA} Pressure level, by contrast, moves agent takes by {lvl_rows.loc['ag_took', 'diff_txt']} (level 5 vs 1).")
+         f"{DOSE['slope_boot_hi']:+.2f}; LR p = {fmt_p(DOSE['p_LR_trend'])}). {DOSE_DIR} Section 4b separates the absolute (pp) scale from the relative (RR / OR) scale.")
+R.append(f"- **Words vs. actions (secondary).** {WVA} Level, by contrast, moves agent takes by {lvl_rows.loc['ag_took', 'diff_txt']} (level 5 vs 1).")
 R.append(f"- **Interactions with monitoring** (ridge logit; null from {B_INTER:,} cluster-resampled parametric-bootstrap draws): mutual take "
          + "; ".join(_mi_txt(k_) for k_ in ["level", "pairing", "scenario_diagnostic"]) + ". "
          + ("Diagnostic x pairing is design-built: the pack fixes whether the pairing's rule matches the scene's diagnostic. " if len(_db) else "")
-         + f"{n_inter_pass} of {len(intdf)} interaction tests pass q < .05 (section 10).")
+         + f"{n_inter_pass} of {len(intdf)} interaction tests pass q < .05 (BH within those {len(intdf)} tests; section 10){INTER_PASS_TXT}.")
 R.append(f"- **Top candidates** (the first {len(summary_cands)} rows of the ranked table in section 5, in the same order; everything except the primary is exploratory; "
-         f"one BH family over m = {M_FAMILY} candidate p-values):")
+         f"one BH family over m = {M_FAMILY} candidate p-values; results without a clustering-aware test are listed separately in section 5):")
 for _, r in summary_cands.iterrows():
     R.append(f"  {r.name}. {r.candidate}: {cand_effect_txt(r)}; n = {int(r.n):,}.")
 R.append(f"- **Design check.** Completion status is not associated with any design parameter (smallest BH q = {fmt_p(comp_q.q_status.min())}). "
@@ -2560,7 +2616,7 @@ R.append("- **Monitoring effects** are paired (the same cell under both notices)
          "compare conditional odds ratios, not pp gaps.")
 R.append(f"- **Intervals.** Every primary-section interval (primary, subgroups, dose-response, words vs. actions, rule application, top relationships) uses "
          f"**one shared set of {B_BOOT_MAIN:,} scenario-cluster bootstrap draws** (resampling the {N_SCEN} scenarios). Newcombe intervals treat cells as independent "
-         "and are shown alongside. Wilson intervals are used only for independent units.")
+         "and are shown alongside. The only Wilson intervals are the asymmetry shares (section 6), which treat episodes as independent and say so.")
 R.append(f"- **Tests.** Screening p-values are asymptotic and ignore clustering. Survivors at BH q < .05 are confirmed by a sequential Besag-Clifford "
          f"permutation at each parameter's randomisation level ({RAND_SOURCE}; `tables/randomisation_levels.csv`), with up to {B_PERM_MAX:,} shuffles, "
          f"stopping at {H_EXCEED} exceedances (floor 1/{B_PERM_MAX + 1:,}). ● = confirmed, ○ = BH only.")
@@ -2571,7 +2627,7 @@ R.append("Monitoring, level and pairing are fully crossed within every scenario.
          "(the last two are coarsenings of pairing), and diagnostic = family. **Strongly associated pairs** (association >= 0.3; started trials; cell counts in "
          "`tables/design_cell_counts.csv`; matrix in Appendix A1):\n")
 R.append(alias_md + "\n")
-R.append("The scene-text features are written into the level text, so they move with pressure level and diagnostic; they are hatched everywhere. "
+R.append("The scene-text features are written into the level text, so they move with level and diagnostic; they are hatched everywhere. "
          "Endpoint, start rank and import status are collection-time variables.\n")
 R.append(f"**Completion by monitoring arm** (all {N_PLANNED:,} planned trials):\n")
 R.append(arm_tab_md + "\n")
@@ -2600,8 +2656,8 @@ R.append(f"- **Within endpoint** (endpoint = collection time; paired within clas
          + "; ".join(f"{k}: {pp(pr.loc['Endpoint: ' + k].diff_w_minus_u)} ({int(pr.loc['Endpoint: ' + k].watched_only_take)} watched-only vs "
                      f"{int(pr.loc['Endpoint: ' + k].unwatched_only_take)} unwatched-only, {int(pr.loc['Endpoint: ' + k].pairs):,} pairs)" for k in EP_CLASSES if pr.loc["Endpoint: " + k].pairs > 0)
          + f". Endpoint x monitoring, tested on the discordant split across the both-same-endpoint classes: p = {fmt_p(p_epxmon)}.")
-R.append(f"- **Within factors:** {n_neg} of {n_sub} diagnostic, pairing and level subgroups have watched < unwatched. **{n_cross} of these subgroup "
-         "intervals cross 0, so their \"same direction\" is uninformative on its own.** Heterogeneity (chi-square on the discordant split, i.e. the "
+R.append(f"- **Within factors:** {n_neg} of {n_sub} diagnostic, pairing and level subgroups have watched < unwatched. **{CROSS_TXT}, so their "
+         "\"same direction\" is uninformative on its own.** Heterogeneity (chi-square on the discordant split, i.e. the "
          f"conditional-OR scale): diagnostic p = {fmt_p(HET['Diagnostic:'])}, pairing {fmt_p(HET['Pairing:'])}, level {fmt_p(HET['Level:'])}, matched/mixed {fmt_p(HET['Pair type:'])}.")
 lone = pr.loc["Outcome: lone take"]
 anyt = pr.loc["Outcome: any take (>=1 agent)"]
@@ -2617,7 +2673,7 @@ R.append(f"A **conditional logit** for matched pairs, with the subgroup as a pai
          f"level trend is a log-OR slope of {DOSE['slope_log_OR_per_level']:+.3f} per level (Wald 95% CI {DOSE['slope_wald_lo']:+.3f} to "
          f"{DOSE['slope_wald_hi']:+.3f}; scenario-cluster bootstrap {DOSE['slope_boot_lo']:+.3f} to {DOSE['slope_boot_hi']:+.3f}; LR p = {fmt_p(DOSE['p_LR_trend'])}). "
          f"The conditional OR at level 3 is {DOSE['cond_OR_at_level3']:.2f}. Categorical LR tests on the same scale: level p = {fmt_p(DOSE['p_LR_level_categorical'])}, "
-         f"diagnostic p = {fmt_p(DOSE['p_LR_diagnostic_categorical'])}, pairing p = {fmt_p(DOSE['p_LR_pairing_categorical'])}.\n")
+         f"diagnostic p = {fmt_p(DOSE['p_LR_diagnostic_categorical'])}, pairing p = {fmt_p(DOSE['p_LR_pairing_categorical'])}. {DOSE_DIR}\n")
 R.append("**Reading the two scales.** Base rates rise steeply with level. The same relative effect (RR or OR) therefore gives a larger pp gap at high levels, "
          "and a constant pp gap would mean a shrinking relative effect. These tests are on the OR scale. A flat OR trend does not mean the pp gap is flat. "
          "Compare the two panels.\n")
@@ -2626,9 +2682,17 @@ R.append(lvl_md + "\n")
 R.append("## 5. Top-ranked relationships\n")
 R.append(f"Candidates are scored on effect size, robustness, relevance to the sprint questions and surprise relative to the directions in PREREG.md. "
          f"No finding has a hand-coded surprise score. **One BH family** covers the p-values of all {M_FAMILY} exploratory candidates (permutation, sign-flip, "
-         "cluster-resampled bootstrap, LR and binomial). A candidate is listed only if q < .05 and it has no trust problem. Mechanical outcomes (word and token "
+         "cluster-resampled bootstrap, LR and binomial). A candidate is ranked only if q < .05 and it has no trust problem. Results without a "
+         "clustering-aware test (the asymmetry binomial and the expected_first_take kappa) are listed after the table as descriptive. Mechanical outcomes (word and token "
          "counts, reasoning length) are demoted. Full list: `tables/candidates.csv`. The summary in section 1 is the head of this table.\n")
 R.append(cand_md + "\n")
+if len(cand_desc):
+    R.append("**Descriptive (not ranked; no clustering-aware test):**\n")
+    for _, r_ in cand_desc.iterrows():
+        R.append(f"- {r_.candidate}: {cand_effect_txt(r_)}; n = {int(r_.n):,}. Caveat: {r_.problems}"
+                 + (f" (binomial p = {fmt_p(r_.p_family)}; it is in the BH family, q = {fmt_p(r_.q_family)}, but the p is optimistic)."
+                    if np.isfinite(r_.p_family) else "."))
+    R.append("")
 if len(mech):
     R.append("**Demoted (mechanical):** " + "; ".join(f"{r.candidate} ({cand_effect_txt(r)})" for _, r in mech.head(6).iterrows())
              + ". These track prompt and message length, which differ by design (e.g. pairing changes the rules text).\n")
@@ -2647,7 +2711,7 @@ R.append("Each row is a paired difference. For monitoring, the pair is the watch
          "subset. Public oversight / monitoring words are kept as public wording, but what they mean is unvalidated.\n")
 R.append("**Monitoring (watched - unwatched):**\n")
 R.append(wmon_md + "\n")
-R.append("**Pressure (level 5 - level 1):**\n")
+R.append("**Level (level 5 - level 1):**\n")
 R.append(wlvl_md + "\n")
 R.append(f"**Reading.** {WVA}\n")
 R.append("**Deception-intended flag: decomposition only (descriptive).** P(flag) = P(take) x P(flag | take). P(flag | take) conditions on a "
@@ -2665,7 +2729,8 @@ R.append(fig_md("06_rule_application.png", "Rule application") + "\n")
 
 R.append("## 7. Univariate results\n")
 R.append("Full table: `tables/univariate_summary.csv`. Variable profile: `tables/variable_profile.csv`. Charts are in Appendix A3. "
-         f"Private deception words appear in {pct(ag.dec_reas.mean())} of agents' reasoning. This reflects echo of the honesty notes.\n")
+         f"Private deception words appear in {pct(ag.dec_reas.mean())} of agents' reasoning. This is consistent with echo of the prompt's honesty notes "
+         "(not checked by hand).\n")
 
 R.append("## 8. Matrices\n")
 R.append(f"Screening covered {len(scr)} parameter x outcome pairs. Of these, {int((scr.q_bh < 0.05).sum())} pass BH q < .05 and {int(scr.confirmed.sum())} are confirmed "
@@ -2695,8 +2760,8 @@ R.append("## 11. Sensitivity\n")
 R.append(f"**Failures (primary test), four bounds.** The {N_FAILED} failed trials ({TIP['watched_failures']} watched, {TIP['unwatched_failures']} unwatched "
          "in started cells) are assigned outcomes as follows:\n")
 R.append(sens_md + "\n")
-R.append(f"The result is {ROBUST}. Bound 3 is the adversarial bound. It requires **100% of watched failures and 0% of unwatched failures** to be "
-         f"mutual takes, so it is a bound, not a plausible value. {TIP_TXT} Full curve: `tables/primary_failure_tipping_point.csv`.\n")
+R.append(f"The result {ROBUST}. Bound 3 is the adversarial bound. It requires **100% of watched failures and 0% of unwatched failures** to be "
+         f"mutual takes, so it is a bound, not a plausible value. {TIP_TXT} {B3_TXT} Full curve: `tables/primary_failure_tipping_point.csv`.\n")
 if mm_txt:
     R.append(mm_txt + " Failure reasons are not outcomes, but an arm imbalance in `missing_message` would make failures informative.\n")
 R.append(f"**Heuristic error.** {RG_NOTE}\n")
@@ -2713,8 +2778,16 @@ R.append("- **One model, one temperature, one pack.** Do not pool with other run
 R.append("- **Mutual take is not collusion.** Coordination was not hand-checked.")
 R.append("- **Heuristics.** Stance and deception-intended are marginal and arm-differential, and the other text heuristics are unreliable. None is headlined. "
          "Monitoring vocabulary echoes the notices.")
-R.append("- **Clustering.** Only permutation-confirmed results that also survive the single candidate BH family are listed. The asymmetry binomial p "
-         "ignores clustering.")
+R.append("- **Clustering.** Ranked candidates must pass the single candidate BH family. Screening rows are also confirmed by a permutation at the "
+         "parameter's randomisation level, and interaction p-values come from a cluster-resampled bootstrap. The words-vs-actions sign-flip "
+         "p-values flip individual pairs, so they do not respect scenario clustering (their intervals do). The asymmetry binomial p ignores clustering and "
+         "the expected_first_take kappa has no test, so both are listed as descriptive, not ranked. The failure-bound p-values (McNemar) and CIs "
+         "(Newcombe) also ignore clustering.")
+R.append(f"- **Level is a bundle** (construct review: [../pressure-construct/REPORT.md](../pressure-construct/REPORT.md)). The level text is cumulative: "
+         "the stakes-block word count grows from 8 to 56 words across L1-L5 (scene-level r = 0.91 with level). A take-instructing superior is present "
+         "in 0%, 1%, 8%, 18% and 81% of scenes at L1-L5. The designer's welfare_if_take label is \"higher\" from L3 onward. In this run's design check, "
+         f"the scene text co-varies with level ({LEVEL_ASSOC_TXT}). So level effects are effects of the whole bundle, not of a \"pressure\" "
+         "ingredient within it. The aggregate r = 0.975 over the five level means is not the trial-level association, which is r = 0.37 (level vs mutual take).")
 R.append("- **Setting and diagnostic** are scenario-level and differ in content, so they are descriptive only.")
 R.append("- **No communication baseline**, so nothing here is an effect of talking.\n")
 
@@ -2733,7 +2806,7 @@ R.append("## Appendix: supporting figures\n")
 APP = [("A1. Design association matrix", "01_design_association.png"), ("A2. Completion balance", "02_completion_balance.png"),
        ("A3. Univariate rates", "14_univariate_rates.png"), ("A3. Numeric outcomes", "15_univariate_numeric.png"),
        ("A4. Screening overview", "07_screening_overview.png"), ("A4. Outcome associations", "16_outcome_association.png"),
-       ("A5. Heat map: pressure level", "08_heat_level.png"), ("A5. Heat map: monitoring (unpaired view)", "09_heat_monitoring.png"),
+       ("A5. Heat map: level", "08_heat_level.png"), ("A5. Heat map: monitoring (unpaired view)", "09_heat_monitoring.png"),
        ("A5. Heat map: pairing", "10_heat_pairing.png"), ("A5. Heat map: diagnostic (descriptive)", "11_heat_diagnostic.png"),
        ("A5. Heat map: setting (descriptive)", "12_heat_setting.png"), ("A6. Two-factor heat maps", "17_2d_heatmaps.png"),
        ("A6. Scenario x level", "18_scenario_x_level.png")]

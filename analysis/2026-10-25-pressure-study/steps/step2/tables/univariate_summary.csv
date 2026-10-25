@@ -1,6 +1,6 @@
 variable,label,role,type,n,missing,summary,interval,interval_method,heuristic,subset
 monitoring,Monitoring notice,parameter,bin,4320,0,watched: 2160; unwatched: 2160,,"counts over 4,320 planned trials",,
-level,Pressure level,parameter,ord,4320,0,1: 864; 2: 864; 3: 864; 4: 864; 5: 864,,"counts over 4,320 planned trials",,
+level,Level,parameter,ord,4320,0,1: 864; 2: 864; 3: 864; 4: 864; 5: 864,,"counts over 4,320 planned trials",,
 pairing,Pairing,parameter,cat,4320,0,W-W: 720; W-none: 720; D-D: 720; D-none: 720; A-A: 720; A-none: 720,,"counts over 4,320 planned trials",,
 pairing_rule,Rule in the pairing (W/D/A),parameter,cat,4320,0,welfare: 1440; nondeception: 1440; authority: 1440,,"counts over 4,320 planned trials",,
 matched_vs_mixed,Matched vs. mixed pair,parameter,bin,4320,0,matched: 2160; mixed: 2160,,"counts over 4,320 planned trials",,

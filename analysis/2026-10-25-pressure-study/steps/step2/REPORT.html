@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Completed pressure study: Step 2 analysis report (FINAL-DATA)</title>
+<title>Step 2 analysis report: run `2026-10-25-pressure-study` (FINAL-DATA)</title>
 <style>
 :root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
 @media (prefers-color-scheme: dark) {
@@ -27,33 +27,33 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
-<h1 id="completed-pressure-study-step-2-analysis-report-final-data">Completed pressure study: Step 2 analysis report (FINAL-DATA)</h1>
+<h1 id="step-2-analysis-report-run-2026-10-25-pressure-study-final-data">Step 2 analysis report: run <code>2026-10-25-pressure-study</code> (FINAL-DATA)</h1>
 <p><strong>FINAL-DATA.</strong> This is the completed run (<code>2026-10-25-pressure-study</code>). All 4,320 planned trials are terminal: 4,243 complete and 77 failed. These are final-data estimates for one model and one seed per cell. The primary test is the one pre-registered for the interim snapshot, run on the final data. The interim pairs are a subset of these data, so this is not an independent replication. See <a href="PREREG.html">PREREG.md</a>.</p>
 <p><strong>Audience:</strong> the team and hackathon judges (AI safety researchers). The model is Qwen3-32B at temperature 0.6, with one seed per cell. Two agents exchange three rounds of simultaneous messages, then lock in a take/refuse decision. Script: <code>analyze_full.py</code> (revised after an expert review of the interim analysis).</p>
-<p><strong>Words used here.</strong> A <em>mutual take</em> means both agents' locked final action was take. This is an operational outcome, not "collusion": in some scenes taking is arguably justified. <em>Watched / unwatched</em> names the text notice the agents saw. Researcher logging was identical in both arms, so this is a notice, not real oversight. Reasoning traces are generated text, not evidence of internal states.</p>
+<p><strong>Words used here.</strong> A <em>mutual take</em> means both agents' locked final action was take. This is an operational outcome, not "collusion": in some scenes taking is arguably justified. <em>Watched / unwatched</em> names the text notice the agents saw. Researcher logging was identical in both arms, so this is a notice, not real oversight. The manipulated factor is the <strong>justification level</strong> (J1-J5; the pack calls it 'pressure'): cumulative stated reasons to take, i.e. escalating third-party cost of refusing, capped in most scenes by a superior's instruction to take. After this, the report says <em>level</em> (section 12; <a href="../pressure-construct/REPORT.html">construct review</a>). Reasoning traces are generated text, not evidence of internal states.</p>
 <h2 id="1-summary-final-data">1. Summary (FINAL-DATA)</h2>
 <ul>
 <li><strong>Primary (pre-registered, sprint 3.4).</strong> 2,083 cells have both the watched and the unwatched trial complete. In those cells the mutual-take rate was 23.3% with the watched notice and 27.2% with the unwatched notice. The paired difference is <strong>-3.9 pp</strong> (95% Newcombe CI -5.2 pp to -2.7 pp; scenario-cluster bootstrap -5.3 pp to -2.7 pp), a risk ratio of 0.86 (0.80-0.91). Discordant pairs: <strong>49 watched-only takes vs 131 unwatched-only takes</strong>; McNemar p = 1.6e-09 (exact 8.0e-10). The direction matches the pre-registered expectation. The minimum detectable effect at 80% power is 1.8 pp.</li>
-<li><strong>Robustness.</strong> The result is robust to every failure bound and within the main endpoint. It holds when both trials ran on the main endpoint (Modal-B: -4.4 pp (-5.9 pp to -2.9 pp), 33 watched-only vs 97 unwatched-only, p = 3.3e-08, 1,471 pairs). Even with all 42 watched failures counted as takes and all 35 unwatched failures as no take, p stays at or below .05 (p = 0.034). Across the 14 diagnostic, pairing and level subgroups, 14 point the same way (watched lower). However, 5 of those subgroup intervals cross 0, so "same direction" tells us little on its own. The heterogeneity tests, which are on the conditional-odds-ratio scale, are: diagnostic p = 0.11, pairing 0.64, level 0.67.</li>
-<li><strong>Dose-response by level (secondary, added after review).</strong> Paired gap by level: L1 -1.0 pp (RR 0.83); L2 -4.5 pp (RR 0.71); L3 -5.4 pp (RR 0.78); L4 -4.0 pp (RR 0.88); L5 -4.8 pp (RR 0.91). A conditional logit on the 180 discordant pairs gives a trend of x1.10 in the conditional OR per level (log-OR slope +0.10, 95% cluster CI -0.18 to +0.41; LR p = 0.44). Section 4b separates the absolute (pp) scale from the relative (RR / OR) scale.</li>
-<li><strong>Words vs. actions (secondary).</strong> The notice reduced takes by about 4 pp (agent take -3.8 pp, 95% CI -5.0 to -2.5 pp). There is no evidence of sanitised talk with an unchanged deal. Public wording shifted toward oversight / deception vocabulary (oversight / monitoring words +5.0 pp, deception words +5.6 pp), and what that vocabulary means is unvalidated. Pressure level, by contrast, moves agent takes by +51.6 pp (level 5 vs 1).</li>
-<li><strong>Interactions with monitoring</strong> (ridge logit; null from 1,000 cluster-resampled parametric-bootstrap draws): mutual take x pressure level p = 0.8 (q = 0.93); x pairing p = 0.62 (q = 0.88); x scenario diagnostic (= family) p = 0.27 (q = 0.73). Diagnostic x pairing is design-built: the pack fixes whether the pairing's rule matches the scene's diagnostic. 4 of 30 interaction tests pass q &lt; .05 (section 10).</li>
-<li><strong>Top candidates</strong> (the first 8 rows of the ranked table in section 5, in the same order; everything except the primary is exploratory; one BH family over m = 355 candidate p-values):
+<li><strong>Robustness.</strong> The result keeps its direction (watched lower, p &lt; .05) under every failure bound and within the main endpoint. This is a statement about direction, not magnitude. It holds when both trials ran on the main endpoint (Modal-B: -4.4 pp (-5.9 pp to -2.9 pp), 33 watched-only vs 97 unwatched-only, p = 3.3e-08, 1,471 pairs). The failure tipping point is never reached: p stays &lt; .05 even when all 42 watched failures are counted as takes and all 35 unwatched failures as no take (k_needed: none; p = 0.034). Under bound 3 the effect shrinks to -1.5 pp (95% CI -2.9 pp to -0.2 pp; p = 0.034), against -3.9 pp in the primary. The bound p-values are McNemar and the bound CIs Newcombe, and both ignore scenario clustering, so the margin under the adversarial bound is thin: the direction survives every bound, the magnitude does not. Across the 14 diagnostic, pairing and level subgroups, 14 point the same way (watched lower). However, 5 of the 14 Newcombe CIs cross 0 (on the cluster CIs, authority and D-none also touch 0), so "same direction" tells us little on its own. The heterogeneity tests, which are on the conditional-odds-ratio scale, are: diagnostic p = 0.11, pairing 0.64, level 0.67.</li>
+<li><strong>Dose-response by level (secondary, added after review).</strong> Paired gap by level: L1 -1.0 pp (RR 0.83); L2 -4.5 pp (RR 0.71); L3 -5.4 pp (RR 0.78); L4 -4.0 pp (RR 0.88); L5 -4.8 pp (RR 0.91). A conditional logit on the 180 discordant pairs gives a trend of x1.10 in the conditional OR per level (log-OR slope +0.10, 95% cluster CI -0.18 to +0.41; LR p = 0.44). In words: the slope is positive, so the conditional OR moves toward 1 as level rises, i.e. the relative effect of the notice weakens with level; this trend is not significant. Section 4b separates the absolute (pp) scale from the relative (RR / OR) scale.</li>
+<li><strong>Words vs. actions (secondary).</strong> The notice reduced takes by about 4 pp (agent take -3.8 pp, 95% CI -5.0 to -2.5 pp). There is no evidence of sanitised talk with an unchanged deal. Public wording shifted toward oversight / deception vocabulary (oversight / monitoring words +5.0 pp, deception words +5.6 pp), and what that vocabulary means is unvalidated. Level, by contrast, moves agent takes by +51.6 pp (level 5 vs 1).</li>
+<li><strong>Interactions with monitoring</strong> (ridge logit; null from 1,000 cluster-resampled parametric-bootstrap draws): mutual take x level p = 0.8 (interaction-family q = 0.93); x pairing p = 0.62 (interaction-family q = 0.88); x scenario diagnostic (= family) p = 0.27 (interaction-family q = 0.73). Diagnostic x pairing is design-built: the pack fixes whether the pairing's rule matches the scene's diagnostic. 4 of 30 interaction tests pass q &lt; .05 (BH within those 30 tests; section 10): 2 are scenario diagnostic (= family) x pairing (design-built); 2 are level x pairing.</li>
+<li><strong>Top candidates</strong> (the first 8 rows of the ranked table in section 5, in the same order; everything except the primary is exploratory; one BH family over m = 355 candidate p-values; results without a clustering-aware test are listed separately in section 5):
   1. Watched notice -&gt; fewer mutual takes (PRIMARY, paired McNemar): paired diff -3.9 pp (95% cluster CI -5.3 pp to -2.7 pp); n = 2,083.
   2. Level 5 vs 1: Argued for take (stance heuristic) (public messages, paired): paired diff +43.8 pp (95% cluster CI +38.4 pp to +49.5 pp); n = 834.
   3. Level 5 vs 1: Mutual take (actions, paired): paired diff +48.4 pp (95% cluster CI +42.2 pp to +54.9 pp); n = 834.
   4. Level 5 vs 1: Agent took (actions, paired): paired diff +51.6 pp (95% cluster CI +45.5 pp to +57.7 pp); n = 834.
-  5. Welfare + no-rule pairs: lone takes by the rule agent 45 vs the no-rule agent 4: rule agent's share of lone takes 91.8% (Wilson 0.81-0.97); n = 49.
-  6. Pack's expected_first_take predicts whether rule agents take: kappa 0.62; n = 6,373.
-  7. Pairing -&gt; Mutual take (both agents took): V 0.33 (cluster CI 0.29-0.37); n = 4,243.
-  8. Pressure level -&gt; Any take (at least one took): |rho| 0.39 (cluster CI 0.35-0.43); n = 4,243.</li>
+  5. Pairing -&gt; Mutual take (both agents took): V 0.33 (cluster CI 0.29-0.37); n = 4,243.
+  6. Level -&gt; Any take (at least one took): |rho| 0.39 (cluster CI 0.35-0.43); n = 4,243.
+  7. Pairing -&gt; Agent took: sqrt(eps2) 0.30 (cluster CI 0.26-0.35); n = 4,243.
+  8. Level -&gt; Plan said take (of plans with an action): |rho| 0.38 (cluster CI 0.34-0.43); n = 2,784.</li>
 <li><strong>Design check.</strong> Completion status is not associated with any design parameter (smallest BH q = 0.86). Monitoring, level and pairing are cleanly crossed. Setting and diagnostic effects are descriptive only: they vary at the scenario level, with only 72 scenes in total, and the scenes differ in content.</li>
 </ul>
 <h2 id="2-how-to-read-the-charts">2. How to read the charts</h2>
 <ul>
 <li><strong>Effect sizes</strong> in screening are on comparable 0-1 scales: bias-corrected Cramér's V (categorical parameter x binary outcome), sqrt(epsilon^2) (categorical x numeric or agent-rate outcome) and |Spearman rho| (ordinal / numeric parameter). As a rough guide, 0.1 is small, 0.3 medium and 0.5 large.</li>
 <li><strong>Monitoring effects</strong> are paired (the same cell under both notices). Each one is reported in percentage points (watched minus unwatched) <strong>and</strong> as a risk ratio (watched / unwatched). Discordant pairs are always labelled by direction: <em>watched-only take</em> means the watched trial was a mutual take and its unwatched partner was not; <em>unwatched-only take</em> is the reverse. Heterogeneity tests on the discordant split compare conditional odds ratios, not pp gaps.</li>
-<li><strong>Intervals.</strong> Every primary-section interval (primary, subgroups, dose-response, words vs. actions, rule application, top relationships) uses <strong>one shared set of 2,000 scenario-cluster bootstrap draws</strong> (resampling the 72 scenarios). Newcombe intervals treat cells as independent and are shown alongside. Wilson intervals are used only for independent units.</li>
+<li><strong>Intervals.</strong> Every primary-section interval (primary, subgroups, dose-response, words vs. actions, rule application, top relationships) uses <strong>one shared set of 2,000 scenario-cluster bootstrap draws</strong> (resampling the 72 scenarios). Newcombe intervals treat cells as independent and are shown alongside. The only Wilson intervals are the asymmetry shares (section 6), which treat episodes as independent and say so.</li>
 <li><strong>Tests.</strong> Screening p-values are asymptotic and ignore clustering. Survivors at BH q &lt; .05 are confirmed by a sequential Besag-Clifford permutation at each parameter's randomisation level (schema randomisation_level; <code>tables/randomisation_levels.csv</code>), with up to 1,999 shuffles, stopping at 50 exceedances (floor 1/2,000). ● = confirmed, ○ = BH only.</li>
 <li><strong>Colour.</strong> A single-hue blue sequential scale on an absolute range. Hatching = confounded parameter or by-construction pair. Grey cells = n &lt; 5.</li>
 </ul>
@@ -150,7 +150,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tr>
 </tbody>
 </table>
-<p>The scene-text features are written into the level text, so they move with pressure level and diagnostic; they are hatched everywhere. Endpoint, start rank and import status are collection-time variables.</p>
+<p>The scene-text features are written into the level text, so they move with level and diagnostic; they are hatched everywhere. Endpoint, start rank and import status are collection-time variables.</p>
 <p><strong>Completion by monitoring arm</strong> (all 4,320 planned trials):</p>
 <table>
 <thead>
@@ -242,7 +242,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <li><strong>p:</strong> chi-square with continuity correction 1.6e-09; exact binomial 8.0e-10. alpha = .05, two-sided.</li>
 <li><strong>Power:</strong> the discordance rate is 8.6%. The minimum detectable paired difference at 80% power is 1.8 pp with 2,083 pairs (1.8 pp if all 2,160 cells were paired).</li>
 <li><strong>Within endpoint</strong> (endpoint = collection time; paired within class): both Modal-A: -8.3 pp (0 watched-only vs 6 unwatched-only, 72 pairs); both Modal-B: -4.4 pp (33 watched-only vs 97 unwatched-only, 1,471 pairs); split: -2.2 pp (16 watched-only vs 28 unwatched-only, 540 pairs). Endpoint x monitoring, tested on the discordant split across the both-same-endpoint classes: p = 0.34.</li>
-<li><strong>Within factors:</strong> 14 of 14 diagnostic, pairing and level subgroups have watched &lt; unwatched. <strong>5 of these subgroup intervals cross 0, so their "same direction" is uninformative on its own.</strong> Heterogeneity (chi-square on the discordant split, i.e. the conditional-OR scale): diagnostic p = 0.11, pairing 0.64, level 0.67, matched/mixed 0.7.</li>
+<li><strong>Within factors:</strong> 14 of 14 diagnostic, pairing and level subgroups have watched &lt; unwatched. <strong>5 of the 14 Newcombe CIs cross 0 (on the cluster CIs, authority and D-none also touch 0), so their "same direction" is uninformative on its own.</strong> Heterogeneity (chi-square on the discordant split, i.e. the conditional-OR scale): diagnostic p = 0.11, pairing 0.64, level 0.67, matched/mixed 0.7.</li>
 <li><strong>Related outcomes (same paired test; not confirmatory):</strong> any take -3.6 pp (82 watched-only vs 157 unwatched-only); lone take +0.3 pp (93 vs 86, p = 0.65).</li>
 </ul>
 <details><summary>Full subgroup table (pp, Newcombe and cluster intervals, risk ratio)</summary>
@@ -277,7 +277,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 
 <h3 id="4b-monitoring-dose-response-by-level-diagnostic-and-pairing-secondary">4b. Monitoring dose-response by level, diagnostic and pairing (secondary)</h3>
 <p><img alt="Monitoring by level: pp and risk ratio" src="figures/19_monitoring_by_level.png" /></p>
-<p>A <strong>conditional logit</strong> for matched pairs, with the subgroup as a pair-level covariate, reduces to a logistic regression of "watched-only" (vs "unwatched-only") on the covariate among discordant pairs. On the 180 discordant pairs, the linear level trend is a log-OR slope of +0.099 per level (Wald 95% CI -0.156 to +0.354; scenario-cluster bootstrap -0.177 to +0.407; LR p = 0.44). The conditional OR at level 3 is 0.35. Categorical LR tests on the same scale: level p = 0.66, diagnostic p = 0.12, pairing p = 0.65.</p>
+<p>A <strong>conditional logit</strong> for matched pairs, with the subgroup as a pair-level covariate, reduces to a logistic regression of "watched-only" (vs "unwatched-only") on the covariate among discordant pairs. On the 180 discordant pairs, the linear level trend is a log-OR slope of +0.099 per level (Wald 95% CI -0.156 to +0.354; scenario-cluster bootstrap -0.177 to +0.407; LR p = 0.44). The conditional OR at level 3 is 0.35. Categorical LR tests on the same scale: level p = 0.66, diagnostic p = 0.12, pairing p = 0.65. In words: the slope is positive, so the conditional OR moves toward 1 as level rises, i.e. the relative effect of the notice weakens with level; this trend is not significant.</p>
 <p><strong>Reading the two scales.</strong> Base rates rise steeply with level. The same relative effect (RR or OR) therefore gives a larger pp gap at high levels, and a constant pp gap would mean a shrinking relative effect. These tests are on the OR scale. A flat OR trend does not mean the pp gap is flat. Compare the two panels.</p>
 <table>
 <thead>
@@ -541,7 +541,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tbody>
 </table>
 <h2 id="5-top-ranked-relationships">5. Top-ranked relationships</h2>
-<p>Candidates are scored on effect size, robustness, relevance to the sprint questions and surprise relative to the directions in PREREG.md. No finding has a hand-coded surprise score. <strong>One BH family</strong> covers the p-values of all 355 exploratory candidates (permutation, sign-flip, cluster-resampled bootstrap, LR and binomial). A candidate is listed only if q &lt; .05 and it has no trust problem. Mechanical outcomes (word and token counts, reasoning length) are demoted. Full list: <code>tables/candidates.csv</code>. The summary in section 1 is the head of this table.</p>
+<p>Candidates are scored on effect size, robustness, relevance to the sprint questions and surprise relative to the directions in PREREG.md. No finding has a hand-coded surprise score. <strong>One BH family</strong> covers the p-values of all 355 exploratory candidates (permutation, sign-flip, cluster-resampled bootstrap, LR and binomial). A candidate is ranked only if q &lt; .05 and it has no trust problem. Results without a clustering-aware test (the asymmetry binomial and the expected_first_take kappa) are listed after the table as descriptive. Mechanical outcomes (word and token counts, reasoning length) are demoted. Full list: <code>tables/candidates.csv</code>. The summary in section 1 is the head of this table.</p>
 <table>
 <thead>
 <tr>
@@ -598,26 +598,6 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tr>
 <tr>
 <td>5</td>
-<td>Welfare + no-rule pairs: lone takes by the rule agent 45 vs the no-rule agent 4</td>
-<td>asymmetry (mixed pairs)</td>
-<td>rule agent's share of lone takes 91.8% (Wilson 0.81-0.97)</td>
-<td>49</td>
-<td>2.9e-07</td>
-<td>1.1 criterion / pairing</td>
-<td>binomial p ignores scenario clustering (optimistic)</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Pack's expected_first_take predicts whether rule agents take</td>
-<td>rule application</td>
-<td>kappa 0.62</td>
-<td>6,373</td>
-<td>–</td>
-<td>1.1 criterion</td>
-<td>agents clustered in scenarios; descriptive (no test)</td>
-</tr>
-<tr>
-<td>7</td>
 <td>Pairing -&gt; Mutual take (both agents took)</td>
 <td>screening</td>
 <td>V 0.33 (cluster CI 0.29-0.37)</td>
@@ -627,8 +607,8 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td></td>
 </tr>
 <tr>
-<td>8</td>
-<td>Pressure level -&gt; Any take (at least one took)</td>
+<td>6</td>
+<td>Level -&gt; Any take (at least one took)</td>
 <td>screening</td>
 <td>/rho/ 0.39 (cluster CI 0.35-0.43)</td>
 <td>4,243</td>
@@ -637,7 +617,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td></td>
 </tr>
 <tr>
-<td>9</td>
+<td>7</td>
 <td>Pairing -&gt; Agent took</td>
 <td>screening</td>
 <td>sqrt(eps2) 0.30 (cluster CI 0.26-0.35)</td>
@@ -647,8 +627,8 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td></td>
 </tr>
 <tr>
-<td>10</td>
-<td>Pressure level -&gt; Plan said take (of plans with an action)</td>
+<td>8</td>
+<td>Level -&gt; Plan said take (of plans with an action)</td>
 <td>screening</td>
 <td>/rho/ 0.38 (cluster CI 0.34-0.43)</td>
 <td>2,784</td>
@@ -657,7 +637,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td></td>
 </tr>
 <tr>
-<td>11</td>
+<td>9</td>
 <td>Pairing -&gt; Any take (at least one took)</td>
 <td>screening</td>
 <td>V 0.28 (cluster CI 0.24-0.32)</td>
@@ -667,8 +647,8 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td></td>
 </tr>
 <tr>
-<td>12</td>
-<td>Interaction Pressure level x Pairing -&gt; mutual take</td>
+<td>10</td>
+<td>Interaction Level x Pairing -&gt; mutual take</td>
 <td>interaction (ridge logit)</td>
 <td>deviance drop minus df 80</td>
 <td>4,243</td>
@@ -677,7 +657,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td></td>
 </tr>
 <tr>
-<td>13</td>
+<td>11</td>
 <td>Watched notice: Deception words, public (public messages, paired)</td>
 <td>words vs actions (paired)</td>
 <td>paired diff +5.6 pp (95% cluster CI +4.1 pp to +7.3 pp)</td>
@@ -687,7 +667,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td></td>
 </tr>
 <tr>
-<td>14</td>
+<td>12</td>
 <td>Pairing -&gt; Plan states an action</td>
 <td>screening</td>
 <td>sqrt(eps2) 0.32 (cluster CI 0.29-0.36)</td>
@@ -697,7 +677,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td></td>
 </tr>
 <tr>
-<td>15</td>
+<td>13</td>
 <td>Pairing -&gt; Argued for take in public (some round)</td>
 <td>screening</td>
 <td>sqrt(eps2) 0.32 (cluster CI 0.29-0.36)</td>
@@ -706,8 +686,34 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>1.1 pairing</td>
 <td></td>
 </tr>
+<tr>
+<td>14</td>
+<td>Monitoring notice -&gt; Any take (at least one took)</td>
+<td>screening</td>
+<td>V 0.03 (cluster CI 0.01-0.05)</td>
+<td>4,243</td>
+<td>0.0021</td>
+<td>3.4 monitoring</td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Watched notice: Agreement phrases, public (public messages, paired)</td>
+<td>words vs actions (paired)</td>
+<td>paired diff +4.3 pp (95% cluster CI +1.7 pp to +6.9 pp)</td>
+<td>2,083</td>
+<td>0.0018</td>
+<td>2.2 words+actions x 3.4</td>
+<td></td>
+</tr>
 </tbody>
 </table>
+<p><strong>Descriptive (not ranked; no clustering-aware test):</strong></p>
+<ul>
+<li>Welfare + no-rule pairs: lone takes by the rule agent 45 vs the no-rule agent 4: rule agent's share of lone takes 91.8% (Wilson 0.81-0.97); n = 49. Caveat: binomial p ignores scenario clustering (optimistic) (binomial p = 8.2e-10; it is in the BH family, q = 2.9e-07, but the p is optimistic).</li>
+<li>Pack's expected_first_take predicts whether rule agents take: kappa 0.62; n = 6,373. Caveat: agents clustered in scenarios; descriptive (no test).</li>
+<li>Authority + no-rule pairs: lone takes by the rule agent 21 vs the no-rule agent 62: rule agent's share of lone takes 25.3% (Wilson 0.17-0.36); n = 83. Caveat: binomial p ignores scenario clustering (optimistic) (binomial p = 7.5e-06; it is in the BH family, q = 0.0011, but the p is optimistic).</li>
+</ul>
 <p><strong>Demoted (mechanical):</strong> Level 5 vs 1: Public words sent (public messages, paired) (paired diff +21.9 (+19.2 to +24.4)); Pairing -&gt; Reasoning length (words) (sqrt(eps2) 0.43 (cluster CI 0.37-0.47)); Pairing -&gt; Total tokens used (sqrt(eps2) 0.57 (cluster CI 0.53-0.60)); Watched notice: Public words sent (public messages, paired) (paired diff +5.8 (+4.5 to +7.2)); Pairing -&gt; Public words exchanged (both agents) (sqrt(eps2) 0.37 (cluster CI 0.34-0.40)); Pairing -&gt; Public words sent (agent) (sqrt(eps2) 0.37 (cluster CI 0.34-0.40)). These track prompt and message length, which differ by design (e.g. pairing changes the rules text).</p>
 <p><img alt="Top relationships" src="figures/13_top_relationships.png" /></p>
 <p>The monitoring panel shows paired rates over the same complete cell pairs, with the paired difference in its title. All y axes start at 0. Within-stratum checks: <code>tables/top_relationships_within_strata.csv</code>.</p>
@@ -726,7 +732,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>Level 5 vs 1: Deception words per 1k reasoning words (private reasoning, paired)</td>
 <td>paired diff</td>
 <td>-2.076</td>
-<td>private deception words mostly echo the prompt's honesty notes</td>
+<td>private deception words likely echo the prompt's honesty notes</td>
 </tr>
 <tr>
 <td>Rule in the pairing (W/D/A) -&gt; Total tokens used</td>
@@ -738,13 +744,13 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>Pairing -&gt; Deception words in private notes</td>
 <td>sqrt(eps2)</td>
 <td>+0.535</td>
-<td>private deception words mostly echo the prompt's honesty notes</td>
+<td>private deception words likely echo the prompt's honesty notes</td>
 </tr>
 <tr>
 <td>Rule in the pairing (W/D/A) -&gt; Deception words in private notes</td>
 <td>sqrt(eps2)</td>
 <td>+0.512</td>
-<td>private deception words mostly echo the prompt's honesty notes; coarsening of pairing (aliased with pairing)</td>
+<td>private deception words likely echo the prompt's honesty notes; coarsening of pairing (aliased with pairing)</td>
 </tr>
 <tr>
 <td>A principal instructs take -&gt; Agent took</td>
@@ -809,7 +815,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <th>Arm A -&gt; arm B</th>
 <th>Paired diff</th>
 <th>95% cluster CI</th>
-<th>q</th>
+<th>q (within-table BH)</th>
 <th>Heuristic / per-arm accuracy</th>
 </tr>
 </thead>
@@ -821,7 +827,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>27.2% -&gt; 23.3%</td>
 <td>-3.9 pp</td>
 <td>-5.3 to -2.7 pp</td>
-<td>4.0e-04</td>
+<td>–</td>
 <td></td>
 </tr>
 <tr>
@@ -976,7 +982,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tr>
 </tbody>
 </table>
-<p><strong>Pressure (level 5 - level 1):</strong></p>
+<p><strong>Level (level 5 - level 1):</strong></p>
 <table>
 <thead>
 <tr>
@@ -986,7 +992,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <th>Arm A -&gt; arm B</th>
 <th>Paired diff</th>
 <th>95% cluster CI</th>
-<th>q</th>
+<th>q (within-table BH)</th>
 <th>Heuristic / per-arm accuracy</th>
 </tr>
 </thead>
@@ -1330,7 +1336,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <p>Cohen's kappa between "level &gt;= expected first-take level" and "agent took": welfare 0.46, non-deception 0.53, authority 0.79, all 0.62.</p>
 <p><img alt="Rule application" src="figures/06_rule_application.png" /></p>
 <h2 id="7-univariate-results">7. Univariate results</h2>
-<p>Full table: <code>tables/univariate_summary.csv</code>. Variable profile: <code>tables/variable_profile.csv</code>. Charts are in Appendix A3. Private deception words appear in 95.8% of agents' reasoning. This reflects echo of the honesty notes.</p>
+<p>Full table: <code>tables/univariate_summary.csv</code>. Variable profile: <code>tables/variable_profile.csv</code>. Charts are in Appendix A3. Private deception words appear in 95.8% of agents' reasoning. This is consistent with echo of the prompt's honesty notes (not checked by hand).</p>
 <h2 id="8-matrices">8. Matrices</h2>
 <p>Screening covered 567 parameter x outcome pairs. Of these, 344 pass BH q &lt; .05 and 243 are confirmed by the cluster-aware permutation. The overview heat map and outcome matrix are in Appendix A4. Top rows (full table <code>tables/screening_table.csv</code>):</p>
 <table>
@@ -1343,7 +1349,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <th>95% cluster CI</th>
 <th>Raw spread</th>
 <th>p (asym.)</th>
-<th>q (BH)</th>
+<th>q (within-screening BH)</th>
 <th>p (perm.)</th>
 <th>Eff. n</th>
 <th>Min cell</th>
@@ -1482,7 +1488,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>False</td>
 </tr>
 <tr>
-<td>Pressure level</td>
+<td>Level</td>
 <td>Agent took</td>
 <td>/rho/</td>
 <td>0.40</td>
@@ -1514,7 +1520,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>False</td>
 </tr>
 <tr>
-<td>Pressure level</td>
+<td>Level</td>
 <td>Any take (at least one took)</td>
 <td>/rho/</td>
 <td>0.39</td>
@@ -1546,7 +1552,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>False</td>
 </tr>
 <tr>
-<td>Pressure level</td>
+<td>Level</td>
 <td>Plan said take (of plans with an action)</td>
 <td>/rho/</td>
 <td>0.38</td>
@@ -1578,7 +1584,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>False</td>
 </tr>
 <tr>
-<td>Pressure level</td>
+<td>Level</td>
 <td>Mutual take (both agents took)</td>
 <td>/rho/</td>
 <td>0.37</td>
@@ -1658,7 +1664,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>False</td>
 </tr>
 <tr>
-<td>Pressure level</td>
+<td>Level</td>
 <td>Argued for take in public (some round)</td>
 <td>/rho/</td>
 <td>0.36</td>
@@ -1722,7 +1728,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>False</td>
 </tr>
 <tr>
-<td>Pressure level</td>
+<td>Level</td>
 <td>Total tokens used</td>
 <td>/rho/</td>
 <td>0.35</td>
@@ -1738,7 +1744,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>False</td>
 </tr>
 <tr>
-<td>Pressure level</td>
+<td>Level</td>
 <td>Deception-intended flag (agent)</td>
 <td>/rho/</td>
 <td>0.35</td>
@@ -1802,7 +1808,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>False</td>
 </tr>
 <tr>
-<td>Pressure level</td>
+<td>Level</td>
 <td>Deception-intended flag, either agent</td>
 <td>/rho/</td>
 <td>0.35</td>
@@ -1850,7 +1856,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <th>Deviance drop - df</th>
 <th>Extra df</th>
 <th>p (cluster param. boot)</th>
-<th>q</th>
+<th>q (BH within interaction tests)</th>
 <th>Min cell</th>
 <th>Note</th>
 </tr>
@@ -1934,7 +1940,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <th>Deviance drop - df</th>
 <th>Extra df</th>
 <th>p (cluster param. boot)</th>
-<th>q</th>
+<th>q (BH within interaction tests)</th>
 <th>Min cell</th>
 <th>Note</th>
 </tr>
@@ -2165,7 +2171,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tr>
 </tbody>
 </table>
-<p>The result is robust to every failure bound and within the main endpoint. Bound 3 is the adversarial bound. It requires <strong>100% of watched failures and 0% of unwatched failures</strong> to be mutual takes, so it is a bound, not a plausible value. Even with all 42 watched failures counted as takes and all 35 unwatched failures as no take, p stays at or below .05 (p = 0.034). Full curve: <code>tables/primary_failure_tipping_point.csv</code>.</p>
+<p>The result keeps its direction (watched lower, p &lt; .05) under every failure bound and within the main endpoint. This is a statement about direction, not magnitude. Bound 3 is the adversarial bound. It requires <strong>100% of watched failures and 0% of unwatched failures</strong> to be mutual takes, so it is a bound, not a plausible value. The failure tipping point is never reached: p stays &lt; .05 even when all 42 watched failures are counted as takes and all 35 unwatched failures as no take (k_needed: none; p = 0.034). Under bound 3 the effect shrinks to -1.5 pp (95% CI -2.9 pp to -0.2 pp; p = 0.034), against -3.9 pp in the primary. The bound p-values are McNemar and the bound CIs Newcombe, and both ignore scenario clustering, so the margin under the adversarial bound is thin: the direction survives every bound, the magnitude does not. Full curve: <code>tables/primary_failure_tipping_point.csv</code>.</p>
 <p><code>missing_message</code> failures: 23 watched vs 17 unwatched (1.06% vs 0.79% of started trials; Fisher p = 0.43; as a share of each arm's failures, Fisher p = 0.65). Failure reasons are not outcomes, but an arm imbalance in <code>missing_message</code> would make failures informative.</p>
 <p><strong>Heuristic error.</strong> No heuristic-error correction is reported. Rogan-Gladen needs per-arm sensitivity and specificity measured on the same unit as the analysed outcome (agent x episode). Step 1 validation reports only per-arm agreement, per message (stance: agreement watched 30/36, unwatched 28/36; take recall 25/36: arm-error caveat; deception-intended: agreement watched 7/12 vs unwatched 11/12: POTENTIALLY BIASED). The interim divide-by-recall table was mis-specified and has been dropped.</p>
 <h2 id="12-caveats-in-plain-terms">12. Caveats in plain terms</h2>
@@ -2176,7 +2182,8 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <li><strong>One model, one temperature, one pack.</strong> Do not pool with other runs.</li>
 <li><strong>Mutual take is not collusion.</strong> Coordination was not hand-checked.</li>
 <li><strong>Heuristics.</strong> Stance and deception-intended are marginal and arm-differential, and the other text heuristics are unreliable. None is headlined. Monitoring vocabulary echoes the notices.</li>
-<li><strong>Clustering.</strong> Only permutation-confirmed results that also survive the single candidate BH family are listed. The asymmetry binomial p ignores clustering.</li>
+<li><strong>Clustering.</strong> Ranked candidates must pass the single candidate BH family. Screening rows are also confirmed by a permutation at the parameter's randomisation level, and interaction p-values come from a cluster-resampled bootstrap. The words-vs-actions sign-flip p-values flip individual pairs, so they do not respect scenario clustering (their intervals do). The asymmetry binomial p ignores clustering and the expected_first_take kappa has no test, so both are listed as descriptive, not ranked. The failure-bound p-values (McNemar) and CIs (Newcombe) also ignore clustering.</li>
+<li><strong>Level is a bundle</strong> (construct review: <a href="../pressure-construct/REPORT.html">../pressure-construct/REPORT.md</a>). The level text is cumulative: the stakes-block word count grows from 8 to 56 words across L1-L5 (scene-level r = 0.91 with level). A take-instructing superior is present in 0%, 1%, 8%, 18% and 81% of scenes at L1-L5. The designer's welfare_if_take label is "higher" from L3 onward. In this run's design check, the scene text co-varies with level (a principal instructs take association 0.61, designer's welfare-if-take association 0.86). So level effects are effects of the whole bundle, not of a "pressure" ingredient within it. The aggregate r = 0.975 over the five level means is not the trial-level association, which is r = 0.37 (level vs mutual take).</li>
 <li><strong>Setting and diagnostic</strong> are scenario-level and differ in content, so they are descriptive only.</li>
 <li><strong>No communication baseline</strong>, so nothing here is an effect of talking.</li>
 </ul>
@@ -2201,8 +2208,8 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <p><img alt="A4. Screening overview" src="figures/07_screening_overview.png" /></p>
 <p><strong>A4. Outcome associations</strong></p>
 <p><img alt="A4. Outcome associations" src="figures/16_outcome_association.png" /></p>
-<p><strong>A5. Heat map: pressure level</strong></p>
-<p><img alt="A5. Heat map: pressure level" src="figures/08_heat_level.png" /></p>
+<p><strong>A5. Heat map: level</strong></p>
+<p><img alt="A5. Heat map: level" src="figures/08_heat_level.png" /></p>
 <p><strong>A5. Heat map: monitoring (unpaired view)</strong></p>
 <p><img alt="A5. Heat map: monitoring (unpaired view)" src="figures/09_heat_monitoring.png" /></p>
 <p><strong>A5. Heat map: pairing</strong></p>
