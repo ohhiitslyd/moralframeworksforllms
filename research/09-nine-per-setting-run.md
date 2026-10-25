@@ -60,3 +60,7 @@ Snapshot `20261025-145559` published with 2,353 completed episodes, 119 exclusio
 ## Snapshot 20261025-152937 and progress past 3,550 completions (82%) at 15:57 UTC
 
 Snapshot `20261025-152937` published with 3,026 completed episodes, 60 exclusions, 100% reasoning coverage (30,705 responses), and verified remote commit `46df3e03`. Concurrency 96 resumed under PID 25340. At 15:57 UTC, completed episodes reached 3,554 (82.3% of 4,320 planned). The level dose-response curve remains highly consistent across ~720 episodes per level: L1: 5.3%, L2: 13.5%, L3: 23.1%, L4: 33.0%, L5: 53.9%. Only 766 episodes remain to full completion (~25 minutes).
+
+## Snapshot 20261025-155819 and progress past 4,000 completions (93.2%) at 16:14 UTC
+
+Snapshot `20261025-155819` published with 3,613 completed episodes, 70 exclusions, 100% reasoning coverage (36,703 responses), and verified remote commit `b9bad74a`. High throughput continued, pushing completed episodes to 4,026 (93.2% of 4,320 planned). At 16:13 UTC, 3 episodes experienced transient `APIConnectionError` stream drops. With `--recover-connection-failures` enabled, the worker resumes immediately for the final 294 episodes to reach 100% completion.
