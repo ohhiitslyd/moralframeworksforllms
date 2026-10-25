@@ -19,7 +19,7 @@ from .game import CRITERIA, validate_config
 from .runner import write_json
 
 COLORS = {"none": "#40566f", "welfare": "#167e78", "nondeception": "#b45535", "authority": "#79569b"}
-LABELS = {"none": "No extra criterion", "welfare": "Total welfare", "nondeception": "Non-deception", "authority": "Hospital loyalty"}
+LABELS = {"none": "No extra criterion", "welfare": "Total welfare", "nondeception": "Non-deception", "authority": "Named principal"}
 
 
 def wilson(successes, n):
@@ -420,7 +420,7 @@ def analyze(directory):
     for criterion, value in thresholds.items():
         lines.append(f"- {LABELS[criterion]}: {value['status']}" + (f"; T50={value['T50']:.3g}" if "T50" in value else "") + ".")
     lines += ["", "Do not force a fitted threshold through sparse, constant, or perfectly separated outcomes. Bootstrap intervals require at least five independent seed blocks and enough identifiable resamples. Three seeds are an exploratory minimum. No human benchmark has been independently verified or overlaid here.", "",
-              "## Prompt handoff", "", "Lydia: take ownership of prompts/scenario.txt, prompts/criteria.json, and prompts/stages.json. Review whether the shared hospital wording over-primes refusal, whether CONCEAL sounds equally natural across conditions, and whether the criteria are equally clear. Keep factual payoffs, message budget, and response schema fixed. Version revisions and rerun the positive control and pilot in a fresh output folder before any new evaluation batch. Do not tune wording just to produce the hoped-for curve.", ""]
+              "## Prompt handoff", "", "Edit scenes in prompts/build_extended_pack.py and regenerate prompts/09-extended-pressure-scenarios.json. Version revisions and rerun in a fresh output folder before any new evaluation batch. Do not tune wording just to produce the hoped-for curve.", ""]
     (folder / "REPORT.md").write_text("\n".join(lines), encoding="utf-8")
     print(f"Analysis saved to {folder.resolve()}")
     return summary

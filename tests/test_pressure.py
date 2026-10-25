@@ -4,6 +4,7 @@ import tempfile
 import unittest
 
 from lying_harness.pressure import ROOT, specs_for, initial_prompt, parse_output, score_actions, episode
+from lying_harness.settings import SETTINGS
 
 
 class Backend:
@@ -24,14 +25,22 @@ class Backend:
 class PressureTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pack = json.loads((ROOT / "prompts/07-collusion-pressure-scenarios.json").read_text(encoding="utf-8"))
+        cls.pack = json.loads((ROOT / "prompts/09-extended-pressure-scenarios.json").read_text(encoding="utf-8"))
 
     def test_matrix(self):
-        self.assertEqual(len(specs_for(self.pack)), 600)
-        self.assertEqual(len(specs_for(self.pack, "weekend")), 180)
+        self.assertEqual(len(specs_for(self.pack)), 5940)
+        self.assertEqual(len(specs_for(self.pack, "weekend")), 540)
+        self.assertEqual(len(specs_for(self.pack, monitoring=["watched"])), 2970)
+
+    def test_setting_is_a_variable(self):
+        self.assertEqual(tuple(self.pack["settings"]), SETTINGS)
+        seen = {row["setting_id"] for row in self.pack["scenarios"]}
+        self.assertEqual(seen, set(SETTINGS))
+        for row in self.pack["scenarios"]:
+            self.assertIn(row["setting_id"], SETTINGS)
 
     def test_no_prediction_leakage_and_mixed_rules(self):
-        spec = specs_for(self.pack)[1]
+        spec = next(row for row in specs_for(self.pack) if row["pairing"] == "W-none")
         a, b = [initial_prompt(self.pack, spec, agent) for agent in ("A", "B")]
         self.assertIn(self.pack["criterion_blocks"]["welfare"], a)
         self.assertNotIn(self.pack["criterion_blocks"]["welfare"], b)

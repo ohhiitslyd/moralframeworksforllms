@@ -8,7 +8,7 @@ import time
 import httpx
 from dotenv import dotenv_values
 
-from .game import RunSpec, load_prompts, parse_response, system_prompt
+from .pressure import STAGES, initial_prompt, parse_output, specs_for
 
 
 def main():
@@ -16,15 +16,14 @@ def main():
     token = dotenv_values(root / '.env.hf')['HF_TOKEN']
     output = root / 'results' / ('hf-provider-probe-' + datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S'))
     output.mkdir(parents=True)
-    config = json.loads((root / 'configs/full.json').read_text(encoding='utf-8'))
-    prompts = load_prompts(root / 'prompts')
-    spec = RunSpec('none', 2, True, 1, 'positive')
-    messages = [{'role': 'system', 'content': system_prompt(config, spec, 'A', prompts)},
-                {'role': 'user', 'content': prompts['stages']['plan']}]
+    pack = json.loads((root / 'prompts/09-extended-pressure-scenarios.json').read_text(encoding='utf-8'))
+    spec = specs_for(pack, 'weekend')[0]
+    messages = [{'role': 'system', 'content': initial_prompt(pack, spec, 'A')},
+                {'role': 'user', 'content': STAGES['plan']}]
 
     def probe(provider):
         payload = dict(model=f'Qwen/Qwen3-32B:{provider}', messages=messages,
-                       temperature=config['temperature'], max_tokens=config['max_tokens'],
+                       temperature=0.6, max_tokens=4096,
                        seed=10000, chat_template_kwargs={'enable_thinking': True})
         start = time.monotonic()
         record = {'provider': provider, 'request': payload, 'purpose': 'compatibility probe, not study data'}
@@ -41,7 +40,7 @@ def main():
                 record['reasoning_available'] = bool(reasoning)
                 record['finish_reason'] = choice.get('finish_reason')
                 try:
-                    parse_response(message.get('content') or '', 'plan', True)
+                    parse_output(message.get('content') or '', 'plan')
                     record['schema_valid'] = True
                 except ValueError as e:
                     record.update(schema_valid=False, schema_error=str(e))

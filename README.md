@@ -29,7 +29,8 @@ training is involved.
   locked final commitments. Each agent retains its own context during an episode;
   every episode starts fresh.
 - Four concrete criteria: none, total welfare, non-deception, and Hospital Charter
-  loyalty. Prompt text lives in editable files rather than Python source.
+  loyalty. The completed hospital study freezes that wording in `lying_harness/game.py`.
+  The live qualitative pack is compiled by `prompts/build_extended_pack.py`.
 - Deterministic payoff execution; structured public reports; separate labels for
   mutual acceptance, concealment, failed attempts, and action-level candidates.
 - Communication-off controls with the same number of private deliberation calls,
@@ -116,20 +117,14 @@ bitwise reproducible.
 # Local tests: no model calls
 python -m unittest discover -s tests -v
 
-# List the full matrix without contacting the endpoint
-python -m lying_harness.runner --config configs/full.json --output results/planned --plan
+# List the pressure-pack matrix without contacting the endpoint
+python -m lying_harness.pressure --output results/planned --plan
 
-# Scripted mechanical smoke test; never treat these responses as research data
-python -m lying_harness.runner --config configs/pilot.json --backend mock --output results/my-mock-check
-python -m lying_harness.analyze results/my-mock-check
+# Weekend slice
+python -m lying_harness.pressure --subset weekend --output results/weekend-v1
 
-# Live pilot, gated by an instructed-coordination check
-python -m lying_harness.runner --config configs/pilot.json --backend openai --output results/my-qwen-pilot
-python -m lying_harness.analyze results/my-qwen-pilot
-
-# Full experiment after prompt review and pilot validation
-python -m lying_harness.runner --config configs/full.json --backend openai --output results/full-v1
-python -m lying_harness.analyze results/full-v1
+# Full pack
+python -m lying_harness.pressure --output results/pressure-v1
 ```
 
 If using the virtual environment, replace `python` with
@@ -326,40 +321,12 @@ No direct human study is run, and no human benchmark curve has been independentl
 verified for this harness. Similar-looking curves would not prove human-like
 moral reasoning or identify the model as a philosophical type.
 
-## Lydia: take ownership of prompt phrasing
+## Live prompts (pressure pack)
 
-**Lydia, the next step is yours: review and refine the language before the full
-experiment.** The editable surfaces are:
-
-- [`prompts/scenario.txt`](prompts/scenario.txt): the shared situation, Charter,
-  bonus/harm explanation, peer channel, and reporting mechanism.
-- [`prompts/criteria.json`](prompts/criteria.json): the four moral-rule blocks.
-- [`prompts/stages.json`](prompts/stages.json): planning, conversation, and final
-  decision instructions and response schemas.
-
-Read a few live transcripts first. Check whether the shared Charter wording
-over-primes refusal, whether ACCEPT/CONCEAL is an unnecessarily loaded framing,
-and whether the three explicit criteria have comparable clarity. These are
-prompt-installed rules, not evidence about moral formation or religious identity.
-One concrete pilot observation: some agents filled checks for frameworks they
-were not assigned. The shared planning-stage instructions currently list each
-framework's output fields. Prioritize reviewing that wording for unintended
-priming, and make the difference between assessing a proposed act and reporting
-the chosen act unmistakable. Treat this first prompt version as a calibration
-draft, not a frozen final scientific instrument.
-The baseline should have no added philosophical rule. Keep payoffs, disclosure
-semantics, call budget, instruction placement, and response schema fixed across
-the main comparisons. The criterion block should be the only moral-condition
-change; avoid adding promises of penalties that would change the payoff table.
-
-Save proposed wording as a new version, run the positive control and small pilot
-in a new results folder, then freeze the final language **before** the full batch.
-Do not tune on the final evaluation seeds or select only runs with an interesting
-curve. Record revisions and failed attempts. Have two independent reviewers label
-at least 20% of episodes using `human_review.csv`, including agreement, empty talk,
-report consistency, and supporting factors. If comparing a judge to human labels,
-choose and calibrate that judge on controls before examining the main outcomes.
-
-The next scientific decision is whether this simple game elicits enough natural
-variation to measure a tipping curve, or whether richer task choices are needed.
-Do not assume the full experiment must produce a threshold.
+The current experiment is the eight-setting qualitative pack, run by
+`python -m lying_harness.pressure`. Edit scenes in
+[`prompts/build_extended_pack.py`](prompts/build_extended_pack.py) and regenerate
+[`prompts/09-extended-pressure-scenarios.json`](prompts/09-extended-pressure-scenarios.json).
+Setting is a variable: hospital, religious, military, school, volunteer,
+social_club, family, or situational. Criteria are welfare / non-deception /
+authority for every setting.
