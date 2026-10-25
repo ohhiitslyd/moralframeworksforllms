@@ -37,4 +37,9 @@ User authorized model endpoint switch to `haitamelmekaoui` workspace and concurr
 
 Snapshot `20261025-123715` published with 547 completed episodes, 11 format exclusions, 100% reasoning coverage (5,576 responses) and remote HEAD verified. Concurrency 96 was maintained. At 12:48 UTC the worker drained and paused when an HTTP connection dropped (`RemoteProtocolError` and `APIConnectionError`). Completed episodes reached 717 with 15 format failures preserved. The runner supports `--recover-connection-failures` to archive the original network failure to `connection-failure-original.json` and resume only missing stages from checkpoint, preserving all existing responses without re-execution.
 
+## Snapshot 20261025-125308 and progress to 1,113 completions at 13:10 UTC
+
+Snapshot `20261025-125308` published with 717 completed episodes, 16 exclusions, 100% reasoning coverage (7,306 responses) and remote HEAD verified. Concurrency 96 continued at high throughput, completing 396 additional episodes in ~17 minutes. Completed episodes reached 1,113 (25.8% of 4,320 planned). Two transient HTTP stream disconnects occurred (`S234-L1-D-D-s1-unwatched` and `S661-L3-W-W-s1-unwatched`), pausing the worker cleanly. Both episodes resume from checkpoint with `--recover-connection-failures`, preserving all existing responses.
+
+
 
