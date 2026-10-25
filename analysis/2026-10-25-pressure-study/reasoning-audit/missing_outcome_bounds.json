@@ -1,0 +1,10 @@
+{
+  "watched_known_takes": 500,
+  "unwatched_known_takes": 575,
+  "watched_failures": 42,
+  "unwatched_failures": 35,
+  "planned_per_arm": 2160,
+  "lower_difference_pp": -5.092592592592593,
+  "upper_difference_pp": -1.5277777777777777,
+  "interpretation": "Extreme missing-outcome assignments, not confidence intervals or inferred actual outcomes."
+}

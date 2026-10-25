@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metrics, provenance and review limits</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="metrics-provenance-and-review-limits">Metrics, provenance and review limits</h1>
+<h2 id="inputs-and-units">Inputs and units</h2>
+<p>The frozen 25 October collection contains 4,320 experimental episodes. <code>extract.py</code>
+retains all of them, including the 77 failures, and creates 8,640 agent rows.
+Outcome comparisons use the 4,243 completed episodes. Counts of returned responses
+include responses from failed episodes but exclude protocol-control episodes.</p>
+<p><code>episode_metrics.csv</code> is one row per episode. Identifiers are accompanied by the
+scenario title; the frozen manifest supplies the full scenario description.
+<code>agent_metrics.csv</code> is one row per agent/episode. The response cache is one row per
+returned response and records the one-based line number in the raw event log.</p>
+<h2 id="exact-fields">Exact fields</h2>
+<ul>
+<li><code>run_id</code>, scenario, setting, diagnostic, level, pairing, monitoring and criterion
+  come from saved results and the frozen manifest, not current prompt files.</li>
+<li><code>status</code>, <code>final_action</code>, <code>mutual_take</code>, and final agent actions are saved outcomes.
+  Missing outcomes remain blank rather than being treated as refusals.</li>
+<li><code>take_misleads_count</code>, <code>refuse_misleads_count</code>, <code>welfare_if_take</code> are scenario-author
+  annotations. They are not independent moral or deception judgments.</li>
+<li><code>endpoints</code> is the sorted set of base URLs found on returned responses. An
+  episode can cross endpoints. Served-model equivalence is not independently verified.</li>
+<li><code>reasoning_words</code>, <code>public_words</code>, <code>private_words</code> count whitespace-delimited
+  tokens. These are word-like counts, not tokenizer tokens.</li>
+<li>Reasoning = returned <code>reasoning</code> fields. Public = parsed <code>peer_message</code> fields.
+  Private = planning/decision response content plus the message-stage <code>plan</code> field.
+  Failed message parses produce empty parsed fields; this is not proof of silence.</li>
+<li><code>prompt_contains_assigned_criterion</code> checks exact presence of the installed text
+  in the first saved system prompt. It does not measure behavioral compliance.</li>
+</ul>
+<h2 id="candidate-screens-not-ground-truth-labels">Candidate screens, not ground-truth labels</h2>
+<p>The full regexes are recorded in <code>extraction_provenance.json</code>. They count literal
+terms for deception, monitoring, authority, welfare, punishment, rule override,
+peer modeling and tactical concealment in each channel. Negation and rhetorical
+context are not generally resolved. A mention is not endorsement or intent.</p>
+<p><code>reasoning_novel_punishment_tokens</code> lists matched punishment-related terms absent
+as case-insensitive substrings from the agent’s first system prompt. It does not
+remove all semantic paraphrases, peer-message echoes or prior-output echoes. It is
+an elementary lexical comparison, not a calibrated motivation classifier.</p>
+<p><code>initial_explicit_stance</code> and <code>last_explicit_stance</code> use a narrow first-person action
+pattern. “Unclear” includes indirect and paraphrased commitments, not just genuine
+indecision. The last public message precedes delivery of the peer’s last message;
+the final action follows it. A mismatch can therefore be a change of mind.</p>
+<p>The public/action screen flagged 16 agents among 1,024 eligible completed agents.
+One analyst reviewed all 16: 14 unconditional discrepancies, two conditional-language
+false positives. Those labels were not blinded or independently replicated. Recall
+is unknown. No population deception rate or validated classification performance is
+claimed. The reviewed CSV retains every flagged statement and the decision.</p>
+<p>The authority-report parser accepts only a <code>their_instruction</code> line with a single
+unambiguous take/refuse word. It parses 1,835 of 2,130 completed authority reports
+and flags four contradictions with the final action. Interpretations differ across
+the four cases; two involve action semantics. Unparsed reports are not compliant by
+default. The 25 welfare-report search hits are unvalidated candidates and are not
+reported as a contradiction rate.</p>
+<p>The final-reasoning-paragraph screen yielded five candidates, three confirmed
+literal conclusion/action mismatches and two conditional-language false positives.
+This is selected-case evidence, not an exhaustive estimate of CoT inconsistency.</p>
+<h2 id="quantitative-comparisons">Quantitative comparisons</h2>
+<p>Monitoring matching fixes scenario, level, pairing and seed, requiring usable
+outcomes under both notices (2,083 cells). Partner-criterion matching fixes scenario,
+level, monitoring and seed, comparing X–X against X–none. The unconditioned partner
+receives no added criterion; it is the same base model with its existing priors.</p>
+<p>Intervals use 10,000 nonparametric bootstrap draws of whole scenario clusters,
+including all cells of each selected scenario. Seed 20261025. They describe
+variation across this benchmark’s scenarios, not across seeds or model families.
+No p-values or preregistered primary test are reported. These exploratory intervals
+are not multiplicity-adjusted. Scenario templates may remain statistically related.</p>
+<p>Endpoint checks require both compared episodes to use the same single endpoint.
+Leave-one-setting-out estimates test whether one setting dominates the overall
+notice contrast. Missing-outcome bounds assign all failed binary outcomes to their
+most favorable/unfavorable extremes; they are not imputations or confidence limits.</p>
+<h2 id="manual-case-selection">Manual case selection</h2>
+<p>The 12 cases were chosen for interpretability, distinct mechanisms and counterexamples.
+They include positives from searches and known examples outside the searches. They
+must not be treated as a random sample or as a gold evaluation set. Exact prompts,
+all returned responses and source hashes are exported for independent review.</p>
+</body>
+</html>

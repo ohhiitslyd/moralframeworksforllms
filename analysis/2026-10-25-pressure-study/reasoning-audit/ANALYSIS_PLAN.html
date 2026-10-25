@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exploratory reasoning and communication audit</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="exploratory-reasoning-and-communication-audit">Exploratory reasoning and communication audit</h1>
+<p>The completed aggregate outcomes and monitoring comparisons were already inspected
+before this audit. This is an exploratory analysis plan, not a preregistration.
+Raw evidence is read-only. No model calls or new experiments are part of this audit.</p>
+<h2 id="questions">Questions</h2>
+<ol>
+<li>Do explicit peer commitments disagree with final actions? What additional
+   information do returned reasoning and private plans provide?</li>
+<li>How do agents justify taking actions that mislead a named third party? Are the
+   justifications compatible with their installed rules and the frozen scenario?</li>
+<li>How do matched watched/unwatched episodes differ in actions and expressed
+   monitoring concerns? Do the differences persist across scenarios and endpoints?</li>
+<li>Are there traces of persuasion, principle substitution, role confusion, or
+   strategic concealment worth testing in a controlled follow-up?</li>
+</ol>
+<h2 id="evidence-rules">Evidence rules</h2>
+<ul>
+<li>Returned reasoning is generated text; it does not establish an authentic internal
+  process, intent, or causal mechanism.</li>
+<li>Search flags identify candidates, not validated behavioral labels. Report exact
+  lexical counts only as lexical counts. Manually review selected cases in full
+  against prompts, all peer turns and final actions. Include counterexamples.</li>
+<li>A public commitment followed by a different action establishes a text/action
+  discrepancy, not necessarily intentional lying to the peer.</li>
+<li>Levels are independent episodes. A level curve is not a longitudinal change in
+  the same agent. There is one seed per cell and only one base model.</li>
+<li>Primary descriptive units: episodes and matched monitoring cells. Bootstrap
+  uncertainty by scenario (72 clusters), with fixed seed 20261025; also inspect
+  endpoint and collection-time sensitivity. All inferential analyses are exploratory.</li>
+<li>Exclusions remain explicit. Controls are not experimental observations.</li>
+<li>Every case must provide its run ID, agent, stage, exact excerpt, and raw-file link.</li>
+</ul>
+<h2 id="hackathon-relevance">Hackathon relevance</h2>
+<p>The official AI Collusion Research Sprint asks whether combining agent speech and
+actions improves detection (2.2), what constitutes convincing evidence (2.3), and
+what a coalition does when it learns it is watched (3.4). The present manipulation
+is an initial monitoring notice, not a mid-episode revelation of surveillance.</p>
+<p>Source: https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25</p>
+<h2 id="outputs-and-compute">Outputs and compute</h2>
+<p>Produce reproducible episode/agent metrics, candidate lists, an audited casebook,
+cluster-aware quantitative summaries, and a concise findings report with follow-up
+experiments. Local extraction is one pass over roughly 512 MB of frozen files;
+expected runtime is a few minutes. Bootstrap arrays are small. Use one worker,
+reserve CPU 0 where supported, and make no paid API requests.</p>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{
+  "bootstrap_seed": 20261025,
+  "bootstrap_iterations": 10000,
+  "cluster_unit": "scenario",
+  "monitoring": [
+    {
+      "stratum": "all",
+      "matched_cells": 2083,
+      "scenarios": 72,
+      "watched_rate": 0.2328372539606337,
+      "unwatched_rate": 0.27220355256841094,
+      "difference_pp": -3.9366298607777246,
+      "ci_low_pp": -5.235100925086481,
+      "ci_high_pp": -2.6730310262529833,
+      "watched_only": 49,
+      "unwatched_only": 131
+    },
+    {
+      "stratum": "W",
+      "matched_cells": 692,
+      "scenarios": 72,
+      "watched_rate": 0.3872832369942196,
+      "unwatched_rate": 0.46965317919075145,
+      "difference_pp": -8.236994219653178,
+      "ci_low_pp": -11.271676300578035,
+      "ci_high_pp": -5.286327879169289,
+      "watched_only": 24,
+      "unwatched_only": 81
+    },
+    {
+      "stratum": "D",
+      "matched_cells": 694,
+      "scenarios": 72,
+      "watched_rate": 0.1829971181556196,
+      "unwatched_rate": 0.20893371757925072,
+      "difference_pp": -2.5936599423631126,
+      "ci_low_pp": -4.617604617604617,
+      "ci_high_pp": -0.7142857142857143,
+      "watched_only": 16,
+      "unwatched_only": 34
+    },
+    {
+      "stratum": "A",
+      "matched_cells": 697,
+      "scenarios": 72,
+      "watched_rate": 0.1291248206599713,
+      "unwatched_rate": 0.13916786226685796,
+      "difference_pp": -1.0043041606886656,
+      "ci_low_pp": -2.446043165467626,
+      "ci_high_pp": 0.42979942693409745,
+      "watched_only": 9,
+      "unwatched_only": 16
+    }
+  ],
+  "endpoint_sensitivity": [
+    {
+      "endpoint": "https://elmekaouihaitham--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "matched_cells": 72,
+      "scenarios": 41,
+      "difference_pp": -8.333333333333332,
+      "ci_low_pp": -15.625,
+      "ci_high_pp": -1.7543859649122806
+    },
+    {
+      "endpoint": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "matched_cells": 1471,
+      "scenarios": 72,
+      "difference_pp": -4.350781781101292,
+      "ci_low_pp": -5.839442052945702,
+      "ci_high_pp": -2.897574123989218
+    }
+  ],
+  "punishment_lexical_comparison": {
+    "matched_agents": 4166,
+    "watched_rate": 0.1099375900144023,
+    "unwatched_rate": 0.0957753240518483,
+    "difference_pp": 1.4162265962554008,
+    "ci_low_pp": -0.0716340934510861,
+    "ci_high_pp": 3.0563750477669878,
+    "note": "Literal punishment-related word occurrences absent from original system prompt; not a validated motivation label."
+  },
+  "public_action_candidate_counts": {
+    "eligible_agents": 1024,
+    "flagged_agents": 16,
+    "flagged_episodes": 16,
+    "directions": {
+      "('refuse', 'take')": 10,
+      "('take', 'refuse')": 6
+    }
+  },
+  "authority_report_candidates": 4,
+  "authority_reports_parsed": 1835,
+  "authority_valid_agents": 2130,
+  "welfare_report_candidates": 25,
+  "word_gap_agents": 6582,
+  "valid_agents": 8486,
+  "total_reasoning_words": 16369479,
+  "assigned_criterion_present": 6373,
+  "assigned_criterion_agents": 6373
+}

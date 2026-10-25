@@ -6,6 +6,8 @@
 
 This is the completed **72-scenario, eight-setting study**: 5 stress levels × 6 pairings × 2 monitoring notices × 1 seed. It is distinct from the newer five-setting prompt design and the older 600-episode study; these datasets are not pooled.
 
+[Deep reasoning audit: findings, graphs and 12 evidence cases](reasoning-audit/README.md)
+
 ## Raw data for the current slice
 
 The current slice is the completed **72-scenario, eight-setting collection**, frozen on **25 October 2026 at 16:42:07 UTC**. Its repository-relative location is **`results/2026-10-25-pressure-study/`**.

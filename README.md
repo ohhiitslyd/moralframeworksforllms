@@ -8,6 +8,7 @@ watched/unwatched notices and one seed per condition.
 
 **[Read the completed-run analysis and all graphs](analysis/2026-10-25-pressure-study/README.md)**
 
+- [Deep reasoning audit: findings, graphs and 12 evidence cases](analysis/2026-10-25-pressure-study/reasoning-audit/README.md)
 - [Raw results, transcripts and audit records](results/2026-10-25-pressure-study/README.md)
 - [Results directory](results/README.md) — completed study and historical archives
 - [Analysis directory](analysis/README.md) — current report and earlier studies
