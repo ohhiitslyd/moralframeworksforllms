@@ -2,7 +2,7 @@
 
 This is the code design for the scripts that implement [`PROCESS.md`](PROCESS.md): Stage 1 (metrics) and the deterministic part of Stage 2 (relationships). Stage 3 stays a judgement task for an analyst or agent, driven by `PROCESS.md` and the prompt library.
 
-Status: **draft for review**. Branch `analysis-pipeline`.
+Status: **revised after design review** (see §8, which takes precedence over earlier sections where they differ). Branch `analysis-pipeline`.
 
 ## 1. Goals and non-goals
 
@@ -194,3 +194,82 @@ Each increment is built by its own fresh subagent and reviewed by another fresh 
 - **The stance and deception heuristics were tuned on v1 deals.** On E1, the scenario nouns differ and the deal is called "the action". They will run, but they're flagged as unvalidated for that pack. Validation needs a transcript sample, which is a judgement task. It's listed as a follow-up in the PR.
 - **E1 is a live snapshot.** Tests compare against its own `summary.json`, not fixed numbers.
 - **Runtime.** E1 has about 1,862 complete trials, each with 10 responses. Parsing is fast. Stage 2 permutation tests with the BH-scaled shuffle count are the slowest part, so early stopping and vectorised permutations are required. The target is under 10 minutes per run on a laptop.
+
+## 8. Design review resolutions (revision 1)
+
+An independent review found 14 issues (5 high). As a baseline check, it reran the v1 `build_metrics.py`, which reproduces the published CSV exactly: 600×162, 0 differing rows, about 42 s. **This section overrides earlier sections where they differ.**
+
+### High
+1. **Model column.**
+   - `model` keeps v1's normalised value: `Qwen/Qwen3-32B:<anything>` and `Qwen--Qwen3-32B--…` both become `Qwen3-32B`. Unknown names pass through unchanged.
+   - The raw endpoint name goes in a new column, `model_endpoint`.
+2. **p-values for the screen.**
+   - **Screening uses asymptotic or exact p-values,** computed by `stats.py` without scipy:
+     - Fisher's exact test for 2×2 tables
+     - χ² with Monte-Carlo fallback for sparse tables
+     - the Spearman t-approximation
+     - Kruskal–Wallis χ²
+   - **By-construction pairs are dropped before m (the number of tests) is counted.**
+   - **Permutation tests are only for confirmation:** pairs with asymptotic q < 0.1, plus every cluster-structured test.
+     - They use Besag–Clifford sequential stopping (stop after h = 10 exceedances), capped at `--max-shuffles` (default 20,000).
+     - The reported p-floor is 1/(shuffles + 1).
+3. **Strata must not be nested in the parameter.**
+   - A stratum may never be a function of the tested parameter.
+   - **Scenario-level parameters** (family, setting, `scene_source`, text features) are tested by permuting **whole scenarios as clusters**, with the p-floor reported. v1 has 20 scenarios.
+   - **Episode-level parameters** permute whole episodes, stratified by scenario only when the parameter varies within scenario (level, pairing, monitoring).
+   - **Agent-level parameters** permute within episodes.
+   - `perm_test` checks the nesting rule and raises an error if it's broken. T3 asserts this.
+4. **Interactions are deferred to a stretch goal** (scope; see 14). If they're built:
+   - Use a ridge-penalised logistic fit (fixed λ = 1) to handle separation.
+   - Statistic: the deviance drop minus extra df.
+   - Null distribution: a parametric bootstrap from the additive A+B fit, with B = 500.
+   - Numeric outcomes: OLS on ranks.
+   - Pairs whose fit fails are reported as "not estimable".
+5. **Missing fields in E1.**
+   - **Every pack or CSV lookup goes through `get(key, default)`.** Defaults are blank, never 0:
+     - `recovered_credit_failure`: blank if the column is absent
+     - `pairing kind`: blank
+     - `expected_first_take`: blank, or "never" when the value is null
+     - unknown criterion: the first sentence of its block
+   - **The level text** says "of N", where N is the number of levels in the pack.
+   - **T4** asserts that no exception is raised on any row and that the default values are blank.
+
+### Medium
+6. **v1 statistics differ slightly.**
+   - `cramers_v` takes a `bias_corrected` flag. Reports use corrected V, and T5 checks the uncorrected V (0.47 ± 0.01).
+   - Tests never compare p-values with v1.
+7. **E1 completion is non-random.**
+   - Stage 2 analyses complete rows only.
+   - Its Step 1 design check adds a **completion-status × parameters** table (setting, monitoring, diagnostic, level, pairing), so collection-order confounding is visible.
+8. **Type inference.**
+   - Types are inferred from non-blank values only.
+   - New types: `empty` (all blank) and `constant`. Both are excluded from screening.
+   - Numeric columns with 10 levels or fewer are `ordinal`, not categorical.
+   - `expected_first_take_*` is `ordinal` with "never" as its highest level.
+   - `seed`, `order_seed` and `selection_method` are `meta`.
+   - Types declared in `column_docs.json` override inference, so v1 and E1 get the same type for each column.
+9. **Report-key regexes.**
+   - Each key gets an exact pattern, `\b<key>\b\W*:?`, so `highest_principal` can't match `highest_principal_who_has_spoken`.
+   - `report_keys` is a fixed dict, frozen here:
+     `{"authority": {"principal": "<key>", "instruction": "their_instruction"}, "nondeception": {"take": "<key>"|None, "refuse": "<key>"|None}, "welfare": {"take": "<key>"|None, "refuse": "<key>"|None}}`
+   - When a pack has no report key, `criterion_cited` is blank, not 0.
+10. **Rows that didn't complete.**
+    - Failed, not-started and running rows keep their **inputs plus status, outcome, `outcome_description` and error**. Everything else is blank.
+    - Column order follows v1: first appearance across rows, using v1's grouping rules. So `served_models` and `total_tokens` keep their v1 positions.
+11. **Hidden dependencies between modules.**
+    - The `report_keys` format is frozen (see 9).
+    - `agent_metrics` and the pair metrics belong to **I4**. Criteria and take-deceives counts are passed as arguments, not globals.
+    - I7 doesn't need the schema. It takes plain label strings, and I8 maps the schema to labels.
+
+### Low
+12. **Extra tests.**
+    - Provider derivation on v1 must equal the published `provider` column, including the HF+Modal cases.
+    - Synthetic-text unit tests for each report-key variant.
+    - Known-answer tests for clustered and stratified `perm_test`, and for the nesting error.
+    - T1 also checks that published columns keep their relative order.
+    - The CSV is written with the `csv` module (not pandas), using v1 value formatting.
+13. **What T1 enforces:** **string-identical values** for every published column after blanks are normalised, and identical column order. The file bytes may differ, for example in line endings.
+14. **Scope and order.**
+    - **PR A (Stage 1):** I1–I5, with T1, T2 and T4, shipped first because it has the hard regression target.
+    - **PR B (Stage 2):** I6, I7 (heat maps and rate bars only), I8 (Steps 0–4 and 6), I9, with T3 and T5.
+    - **Stretch goal:** interactions (Step 5), plus distributions and association-matrix charts.
