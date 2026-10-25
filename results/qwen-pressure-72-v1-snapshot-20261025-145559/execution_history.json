@@ -1,0 +1,132 @@
+[
+  {
+    "at": "2026-10-25T11:41:36.618309+00:00",
+    "source_sha256": "e53adbd20eaff24ff9749cf1eb657a9f8fd05d57c43cfa60eaf9064c3c6038fa",
+    "continue_on_format_failure": true,
+    "jobs": 48,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://elmekaouihaitham--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T11:53:54.807218+00:00",
+    "source_sha256": "ef0375c9e62421bc4a56fe978c521640c5dc2bc98bf139a544db3167dba36d6e",
+    "continue_on_format_failure": true,
+    "jobs": 48,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://elmekaouihaitham--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T12:31:40.216993+00:00",
+    "source_sha256": "3e90be476e2e8ca61ef2d8464f62fcb1bfbb7730e18817aead8359b5c87f31db",
+    "continue_on_format_failure": true,
+    "jobs": 96,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T12:38:39.966625+00:00",
+    "source_sha256": "3e90be476e2e8ca61ef2d8464f62fcb1bfbb7730e18817aead8359b5c87f31db",
+    "continue_on_format_failure": true,
+    "jobs": 96,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T12:52:17.535207+00:00",
+    "source_sha256": "51f39fa036ad77af914fdfd76165bf89c70dc27dcda8759f6808246f9ac6a207",
+    "continue_on_format_failure": true,
+    "jobs": 96,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T13:14:43.065900+00:00",
+    "source_sha256": "51f39fa036ad77af914fdfd76165bf89c70dc27dcda8759f6808246f9ac6a207",
+    "continue_on_format_failure": true,
+    "jobs": 96,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T13:26:52.232291+00:00",
+    "source_sha256": "51f39fa036ad77af914fdfd76165bf89c70dc27dcda8759f6808246f9ac6a207",
+    "continue_on_format_failure": true,
+    "jobs": 96,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T13:30:55.198467+00:00",
+    "source_sha256": "b604f500449f7643069ccfc41b137d2ecb8573a826da9fe69dfb26031470131d",
+    "continue_on_format_failure": true,
+    "jobs": 96,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T13:52:27.168865+00:00",
+    "source_sha256": "f123e3ecadbcd80e35cba899080669f679d4f9e3e051e56276e978e2dd923c9e",
+    "continue_on_format_failure": true,
+    "jobs": 96,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T14:17:46.100550+00:00",
+    "source_sha256": "f123e3ecadbcd80e35cba899080669f679d4f9e3e051e56276e978e2dd923c9e",
+    "continue_on_format_failure": true,
+    "jobs": 96,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://haitamelmekaoui--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  }
+]

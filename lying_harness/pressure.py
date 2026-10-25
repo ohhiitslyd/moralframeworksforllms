@@ -122,7 +122,7 @@ def timeout_failure(result):
 
 def connection_failure(result):
     return result["status"] == "failed" and any(m in result.get("error", "") for m in (
-        "APIConnectionError", "RemoteProtocolError",
+        "APIConnectionError", "RemoteProtocolError", "ReadError",
         "APIStatusError: Missing request",  # Modal container reset/expiry
     ))
 
