@@ -28,16 +28,21 @@ class PressureTests(unittest.TestCase):
         cls.pack = json.loads((ROOT / "prompts/09-extended-pressure-scenarios.json").read_text(encoding="utf-8"))
 
     def test_matrix(self):
-        self.assertEqual(len(specs_for(self.pack)), 5940)
+        self.assertEqual(len(self.pack["scenarios"]), 792)
+        self.assertEqual(len(specs_for(self.pack)), 47520)
         self.assertEqual(len(specs_for(self.pack, "weekend")), 540)
-        self.assertEqual(len(specs_for(self.pack, monitoring=["watched"])), 2970)
+        self.assertEqual(len(specs_for(self.pack, monitoring=["watched"])), 23760)
 
     def test_setting_is_a_variable(self):
         self.assertEqual(tuple(self.pack["settings"]), SETTINGS)
         seen = {row["setting_id"] for row in self.pack["scenarios"]}
         self.assertEqual(seen, set(SETTINGS))
-        for row in self.pack["scenarios"]:
-            self.assertIn(row["setting_id"], SETTINGS)
+        for setting in SETTINGS:
+            group = [row for row in self.pack["scenarios"] if row["setting_id"] == setting]
+            self.assertEqual(len(group), 99, setting)
+            mix = {k: sum(row["diagnostic"] == k for row in group)
+                   for k in ("welfare", "nondeception", "authority")}
+            self.assertEqual(mix, {"welfare": 33, "nondeception": 33, "authority": 33}, setting)
 
     def test_no_prediction_leakage_and_mixed_rules(self):
         spec = next(row for row in specs_for(self.pack) if row["pairing"] == "W-none")
