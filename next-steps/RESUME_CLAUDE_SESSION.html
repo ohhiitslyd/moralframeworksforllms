@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RESUME_CLAUDE_SESSION (next-steps edition): hackathon-lying-agent-experiment</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="resume_claude_session-next-steps-edition-hackathon-lying-agent-experiment">RESUME_CLAUDE_SESSION (next-steps edition): hackathon-lying-agent-experiment</h1>
+<p>Handoff for anyone, human or AI agent, picking up this work. It records the context, state, results, rules and open items as of <strong>2026-10-25, about 21:00 UTC</strong>, when the project owner (Tom) paused the project and handed write-up to the team.</p>
+<blockquote>
+<p><strong>Deadline:</strong> Apart Research AI Collusion Research Sprint, submissions close <strong>2026-10-25 11:59 PM AoE</strong> (about 2026-10-26 12:00 UTC). The deliverable is a PDF of at most 8 pages on Apart's template, with a 150–250-word abstract, authors, and a limitations and dual-use appendix. A template PDF is at <code>C:\Users\Tom\hackathon\apart_research_hackathon_submission_template.pdf</code>.</p>
+</blockquote>
+<hr />
+<h2 id="0-updates-since-the-root-handoff-2026-10-25-late-evening-utc">0. Updates since the root handoff (2026-10-25, late evening UTC)</h2>
+<p><strong>New on <code>main</code>:</strong>
+- PR #13: the root <code>RESUME_CLAUDE_SESSION.md</code>.
+- PR #14: <code>prompt-library/experiments/authority-ablation.md</code>, plus the prompt-placement limitation in §6.</p>
+<p><strong>This folder (<code>next-steps/</code>):</strong>
+- branch <code>docs-next-steps</code>
+- files 01–05: the system-prompt separation, branch cleanup, ablation instructions, arm selection, and the plan and timeline</p>
+<p><strong>Report draft</strong> (branch <code>report-final-draft</code>, <code>final_report/REPORT.md</code> and <code>.html</code>, template PDF alongside, commit <code>1a2b487b</code>):
+- <strong>Structure:</strong> follows the Apart template. The abstract is 246 words and the main text about 2,650 words, over the roughly 4-page guidance. There are 4 contributions, mapped to sprint questions 3.4/1.5, 2.2, 1.1/2.1 and 2.3, and appendices A–F.
+- <strong>Mock-judge review (fresh agent): impact 3, execution 4, presentation 3.</strong> Top fixes:
+  - Remove the TODOs, placeholders, <code>[verify]</code> tags and "AI-assisted draft" sentences. Needham et al. is arXiv:2505.23836.
+  - <strong>The authority result is partly by construction.</strong> Authority-rule agents are told to follow the highest principal, so lead with the effect on welfare, non-deception and no-rule agents.
+  - Define or remove "endpoint", "Modal-A/B" and "Diagnostic".
+  - Cut to about 4 pages.
+  - Recast contribution 2 as a monitor-checkable licence-text signature, with precision and recall.
+  - Link the pre-registration commit.
+  - Fix figure and caption mismatches: Fig. 3 "Pressure", Fig. 4 "honesty" and overlapping labels, the "FINAL-DATA" subtitles.
+  - Temper the convergence claim.
+  - State the effect size honestly: about 4 pp, with a lower bound of 1.5 pp.
+- <strong>Fact-check review:</strong> see the <code>report-final-draft</code> branch for the status. Apply both reviews before submitting.
+- The sprint <strong>strongly encourages the final text to be written mainly by the team</strong>, so treat the draft as scaffolding.</p>
+<p><strong>Arm-selection insight</strong> (it changes the follow-up design; see <code>04-arm-selection.md</code>): the attack-surface question needs agents that are <em>not</em> instructed to obey, so add a <strong>no-rule + no-rule</strong> pairing, which was never run. Make it, together with W-W and D-D under split placement, the primary arms.</p>
+<hr />
+<h2 id="1-tldr-what-to-write-the-paper-from">1. TL;DR: what to write the paper from</h2>
+<p>Everything final is on <strong><code>main</code></strong> under <a href="../analysis/2026-10-25-pressure-study/steps/"><code>analysis/2026-10-25-pressure-study/steps/</code></a>:</p>
+<table>
+<thead>
+<tr>
+<th>Open first</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>step3/paper-outline.html</code> / <code>.md</code></td>
+<td><strong>Paper kit (v3):</strong> 3 titles, 247-word abstract, 8-page budget, figure plan with captions, limitations and dual-use bullets</td>
+</tr>
+<tr>
+<td><code>step3/SUMMARY.html</code> / <code>.md</code></td>
+<td>Briefing: 60-second summary, headline findings, a 34-row <code>claims_ledger.csv</code> (strength, caveats, research question, judging criterion), non-claims, threats to validity, judge lens, next steps</td>
+</tr>
+<tr>
+<td><code>step2/REPORT.html</code></td>
+<td>Final Step 2: the pre-registered primary test and its robustness, dose-response, interactions, candidates; figures 03, 19, 13, 04, 05, 06 are for the main text</td>
+</tr>
+<tr>
+<td><code>step2/oversight_reasoning/REPORT.html</code>, <code>excerpts.html</code></td>
+<td>How agents reason about the monitoring notice ("no oversight" as permission)</td>
+</tr>
+<tr>
+<td><code>step2/convergence/convergence_output.txt</code></td>
+<td>The notice acts at the convergence step</td>
+</tr>
+<tr>
+<td><code>pressure-construct/REPORT.html</code></td>
+<td>Construct audit: "pressure" is a <strong>justification ladder</strong>; §7 splits takes by instructed vs. other pressure</td>
+</tr>
+<tr>
+<td><code>step0.5/README.html</code>, <code>step1.5/README.html</code></td>
+<td>65 raw and 71 derived-metric heat maps (rate and n in every cell)</td>
+</tr>
+<tr>
+<td><code>step1/trial_metrics_dictionary.html</code>, <code>VALIDATION.html</code></td>
+<td>Per-trial table (4,320 × 190), its dictionary, and heuristic validation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-does-what-next-undecided-the-owner-paused-on-2026-10-25">Who does what next (undecided; the owner paused on 2026-10-25)</h3>
+<ul>
+<li><strong>The paper is the remaining task.</strong> Nobody has been assigned. The PDF, author list and final abstract aren't started; the draft abstract is in <code>step3/paper-outline.md</code>.</li>
+<li>Before writing, <strong>reconcile with Haitham's <code>reasoning-audit/</code></strong> (see §3): agree on numbers, figures and wording. Avoid "collusion rate by pressure level".</li>
+<li><strong>Pack provenance:</strong> the completed study ran <code>prompts/12-pressure-nine-per-setting.json</code> (72 scenes; Step 1 labels it "Extended pressure v5"). That pack exists only on codex and the working branch, not on main.</li>
+</ul>
+<h3 id="headline-results-completed-study-4243-of-4320-trials-complete">Headline results (completed study, 4,243 of 4,320 trials complete)</h3>
+<ol>
+<li><strong>Pre-registered primary:</strong> a one-sentence "monitored" notice lowers mutual take (both agents "take" the rule-bending action) from 27.2% to 23.3%.
+   - Paired within 2,083 scenario × level × pairing cells: <strong>−3.9 pp</strong> (scenario-cluster 95% CI −5.3 to −2.7), RR 0.86 (0.80–0.91).
+   - Discordant cells: 49 took only when watched, 131 only when unwatched. McNemar p = 1.6×10⁻⁹.
+   - The <strong>direction</strong> holds under all four failure bounds. The adversarial bound shrinks it to −1.5 pp (CI −2.9 to −0.2, p = .034, unclustered), so the margin on size is thin.
+   - No dose-response by level (LR p = .44).
+   - No significant heterogeneity by pairing or family <strong>on the conditional-OR scale</strong> (diagnostic p = .11, pairing p = .64).
+   - <strong>Name the scale in the paper.</strong> In percentage points the effect is larger in welfare pairs (about −8.2 pp) than in non-deception (about −2.6) or authority (about −1.0, CI crossing 0). See Haitham's reasoning-audit (§3).</li>
+<li><strong>Mechanism (exploratory):</strong> unwatched agents often treat "no oversight" as licence. It appears in 54% of the unwatched takes whose watched twin did <strong>not</strong> take, vs. 28% where the watched twin also took (p = 5×10⁻⁸); 40% vs. 18% using plan-stage text only.
+   - Code precision on held-out labels: licence 18/20, oversight-as-caution 17/20, detection talk 20/20.
+   - Caveats: single labeller; blinding only partial.</li>
+<li><strong>Convergence step:</strong> in 77% of mutual takes, the agents were not both saying "take" in round 1. In 43 of the 131 cells where the notice prevented the take, the watched twin ended in a <strong>lone</strong> take: one agent took and its partner held out.</li>
+<li><strong>Construct audit:</strong> the pack's "pressure level" is a <strong>cumulative justification ladder</strong> (<code>cumulate()</code> concatenates sentences; the stakes block grows 8 → 56 words, or 13 → 83 including the principals block).
+   - A superior instructing "take" is present in 0/1/8/18/<strong>81%</strong> of scenes at L1–L5. Severe third-party harm of refusing goes 1 → 58%. Self-benefit stays flat, 22 → 24%.
+   - The designer's <code>welfare_if_take</code> label is "higher" from L3 onward in 71 of 72 scenes.
+   - The aggregate r over the 5 level means is <strong>0.975, but that's monotone by construction</strong>; the trial-level r is 0.37.
+   - At L5: 60.5% mutual take with a take-instruction vs. 24.6% without. <strong>Authority-rule agents: no mutual takes at all in the 1,109 trials without a take-instructing principal.</strong> §7 gives a narrower count: 0 of 1,043 trials with no authority voice, and 0 of 200 under mere suggestions.
+   - 61% of mutual takes had no explicit instruction. Those followed third-party cost, a promise, or a permitting document.
+   - Recommended name: <strong>"justification level (J1–J5)"</strong>. <strong>Do not claim</strong> "agents collude more under pressure".</li>
+<li><strong>Language rules for the paper:</strong>
+   - "Mutual take" is an operational outcome, not proven collusion.
+   - Reasoning traces are generated text, not internal states.
+   - The notice is not real oversight.
+   - <code>deception_intended</code> is a keyword heuristic, close to "took and acknowledged that taking misleads", and <strong>not</strong> intent.
+   - Use causal wording only for manipulated factors (the monitoring notice, and level as a bundle).</li>
+<li><strong>Limitations:</strong>
+   - one model (Qwen3-32B, temperature 0.6, max 4,096 tokens, reasoning on) and one seed per cell
+   - two Modal endpoints
+   - the superior's instruction was not randomised (see §6, the WIP ablation)
+   - heuristics validated by a single coder</li>
+</ol>
+<hr />
+<h2 id="2-project-and-people">2. Project and people</h2>
+<ul>
+<li><strong>Repo:</strong> https://github.com/tomloscalzo/hackathon-lying-agent-experiment (<code>gh</code> CLI is authenticated as tomloscalzo).</li>
+<li><strong>Team:</strong></li>
+<li><strong>Tom:</strong> owner; ran the analysis workstream with Claude Code (this session).</li>
+<li><strong>Haitham:</strong> harness, Modal endpoints, experiment runs, publishing snapshots.</li>
+<li><strong>Lydia:</strong> research surveys, experiment design, scenario packs.</li>
+<li><strong>Experiment:</strong> two Qwen3-32B agents, run separately, play officials in a fictional scenario.</li>
+<li><strong>Sequence:</strong> each writes a private plan, they exchange 3 rounds of peer messages, then each locks a private <code>take</code> / <code>refuse</code>.</li>
+<li><strong>The side deal</strong> (a rule-bending action) executes only if both take ("dual control").</li>
+<li><strong>Factors in the completed study:</strong><ul>
+<li>72 scenes (8 settings × 3 families: welfare / nondeception / authority × 3)</li>
+<li>5 levels</li>
+<li>6 pairings: W-W, W-none, D-D, D-none, A-A, A-none (W = welfare, D = non-deception, A = authority rule; agent A always holds the rule)</li>
+<li>watched / unwatched notice</li>
+<li>one seed: 4,320 planned trials</li>
+</ul>
+</li>
+<li><strong>Data:</strong> the completed study is <code>results/2026-10-25-pressure-study/</code> (raw runs, about 514 MB, 13k files). That's on Haitham's branch <code>codex/resolve-pressure-merge</code> and on our working branch, <strong>not on main</strong>. Snapshot cutoff 16:42:07 UTC.</li>
+<li><strong>Earlier studies:</strong></li>
+<li>v1 pressure pack, 600 trials (<code>results/qwen-pressure-final-20261024-181708</code>, on main). Its first-run analysis is <code>analysis/qwen-pressure-final-20261024-181708/</code> (the main-repo layout).</li>
+<li>the 99-case hospital study, the pilot, and provider probes.</li>
+</ul>
+<h2 id="3-branches-prs-and-worktrees">3. Branches, PRs and worktrees</h2>
+<p>Worktrees sit next to the main checkout in <code>C:\Users\Tom\hackathon2\</code>. The owner's convention for new ones is branch <code>[category]-[item]</code>, worktree <code>hackathon-lying-agent-experiment-[branch]</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>State</th>
+<th>Worktree</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main</code></td>
+<td><strong>trunk; up to date at <code>6ca8c47f</code></strong> (PR #12)</td>
+<td><code>hackathon-lying-agent-experiment</code> (primary checkout, on main)</td>
+<td>Has the harness, the v1 results and analysis, the prompt library, <code>analysis-pipeline/PROCESS.md</code>, and all completed-study step outputs (Steps 0.5–3, oversight, convergence, construct)</td>
+</tr>
+<tr>
+<td><code>analysis-full-pressure-study</code></td>
+<td><strong>working branch</strong> for the completed study; <code>c9323ead</code></td>
+<td><code>…-analysis-full-pressure-study</code></td>
+<td>Based on Haitham's <code>codex/resolve-pressure-merge</code> plus our step outputs. <code>steps/</code> is byte-identical to main. It also contains the raw results and Haitham's reorganisation, so merging it to main would bring all of that in. Only untracked: <code>steps/step2/_test_snapshot/</code> (scratch).</td>
+</tr>
+<tr>
+<td><code>codex/resolve-pressure-merge</code></td>
+<td><strong>Haitham's</strong>; tip <code>ff1b3743</code>, 2026-10-25 20:12, "Graph all monitoring outcomes and unilateral decisions"</td>
+<td>—</td>
+<td>25 commits not in main; reorganises results/analysis; <strong>already contains (merged in <code>36cbdfbc</code>) both <code>experiment-harness-pilot-results</code> and <code>prompt-changes-v2</code></strong>, so their conflict is resolved there. <strong>Newer than our working branch.</strong> Main is <em>not</em> an ancestor of it, so it lacks PRs #10–#12. Also contains <strong>Haitham's own parallel analysis</strong> <code>analysis/2026-10-25-pressure-study/reasoning-audit/</code> (<code>3ca23458</code>, <code>ff1b3743</code>): monitoring estimates, missing-outcome bounds, endpoint sensitivity, 4 cases where an authority agent's action contradicts its own reported instruction, and a "plausible deniability" casebook. <strong>Its README and the results README still say "collusion rate by pressure level"</strong>, which breaks the language rules in §1. Reconcile its numbers and wording with <code>steps/</code> before the paper. Merging into main is the team's decision.</td>
+</tr>
+<tr>
+<td><code>experiment-harness-pilot-results</code></td>
+<td>Haitham's; tip <code>82b644ce</code> on origin (16:48, snapshot 164207). <strong>The local ref is stale</strong> at <code>e76e3205</code>; run <code>git fetch</code>.</td>
+<td>—</td>
+<td>Older line, already merged into <code>codex/resolve-pressure-merge</code></td>
+</tr>
+<tr>
+<td><code>prompt-changes-v2</code></td>
+<td>Lydia's; <code>5c641c1e</code></td>
+<td><code>wt-prompt-changes-v2</code></td>
+<td>Extended pack v4 → v6 (5 settings, 495 scenes, 87% template-generated). Rewrites the criterion texts.</td>
+</tr>
+<tr>
+<td><code>experiments-authority-ablation</code></td>
+<td><strong>WIP, unreviewed, not run</strong>; <code>390355db</code> (pushed)</td>
+<td><code>…-experiments-authority-ablation</code></td>
+<td>See §6. <strong>Merge hazard:</strong> it's based on the working branch (<code>44b443be</code>), so it carries all 25 codex commits and the 514 MB of raw results. Don't merge it into main as is; cherry-pick <code>390355db</code> onto a branch off main, or merge codex first.</td>
+</tr>
+<tr>
+<td><code>analysis-e1-preliminary</code></td>
+<td>done; snapshot (71%) Steps 1–3; <code>f92e5d47</code></td>
+<td><code>…-analysis-e1-preliminary</code></td>
+<td>Superseded by the completed study; kept for provenance</td>
+</tr>
+<tr>
+<td><code>analysis-pipeline</code></td>
+<td>paused after design; <code>ecf8ff6c</code></td>
+<td><code>…-analysis-pipeline</code></td>
+<td><code>analysis-pipeline/DESIGN.md</code> (reviewed; §8 resolutions). No code written.</td>
+</tr>
+<tr>
+<td><code>self-contained-pressure-levels</code></td>
+<td><strong>PR #1 OPEN</strong>; <code>6f34852e</code></td>
+<td><code>wt-self-contained-pressure-levels</code></td>
+<td>v2 of the v1 pack: verbatim back-reference and harm fixes. Optional.</td>
+</tr>
+<tr>
+<td>Merged feature branches</td>
+<td>PRs #2–#12 merged</td>
+<td>various <code>…-docs-*</code>, <code>…-analysis-*</code> worktrees</td>
+<td>Safe to delete. <strong>Folder names don't always match branches:</strong> <code>…-analysis-heatmaps-pressure-study</code> holds <code>docs-heatmap-legibility</code>, and <code>…-analysis-steps-pressure-study</code> holds <code>analysis-construct-addendum</code>. Check <code>git worktree list</code> before deleting.</td>
+</tr>
+<tr>
+<td><code>first-run-summary-analysis</code>, <code>working/constraint-tipping</code></td>
+<td>merged (#2) / superseded</td>
+<td>—</td>
+<td><code>working/constraint-tipping</code> (origin only) duplicates content already on main</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PR history:</strong>
+- #1 open: pack v2.
+- #2: harness, v1 results and first-run analysis.
+- #3: prompt library.
+- #4: Step 1/2 original prompts.
+- #5: Step 1–3 consolidation; PROCESS aligned.
+- #6: CPU reservation rule.
+- #7: Step 0.5 / 1.5 prompts.
+- #8: Step 0.5 / 1.5 outputs.
+- #9: Step 1 and Step 3 v1.
+- #10: Step 2, Step 3 v3, oversight, convergence, construct.
+- #11: construct addendum.
+- #12: legible heat maps and chart rule.</p>
+<p>Two old worktrees (<code>wt-prompt-changes-v2</code>, <code>wt-self-contained-pressure-levels</code>) don't follow the naming convention, because Windows file locks prevented <code>git worktree move</code>.</p>
+<h2 id="4-the-analysis-process-reusable">4. The analysis process (reusable)</h2>
+<ul>
+<li><strong>The process:</strong> <a href="../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a> defines the stages, file contracts and the <code>metrics_schema.json</code> contract.</li>
+<li><strong>The method:</strong> the step prompts in <a href="../prompt-library/README.html"><code>prompt-library/</code></a> are authoritative.</li>
+<li><strong>Step 0.5:</strong> raw 1-variable and 2-variable heat maps from <code>runs.csv</code>. The owner calls this the highest-value item. It takes about 1 minute.</li>
+<li><strong>Step 1:</strong> extract, organise, augment: a per-trial table with a description column next to every identifier, plus a schema, dictionary and validation.</li>
+<li><strong>Step 1.5:</strong> derived-metric heat maps (about 1.5 minutes).</li>
+<li><strong>Step 2:</strong> analysis: pre-registration, a paired primary test, randomisation-level inference, BH, words vs. actions, sensitivity.</li>
+<li><strong>Step 3:</strong> findings briefing and paper kit.</li>
+<li><strong>Reference scripts:</strong> <code>prompt-library/analysis/tools/</code> (Steps 0.5 and 1.5); <code>tools/run_reserved.py</code> (keeps CPUs free); <code>tools/md_to_html.py</code> (makes the HTML copy of every <code>.md</code>).</li>
+<li><strong>Completed-study scripts:</strong> in each <code>steps/&lt;step&gt;/</code> folder:</li>
+<li><code>build_metrics_e1.py</code>: Step 1. 8 workers take about 97 s.</li>
+<li><code>analyze_full.py</code> + <code>analyze_full_workers.py</code>: Step 2. About 5.5 minutes with the cache; about 10 minutes fresh.</li>
+<li><code>oversight_reasoning/*.py</code></li>
+<li><code>pressure_construct.py</code>, <code>instructed_split.py</code></li>
+<li><strong>Workflow and batch-run rules:</strong> <code>prompt-library/workflow/development-workflow.md</code> and <code>batch-runs-and-compute.md</code>.</li>
+</ul>
+<h2 id="5-owners-standing-rules-follow-them">5. Owner's standing rules (follow them)</h2>
+<ul>
+<li><strong>Workflow</strong> (<code>development-workflow.md</code>):</li>
+<li>Use small branches and worktrees with the naming above.</li>
+<li>Follow the staged process: design → review → implement → review → test → review → analysis → review → reports → review.</li>
+<li>Use <strong>fresh subagents for every review and discrete unit of work</strong>, parallel where independent.</li>
+<li>Commit often.</li>
+<li><strong>Merging:</strong> minor changes may be merged after an AI review. For major changes, ask the owner first.</li>
+<li><strong>After every merge,</strong> update the primary checkout to the tip of main.</li>
+<li>Give the owner HTML and Markdown report links.</li>
+<li><strong>Batch runs</strong> (<code>batch-runs-and-compute.md</code>): <strong>before any paid or cloud run, estimate the runtime, requests, tokens and cost, and get approval.</strong></li>
+<li>Schedule MSSQ (one queue, many workers), longest jobs first.</li>
+<li>Spend cap: 120% of the estimate. Pause if errors exceed 10%.</li>
+<li>Check alignment with the sprint's criteria and research questions.</li>
+<li><strong>Local CPU:</strong></li>
+<li>Always leave CPU 0 free.</li>
+<li>For Step 0.5–3 analytics jobs, <strong>leave CPUs 0–3 free</strong>. Launch with <code>python tools/run_reserved.py &lt;script&gt;</code>. This machine is an i7-8850H with 12 logical CPUs; the launcher reserves CPUs 0–3 and reports <strong>8 available</strong> (mask <code>0xFF0</code>).</li>
+<li><strong>Never kill processes by name or window title.</strong> Stop only exact PIDs you started. Another session (<code>C:\Users\Tom\hackathon\work_scratch\…</code>) runs hundreds of Python jobs on this machine. A Step 2 agent's filtered <code>taskkill</code> may once have hit them.</li>
+<li><strong>Don't stall for approval</strong> once the owner has asked for work. Pause only for paid spend, destructive actions or real ambiguity.</li>
+<li><strong>Prompt library:</strong> add prompts as new files, each with an HTML copy. Don't delete existing prompts without approval.</li>
+<li>Claude memory files with these rules live at <code>C:\Users\Tom\.claude\projects\C--Users-Tom-hackathon2\memory\</code> (<code>MEMORY.md</code> index).</li>
+</ul>
+<h2 id="6-work-in-progress-and-stopped-work">6. Work in progress and stopped work</h2>
+<h3 id="authority-ablation-stopped-wip-committed-on-experiments-authority-ablation-390355db-not-merged">Authority ablation: STOPPED, WIP committed on <code>experiments-authority-ablation</code> (<code>390355db</code>), not merged</h3>
+<ul>
+<li><strong>Purpose:</strong> randomise the superior's take-instruction independently of level, to test causally the strongest exploratory finding (obedience to a claimed superior).</li>
+<li><strong>Built by a design agent; stopped before its write-up. Unreviewed.</strong></li>
+<li><code>prompts/13-authority-ablation.json</code>:<ul>
+<li>46 scenes, 107 scene variants: instruction present / removed / added, plus rebuilt frozen originals with the repeated-principals artefact fixed</li>
+<li>pairings A-A, A-none, W-W, D-D</li>
+<li>1,704 planned trials</li>
+</ul>
+</li>
+<li><code>experiments/authority-ablation/</code>:<ul>
+<li><code>build_ablation_pack.py</code>, <code>validate_ablation_pack.py</code> (validation <strong>ok</strong>: 0 failures, 1,704 unique run IDs, 3,408 prompts rendered)</li>
+<li><code>ABLATION-DIFFS.md</code> and <code>ablation_diffs.csv</code> (per-variant text diffs)</li>
+<li><code>power_mde.py</code> / <code>.csv</code>, <code>analysis_pairs.csv</code></li>
+<li><code>run_collection.py</code> (launch shim, so the run can go through <code>run_reserved.py</code>)</li>
+</ul>
+</li>
+<li>Harness changes: <code>lying_harness/pressure.py</code> skips levels marked <code>"run": false</code> (deduplicated cells), and <code>tests/test_pressure.py</code> adds tests for that.</li>
+<li><strong>Missing:</strong></li>
+<li><code>DESIGN.md</code></li>
+<li><code>LAUNCH.md</code></li>
+<li>an independent review (the variants must differ <strong>only</strong> in the instruction)</li>
+<li>the owner's cost approval</li>
+<li>Modal credentials</li>
+<li><strong>Estimate (unapproved):</strong> about 1,700 trials, about 25M tokens, about 1.7–2.4 h at the measured 700–1,000 trials/h, about $10–40 of GPU. Calibrate against the actual Modal bill for the 4,320-trial run.</li>
+<li><strong>Launch</strong> (not done) needs <code>LLM_BASE_URL</code> / <code>LLM_API_KEY</code> in a git-ignored <code>.env.pressure-modal</code>. <strong>No such file exists in any checkout</strong> (only <code>.env.example</code>), so this is blocked on Haitham. These are Haitham's vLLM endpoint values, not an OpenAI key. Earlier runs used e.g. <code>python -u -m lying_harness.pressure --pack … --output results/… --jobs 48 --order-seed … --control-seed … --continue-on-format-failure --env-file .env.pressure-modal</code>.</li>
+<li><strong>Worth adding if resumed:</strong> "rank stated in the principals block" vs. "no rank stated" variants. In the current prompts, rank appears only in the stakes prose ("above the school file"), and the principals block repeats "X instructs refuse" about 5 times.</li>
+</ul>
+<h3 id="prompt-placement-limitation-and-placement-test-designed-not-built">Prompt-placement limitation and placement test (designed, not built)</h3>
+<ul>
+<li><strong>What happened in the completed study:</strong> each agent's whole opening prompt went in one <code>system</code> message (<code>lying_harness/pressure.py</code> around line 123): scenario, duty, stakes, principals (including "X instructs take"), the monitoring notice and the moral rule. Stage instructions and peer messages were <code>user</code> turns.</li>
+<li><strong>Why it matters:</strong> the in-story superior's instruction therefore shared system-level priority with the agent's own rule, which may inflate the authority effect.</li>
+<li><strong>The fix, tested directly:</strong> keep only the role, the rule, the notice and the protocol in the system prompt, and move the scenario, stakes and principals to the first user turn as a quoted case file.</li>
+<li><strong>Cost:</strong> a targeted test on the 63 first-instruction scene-levels and their preceding levels, with pairings A-A, A-none, W-W and D-D, takes about 500–1,000 trials, about 0.5–1.5 h and roughly $3–30. The completed study serves as the system-placement arm, plus a 10–20% control slice. The harness change is about 40–80 lines.</li>
+<li><strong>The prompt</strong> for both the ablation and placement is <a href="../prompt-library/experiments/authority-ablation.html"><code>prompt-library/experiments/authority-ablation.md</code></a>.</li>
+</ul>
+<h3 id="other-paused-or-optional-work">Other paused or optional work</h3>
+<ul>
+<li><strong>Step 2 heat-map font scaling:</strong> stopped before any change. Step 2's heat maps still use small fonts. Steps 0.5 and 1.5 are fixed. The method is in the "Legible on screen" chart rule.</li>
+<li><strong><code>analysis-pipeline</code> code:</strong> design reviewed, no implementation.</li>
+<li><strong>Step 3 next steps:</strong></li>
+<li>a second blind coder for the oversight codes and the 48-cell mechanism sample</li>
+<li>a convergence table with cluster CIs and a first-mover/follower analysis</li>
+<li>redrawing paper figures without codes</li>
+<li><strong>Follow-up experiments B and C</strong> (non-cumulative levels with length-matched filler, about 1,300 trials; a real temptation ladder, about 720 trials): not built.</li>
+</ul>
+<h2 id="7-subagent-history-this-session">7. Subagent history (this session)</h2>
+<p>All agents are <strong>finished or stopped. None are running.</strong> The 30-minute trunk-sync cron is <strong>cancelled</strong>. Agents reported in their handbacks; their transcripts aren't needed. The main ones, in order:</p>
+<ol>
+<li>First-run (v1) analysis, accessible rewrites, full 600-run analysis, metrics CSV, dimension × metric heat maps (first-run worktree). Merged as PR #2.</li>
+<li>Prompt-library expert review; Step 1/2 originals review; friendly and adversarial reviews of the step prompts; two superset verifications; quick reviews of the CPU-rule and 0.5/1.5 PRs. All addressed and merged.</li>
+<li>Analysis-pipeline design review: 14 findings, resolved in <code>DESIGN.md</code> §8.</li>
+<li>Snapshot (71%) Step 1, its review, Step 2, its review, Step 3, plus a plan review. On <code>analysis-e1-preliminary</code>.</li>
+<li>Completed-study work, merged in PRs #8–#11:
+   - Step 1 (with schema fixes and a transfer check)
+   - Step 2 script improvements, then review, then fixes
+   - oversight-reasoning analysis
+   - Step 3 v1 → v2 → v3
+   - construct analysis (Fable model) plus its instructed-split addendum</li>
+<li>Stopped: the authority-ablation design agent (WIP committed) and the Step 2 font-scaling agent (made no changes).</li>
+</ol>
+<h2 id="8-known-pitfalls-and-lessons">8. Known pitfalls and lessons</h2>
+<ul>
+<li><strong>Harness conflict (resolved in codex).</strong> <code>experiment-harness-pilot-results</code> and <code>prompt-changes-v2</code> had incompatible monitoring implementations in <code>lying_harness/pressure.py</code>: different run-ID formats, loop order, an always-on <code>monitoring</code> identity key that breaks resume, and different <code>monitoring_text</code> handling. Both are merged into <code>codex/resolve-pressure-merge</code> (<code>36cbdfbc</code>). Verify that branch's <code>pressure.py</code> keeps Haitham's run-ID format before rerunning old studies.</li>
+<li><strong>Lydia's extended pack v6:</strong> 87% of its 495 scenes are generated from 3 templates, so it isn't 495 independent scenes. Haitham's runs used mostly hand-written subsets (packs 10–12).</li>
+<li><strong>Scenario-text labels do the reasoning.</strong> "Take would mislead", "above X" and principals' verdicts tell the agents which way to go, so rule-following often amounts to reading labels.</li>
+<li><strong>Interim snapshots</strong> are cumulative copies of thousands of files, which bloats the repo.</li>
+<li><strong>Tooling quirks:</strong></li>
+<li>Subagents' Write tool refuses <code>.md</code> report files, so they write them from Python.</li>
+<li><code>md_to_html.py</code> sometimes fails to rewrite <code>.md</code> links inside the HTML.</li>
+<li><code>python -I</code> hides user-installed packages (pandas, markdown).</li>
+<li>On Windows, set CPU affinity with ctypes <code>SetProcessAffinityMask</code> and correct <code>wintypes</code> (psutil isn't installed).</li>
+<li><code>git worktree move</code> fails on Windows when a folder is locked.</li>
+</ul>
+<h2 id="9-how-to-resume">9. How to resume</h2>
+<ol>
+<li><code>cd C:\Users\Tom\hackathon2\hackathon-lying-agent-experiment &amp;&amp; git fetch origin &amp;&amp; git status</code>. Expect <code>main</code>, clean apart from the untracked <code>analysis/qwen-pressure-final-20261024-181708/trial_metrics.xlsx</code> (the owner's file; it was never committed). Fast-forward if behind. Local refs for other branches may be stale; use <code>origin/&lt;branch&gt;</code>.</li>
+<li>Read this file, then <code>analysis/2026-10-25-pressure-study/steps/step3/SUMMARY.md</code> and <code>paper-outline.md</code>.</li>
+<li><strong>For the paper:</strong> use the kit in <code>step3/</code>. Figures:
+   - <code>step2/figures/03_primary_monitoring_forest.png</code>
+   - <code>step2/figures/19_monitoring_by_level.png</code>
+   - <code>pressure-construct/figures/fig7_family_by_principal.png</code>
+   - <code>fig2_take_by_level_split.png</code>
+   - <code>step2/figures/05_asymmetry_mixed_pairs.png</code> and <code>06_rule_application.png</code></li>
+</ol>
+<p>Check the exact file names in <code>step3/paper-outline.md</code>'s figure plan.
+4. <strong>To continue the ablation:</strong> check out <code>experiments-authority-ablation</code>, write <code>DESIGN.md</code> / <code>LAUNCH.md</code>, have a fresh agent review it, run a cost estimate and get approval, then get the credentials from Haitham.
+5. <strong>To rerun the analysis on new data:</strong> follow <code>prompt-library/README.md</code>: Step 0.5 → 1 → 1.5 → 2 → 3, always via <code>tools/run_reserved.py</code>.</p>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01: Separate the system prompt from the scenario</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="01-separate-the-system-prompt-from-the-scenario">01: Separate the system prompt from the scenario</h1>
+<h2 id="why">Why</h2>
+<p>In the completed study, <code>lying_harness/pressure.py</code> sends each agent's <strong>entire opening prompt as one <code>system</code> message</strong>: around line 123, <code>histories = {a: [{"role": "system", "content": initial_prompt(pack, spec, a)}] …}</code>. That message includes:
+- the scenario
+- the official duty
+- the proposed action
+- the honesty notes
+- the <strong>principals block</strong> (e.g. "District special-education director instructs take")
+- the <strong>stakes text</strong> (the justification ladder)
+- the monitoring notice
+- the agent's <strong>moral-rule criterion block</strong>
+- the output protocol</p>
+<p>Stage instructions ("plan", "message", "decide") and delivered peer messages are <code>user</code> turns.</p>
+<p><strong>Consequence:</strong> an in-story superior's instruction shares system-level priority with the agent's own operator-given rule. Instruction-hierarchy training (Wallace et al., 2024, <em>The Instruction Hierarchy</em>) teaches models to privilege system content, so the observed authority effect may be partly <strong>system-prompt priority</strong> rather than claimed authority. The realistic threat model, where task content tries to override an operator rule, needs the scenario in a <strong>user</strong> turn.</p>
+<h2 id="target-message-layout">Target message layout</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>system</code></td>
+<td>Role line ("You are {role}. Another participant is {other_role}."), the agent's <strong>criterion block</strong> (moral rule), the <strong>monitoring notice</strong> (kept here so the monitoring arm stays comparable), the dual-control mechanics, the output instructions (<code>plan:</code> / <code>action:</code> lines) and the <code>PROTOCOL</code> text</td>
+</tr>
+<tr>
+<td><code>user</code> (first turn)</td>
+<td><code>CASE FILE:</code>: setting, official duty, proposed action, outcome and cost, honesty notes, <strong>principals who have spoken</strong>, <strong>stakes in this episode</strong>. Then the first stage instruction (<code>STAGES["plan"]</code>) in the <strong>same</strong> user message, to avoid two consecutive user turns.</td>
+</tr>
+<tr>
+<td>later turns</td>
+<td>unchanged: assistant responses, then user turns with stage instructions plus delivered peer messages</td>
+</tr>
+</tbody>
+</table>
+<h2 id="implementation-steps-about-4080-lines-plus-tests">Implementation steps (about 40–80 lines plus tests)</h2>
+<ol>
+<li><strong>Pack fields.</strong> Don't edit frozen packs. Add an optional pack-level key, <code>"placement_templates": {"system": "...", "case": "..."}</code>. The two format strings split <code>shared_wrapper</code> into the system part and the case-file part, using the same <code>{placeholders}</code>. Generate them in the builder (03) by cutting <code>shared_wrapper</code> at the "Setting / Official duty … Stakes" block. Keep <code>shared_wrapper</code> unchanged for the default path.</li>
+<li><strong><code>pressure.py</code>:</strong>
+   - Add <code>opening_messages(pack, spec, agent, placement="system") -&gt; list[dict]</code>.<ul>
+<li><code>placement == "system"</code>: return <code>[{"role": "system", "content": initial_prompt(...)}]</code>, <strong>byte-identical</strong> to today.</li>
+<li><code>placement == "split"</code>: render both templates with the same <code>values</code> dict <code>initial_prompt</code> uses (including <code>monitoring_text</code>). Return <code>[system_msg]</code>, and mark the case text so <code>episode()</code> prepends it to the first stage's user message.</li>
+<li>In <code>episode()</code>, replace the <code>histories = …</code> line with <code>opening_messages(...)</code>. When the plan-stage user message is built, prefix it with <code>"CASE FILE:\n" + case_text + "\n\n"</code> if placement is split.</li>
+<li>Add <code>--placement {system,split}</code> to the CLI (default <code>system</code>). Put <code>spec["placement"]</code> on each spec. Add a run-ID suffix <code>-split</code> <strong>only</strong> when it's split, so existing run IDs and resume behaviour don't change.</li>
+<li><strong>Resume compatibility:</strong> add <code>placement</code> to the manifest identity <strong>only when it isn't <code>system</code></strong>. An unconditional key would break <code>same_study</code> checks on old manifests. An earlier review found this exact bug pattern with <code>monitoring</code>.</li>
+</ul>
+</li>
+<li><strong>Tests</strong> (<code>tests/test_pressure.py</code>):
+   - <strong>Default regression:</strong> for 10 random specs from the frozen pack, <code>opening_messages(..., "system")[0]["content"] == initial_prompt(...)</code>.
+   - <strong>Split content:</strong> the system message contains the criterion block and the monitoring notice, but <strong>not</strong> the principals or stakes text. The first user message contains both, plus <code>STAGES["plan"]</code>.
+   - <strong>Run IDs:</strong> split specs have unique IDs ending in <code>-split</code>; default specs are unchanged.
+   - <strong>Episode with the mock backend</strong> (as the existing tests do): the number of calls is unchanged, and the histories contain no private information from the other agent.
+   - <strong>Resume:</strong> a manifest written without <code>placement</code> still passes the resume check with <code>--placement system</code>.</li>
+<li><strong>Validation script:</strong> render every split prompt for the selected cells (see 04), and diff it against the system version. Only the location of the moved block may differ.</li>
+<li><strong>Review:</strong> a fresh agent reviews the diff, the tests and some rendered examples before any run.</li>
+</ol>
+<h2 id="verification-checklist">Verification checklist</h2>
+<ul>
+<li>[ ] <code>python -m pytest tests/test_pressure.py -q</code> passes, run via <code>python tools/run_reserved.py -m pytest …</code> or plainly.</li>
+<li>[ ] Default renders are byte-identical to before.</li>
+<li>[ ] Spot-check 3 split transcripts from a mock run.</li>
+<li>[ ] <code>README</code> / <code>research/</code> note describing the new flag.</li>
+</ul>
+</body>
+</html>

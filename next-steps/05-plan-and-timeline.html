@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05: Plan and timeline</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="05-plan-and-timeline">05: Plan and timeline</h1>
+<p>Durations are estimates: working time for one engineer with AI agents, plus wall-clock time for runs. ⛔ marks <strong>gates</strong> that need a human decision.</p>
+<h2 id="phases">Phases</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Phase</th>
+<th>Work</th>
+<th>Depends on</th>
+<th>Est. time</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><strong>Orient</strong></td>
+<td>Read <code>RESUME_CLAUDE_SESSION.md</code> and this folder; <code>git fetch</code>; confirm the worktree layout</td>
+<td>—</td>
+<td>0.5 h</td>
+<td>—</td>
+</tr>
+<tr>
+<td>1</td>
+<td><strong>Reconcile and merge data</strong></td>
+<td>⛔ The team decides how to merge <code>codex/resolve-pressure-merge</code> into main. Reconcile Haitham's <code>reasoning-audit/</code> numbers and wording with <code>steps/</code>.</td>
+<td>0</td>
+<td>1–2 h</td>
+<td>main has the raw data and one agreed set of numbers</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Branch cleanup</strong></td>
+<td>Follow 02: archive tags, delete merged branches, close PR #1</td>
+<td>1 (partly)</td>
+<td>0.5 h</td>
+<td>lean branch list</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Placement split</strong> (01)</td>
+<td>Harness change, tests, validation renders; fresh-agent review</td>
+<td>1 or the manifest copy</td>
+<td>2–3 h</td>
+<td><code>--placement split</code>; tests green</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Ablation pack v2</strong> (03 + 04)</td>
+<td>Cherry-pick <code>390355db</code> onto a branch off main; add the none-none pairing and placement; select the 92 scene-levels; rebuild; diff report; validation; <code>DESIGN.md</code>, <code>PREREG.md</code>, <code>LAUNCH.md</code></td>
+<td>3</td>
+<td>2–3 h</td>
+<td>pack 13 v2, validated</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Review</strong></td>
+<td>A fresh agent reviews the design, diffs and code (friendly + adversarial); fix findings</td>
+<td>4</td>
+<td>1 h</td>
+<td>review notes resolved</td>
+</tr>
+<tr>
+<td>6</td>
+<td>⛔ <strong>Cost approval and credentials</strong></td>
+<td>Cost table per arm (04); owner approval; Haitham provides <code>.env.pressure-modal</code> or launches</td>
+<td>5</td>
+<td>depends on people</td>
+<td>approval recorded</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Pilot</strong></td>
+<td>About 30 trials with <code>--limit</code>; check parsing, placement rendering and outcomes</td>
+<td>6</td>
+<td>0.5 h</td>
+<td>go / no-go</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Full run</strong></td>
+<td>MSSQ, <code>--jobs 48</code>; monitor throughput, errors and spend against the cap</td>
+<td>7</td>
+<td>2.3–3.3 h wall (minimal ≈1 h)</td>
+<td><code>results/authority-ablation-v1/</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Analysis</strong></td>
+<td>Steps 0.5 → 1 → 1.5 → 2 (primary H1–H4) → 3, via <code>tools/run_reserved.py</code></td>
+<td>8</td>
+<td>1.5–2 h</td>
+<td>step outputs plus updated claims ledger</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Paper update</strong></td>
+<td>Fold the results into <code>final_report/REPORT.md</code> (reframe the authority contribution around none-none / SPLIT); team rewrite; references verified</td>
+<td>9</td>
+<td>2–4 h</td>
+<td>submission-ready report</td>
+</tr>
+</tbody>
+</table>
+<h2 id="timeline-one-engineer-starting-at-t0">Timeline (one engineer, starting at T0)</h2>
+<pre><code>T0      +2h      +4h      +6h      +8h      +10h     +12h     +14h
+|--0,1--|        |        |        |        |        |        |
+   |-2-|
+        |---3---|
+                 |---4----|
+                          |-5-|
+                              ⛔6 (approval/credentials; can overlap 5)
+                                 |7|
+                                   |------8 run------|
+                                                     |--9--|
+                                                           |--10--|
+</code></pre>
+<ul>
+<li><strong>Critical path:</strong> 1 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10. That's about <strong>12–16 working hours</strong> with prompt approvals, or <strong>about 1.5–2 calendar days</strong> realistically.</li>
+<li><strong>Can run in parallel:</strong></li>
+<li>phase 2 alongside 3</li>
+<li>drafting <code>PREREG.md</code> (in phase 4) alongside the placement tests (3)</li>
+<li>the paper rewrite of the existing results (10, first half) alongside the runs (8)</li>
+<li><strong>If the hackathon deadline still applies</strong> (11:59 PM AoE, 2026-10-25): skip 2–9 and submit the current results. Use <code>final_report/REPORT.md</code> after applying the review fixes (see <code>report-final-draft</code>). List H1–H4 as future work.</li>
+</ul>
+<h2 id="decision-points">Decision points</h2>
+<ul>
+<li>⛔ <strong>Phase 1:</strong> how to merge codex (Haitham's layout changes), and whose figures and wording the paper uses.</li>
+<li>⛔ <strong>Phase 6:</strong> the budget (full ≈2,300 trials ≈$15–55, or minimal ≈736 ≈$5–18) and who launches.</li>
+<li><strong>After phase 7:</strong> go / no-go on the pilot.</li>
+<li><strong>After phase 9:</strong> whether the results change the paper's headline. They would if H1 holds: "claimed authority in user content overrides …".</li>
+</ul>
+<h2 id="rules-that-apply-throughout">Rules that apply throughout</h2>
+<ul>
+<li>Use branches named <code>[category]-[item]</code>, with worktrees named <code>hackathon-lying-agent-experiment-[branch]</code>.</li>
+<li>Commit often. Use fresh-agent reviews. Merge minor changes after review; ask the owner before merging major ones.</li>
+<li>After each merge, fast-forward the primary checkout to main.</li>
+<li>Leave CPUs 0–3 free (<code>tools/run_reserved.py</code>). Never kill processes by name. No paid runs without approval.</li>
+</ul>
+</body>
+</html>
