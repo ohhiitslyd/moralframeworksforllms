@@ -3,7 +3,7 @@
 **Use it for:** turning a run's raw results (`runs.csv`, plus each run's `result.json` / `events.jsonl`) into one organised per-trial table. Inputs come first, each with a plain-language description, then outcomes, then derived interaction and deception metrics for each agent and for the pair.
 **Pipeline stage:** Stage 1 of [`analysis-pipeline/PROCESS.md`](../../analysis-pipeline/PROCESS.md).
 **Origin:** the requests and prompts actually used on the first pressure-pack run (2026-10-24). They produced `analysis/qwen-pressure-final-20261024-181708/trial_metrics.csv` (600 rows × 162 columns) on branch `first-run-summary-analysis`.
-**Recommended version:** [`per-trial-metrics.md`](per-trial-metrics.md) is the generalised, expert-reviewed prompt built from these. Use it for new runs. This page keeps the originals for provenance and reuse.
+**Recommended version:** [`per-trial-metrics.md`](per-trial-metrics.md) is the generalised, expert-reviewed prompt built from these. Use it for new runs. This page keeps the originals for provenance and reuse. If `analysis-pipeline/PROCESS.md` is available, it takes precedence over both.
 
 ---
 
@@ -20,6 +20,8 @@
 ## 2. Prompt sent to the analysis agent for Request A (verbatim)
 
 The scratchpad path has been replaced by a placeholder.
+
+> **Values specific to the first run:** the results folder, "all 600", the family ranges S01–S07 / S08–S14 / S15–S20, and the outcome counts (166 / 24 / 396 / 14). Replace them for another run, or use the recommended version.
 
 ```text
 New task on the same final data (results/qwen-pressure-final-20261024-181708): build a per-trial metrics CSV. The repo stays read-only. Write all outputs to the scratchpad: <SCRATCHPAD>\metrics\
@@ -73,7 +75,7 @@ When done, report back:
 - any caveats
 ```
 
-## 3. How Request B was implemented
+## 3. Reusable instruction for Request B (written afterwards, not an original prompt)
 
 Request B was done directly in the generator script, with no separate agent prompt. To reuse it, give an agent this instruction:
 

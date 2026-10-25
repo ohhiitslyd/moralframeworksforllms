@@ -31,7 +31,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <p><strong>Use it for:</strong> turning a run's raw results (<code>runs.csv</code>, plus each run's <code>result.json</code> / <code>events.jsonl</code>) into one organised per-trial table. Inputs come first, each with a plain-language description, then outcomes, then derived interaction and deception metrics for each agent and for the pair.
 <strong>Pipeline stage:</strong> Stage 1 of <a href="../../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a>.
 <strong>Origin:</strong> the requests and prompts actually used on the first pressure-pack run (2026-10-24). They produced <code>analysis/qwen-pressure-final-20261024-181708/trial_metrics.csv</code> (600 rows × 162 columns) on branch <code>first-run-summary-analysis</code>.
-<strong>Recommended version:</strong> <a href="per-trial-metrics.html"><code>per-trial-metrics.md</code></a> is the generalised, expert-reviewed prompt built from these. Use it for new runs. This page keeps the originals for provenance and reuse.</p>
+<strong>Recommended version:</strong> <a href="per-trial-metrics.html"><code>per-trial-metrics.md</code></a> is the generalised, expert-reviewed prompt built from these. Use it for new runs. This page keeps the originals for provenance and reuse. If <code>analysis-pipeline/PROCESS.md</code> is available, it takes precedence over both.</p>
 <hr />
 <h2 id="1-original-requests-verbatim-from-the-project-owner">1. Original requests (verbatim, from the project owner)</h2>
 <p><strong>Request A: augment <code>runs.csv</code> with derived metrics</strong></p>
@@ -44,6 +44,9 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </blockquote>
 <h2 id="2-prompt-sent-to-the-analysis-agent-for-request-a-verbatim">2. Prompt sent to the analysis agent for Request A (verbatim)</h2>
 <p>The scratchpad path has been replaced by a placeholder.</p>
+<blockquote>
+<p><strong>Values specific to the first run:</strong> the results folder, "all 600", the family ranges S01–S07 / S08–S14 / S15–S20, and the outcome counts (166 / 24 / 396 / 14). Replace them for another run, or use the recommended version.</p>
+</blockquote>
 <pre><code class="language-text">New task on the same final data (results/qwen-pressure-final-20261024-181708): build a per-trial metrics CSV. The repo stays read-only. Write all outputs to the scratchpad: &lt;SCRATCHPAD&gt;\metrics\
 
 Deliverables:
@@ -94,7 +97,7 @@ When done, report back:
 - the heuristic validation results
 - any caveats
 </code></pre>
-<h2 id="3-how-request-b-was-implemented">3. How Request B was implemented</h2>
+<h2 id="3-reusable-instruction-for-request-b-written-afterwards-not-an-original-prompt">3. Reusable instruction for Request B (written afterwards, not an original prompt)</h2>
 <p>Request B was done directly in the generator script, with no separate agent prompt. To reuse it, give an agent this instruction:</p>
 <pre><code class="language-text">In &lt;TABLE&gt;.csv, every identifier column must have a plain-language *_description column immediately to its right
 (and a short title/label column where useful). Identifiers include: run, scenario, scenario family, diagnostic,

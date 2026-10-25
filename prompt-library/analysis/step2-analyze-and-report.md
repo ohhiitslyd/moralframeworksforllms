@@ -3,7 +3,7 @@
 **Use it for:** single-variable, two-variable and three-variable analysis of a per-trial table. That covers distributions, correlation matrices (parameter × parameter, parameter × outcome, outcome × outcome), single-factor heat maps, and two-input × one-output heat maps, filtered down to the relationships that are non-random, interesting or important, with written commentary.
 **Pipeline stage:** Stage 2 of [`analysis-pipeline/PROCESS.md`](../../analysis-pipeline/PROCESS.md), with its curation step leading into Stage 3.
 **Origin:** the requests and prompts actually used on the first pressure-pack run (2026-10-24). They produced `analysis/qwen-pressure-final-20261024-181708/dimension-metric-analysis/` on branch `first-run-summary-analysis`.
-**Recommended version:** [`parameter-outcome-report.md`](parameter-outcome-report.md) is the generalised, expert-reviewed prompt built from these, with corrected statistics. Use it for new runs. This page keeps the originals for provenance and reuse.
+**Recommended version:** [`parameter-outcome-report.md`](parameter-outcome-report.md) is the generalised, expert-reviewed prompt built from these, with corrected statistics. Use it for new runs. This page keeps the originals for provenance and reuse. If `analysis-pipeline/PROCESS.md` is available, it takes precedence over both.
 
 ---
 
@@ -20,6 +20,8 @@
 ## 2. Prompt sent to the analysis agent for Request C (verbatim)
 
 The scratchpad and worktree paths have been replaced by placeholders.
+
+> **Statistics guidance in this prompt has been superseded.** It normalises colour per column, treats agent rows as independent, only "notes" multiple comparisons (no FDR correction), and gives no shuffle-count rule. See [`parameter-outcome-report.md`](parameter-outcome-report.md) for the corrected method. Its file paths, column names and first-run caveats are also specific to that run.
 
 ```text
 New task: univariate and bivariate analysis of the per-trial metrics, with heat maps and written commentary.

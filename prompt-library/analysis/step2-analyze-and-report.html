@@ -31,7 +31,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <p><strong>Use it for:</strong> single-variable, two-variable and three-variable analysis of a per-trial table. That covers distributions, correlation matrices (parameter × parameter, parameter × outcome, outcome × outcome), single-factor heat maps, and two-input × one-output heat maps, filtered down to the relationships that are non-random, interesting or important, with written commentary.
 <strong>Pipeline stage:</strong> Stage 2 of <a href="../../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a>, with its curation step leading into Stage 3.
 <strong>Origin:</strong> the requests and prompts actually used on the first pressure-pack run (2026-10-24). They produced <code>analysis/qwen-pressure-final-20261024-181708/dimension-metric-analysis/</code> on branch <code>first-run-summary-analysis</code>.
-<strong>Recommended version:</strong> <a href="parameter-outcome-report.html"><code>parameter-outcome-report.md</code></a> is the generalised, expert-reviewed prompt built from these, with corrected statistics. Use it for new runs. This page keeps the originals for provenance and reuse.</p>
+<strong>Recommended version:</strong> <a href="parameter-outcome-report.html"><code>parameter-outcome-report.md</code></a> is the generalised, expert-reviewed prompt built from these, with corrected statistics. Use it for new runs. This page keeps the originals for provenance and reuse. If <code>analysis-pipeline/PROCESS.md</code> is available, it takes precedence over both.</p>
 <hr />
 <h2 id="1-original-requests-verbatim-from-the-project-owner">1. Original requests (verbatim, from the project owner)</h2>
 <p><strong>Request C: univariate and bivariate analysis with heat maps</strong></p>
@@ -44,6 +44,9 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </blockquote>
 <h2 id="2-prompt-sent-to-the-analysis-agent-for-request-c-verbatim">2. Prompt sent to the analysis agent for Request C (verbatim)</h2>
 <p>The scratchpad and worktree paths have been replaced by placeholders.</p>
+<blockquote>
+<p><strong>Statistics guidance in this prompt has been superseded.</strong> It normalises colour per column, treats agent rows as independent, only "notes" multiple comparisons (no FDR correction), and gives no shuffle-count rule. See <a href="parameter-outcome-report.html"><code>parameter-outcome-report.md</code></a> for the corrected method. Its file paths, column names and first-run caveats are also specific to that run.</p>
+</blockquote>
 <pre><code class="language-text">New task: univariate and bivariate analysis of the per-trial metrics, with heat maps and written commentary.
 
 Input: &lt;ANALYSIS_DIR&gt;\trial_metrics.csv. It now has 162 columns. I added a plain-language *_description column next to every identifier (run, scenario, family, diagnostic, level, pairing, pairing kind, criterion A/B, provider, outcome). build_metrics.py and trial_metrics_dictionary.md in the same folder are updated to match.
