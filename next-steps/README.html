@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>next-steps/: handoff package</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="next-steps-handoff-package">next-steps/: handoff package</h1>
+<p>This folder is everything an engineer (or an AI agent) needs to continue the dual-control collusion experiment after the 2026-10-25 sprint pause. Read the files in order:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>File</th>
+<th>What it gives you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><a href="RESUME_CLAUDE_SESSION.html">RESUME_CLAUDE_SESSION.md</a></td>
+<td>Full context: results, where everything lives, rules, history, pitfalls. <strong>Start here.</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="01-separate-system-prompt.html">01-separate-system-prompt.md</a></td>
+<td>Harness change: the moral rule stays in the system prompt; the scenario, stakes and principals move to a user turn. Includes code-level steps and tests.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="02-branch-cleanup.html">02-branch-cleanup.md</a></td>
+<td>Which branches and worktrees to keep, archive or delete, with safe commands and checks</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="03-authority-ablation.html">03-authority-ablation.md</a></td>
+<td>The authority-ablation experiment (± prompt placement): what's built, what's missing, and how to finish it</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="04-arm-selection.html">04-arm-selection.md</a></td>
+<td>Which experimental arms to run next and which to drop, with exact cells, counts and cost</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="05-plan-and-timeline.html">05-plan-and-timeline.md</a></td>
+<td>A pre-defined plan with phases, dependencies, gates and timeline</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Status at handoff:</strong>
+- <strong>Completed study:</strong> analysed. The results are on <code>main</code> in <code>analysis/2026-10-25-pressure-study/steps/</code>.
+- <strong>Report:</strong> a draft is on branch <code>report-final-draft</code> (<code>final_report/REPORT.md</code> + <code>.html</code>). It's AI-assisted and has been through a mock-judge review and a fact-check, with fixes applied in a revision pass. The team should still rewrite it in their own words.
+- <strong>Follow-up experiments:</strong> designed, not run. Running them needs the owner's cost approval and Haitham's Modal endpoint credentials.</p>
+<p><strong>Non-negotiable rules:</strong>
+- Leave CPUs 0–3 free for analytics jobs. Use <code>python tools/run_reserved.py &lt;script&gt;</code>.
+- Never kill processes by name.
+- No paid runs without a cost estimate and approval.
+- Use small branches and PRs, with a fresh-agent review for each change.</p>
+<p>The details are in <code>prompt-library/workflow/</code>.</p>
+</body>
+</html>

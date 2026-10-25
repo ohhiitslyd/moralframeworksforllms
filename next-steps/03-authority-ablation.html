@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03: Authority ablation (± instruction placement): full instructions</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="03-authority-ablation-instruction-placement-full-instructions">03: Authority ablation (± instruction placement): full instructions</h1>
+<p><strong>Use it for:</strong> a causal follow-up to the completed dual-control pressure study (2026-10-25). It randomises whether a named superior instructs the agents to "take", independently of justification level, and optionally whether the scenario, including that instruction, is delivered in the system prompt or in a user turn.
+<strong>Status:</strong> designed; <strong>not run</strong>. Unreviewed WIP for the instruction factor is on branch <code>experiments-authority-ablation</code> (commit <code>390355db</code>).
+<strong>Origin:</strong> the owner's follow-up after the construct audit (<code>analysis/2026-10-25-pressure-study/steps/pressure-construct/REPORT.md</code>) found that "pressure" is largely a superior's instruction. A later prompt-placement question added the placement factor: in the completed study the whole scenario, including the instruction, sat in the same system message as the agent's moral rule.
+<strong>Related:</strong> <a href="../prompt-library/workflow/batch-runs-and-compute.html">batch-runs-and-compute</a> (cost gate), the analysis steps in <a href="../prompt-library/analysis/"><code>../analysis/</code></a>, and <code>RESUME_CLAUDE_SESSION.md</code> §6.</p>
+<hr />
+<h2 id="prompt">Prompt</h2>
+<h3 id="goal">Goal</h3>
+<p>Test causally whether a named superior's instruction to "take" drives joint approval of a rule-bending action, independent of justification level. In the completed study this was exploratory: the instruction is confounded with level, appearing in 0/1/8/18/81% of scenes at L1–L5, and authority-rule agents had no mutual takes in 1,109 trials without one.</p>
+<p>Optionally, also test whether the effect depends on the instruction being delivered at system-prompt level.</p>
+<h3 id="context-read-first">Context (read first)</h3>
+<ul>
+<li><code>RESUME_CLAUDE_SESSION.md</code> (repo root): sections 1, 3, 5, 6 and 8</li>
+<li><code>analysis/2026-10-25-pressure-study/steps/pressure-construct/REPORT.md</code>, including §7 (instructed vs. other pressure)</li>
+<li><code>analysis/2026-10-25-pressure-study/steps/step2/REPORT.md</code> (the primary method to mirror) and <code>PREREG.md</code></li>
+<li>Frozen pack: <code>results/2026-10-25-pressure-study/manifest.json["pack"]</code>, on branch <code>codex/resolve-pressure-merge</code></li>
+<li>Harness: <code>lying_harness/pressure.py</code>.</li>
+<li>Note <code>specs_for</code>, <code>initial_prompt</code> and <code>episode</code>.</li>
+<li>The whole opening prompt is currently <strong>one system message</strong> (around line 123). Stage instructions and peer messages are user turns.</li>
+<li>WIP: branch <code>experiments-authority-ablation</code> (<code>390355db</code>). It has <code>prompts/13-authority-ablation.json</code>, a builder, diffs and validation, all unreviewed. <strong>That branch carries the raw results</strong>, so don't merge it into main as is. Cherry-pick <code>390355db</code> onto a branch off main instead.</li>
+</ul>
+<h3 id="design">Design</h3>
+<p>Factors:
+- <strong>Instruction</strong>, varied within scene × level:
+  - <strong>PRESENT</strong> (original text)
+  - <strong>REMOVED:</strong> delete the superior's sentence from the stakes text, and its "X instructs take" line from the principals block
+  - <strong>ADDED:</strong> insert the scene's own superior sentence, verbatim from the level where it first appears, plus its principals line, at earlier levels
+- <strong>Placement</strong> (optional second factor):
+  - <strong>SYSTEM:</strong> the current single system message
+  - <strong>SPLIT:</strong> the system prompt holds the role, the moral rule, the monitoring notice and the protocol; the first user turn holds the scenario, duty, stakes and principals, framed as a quoted case file
+- <strong>Pairings:</strong> A-A and A-none (primary); W-W and D-D (generality).
+- <strong>Monitoring notice:</strong> keep both arms if the budget allows, otherwise unwatched only. Keep the notice in the system prompt in every arm.
+- <strong>Control:</strong> rebuild the original condition with the known artefact fixed (the principals block repeats "X instructs refuse" about 5 times at L5), so arms differ <strong>only</strong> in the instruction, or only in placement.
+- <strong>Budget:</strong>
+  - instruction factor alone: about 1,700 trials
+  - <strong>placement-only test:</strong> about 500–1,000 trials on the 63 first-instruction scene-levels and their preceding levels. Here the completed study supplies the SYSTEM arm, plus a 10–20% concurrent SYSTEM control slice to check endpoint or time drift.
+  - Show the cell table and justify any cuts.
+- <strong>Optional:</strong> a "rank stated in the principals block" vs. "no rank stated" variant. In the original prompts, rank appears only in the stakes text, e.g. "above the school file".</p>
+<h3 id="pre-registration-write-preregmd-before-running">Pre-registration (write <code>PREREG.md</code> before running)</h3>
+<ul>
+<li><strong>Primary:</strong> within scene × level × pairing, P(mutual take | instruction present) − P(mutual take | absent). Use a paired McNemar test plus a scenario-cluster bootstrap CI. Expect a positive difference, largest for authority-rule agents.</li>
+<li><strong>Secondary:</strong></li>
+<li>the same contrast by rule and by level</li>
+<li>placement: a smaller instruction effect under SPLIT than SYSTEM?</li>
+<li>agent-level take rates; lone takes</li>
+<li><strong>Report:</strong> the minimum detectable effect at 80% power, and failure sensitivity (failures counted as each outcome in turn).</li>
+</ul>
+<h3 id="build-and-validate-no-api-calls">Build and validate (no API calls)</h3>
+<ol>
+<li>Write a builder that reads the frozen pack and writes <code>prompts/13-authority-ablation*.json</code> with the same schema, plus a <code>--placement split|system</code> harness option. Give run IDs unique suffixes, e.g. <code>-INS</code>, <code>-NOI</code>, <code>-ADD</code>, <code>-split</code>.</li>
+<li>Write a diff report (<code>ABLATION-DIFFS.md</code> plus CSV) proving each variant differs from its original only in the instruction sentence and principals line, or only in placement.</li>
+<li>Validation script:
+   - render every prompt through <code>specs_for</code> / <code>initial_prompt</code> / <code>episode</code> with a mock backend
+   - check counts and unique run IDs
+   - check the diffs
+   - run <code>python -m pytest tests/test_pressure.py -q</code></li>
+<li>Have a <strong>fresh agent review</strong> the design, the diffs and the code before any paid run.</li>
+</ol>
+<h3 id="cost-gate-mandatory">Cost gate (mandatory)</h3>
+<ul>
+<li><strong>Estimate:</strong> per arm and in total, give trials, requests (about 10 per trial), tokens (about 14.6k per trial, about 5.6k of it output), runtime (about 700–1,000 trials per hour on the Modal endpoint at <code>--jobs 48</code>) and GPU cost.</li>
+<li>First guess: about $5–8 per replica-hour, 1–3 replicas. That gives about $10–40 for about 1,700 trials, or about $3–30 for the placement-only test.</li>
+<li>Calibrate from the actual Modal bill for the 4,320-trial run.</li>
+<li><strong>Get the owner's approval</strong> before running.</li>
+<li><strong>Limits:</strong> the spend cap is 120% of the approved estimate. Pause if the infrastructure error rate exceeds 10%.</li>
+</ul>
+<h3 id="launch-only-after-approval-credentials-come-from-haitham">Launch (only after approval; credentials come from Haitham)</h3>
+<ul>
+<li><strong>Credentials:</strong> <code>LLM_BASE_URL</code> and <code>LLM_API_KEY</code> go in a git-ignored <code>.env.pressure-modal</code>. This is the vLLM endpoint key, not an OpenAI key. Never commit it.</li>
+<li><strong>Pilot:</strong> about 30 trials with <code>--limit</code>, then check parsing and outcomes.</li>
+<li><strong>Full run:</strong>
+  <code>python -u tools/run_reserved.py experiments/authority-ablation/run_collection.py --pack prompts/13-authority-ablation.json --output results/authority-ablation-v1 --jobs 48 --order-seed 20261026 --control-seed 4 --continue-on-format-failure --env-file .env.pressure-modal</code></li>
+<li><strong>Scheduling</strong> is MSSQ (single queue, shuffled order). Monitor throughput, errors and cost.</li>
+</ul>
+<h3 id="analysis">Analysis</h3>
+<p>Reuse the prompt library:
+- Step 0.5: raw heat maps
+- Step 1: metrics (reuse <code>build_metrics_e1.py</code>)
+- Step 1.5
+- Step 2: paired primary plus secondaries
+- Step 3: update the claims ledger and the paper kit</p>
+<p>Language rules:
+- "mutual take" is an operational outcome
+- reasoning is generated text, not internal states
+- call it "justification level", never "pressure"
+- exploratory vs. pre-registered is labelled everywhere</p>
+<h3 id="rules">Rules</h3>
+<ul>
+<li>Work on branch <code>experiments-authority-ablation</code>, or a fresh branch off main with the WIP cherry-picked.</li>
+<li>Commit often. Use a fresh subagent for every review.</li>
+<li>Analytics jobs use <code>python tools/run_reserved.py</code> (CPUs 0–3 free).</li>
+<li><strong>Never kill processes by name.</strong></li>
+<li>No paid calls without approval.</li>
+<li>Ask the owner before merging into main.</li>
+</ul>
+<h3 id="report-back">Report back</h3>
+<p>The cell table and n, the MDE, the cost table for approval, validation results, review findings, and (after the run) the primary result with CI and p, the placement contrast, and updated ledger rows.</p>
+<hr />
+<h2 id="handoff-specifics-as-of-2026-10-25">Handoff specifics (as of 2026-10-25)</h2>
+<p><strong>State of the WIP</strong> (branch <code>experiments-authority-ablation</code>, commit <code>390355db</code>, <strong>unreviewed, not run</strong>):
+- <code>prompts/13-authority-ablation.json</code>: 46 scenes, 107 scene variants, pairings A-A, A-none, W-W and D-D, 1,704 planned trials.
+- <code>experiments/authority-ablation/</code>:
+  - <code>build_ablation_pack.py</code>, <code>validate_ablation_pack.py</code>
+  - <code>validation_report.json</code> (ok: 0 failures, 1,704 unique run IDs, 3,408 prompts rendered)
+  - <code>ABLATION-DIFFS.md</code> and <code>ablation_diffs.csv</code>
+  - <code>power_mde.py</code> / <code>.csv</code>, <code>analysis_pairs.csv</code>
+  - <code>run_collection.py</code>
+- Harness: <code>lying_harness/pressure.py</code> skips levels marked <code>"run": false</code> (deduplicated cells), and <code>tests/test_pressure.py</code> has tests for it.
+- <strong>Missing:</strong> <code>DESIGN.md</code>, <code>LAUNCH.md</code>, the placement factor (01), the revised arm selection (04), an independent review, cost approval and credentials.</p>
+<p><strong>How to continue without dragging in the raw data:</strong></p>
+<pre><code class="language-bash">git fetch origin
+git switch -c experiments-authority-ablation-v2 origin/main
+git cherry-pick 390355db      # brings only the WIP files and harness edit
+</code></pre>
+<p>The pack builder reads the frozen pack from <code>results/2026-10-25-pressure-study/manifest.json</code>. That file exists only on <code>codex/resolve-pressure-merge</code>, so either merge codex into main first, or copy just <code>manifest.json</code> into the new branch under <code>results/2026-10-25-pressure-study/</code> (it's small).</p>
+<p><strong>Then:</strong>
+1. Implement 01 (placement split).
+2. Rebuild the pack for the arms in 04.
+3. Write <code>DESIGN.md</code>, <code>PREREG.md</code> and <code>LAUNCH.md</code>.
+4. Have a fresh agent review it.
+5. Run the cost estimate and get approval.
+6. Pilot, then the full run.</p>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02: Branch and worktree cleanup</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="02-branch-and-worktree-cleanup">02: Branch and worktree cleanup</h1>
+<p>Goal: leave only branches that carry live work or are needed for provenance. <strong>Do nothing destructive without checking first.</strong> Every delete below is safe only if <code>git branch -r --merged origin/main</code> (or the stated condition) confirms it. Haitham's and Lydia's branches are <strong>theirs to delete</strong>, so ask them.</p>
+<h2 id="decision-table-state-at-2026-10-25-2100-utc-run-git-fetch-prune-first">Decision table (state at 2026-10-25 ~21:00 UTC; run <code>git fetch --prune</code> first)</h2>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Decision</th>
+<th>Condition / reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main</code></td>
+<td><strong>keep</strong></td>
+<td>trunk</td>
+</tr>
+<tr>
+<td><code>codex/resolve-pressure-merge</code> (Haitham)</td>
+<td><strong>keep → merge into main</strong> after team review</td>
+<td>It has the raw completed-study data, the reorganised layout, Haitham's <code>reasoning-audit/</code>, and the resolved harness, merging in both <code>experiment-harness-pilot-results</code> and <code>prompt-changes-v2</code>. Main isn't its ancestor, so merging will need conflict checks.</td>
+</tr>
+<tr>
+<td><code>analysis-full-pressure-study</code></td>
+<td>keep until codex is merged, <strong>then delete</strong></td>
+<td>Working branch = codex plus our <code>steps/</code> (identical to main). Once codex is merged, everything it has is on main.</td>
+</tr>
+<tr>
+<td><code>experiments-authority-ablation</code></td>
+<td><strong>keep (WIP)</strong></td>
+<td>Unreviewed ablation build (<code>390355db</code>). Based on the working branch, so it carries the raw data. <strong>Don't merge it into main as is</strong>; cherry-pick <code>390355db</code> (see 03).</td>
+</tr>
+<tr>
+<td><code>report-final-draft</code></td>
+<td><strong>keep</strong> until the paper is final</td>
+<td>Report draft in <code>final_report/</code></td>
+</tr>
+<tr>
+<td><code>analysis-pipeline</code></td>
+<td><strong>archive</strong> (tag, then delete), or keep if anyone builds the pipeline</td>
+<td>Design only (<code>DESIGN.md</code>); no code</td>
+</tr>
+<tr>
+<td><code>analysis-e1-preliminary</code></td>
+<td><strong>archive</strong> (tag <code>archive/e1-snapshot-analysis</code>), then delete</td>
+<td>Snapshot (71%) analysis, superseded by the completed study</td>
+</tr>
+<tr>
+<td><code>self-contained-pressure-levels</code> (PR #1)</td>
+<td><strong>close PR #1 unmerged, then delete</strong></td>
+<td>v2 fixes for the <em>v1</em> pack; the v1 pack isn't being rerun. Lydia's line also has an identical copy.</td>
+</tr>
+<tr>
+<td><code>experiment-harness-pilot-results</code> (Haitham), <code>prompt-changes-v2</code> (Lydia)</td>
+<td>delete <strong>after</strong> codex is merged (owners' call)</td>
+<td>Both already merged into codex</td>
+</tr>
+<tr>
+<td><code>working/constraint-tipping</code> (Lydia)</td>
+<td>delete (owner's call)</td>
+<td>Duplicates content on main</td>
+</tr>
+<tr>
+<td><code>first-run-summary-analysis</code></td>
+<td>delete</td>
+<td>Merged (PR #2)</td>
+</tr>
+<tr>
+<td><code>docs-prompt-library</code>, <code>docs-prompt-library-analysis-steps</code>, <code>docs-prompt-library-steps-consolidation</code>, <code>docs-prompt-library-cpu-reservation</code>, <code>docs-prompt-library-steps-0.5-1.5</code>, <code>docs-prompt-library-authority-ablation</code>, <code>docs-heatmap-legibility</code>, <code>docs-resume-claude-session</code>, <code>analysis-heatmaps-pressure-study</code>, <code>analysis-steps-pressure-study</code>, <code>analysis-steps2-pressure-study</code>, <code>analysis-construct-addendum</code></td>
+<td><strong>delete</strong></td>
+<td>All merged (PRs #3–#14)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="safe-procedure">Safe procedure</h2>
+<pre><code class="language-bash">git fetch --prune origin
+git branch -r --merged origin/main          # candidates that are fully merged
+# Archive before deleting anything unmerged:
+git tag archive/e1-snapshot-analysis origin/analysis-e1-preliminary
+git tag archive/analysis-pipeline-design origin/analysis-pipeline
+git push origin archive/e1-snapshot-analysis archive/analysis-pipeline-design
+# Delete merged remote branches (repeat per branch after confirming it is in the --merged list):
+git push origin --delete docs-prompt-library
+</code></pre>
+<p><strong>Close PR #1:</strong></p>
+<pre><code class="language-bash">gh pr close 1 --comment &quot;Superseded: v1 pack not being rerun.&quot;
+git push origin --delete self-contained-pressure-levels
+</code></pre>
+<p><strong>Local worktrees</strong> sit next to the main checkout in <code>C:\Users\Tom\hackathon2\</code>. Folder names don't always match branches, e.g. <code>…-analysis-heatmaps-pressure-study</code> holds <code>docs-heatmap-legibility</code>. Always check first:</p>
+<pre><code class="language-bash">git worktree list
+git -C &lt;worktree&gt; status --short      # must be empty, or only throwaway files
+git worktree remove &lt;worktree&gt;         # add --force only if the only changes are known scratch files
+git branch -d &lt;branch&gt;                 # -d refuses unmerged branches; use -D only after archiving
+git worktree prune
+</code></pre>
+<p><strong>Windows notes:</strong>
+- <code>git worktree remove</code> / <code>move</code> can fail with "Permission denied" if an editor or indexer holds the folder. Close it and retry.
+- Never delete the primary checkout <code>hackathon-lying-agent-experiment</code>.
+- Leave the untracked <code>analysis/qwen-pressure-final-20261024-181708/trial_metrics.xlsx</code> in the main checkout (the owner's file).</p>
+<h2 id="after-cleanup-the-expected-remaining-branches">After cleanup, the expected remaining branches</h2>
+<p><code>main</code>, <code>codex/resolve-pressure-merge</code> (until merged), <code>experiments-authority-ablation</code> (or its replacement off main), <code>report-final-draft</code> (until the paper is final), plus the archive tags.</p>
+</body>
+</html>
