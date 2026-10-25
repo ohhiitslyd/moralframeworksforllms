@@ -21,20 +21,20 @@ You are writing for the **team**, not the judges: smart people who must decide i
 - Time and budget left: `<HOURS_LEFT>`, `<BUDGET>`. Paper limit: `<PAGES>` (default 8). Output folder: `<OUTPUT>`
 
 **Writing rules** (kept from the plain-language rewrite)
-- Replace codes with words, or define each one where it first appears: criteria, pairings, levels, scenarios, outcomes, endpoints, statistical terms. Give each scenario a one-line plain description.
+- Replace codes with words, or define each one where it first appears: criteria, pairings, levels, scenarios, outcomes, endpoints or providers, seed, statistical terms. Give each scenario a one-line plain description.
 - Use run IDs only as parenthetical citations, never as the subject of a sentence.
-- Give numbers as "X out of Y (Z%, 95% CI a-b)". Keep tables simple, with every column labelled in words.
+- Give numbers as "X out of Y (Z%, 95% CI a-b)", with a plain explanation of what they mean. Keep tables simple, with every column labelled in words.
 - Explain caveats in everyday terms ("the runs that colluded most also ran on a different server, so we can't tell which caused it").
 - Label every result **pre-specified** or **exploratory**. Returned reasoning is text the model produced, not its internal thought.
 - Quotes: verbatim, at most 40 words, read in full context first, labelled *private plan*, *message* or *final reasoning*, and cited by run ID. Say whether each is typical or a contrasting case.
 
-**Lite mode: readability rewrite only.** If you only need to make an existing report readable (`<REPORT>`), for example a Step 2 `REPORT.md` or an older summary, do this instead of Steps A–C:
+**Lite mode: readability rewrite only.** If you only need to make an existing report readable (`<REPORT>`) for a smart reader with no background, who hasn't seen the harness, the scenario pack or AI-safety jargon, for example a Step 2 `REPORT.md` or an older summary, do this instead of Steps A–C:
 - Apply the Writing rules.
 - Open with section 2, "What this experiment is".
 - Add "why it matters" as one sentence per finding.
 - Add section 3, "What changed", if `<EARLIER_SUMMARY>` is given.
 - Keep the same findings and add no new analysis claims. Aim for roughly the original length, or slightly longer.
-- Save to `<OUTPUT>` plus an `.html` copy.
+- Save to `<OUTPUT>/SUMMARY.md` (or another file name you're given) plus an `.html` copy.
 
 **Step A: Build the claims ledger first.** Write `<OUTPUT>/claims_ledger.csv`: one row per candidate claim from `candidates.csv`, `REPORT.md` and `<EARLIER_SUMMARY>`, with columns
 `rank, claim (one plain sentence), evidence (X of Y, effect, CI, source table or figure), strength, robustness checks passed/failed, main caveat, pre-specified/exploratory, research question(s), judging criterion served, novelty (known / new angle / new), paper-ready (yes / with caveat / not yet: what's missing), example run IDs`.

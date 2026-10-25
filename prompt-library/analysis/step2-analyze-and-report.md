@@ -20,6 +20,7 @@ Analyse `<DATA>` so a human can quickly understand which parameters matter for w
 
 ### Inputs (fill in)
 - `<DATA>`: the per-trial table (`trial_metrics.csv`), with `<SCHEMA>` (`metrics_schema.json`) and its dictionary
+- `<PARAMETERS>` / `<OUTCOMES>`: explicit lists, or "schema role = parameter / outcome". Explicit lists override the schema.
 - `<RESEARCH_QUESTIONS>`, and the design's expected directions and tipping points (e.g. the pack's `expected_first_take`)
 - `<PRIMARY>`: the pre-specified primary hypothesis, if one exists
 - `<DESIGN_FACTS>`: e.g. one seed per cell; a paired manipulation via `cell_id`; endpoint switched mid-run; **interim snapshot: yes/no**
@@ -27,8 +28,9 @@ Analyse `<DATA>` so a human can quickly understand which parameters matter for w
 
 ### Ground rules
 - **Scope.** Treat the input data as read-only, and write only to `<OUTPUT_DIR>`. No git operations.
-- **Before charting.** Check which packages are installed. Load the `dataviz` skill if your environment has it, and follow its guidance on palette, scales, labelling and accessibility.
+- **Before charting.** Check which packages are installed. Load the `dataviz` skill if your environment has it, and follow its guidance on palette, scales, labelling and accessibility. If `python -I` hides the installed packages, run your own analysis script without `-I`. Keep `-I` for code that only reads untrusted data.
 - **Reproducibility.** Put everything in one rerunnable script with fixed seeds. Also write `provenance.json`: input SHA-256s, package versions, arguments and seeds.
+- **Prefer effect sizes and consistency over significance.**
 - **Reporting numbers.**
   - Every number comes with its n.
   - Never give a p-value without an effect size and a 95% interval.
@@ -43,7 +45,7 @@ Analyse `<DATA>` so a human can quickly understand which parameters matter for w
 - **Causal wording** is only for manipulated factors whose comparisons are clean. Everything else is "associated with".
 
 ### Step 0: Type, frame and pre-register
-1. **Read the schema.** Take each variable's type (numeric, ordinal, categorical, binary, text, empty, constant) and its `randomisation_level` (scenario, episode or agent). Exclude empty and constant columns.
+1. **Read the schema and profile the data.** Record missingness, levels and cell counts (min, median, max per level) for every variable. Take each variable's type (numeric, ordinal, categorical, binary, text, empty, constant) and its `randomisation_level` (scenario, episode or agent). Exclude empty and constant columns.
    - Flag outcomes that apply only to a subset, with their denominators.
    - Flag by-construction pairs; never report them as findings.
    - Flag heuristic columns, with their overall and per-arm accuracy.
@@ -72,7 +74,7 @@ Analyse `<DATA>` so a human can quickly understand which parameters matter for w
   - binary: rates with intervals
   - numeric: medians and IQRs, as histograms (log or rank scale when skewed)
 - **Pooling.** Show per-agent metrics pooled across `_a` / `_b` where that makes sense.
-- **Output:** one summary table, saved as CSV.
+- **Output:** one summary table (variable, type, n, missing, summary, interval), saved as CSV.
 
 ### Step 3: Parameter × outcome screening
 - **Effect sizes, on a comparable scale:**
@@ -121,7 +123,7 @@ Analyse `<DATA>` so a human can quickly understand which parameters matter for w
   - binary outcomes: a **ridge-penalised logit**; the statistic is the deviance drop of A×B over A+B, minus the extra degrees of freedom; the null comes from a parametric bootstrap of the additive fit
   - numeric outcomes: OLS on ranks
   - where cells are separated (0 or n), use Firth or exact methods
-- **2D heat maps:** draw only the pairs that pass (at most 6–10), plus pairs central to the research questions, such as scenario × level for the main outcome. Use an **absolute** colour scale, show the value and k/n in each cell, and grey out small cells. Describe each in words.
+- **2D heat maps:** draw only the pairs that pass (at most 6–10), plus pairs central to the research questions, such as scenario × level, family × level, pairing × family and criterion × family (agent take rate) for the main outcome. Use an **absolute** colour scale, show the value and k/n in each cell, and grey out small cells. Describe each in words.
 - **If none pass,** or the time budget is exhausted, say so.
 
 ### Step 6: Sensitivity
@@ -143,7 +145,7 @@ Analyse `<DATA>` so a human can quickly understand which parameters matter for w
 - **Count:** about 10–20 charts.
 
 ### Deliverables
-- **`REPORT.md` + HTML,** with these sections:
+- **`REPORT.md` + HTML,** with figures embedded by relative links (`figures/<name>.png`), and these sections:
   1. summary (PRELIMINARY if interim)
   2. how to read the charts
   3. design check and completion
@@ -228,7 +230,7 @@ This is the version proposed in answer to Request D, before the expert review. T
 
 You are analysing an experiment's results so a human can quickly understand which parameters matter for which outcomes, visually and with summary statistics.
 
-### Inputs (fill in)
+## Inputs (fill in)
 - Data file: <path to CSV/Parquet, one row per unit>
 - Unit of analysis: <e.g. one row per episode / trial / participant>
 - Clustering: <e.g. "two agent rows per episode", "repeated measures per subject", or "none">
@@ -239,20 +241,20 @@ You are analysing an experiment's results so a human can quickly understand whic
 - Output folder: <path>
 - Audience: <e.g. "researchers new to the project", "hackathon judges">
 
-### Ground rules
+## Ground rules
 - Treat the data as read-only. Write only to the output folder.
 - Put all analysis in one rerunnable script (`analyze.py`). Use pandas/numpy/matplotlib (and scipy/statsmodels if installed; otherwise implement the few tests you need). Fix every random seed.
 - Never present a p-value without an effect size and an interval. Prefer effect sizes and consistency over significance.
 - Every number shown must also come with its n.
 
-### Step 0: Understand and type the variables
+## Step 0: Understand and type the variables
 1. Classify every parameter and outcome as numeric, ordinal, categorical or binary. Record missingness, the number of levels, and the min, max and median count per level.
 2. Flag outcomes defined only for a subset (e.g. "switch rate among agents who planned X") and state their denominators.
 3. Flag outcomes that are related by construction (one is derived from another, or they share inputs). Correlations between them must not be reported as findings.
 4. Flag derived or heuristic outcomes (classifiers, keyword counts) and their known accuracy. Their errors carry into anything built on them.
 5. If rows are clustered, choose an episode-level summary or a cluster-aware test for every comparison, and say which. Do not treat clustered rows as independent without saying the p-values are optimistic.
 
-### Step 1: Design check (parameter × parameter)
+## Step 1: Design check (parameter × parameter)
 Purpose: find confounding and aliasing before interpreting any outcome.
 - Compute a mixed-type association matrix over all parameters:
   - numeric–numeric: Spearman ρ
@@ -263,7 +265,7 @@ Purpose: find confounding and aliasing before interpreting any outcome.
 - Plot cell-count tables (mosaic or heat map) for any pair with association ≥ 0.3, or any pair with empty or very small cells.
 - Report which parameter effects cannot be separated (aliased pairs) and which comparisons are clean (e.g. "within level X of parameter P, Q varies freely"). Every later finding must say whether it is clean or confounded.
 
-### Step 2: Univariate summaries
+## Step 2: Univariate summaries
 - Parameters: a bar chart of counts per level (design balance).
 - Outcomes:
   - binary: rate with a 95% Wilson interval
@@ -271,7 +273,7 @@ Purpose: find confounding and aliasing before interpreting any outcome.
   - skewed numeric: show it on a log or rank scale
 - Put both in one compact table: variable, type, n, missing, summary, interval.
 
-### Step 3: Parameter × outcome screening
+## Step 3: Parameter × outcome screening
 For every (parameter, outcome) pair:
 - Effect size:
   - categorical parameter, binary outcome: Cramér's V, plus the max−min rate difference across levels
@@ -285,12 +287,12 @@ For every (parameter, outcome) pair:
   - draw a level-by-outcome chart (rates with intervals, or box plots)
   - for any whose effect may come through a confound, add the comparison within the confounding parameter's levels
 
-### Step 4: Outcome × outcome
+## Step 4: Outcome × outcome
 - Draw a mixed-type association matrix over outcomes, using the same measures as Step 1.
 - Group outcomes that move together. Separate correlations that hold by construction from ones that are informative.
 - If two outcomes are nearly redundant (|association| ≥ 0.8 and not by construction), say so and recommend keeping one.
 
-### Step 5: Two-parameter interactions (2D heat maps)
+## Step 5: Two-parameter interactions (2D heat maps)
 - Candidates are parameter pairs that are not aliased (Step 1) and have adequate cell counts.
 - For each candidate pair and key outcome, estimate the interaction: the improvement of a model with A×B over the additive model A+B. Use the deviance or R² gain, or for binary outcomes the spread of cell rates around their additive prediction. Rank candidates by this, not by the main effects.
 - For the top ~6–10 interactions, plus any 2D view that is scientifically expected or central to the research question, draw a 2D heat map:
@@ -300,7 +302,7 @@ For every (parameter, outcome) pair:
   - small cells are greyed out
 - Explain each in words: "B matters only when A = …".
 
-### Step 6: Filter and curate
+## Step 6: Filter and curate
 Rank every relationship found by:
 1. effect size
 2. robustness: survives FDR, is not confounded, holds within subgroups, cells are not tiny
@@ -314,14 +316,14 @@ Then sort them into three tiers:
 
 Explicitly list relationships that look large but are not trustworthy, and why (confounded, by construction, tiny cells, classifier error).
 
-### Chart rules
+## Chart rules
 - Every chart has a title stating the takeaway, axis labels in plain words (no codes), and a colour bar with units.
 - Use a single-hue sequential scale for magnitudes and a diverging scale centred at 0 for signed correlations. Keep the palette colour-blind safe.
 - Print the value and n in every heat-map cell. If a heat map normalises per column, say so and keep the printed raw values.
 - Order rows and columns meaningfully (by effect or by clustering), not alphabetically.
 - Keep the chart count around 10–20, using small multiples rather than many one-off charts.
 
-### Deliverables
+## Deliverables
 - REPORT.md, plus an HTML version that embeds the figures. It should contain:
   1. One-paragraph summary
   2. How to read the charts (effect-size scales, what n means, normalisation)
@@ -337,6 +339,6 @@ Explicitly list relationships that look large but are not trustworthy, and why (
 - tables/, as CSV: univariate, screening table with all tests, matrices, the numbers behind every heat map
 - analyze.py, which regenerates everything
 
-### Report back
+## Report back
 List of files; the headline relationships in one line each; the design-check result (aliased pairs); and any analysis you could not do reliably, with the reason.
 ```

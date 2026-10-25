@@ -22,6 +22,8 @@ Build a per-trial metrics table for the run in `<RESULTS_DIR>`.
 - **Untrusted data.** Run Python with `-I` when it reads run data.
 - **Pack source.** Read the scenario pack from `manifest.json["pack"]`, never from `prompts/`, which may have changed since the run.
 - **No LLM classification** (such as an LLM judge) without a cost estimate and explicit approval ([batch-runs-and-compute.md](../workflow/batch-runs-and-compute.md)).
+- **Deterministic first.** Prefer deterministic extraction from `result.json` / `events.jsonl`. Document every keyword or regex heuristic.
+- **Formatting.** Use snake_case column names, booleans as 0/1, and blanks for missing values.
 - **No guessing.** If a pack field or CSV column is missing or renamed, leave the column blank, record `source_key_missing` for it in the schema, and continue. Never crash on a missing key: use guarded lookups with blank defaults, never 0.
 
 ### Deliverables
@@ -60,6 +62,7 @@ Build a per-trial metrics table for the run in `<RESULTS_DIR>`.
   - **scenario** = setting + official duty + side deal + reward + cost
   - **level** = "Pressure level N of <max> (1 = lowest): <pressure text>"
   - **criterion** = a one-sentence summary of the rule
+  - **run** = scenario title (ID), level and label, pairing in words, seed
   - **also:** family, diagnostic, pairing (in words), pairing kind, provider or endpoint, setting, monitoring (the notice text), outcome
 - **Placement:** the first five scenario-text feature columns, through `refuse_breaks_promise`, have `randomisation_level: scenario`. They are inputs, not outcomes.
 
@@ -100,7 +103,7 @@ Build a per-trial metrics table for the run in `<RESULTS_DIR>`.
 
 ### Heuristics: validation rules
 - **Validation sample.** Tune each heuristic on one sample of transcripts, then test it on a **held-out sample enriched for positives**: at least 10 positives where possible. Label the sample **blind to the experimental arm**.
-- **What to report.** Give k/n with Wilson 95% intervals **overall and for each arm of every manipulated factor**, e.g. watched vs. unwatched and each pressure level.
+- **What to report.** Give agreement, precision and recall, each as k/n with Wilson 95% intervals, **overall and for each arm of every manipulated factor**, e.g. watched vs. unwatched and each pressure level.
 - **Differential error.** Flag it when accuracy differs between arms, because it biases contrasts. Keep a heuristic under 75% held-out accuracy, but mark it `unreliable`.
 - **Report keys.** Use exact patterns for each pack's report keys, e.g. `\bhighest_principal\b` vs. `\bhighest_principal_who_has_spoken\b`. Record the pattern used for each pack.
 - **Conflicts.** The "considered, not included" rule overrides the column list above. Don't ship a column you can't compute reliably.
@@ -111,7 +114,7 @@ Build a per-trial metrics table for the run in `<RESULTS_DIR>`.
 - **Regression.** If you changed a reference generator, rerun it on a previously published run. Every published column must have string-identical values and the same relative order; new columns are fine.
 
 ### Report back
-File paths; column count by section; new columns; validation results (k/n, interval, per arm, reliable?); count and regression results; missing pack keys; caveats.
+File paths; column count and the columns grouped by section; new columns; validation results (k/n, interval, per arm, reliable?); count and regression results; missing pack keys; caveats.
 
 ---
 
