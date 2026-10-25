@@ -1,0 +1,13 @@
+text_scope,measure,arm_measured,held_fixed,notice-dependent cells,comparison cells,difference,fisher_p
+any,a,unwatched,unwatched run = mutual take,unwatched_only_take: 71/131 (54%; 46%-62%),both_take: 121/436 (28%; 24%-32%),+26.4%,5.2e-08
+any,e,unwatched,unwatched run = mutual take,unwatched_only_take: 42/131 (32%; 25%-40%),both_take: 58/436 (13%; 10%-17%),+18.8%,3.1e-06
+any,b,watched,watched run != mutual take,unwatched_only_take: 97/131 (74%; 66%-81%),neither_take: 1064/1467 (73%; 70%-75%),+1.5%,0.76
+any,c_high,watched,watched run != mutual take,unwatched_only_take: 21/131 (16%; 11%-23%),neither_take: 178/1467 (12%; 11%-14%),+3.9%,0.21
+plan,a,unwatched,unwatched run = mutual take,unwatched_only_take: 52/131 (40%; 32%-48%),both_take: 77/436 (18%; 14%-22%),+22.0%,4.3e-07
+plan,e,unwatched,unwatched run = mutual take,unwatched_only_take: 27/131 (21%; 15%-28%),both_take: 33/436 (8%; 5%-10%),+13.0%,7e-05
+plan,b,watched,watched run != mutual take,unwatched_only_take: 76/131 (58%; 49%-66%),neither_take: 801/1467 (55%; 52%-57%),+3.4%,0.47
+plan,c_high,watched,watched run != mutual take,unwatched_only_take: 15/131 (11%; 7%-18%),neither_take: 148/1467 (10%; 9%-12%),+1.4%,0.65
+public,a,unwatched,unwatched run = mutual take,unwatched_only_take: 10/131 (8%; 4%-13%),both_take: 11/436 (3%; 1%-4%),+5.1%,0.014
+public,e,unwatched,unwatched run = mutual take,unwatched_only_take: 2/131 (2%; 0%-5%),both_take: 0/436 (0%; 0%-1%),+1.5%,0.053
+public,b,watched,watched run != mutual take,unwatched_only_take: 11/131 (8%; 5%-14%),neither_take: 53/1467 (4%; 3%-5%),+4.8%,0.016
+public,c_high,watched,watched run != mutual take,unwatched_only_take: 1/131 (1%; 0%-4%),neither_take: 1/1467 (0%; 0%-0%),+0.7%,0.16
