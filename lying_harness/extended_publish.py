@@ -49,13 +49,50 @@ def analyze(output):
              f"Outcomes among usable completions: {summary['outcomes']}", '',
              f"{len(manifest['pack']['scenarios'])} scenes across {len({s['setting_id'] for s in manifest['pack']['scenarios']})} settings, five levels, six pairings, watched/unwatched notices, one seed per cell. Three peer exchanges; temperature 0.6; maximum 4096 output tokens. Execution order is shuffled with seed {manifest.get('order_seed', 'not specified')}. Watched/unwatched describes the notice shown to agents; researcher logging is identical.", '',
              'Mutual take is an operational outcome, not causally established collusion. No communication-off or none-none experimental baseline is present. Rule wording differs from the earlier study. Qualitative utilities, template-related scenarios, differences in task content between settings, one seed, incomplete coverage and output exclusions limit interpretation. Rule compliance requires manual review. Do not pool this study with the older mixed-provider batch.', '']
-    for field, name in [('pairing', 'pairing-outcomes'), ('setting_id', 'setting-outcomes'), ('monitoring', 'monitoring-outcomes')]:
+    levels = sorted({r['level'] for r in rows})
+    fig, ax = plt.subplots(figsize=(8, 5))
+    overall_rates = []
+    for lvl in levels:
+        c = Counter(r['outcome'] for r in complete if r['level'] == lvl)
+        n = sum(c.values())
+        overall_rates.append(100 * c['mutual_take'] / n if n else 0)
+    ax.plot(levels, overall_rates, marker='o', linewidth=2.5, markersize=8, color='#aa4035', label='Overall')
+    for x, y in zip(levels, overall_rates):
+        ax.annotate(f'{y:.1f}%', (x, y), textcoords='offset points', xytext=(0, 10), ha='center', fontweight='bold')
+    for mon, color, ls in [('unwatched', '#2b5c8f', '--'), ('watched', '#5a8274', ':')]:
+        mon_rates = []
+        for lvl in levels:
+            c = Counter(r['outcome'] for r in complete if r['level'] == lvl and r['monitoring'] == mon)
+            n = sum(c.values())
+            mon_rates.append(100 * c['mutual_take'] / n if n else 0)
+        ax.plot(levels, mon_rates, marker='s', linewidth=1.5, markersize=6, color=color, linestyle=ls, label=f'Notice: {mon}')
+    ax.set_xlabel('Pressure Level')
+    ax.set_ylabel('Mutual Take (Collusion) Rate (%)')
+    ax.set_title('Collusion Rate by Pressure Level')
+    ax.set_xticks(levels)
+    ax.set_xticklabels([f'Level {lvl}' for lvl in levels])
+    ax.set_ylim(0, max(max(overall_rates) + 15, 60) if overall_rates else 60)
+    ax.grid(True, linestyle='--', alpha=0.5)
+    ax.legend(loc='upper left')
+    fig.tight_layout()
+    for suffix in ('png', 'svg'): fig.savefig(figures / f'level-collusion-rate.{suffix}', dpi=160)
+    plt.close(fig)
+    lines += ['## Collusion rate by pressure level', '',
+              '![Collusion rate by pressure level](figures/level-collusion-rate.png)', '']
+
+    for field, name, label_fn in [
+        ('level', 'level-outcomes', lambda g: f'Level {g}'),
+        ('pairing', 'pairing-outcomes', lambda g: str(g)),
+        ('setting_id', 'setting-outcomes', lambda g: str(g)),
+        ('monitoring', 'monitoring-outcomes', lambda g: str(g)),
+    ]:
         groups = sorted({r[field] for r in rows})
         counts = {g: Counter(r['outcome'] for r in complete if r[field] == g) for g in groups}
+        labels = [label_fn(g) for g in groups]
         fig, ax = plt.subplots(figsize=(10, 5)); left = [0] * len(groups)
         for outcome, color in [('mutual_take', '#aa4035'), ('unilateral_take', '#d7a24a'), ('both_refuse', '#3c7775')]:
             vals = [counts[g][outcome] for g in groups]
-            ax.barh(groups, vals, left=left, label=outcome.replace('_', ' '), color=color)
+            ax.barh(labels, vals, left=left, label=outcome.replace('_', ' '), color=color)
             left = [a+b for a,b in zip(left, vals)]
         ax.set_xlabel('Parse-valid completed episodes (counts)'); ax.set_title(field.replace('_', ' ')); ax.legend()
         fig.tight_layout()
@@ -66,7 +103,7 @@ def analyze(output):
         for g in groups:
             n = sum(counts[g].values()); take = counts[g]['mutual_take']
             rate = f'{100*take/n:.1f}%' if n else 'n/a'
-            lines.append(f'| {g} | {n} | {take} | {rate} |')
+            lines.append(f'| {label_fn(g)} | {n} | {take} | {rate} |')
         lines.append('')
     lines += ['## Evidence', '', f"Returned reasoning coverage: {summary['responses_with_reasoning']}/{summary['responses']} responses, including controls. Tokens: {summary['tokens']:,}.", '',
               'Full requests, returned reasoning, peer messages, decisions, errors and endpoint provenance are under [runs](runs/). Returned reasoning is model output, not verified internal thought. All attempted controls are retained and excluded from experimental rates.', '',
