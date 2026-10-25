@@ -301,6 +301,14 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <li><strong>Launch</strong> (not done) needs <code>LLM_BASE_URL</code> / <code>LLM_API_KEY</code> in a git-ignored <code>.env.pressure-modal</code>. <strong>No such file exists in any checkout</strong> (only <code>.env.example</code>), so this is blocked on Haitham. These are Haitham's vLLM endpoint values, not an OpenAI key. Earlier runs used e.g. <code>python -u -m lying_harness.pressure --pack … --output results/… --jobs 48 --order-seed … --control-seed … --continue-on-format-failure --env-file .env.pressure-modal</code>.</li>
 <li><strong>Worth adding if resumed:</strong> "rank stated in the principals block" vs. "no rank stated" variants. In the current prompts, rank appears only in the stakes prose ("above the school file"), and the principals block repeats "X instructs refuse" about 5 times.</li>
 </ul>
+<h3 id="prompt-placement-limitation-and-placement-test-designed-not-built">Prompt-placement limitation and placement test (designed, not built)</h3>
+<ul>
+<li><strong>What happened in the completed study:</strong> each agent's whole opening prompt went in one <code>system</code> message (<code>lying_harness/pressure.py</code> around line 123): scenario, duty, stakes, principals (including "X instructs take"), the monitoring notice and the moral rule. Stage instructions and peer messages were <code>user</code> turns.</li>
+<li><strong>Why it matters:</strong> the in-story superior's instruction therefore shared system-level priority with the agent's own rule, which may inflate the authority effect.</li>
+<li><strong>The fix, tested directly:</strong> keep only the role, the rule, the notice and the protocol in the system prompt, and move the scenario, stakes and principals to the first user turn as a quoted case file.</li>
+<li><strong>Cost:</strong> a targeted test on the 63 first-instruction scene-levels and their preceding levels, with pairings A-A, A-none, W-W and D-D, takes about 500–1,000 trials, about 0.5–1.5 h and roughly $3–30. The completed study serves as the system-placement arm, plus a 10–20% control slice. The harness change is about 40–80 lines.</li>
+<li><strong>The prompt</strong> for both the ablation and placement is <a href="prompt-library/experiments/authority-ablation.html"><code>prompt-library/experiments/authority-ablation.md</code></a>.</li>
+</ul>
 <h3 id="other-paused-or-optional-work">Other paused or optional work</h3>
 <ul>
 <li><strong>Step 2 heat-map font scaling:</strong> stopped before any change. Step 2's heat maps still use small fonts. Steps 0.5 and 1.5 are fixed. The method is in the "Legible on screen" chart rule.</li>

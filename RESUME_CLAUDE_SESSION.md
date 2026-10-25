@@ -179,6 +179,13 @@ Two old worktrees (`wt-prompt-changes-v2`, `wt-self-contained-pressure-levels`) 
 - **Launch** (not done) needs `LLM_BASE_URL` / `LLM_API_KEY` in a git-ignored `.env.pressure-modal`. **No such file exists in any checkout** (only `.env.example`), so this is blocked on Haitham. These are Haitham's vLLM endpoint values, not an OpenAI key. Earlier runs used e.g. `python -u -m lying_harness.pressure --pack … --output results/… --jobs 48 --order-seed … --control-seed … --continue-on-format-failure --env-file .env.pressure-modal`.
 - **Worth adding if resumed:** "rank stated in the principals block" vs. "no rank stated" variants. In the current prompts, rank appears only in the stakes prose ("above the school file"), and the principals block repeats "X instructs refuse" about 5 times.
 
+### Prompt-placement limitation and placement test (designed, not built)
+- **What happened in the completed study:** each agent's whole opening prompt went in one `system` message (`lying_harness/pressure.py` around line 123): scenario, duty, stakes, principals (including "X instructs take"), the monitoring notice and the moral rule. Stage instructions and peer messages were `user` turns.
+- **Why it matters:** the in-story superior's instruction therefore shared system-level priority with the agent's own rule, which may inflate the authority effect.
+- **The fix, tested directly:** keep only the role, the rule, the notice and the protocol in the system prompt, and move the scenario, stakes and principals to the first user turn as a quoted case file.
+- **Cost:** a targeted test on the 63 first-instruction scene-levels and their preceding levels, with pairings A-A, A-none, W-W and D-D, takes about 500–1,000 trials, about 0.5–1.5 h and roughly $3–30. The completed study serves as the system-placement arm, plus a 10–20% control slice. The harness change is about 40–80 lines.
+- **The prompt** for both the ablation and placement is [`prompt-library/experiments/authority-ablation.md`](prompt-library/experiments/authority-ablation.md).
+
 ### Other paused or optional work
 - **Step 2 heat-map font scaling:** stopped before any change. Step 2's heat maps still use small fonts. Steps 0.5 and 1.5 are fixed. The method is in the "Legible on screen" chart rule.
 - **`analysis-pipeline` code:** design reviewed, no implementation.
