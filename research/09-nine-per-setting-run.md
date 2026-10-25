@@ -28,3 +28,8 @@ Analyze descriptive outcomes by scenario,pressure,pairing and monitoring with ex
 ## Windows save recovery at11:53 UTC
 
 The worker exited on WinError5 during atomic replacement of one completed result. The final result was fully saved in result.json.tmp; all10 model responses and the execution event were present. Decisions and scores were verified against original responses, then the result and readable transcript were restored with no inference calls. WRITE_RECOVERY.json retains the prior running record, complete result and source checksum. The pressure runner now retries transient local PermissionError saves only; prompts, parsing, sampling and outcomes are unchanged. Nine pressure tests passed. Collection resumed at48slots, using pressure-72-48-write-recovery.stdout.log/.stderr.log.
+
+## Workspace endpoint switch and concurrency 96 at 12:12 UTC
+
+User authorized model endpoint switch to `haitamelmekaoui` workspace and concurrency 96 due to low credits on the previous workspace. The running 48-slot worker was cleanly drained via `pause.request`, preserving all 481 completed episodes and 10 format exclusions, and published in snapshot `20261025-121256`. The new endpoint was verified with streaming reasoning tokens. Remaining episodes resume at 96 parallel requests with `--allow-endpoint-change`, logging provenance to `endpoint_history.json`. Logs: `pressure-72-96.stdout.log` / `pressure-72-96.stderr.log`.
+
