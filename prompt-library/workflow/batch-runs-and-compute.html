@@ -121,8 +121,12 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <li><strong>Respect dependencies.</strong> Split the run into dependency groups. Within each group, run as many jobs in parallel as the local and cloud limits allow.</li>
 <li><strong>No blocking.</strong> A slow or failing job must never block another worker. Use per-job timeouts and isolate failures.</li>
 <li><strong>Reserve a core locally.</strong> Leave at least one logical CPU free for system tasks, preferably CPU 0.</li>
-<li>Size local worker pools at most <code>os.cpu_count() - 1</code>.</li>
-<li>Pin processes away from CPU 0, e.g. <code>psutil.Process().cpu_affinity(list(range(1, os.cpu_count())))</code>, or on Windows <code>(Get-Process -Id $pid).ProcessorAffinity = &lt;mask without bit 0&gt;</code>.</li>
+<li>Size local worker pools at most <code>max(1, os.cpu_count() - 1)</code>.</li>
+<li>Pin processes away from CPU 0. Child processes inherit the setting.<ul>
+<li>Python with psutil (Linux and Windows; not available on macOS): <code>psutil.Process().cpu_affinity(list(range(1, os.cpu_count())))</code>.</li>
+<li>Windows PowerShell: <code>$n=[Environment]::ProcessorCount; (Get-Process -Id $pid).ProcessorAffinity = ((1 -shl $n) - 1) -band (-bnot 1)</code>. Bit 0 is CPU 0, and the mask covers at most 64 CPUs.</li>
+</ul>
+</li>
 <li>Pass this rule to any subagent that runs local compute.</li>
 <li><strong>Monitor the run.</strong> Track throughput, error rates (timeouts, rate limits, connection errors) and cost so far. When any of them drifts from the estimate, alert the user. If a spend-cap or error threshold is crossed, pause and ask.</li>
 </ul>

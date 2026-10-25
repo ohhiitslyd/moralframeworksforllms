@@ -52,7 +52,9 @@ State your assumptions: tokens per request, latency, concurrency and price per t
 - **Respect dependencies.** Split the run into dependency groups. Within each group, run as many jobs in parallel as the local and cloud limits allow.
 - **No blocking.** A slow or failing job must never block another worker. Use per-job timeouts and isolate failures.
 - **Reserve a core locally.** Leave at least one logical CPU free for system tasks, preferably CPU 0.
-  - Size local worker pools at most `os.cpu_count() - 1`.
-  - Pin processes away from CPU 0, e.g. `psutil.Process().cpu_affinity(list(range(1, os.cpu_count())))`, or on Windows `(Get-Process -Id $pid).ProcessorAffinity = <mask without bit 0>`.
+  - Size local worker pools at most `max(1, os.cpu_count() - 1)`.
+  - Pin processes away from CPU 0. Child processes inherit the setting.
+    - Python with psutil (Linux and Windows; not available on macOS): `psutil.Process().cpu_affinity(list(range(1, os.cpu_count())))`.
+    - Windows PowerShell: `$n=[Environment]::ProcessorCount; (Get-Process -Id $pid).ProcessorAffinity = ((1 -shl $n) - 1) -band (-bnot 1)`. Bit 0 is CPU 0, and the mask covers at most 64 CPUs.
   - Pass this rule to any subagent that runs local compute.
 - **Monitor the run.** Track throughput, error rates (timeouts, rate limits, connection errors) and cost so far. When any of them drifts from the estimate, alert the user. If a spend-cap or error threshold is crossed, pause and ask.
