@@ -1,0 +1,89 @@
+{
+ "generated_at_utc": "2026-10-25T18:50:55+00:00",
+ "generator": "build_metrics_e1.py",
+ "generator_version": "full-1",
+ "heuristics_version": "e1-1",
+ "reused_from": "hackathon-lying-agent-experiment-analysis-e1-preliminary/analysis/qwen-pressure-72-v1-snapshot-20261025-152937/step1 (copied; originals unchanged)",
+ "command": [
+  "python.exe",
+  "build_metrics_e1.py",
+  "--results",
+  "C:/Users/Tom/hackathon2/hackathon-lying-agent-experiment-analysis-full-pressure-study/results/2026-10-25-pressure-study",
+  "--out",
+  "."
+ ],
+ "args": {
+  "results": "C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study\\results\\2026-10-25-pressure-study",
+  "out": ".",
+  "workers": 8
+ },
+ "runtime_seconds": 96.7,
+ "rows": 4320,
+ "columns": 190,
+ "cpu": {
+  "logical_cpus": 12,
+  "RESERVED_WORKERS": "8",
+  "RESERVED_CPUS": "0,1,2,3 (run_reserved.py default)"
+ },
+ "results_dir": "C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study\\results\\2026-10-25-pressure-study",
+ "input_sha256": {
+  "runs.csv": "ba41375e61e4a383bf36fa19c5266925331086a9fe4d2289ff2a16093db207ee",
+  "manifest.json": "6db5f603f077bd17e7b7bdd784f2245bbe567ac9c7649913658058524667196d",
+  "summary.json": "0e4647ad9ba71b8c6e5a99047fec6f2360acc6be8a967cddcb04283e0759c864",
+  "SNAPSHOT.json": "8d691245295ea8e182a3a984426d5ca7a075b709d30fc37a0df3f520637545db",
+  "SHA256SUMS.json": "b09c281d96a38e02f93b0b98d62b5108e0651bd373dcdb927278e33601e93380",
+  "endpoint_history.json": "ec66a094bc5a94b62bb290f9788560a02a00e61c3c1ded84e40ab92f7af39c39",
+  "MIGRATION.json": "8cc2e3774f574e09d6ac4e51a89566fd19f0a0dd0fe4b1de6414b2bc75dd4a7f",
+  "MIGRATION_PRIOR.json": "46bcf1f7fceaf7a49c4aacfe676c78d6bedc79eb83f442cd1fd0d687dc1903e0",
+  "WRITE_RECOVERY.json": "9e80553ffd4f3013db4eccb4bb3f3e64ee61f2c328357b917bb942ba30591157"
+ },
+ "manifest_source_sha256": "e53adbd20eaff24ff9749cf1eb657a9f8fd05d57c43cfa60eaf9064c3c6038fa",
+ "script_sha256": {
+  "build_metrics_e1.py": "9ed5357458597fdb242bbf4bd5b54aba37d7c5fef9522c95d9ae739dd149fecc",
+  "validate_e1.py": "f53825f520592096b830f5ae17a6327a59b6eccd88578a59fc6b8a330b200ec5",
+  "gen_docs.py": "3f312142402896a125b58dc5fa3cd218f309f4dc7899d68df1f5e970fa64ef2e"
+ },
+ "validation_labels_sha256": {
+  "labels_criterion_report.csv": "84b513dcf204b837ca2667ece7be51ba766a4c525e974ded807dd9b07f28e014",
+  "labels_deception_intended.csv": "26e943cc1551a52282fde02616a1d8e63be4fe01c39dd1040632bc2d51faa99e",
+  "labels_lone_take_aware.csv": "10a32ca4acd916a38c20a550abe68c58198d2e61dd3717a1923e11af1be4ec29",
+  "labels_notice.csv": "30ad8e0bcb45912df460790d99f3dafb54f7a368949050f9a819e32b1c7c7562",
+  "labels_plan_stance.csv": "900d80ccea3620ad645f3b7b3f82a43a63c0ad0e81ddc5263e819a4017812632",
+  "labels_said_did.csv": "81219c5135e07eddacbda4afb99791aec309bc5d71edd285f6ffa9bb9341d8fb",
+  "labels_stance.csv": "6352923d92c0f6ca391b05fe9d77488d6d850fb5f4af2435282240147475164e",
+  "labels_transfer_deception_intended.csv": "127bd7cde66cb5ce1d66ab584e5353ed06d7fae4e8aa6c03cad15ca5d291e8db",
+  "labels_transfer_stance.csv": "f198ba9f971bdd400561456abb99b656b8166f315831d5ff97c361dddce45fb4"
+ },
+ "pack": {
+  "title": "Extended pressure v5: nine scenarios per setting, three per diagnostic (72 total)",
+  "version": null,
+  "version_note": "pack has no version field (source_key_missing)"
+ },
+ "seeds": {
+  "order_seed": 20261025,
+  "trial_seeds": [
+   1
+  ],
+  "config_send_seed": true
+ },
+ "git": {
+  "analysis_checkout": {
+   "checkout": "C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study",
+   "ref": "refs/heads/analysis-full-pressure-study",
+   "sha": "648b66ecc060dbb7337c51a022feba02bced356c"
+  }
+ },
+ "packages": {
+  "python": "3.14.3",
+  "implementation": "CPython",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "markdown": "3.11.2 (plain python, used only by tools/md_to_html.py)",
+  "note": "generator is stdlib-only; markdown is used only by tools/md_to_html.py for the HTML copies"
+ },
+ "outputs_sha256": {
+  "trial_metrics.csv": "1574958f145e9e62456d4b9dbcf8691534783a618ec86c0bce530b537169c342",
+  "metrics_schema.json": "5a8c3760bb56068a69e7cbc21afe596eba5259d9db816df9eff1b123bc535fd4",
+  "validation_results.json": "f07706878de26fa9803ad5bf5d2e12eacb3cc12091d3212311013b62916b2a7a"
+ },
+ "hash_note": "script, label and output hashes refreshed after validate_e1.py, --refresh-schema and gen_docs.py; build_metrics_e1.py unchanged since the build"
+}
