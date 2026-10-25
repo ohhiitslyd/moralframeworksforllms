@@ -1,0 +1,17 @@
+{
+ "power": {
+  "pairs_now": 1046,
+  "discordance_rate": 0.08795411089866156,
+  "mde_paired_now": 0.025661169924586332,
+  "mde_paired_full": 0.017867670639884384,
+  "mde_unpaired_now": 0.04486151588829382,
+  "mde_unpaired_full": 0.03739705602953936
+ },
+ "p_endpoint_x_monitoring_fisher": 1.0,
+ "heterogeneity_p": {
+  "Diagnostic:": 0.24041846236024178,
+  "Pairing:": 0.7946000632099509,
+  "Level:": 0.4605823084112247,
+  "Pair type:": 0.39627532243250885
+ }
+}

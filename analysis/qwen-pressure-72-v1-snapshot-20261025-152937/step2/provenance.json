@@ -1,0 +1,53 @@
+{
+ "script": "analyze_e1.py",
+ "script_sha256": "e1be6abf1fe81e01d1a29a0c2189d71822e837f220d28d3e1b1866596a12d060",
+ "run_at_utc": "2026-10-25T18:08:49.003008+00:00",
+ "inputs": {
+  "step1\\trial_metrics.csv": "48d54fa7deac154a05de8695e05953eaf043179bc96dc08de04d09954b125249",
+  "step1\\metrics_schema.json": "1b2c52f2dbc2883b1695135eca4833a29ce072e98ac8ff41ae2c166e47041bbd",
+  "ANALYSIS-PLAN.md": "aab1a0ffa6b2dc0311890035eea342643cf8b9989648847f3ee83b5b744c8bb9",
+  "step2/PREREG.md": "d1463964d6c94ad53c7e620f0a9d6af721699593f4b72ca55935c9da966008f4"
+ },
+ "packages": {
+  "python": "3.14.3",
+  "numpy": "2.4.6",
+  "pandas": "3.0.3",
+  "matplotlib": "3.11.2",
+  "scipy": "not installed (tests implemented in-script)"
+ },
+ "seeds": {
+  "numpy_default_rng": 20261025
+ },
+ "settings": {
+  "B_BOOT_SCREEN": 200,
+  "B_BOOT_MAIN": 2000,
+  "B_PERM_MAX": 1999,
+  "H_EXCEED": 50,
+  "B_SIGNFLIP": 5000,
+  "B_INTER": 100,
+  "RIDGE": 1.0
+ },
+ "cpu": "psutil unavailable (ModuleNotFoundError); single process, BLAS threads = 1; Win32 affinity mask 0xff0 (CPUs 0-3 left free)",
+ "runtime_seconds": 291.3,
+ "log": [
+  "Loading C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-e1-preliminary\\analysis\\qwen-pressure-72-v1-snapshot-20261025-152937\\step1\\trial_metrics.csv",
+  "complete rows 3026",
+  "parameters 21 outcomes 27",
+  "source_key_missing columns: none in schema",
+  "completion: min q 0.08057507923816176",
+  "PRIMARY {'pairs': 1046, 'watched_only_take': 24, 'unwatched_only_take': 68, 'diff_w_minus_u': -0.04206500956022946, 'newcombe_lo': -0.059960422140693234, 'newcombe_hi': -0.02428660554819657, 'cluster_boot_lo': np.float64(-0.057957811773484205), 'cluster_boot_hi': np.float64(-0.02618626729978032), 'p_exact': 4.9353514190469894e-06, 'p_chi2_cc': 7.358026350374134e-06}",
+  "POWER {'pairs_now': 1046, 'discordance_rate': 0.08795411089866156, 'mde_paired_now': 0.025661169924586332, 'mde_paired_full': 0.017867670639884384, 'mde_unpaired_now': 0.04486151588829382, 'mde_unpaired_full': 0.03739705602953936} ep x mon p 1.0 HET {'Diagnostic:': np.float64(0.24041846236024178), 'Pairing:': np.float64(0.7946000632099509), 'Level:': np.float64(0.4605823084112247), 'Pair type:': np.float64(0.39627532243250885)}",
+  "words vs actions done 29.596347093582153",
+  "asymmetry + rule application done 33.11237549781799",
+  "screening ... 33.2",
+  "screening pairs 567 BH survivors 319 176.8",
+  "Besag-Clifford: 319 survivors; cap 1999 shuffles each, stop at 50 exceedances (<= 637681 statistics; measured ~3 s per survivor single-threaded, i.e. ~15 min without cache)",
+  "permutation cache entries reused: 319",
+  "permutations done 0.2 s",
+  "heat maps done 200.3",
+  "top relationships done 210.1",
+  "interactions done 39.1 s; passing (q<.05): 8",
+  "candidates 332 trustworthy 60",
+  "REPORT.md written"
+ ]
+}

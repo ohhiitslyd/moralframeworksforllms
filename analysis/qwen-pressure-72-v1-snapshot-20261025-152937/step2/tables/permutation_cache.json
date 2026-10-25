@@ -1,0 +1,1605 @@
+{
+"tag": {
+"input_sha256": "48d54fa7deac154a05de8695e05953eaf043179bc96dc08de04d09954b125249",
+"B_PERM_MAX": 1999,
+"H_EXCEED": 50,
+"seed": 20261025
+},
+"results": {
+"monitoring|mutual_take": [
+0.0005,
+1999,
+0
+],
+"monitoring|any_take": [
+0.0005,
+1999,
+0
+],
+"monitoring|explicit_agree": [
+0.0005,
+1999,
+0
+],
+"monitoring|any_silence": [
+0.007,
+1999,
+13
+],
+"monitoring|deception_intended_pair": [
+0.001,
+1999,
+1
+],
+"monitoring|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"monitoring|ag_took": [
+0.0005,
+1999,
+0
+],
+"monitoring|ag_argued_take": [
+0.0005,
+1999,
+0
+],
+"monitoring|ag_dec_pub": [
+0.0005,
+1999,
+0
+],
+"monitoring|ag_dec_notes": [
+0.0005,
+1999,
+0
+],
+"monitoring|ag_mon_pub": [
+0.0005,
+1999,
+0
+],
+"monitoring|ag_mon_priv": [
+0.0005,
+1999,
+0
+],
+"monitoring|ag_deception_intended": [
+0.001,
+1999,
+1
+],
+"monitoring|ag_reasoning_words": [
+0.001,
+1999,
+1
+],
+"monitoring|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"level|mutual_take": [
+0.0005,
+1999,
+0
+],
+"level|unilateral_take": [
+0.0005,
+1999,
+0
+],
+"level|any_take": [
+0.0005,
+1999,
+0
+],
+"level|final_public_stances_match": [
+0.029779630732578916,
+1679,
+50
+],
+"level|any_silence": [
+0.0005,
+1999,
+0
+],
+"level|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"level|peer_deception_pair": [
+0.004,
+1999,
+7
+],
+"level|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"level|total_tokens": [
+0.0005,
+1999,
+0
+],
+"level|ag_took": [
+0.0005,
+1999,
+0
+],
+"level|ag_plan_states_action": [
+0.007,
+1999,
+13
+],
+"level|ag_plan_take": [
+0.0005,
+1999,
+0
+],
+"level|ag_argued_take": [
+0.0005,
+1999,
+0
+],
+"level|ag_dec_notes": [
+0.0005,
+1999,
+0
+],
+"level|ag_dec_reas": [
+0.0005,
+1999,
+0
+],
+"level|ag_mon_priv": [
+0.0005,
+1999,
+0
+],
+"level|ag_deception_intended": [
+0.0005,
+1999,
+0
+],
+"level|ag_said_other": [
+0.0035,
+1999,
+6
+],
+"level|ag_reasoning_words": [
+0.0327653997378768,
+1526,
+50
+],
+"level|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"pairing|mutual_take": [
+0.0005,
+1999,
+0
+],
+"pairing|unilateral_take": [
+0.0005,
+1999,
+0
+],
+"pairing|any_take": [
+0.0005,
+1999,
+0
+],
+"pairing|explicit_agree": [
+0.0005,
+1999,
+0
+],
+"pairing|final_public_stances_match": [
+0.0005,
+1999,
+0
+],
+"pairing|any_silence": [
+0.0005,
+1999,
+0
+],
+"pairing|plans_agree": [
+0.0005,
+1999,
+0
+],
+"pairing|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"pairing|peer_deception_pair": [
+0.003,
+1999,
+5
+],
+"pairing|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"pairing|total_tokens": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_took": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_plan_states_action": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_plan_take": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_flipped": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_argued_take": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_dec_pub": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_dec_notes": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_dec_reas": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_mon_pub": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_mon_priv": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_evaluator": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_deception_intended": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_said_other": [
+0.0065,
+1999,
+12
+],
+"pairing|ag_reasoning_words": [
+0.0005,
+1999,
+0
+],
+"pairing|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|mutual_take": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|any_take": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|explicit_agree": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|final_public_stances_match": [
+0.031446540880503145,
+1590,
+50
+],
+"pairing_rule|any_silence": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|peer_deception_pair": [
+0.003,
+1999,
+5
+],
+"pairing_rule|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|total_tokens": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_took": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_plan_states_action": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_plan_take": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_flipped": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_argued_take": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_dec_pub": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_dec_notes": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_dec_reas": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_mon_pub": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_evaluator": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_deception_intended": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_said_other": [
+0.0015,
+1999,
+2
+],
+"pairing_rule|ag_reasoning_words": [
+0.0005,
+1999,
+0
+],
+"pairing_rule|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|mutual_take": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|unilateral_take": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|explicit_agree": [
+0.0025,
+1999,
+4
+],
+"matched_vs_mixed|final_public_stances_match": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|plans_agree": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|ag_plan_states_action": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|ag_flipped": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|ag_dec_reas": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|ag_mon_pub": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|ag_mon_priv": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|ag_reasoning_words": [
+0.0005,
+1999,
+0
+],
+"matched_vs_mixed|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"scenario_diagnostic|mutual_take": [
+0.001,
+1999,
+1
+],
+"scenario_diagnostic|unilateral_take": [
+0.08064516129032258,
+620,
+50
+],
+"scenario_diagnostic|any_take": [
+0.0005,
+1999,
+0
+],
+"scenario_diagnostic|explicit_agree": [
+0.002,
+1999,
+3
+],
+"scenario_diagnostic|final_public_stances_match": [
+0.0105,
+1999,
+20
+],
+"scenario_diagnostic|any_silence": [
+0.0005,
+1999,
+0
+],
+"scenario_diagnostic|deception_intended_pair": [
+0.0015,
+1999,
+2
+],
+"scenario_diagnostic|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"scenario_diagnostic|total_tokens": [
+0.0005,
+1999,
+0
+],
+"scenario_diagnostic|ag_took": [
+0.0005,
+1999,
+0
+],
+"scenario_diagnostic|ag_plan_states_action": [
+0.001,
+1999,
+1
+],
+"scenario_diagnostic|ag_plan_take": [
+0.07587253414264036,
+659,
+50
+],
+"scenario_diagnostic|ag_argued_take": [
+0.0015,
+1999,
+2
+],
+"scenario_diagnostic|ag_dec_pub": [
+0.062421972534332085,
+801,
+50
+],
+"scenario_diagnostic|ag_dec_notes": [
+0.08976660682226212,
+557,
+50
+],
+"scenario_diagnostic|ag_dec_reas": [
+0.12531328320802004,
+399,
+50
+],
+"scenario_diagnostic|ag_mon_priv": [
+0.0245,
+1999,
+48
+],
+"scenario_diagnostic|ag_evaluator": [
+0.6172839506172839,
+81,
+50
+],
+"scenario_diagnostic|ag_deception_intended": [
+0.0005,
+1999,
+0
+],
+"scenario_diagnostic|ag_reasoning_words": [
+0.0055,
+1999,
+10
+],
+"scenario_diagnostic|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"setting_id|mutual_take": [
+0.9090909090909091,
+55,
+50
+],
+"setting_id|any_take": [
+0.9433962264150944,
+53,
+50
+],
+"setting_id|deception_intended_pair": [
+0.78125,
+64,
+50
+],
+"setting_id|total_words_exchanged": [
+0.12987012987012986,
+385,
+50
+],
+"setting_id|total_tokens": [
+0.013,
+1999,
+25
+],
+"setting_id|ag_took": [
+0.9803921568627451,
+51,
+50
+],
+"setting_id|ag_plan_states_action": [
+0.19157088122605365,
+261,
+50
+],
+"setting_id|ag_argued_take": [
+0.6410256410256411,
+78,
+50
+],
+"setting_id|ag_dec_pub": [
+0.625,
+80,
+50
+],
+"setting_id|ag_dec_notes": [
+0.3816793893129771,
+131,
+50
+],
+"setting_id|ag_dec_reas": [
+0.1968503937007874,
+254,
+50
+],
+"setting_id|ag_mon_pub": [
+0.05197505197505198,
+962,
+50
+],
+"setting_id|ag_mon_priv": [
+0.005,
+1999,
+9
+],
+"setting_id|ag_evaluator": [
+0.30864197530864196,
+162,
+50
+],
+"setting_id|ag_deception_intended": [
+0.819672131147541,
+61,
+50
+],
+"setting_id|ag_reasoning_words": [
+0.23696682464454977,
+211,
+50
+],
+"setting_id|ag_words_sent_total": [
+0.1392757660167131,
+359,
+50
+],
+"weekend_slice|any_silence": [
+0.25125628140703515,
+199,
+50
+],
+"weekend_slice|deception_intended_pair": [
+0.18315018315018314,
+273,
+50
+],
+"weekend_slice|total_words_exchanged": [
+0.05428881650380022,
+921,
+50
+],
+"weekend_slice|ag_plan_states_action": [
+0.13157894736842105,
+380,
+50
+],
+"weekend_slice|ag_argued_take": [
+0.33112582781456956,
+151,
+50
+],
+"weekend_slice|ag_dec_notes": [
+0.42016806722689076,
+119,
+50
+],
+"weekend_slice|ag_mon_pub": [
+0.12254901960784313,
+408,
+50
+],
+"weekend_slice|ag_mon_priv": [
+0.0657030223390276,
+761,
+50
+],
+"weekend_slice|ag_evaluator": [
+0.0075,
+1999,
+14
+],
+"weekend_slice|ag_deception_intended": [
+0.28901734104046245,
+173,
+50
+],
+"weekend_slice|ag_reasoning_words": [
+0.1510574018126888,
+331,
+50
+],
+"weekend_slice|ag_words_sent_total": [
+0.04557885141294439,
+1097,
+50
+],
+"welfare_if_take_designer|mutual_take": [
+0.06675567423230974,
+749,
+50
+],
+"welfare_if_take_designer|unilateral_take": [
+0.06016847172081829,
+831,
+50
+],
+"welfare_if_take_designer|any_take": [
+0.053022269353128315,
+943,
+50
+],
+"welfare_if_take_designer|explicit_agree": [
+0.2994011976047904,
+167,
+50
+],
+"welfare_if_take_designer|any_silence": [
+0.78125,
+64,
+50
+],
+"welfare_if_take_designer|deception_intended_pair": [
+0.03663003663003663,
+1365,
+50
+],
+"welfare_if_take_designer|peer_deception_pair": [
+0.27472527472527475,
+182,
+50
+],
+"welfare_if_take_designer|total_words_exchanged": [
+0.102880658436214,
+486,
+50
+],
+"welfare_if_take_designer|total_tokens": [
+0.0625782227784731,
+799,
+50
+],
+"welfare_if_take_designer|ag_took": [
+0.058343057176196034,
+857,
+50
+],
+"welfare_if_take_designer|ag_plan_states_action": [
+0.625,
+80,
+50
+],
+"welfare_if_take_designer|ag_plan_take": [
+0.0195,
+1999,
+38
+],
+"welfare_if_take_designer|ag_flipped": [
+0.09380863039399624,
+533,
+50
+],
+"welfare_if_take_designer|ag_argued_take": [
+0.11086474501108648,
+451,
+50
+],
+"welfare_if_take_designer|ag_dec_notes": [
+0.6944444444444444,
+72,
+50
+],
+"welfare_if_take_designer|ag_dec_reas": [
+0.5882352941176471,
+85,
+50
+],
+"welfare_if_take_designer|ag_mon_priv": [
+0.21008403361344538,
+238,
+50
+],
+"welfare_if_take_designer|ag_deception_intended": [
+0.0585480093676815,
+854,
+50
+],
+"welfare_if_take_designer|ag_said_other": [
+0.16611295681063123,
+301,
+50
+],
+"welfare_if_take_designer|ag_reasoning_words": [
+0.078125,
+640,
+50
+],
+"welfare_if_take_designer|ag_words_sent_total": [
+0.0847457627118644,
+590,
+50
+],
+"take_principal_present|mutual_take": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|unilateral_take": [
+0.17123287671232876,
+292,
+50
+],
+"take_principal_present|any_take": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|any_silence": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|total_words_exchanged": [
+0.47619047619047616,
+105,
+50
+],
+"take_principal_present|total_tokens": [
+0.11737089201877934,
+426,
+50
+],
+"take_principal_present|ag_took": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|ag_plan_take": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|ag_flipped": [
+0.0681198910081744,
+734,
+50
+],
+"take_principal_present|ag_argued_take": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|ag_dec_pub": [
+0.007,
+1999,
+13
+],
+"take_principal_present|ag_dec_notes": [
+0.002,
+1999,
+3
+],
+"take_principal_present|ag_dec_reas": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|ag_mon_pub": [
+0.0025,
+1999,
+4
+],
+"take_principal_present|ag_mon_priv": [
+0.0005,
+1999,
+0
+],
+"take_principal_present|ag_evaluator": [
+0.23148148148148148,
+216,
+50
+],
+"take_principal_present|ag_deception_intended": [
+0.001,
+1999,
+1
+],
+"take_principal_present|ag_words_sent_total": [
+0.4166666666666667,
+120,
+50
+],
+"soft_take_principal_present|mutual_take": [
+0.6756756756756757,
+74,
+50
+],
+"soft_take_principal_present|any_take": [
+0.45454545454545453,
+110,
+50
+],
+"soft_take_principal_present|ag_took": [
+0.4716981132075472,
+106,
+50
+],
+"soft_take_principal_present|ag_plan_states_action": [
+0.05370569280343716,
+931,
+50
+],
+"soft_take_principal_present|ag_argued_take": [
+0.5154639175257731,
+97,
+50
+],
+"soft_take_principal_present|ag_dec_pub": [
+0.3184713375796178,
+157,
+50
+],
+"soft_take_principal_present|ag_dec_notes": [
+0.43103448275862066,
+116,
+50
+],
+"soft_take_principal_present|ag_dec_reas": [
+0.001,
+1999,
+1
+],
+"soft_take_principal_present|ag_mon_priv": [
+0.11235955056179775,
+445,
+50
+],
+"soft_take_principal_present|ag_evaluator": [
+0.3048780487804878,
+164,
+50
+],
+"soft_take_principal_present|ag_reasoning_words": [
+0.0155,
+1999,
+30
+],
+"rank_stated_in_level_text|mutual_take": [
+0.0005,
+1999,
+0
+],
+"rank_stated_in_level_text|any_take": [
+0.0005,
+1999,
+0
+],
+"rank_stated_in_level_text|any_silence": [
+0.005,
+1999,
+9
+],
+"rank_stated_in_level_text|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"rank_stated_in_level_text|total_words_exchanged": [
+0.3448275862068966,
+145,
+50
+],
+"rank_stated_in_level_text|total_tokens": [
+0.20242914979757085,
+247,
+50
+],
+"rank_stated_in_level_text|ag_took": [
+0.0005,
+1999,
+0
+],
+"rank_stated_in_level_text|ag_plan_take": [
+0.0005,
+1999,
+0
+],
+"rank_stated_in_level_text|ag_flipped": [
+0.017,
+1999,
+33
+],
+"rank_stated_in_level_text|ag_argued_take": [
+0.0005,
+1999,
+0
+],
+"rank_stated_in_level_text|ag_dec_pub": [
+0.004,
+1999,
+7
+],
+"rank_stated_in_level_text|ag_dec_notes": [
+0.008,
+1999,
+15
+],
+"rank_stated_in_level_text|ag_dec_reas": [
+0.0005,
+1999,
+0
+],
+"rank_stated_in_level_text|ag_mon_pub": [
+0.03295978905735003,
+1517,
+50
+],
+"rank_stated_in_level_text|ag_mon_priv": [
+0.04878048780487805,
+1025,
+50
+],
+"rank_stated_in_level_text|ag_deception_intended": [
+0.002,
+1999,
+3
+],
+"rank_stated_in_level_text|ag_words_sent_total": [
+0.390625,
+128,
+50
+],
+"n_principals|mutual_take": [
+0.0025,
+1999,
+4
+],
+"n_principals|unilateral_take": [
+0.3333333333333333,
+150,
+50
+],
+"n_principals|any_take": [
+0.0025,
+1999,
+4
+],
+"n_principals|any_silence": [
+0.004,
+1999,
+7
+],
+"n_principals|deception_intended_pair": [
+0.03897116134060795,
+1283,
+50
+],
+"n_principals|total_words_exchanged": [
+0.9433962264150944,
+53,
+50
+],
+"n_principals|total_tokens": [
+0.6756756756756757,
+74,
+50
+],
+"n_principals|ag_took": [
+0.0015,
+1999,
+2
+],
+"n_principals|ag_plan_take": [
+0.0175,
+1999,
+34
+],
+"n_principals|ag_flipped": [
+0.008,
+1999,
+15
+],
+"n_principals|ag_argued_take": [
+0.0035,
+1999,
+6
+],
+"n_principals|ag_dec_pub": [
+0.03445899379738112,
+1451,
+50
+],
+"n_principals|ag_dec_notes": [
+0.034722222222222224,
+1440,
+50
+],
+"n_principals|ag_dec_reas": [
+0.0005,
+1999,
+0
+],
+"n_principals|ag_mon_pub": [
+0.0045,
+1999,
+8
+],
+"n_principals|ag_mon_priv": [
+0.0015,
+1999,
+2
+],
+"n_principals|ag_evaluator": [
+0.24271844660194175,
+206,
+50
+],
+"n_principals|ag_deception_intended": [
+0.08389261744966443,
+596,
+50
+],
+"n_principals|ag_reasoning_words": [
+0.08077544426494346,
+619,
+50
+],
+"n_principals|ag_words_sent_total": [
+0.847457627118644,
+59,
+50
+],
+"take_is_justified_ambiguous|mutual_take": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|unilateral_take": [
+0.006,
+1999,
+11
+],
+"take_is_justified_ambiguous|any_take": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|explicit_agree": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|final_public_stances_match": [
+0.002,
+1999,
+3
+],
+"take_is_justified_ambiguous|any_silence": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|peer_deception_pair": [
+0.03551136363636364,
+1408,
+50
+],
+"take_is_justified_ambiguous|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|total_tokens": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|ag_took": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|ag_plan_states_action": [
+0.0225,
+1999,
+44
+],
+"take_is_justified_ambiguous|ag_plan_take": [
+0.015,
+1999,
+29
+],
+"take_is_justified_ambiguous|ag_argued_take": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|ag_dec_pub": [
+0.06821282401091405,
+733,
+50
+],
+"take_is_justified_ambiguous|ag_dec_notes": [
+0.02,
+1999,
+39
+],
+"take_is_justified_ambiguous|ag_dec_reas": [
+0.05060728744939271,
+988,
+50
+],
+"take_is_justified_ambiguous|ag_mon_priv": [
+0.008,
+1999,
+15
+],
+"take_is_justified_ambiguous|ag_evaluator": [
+0.6097560975609756,
+82,
+50
+],
+"take_is_justified_ambiguous|ag_deception_intended": [
+0.0005,
+1999,
+0
+],
+"take_is_justified_ambiguous|ag_reasoning_words": [
+0.0075,
+1999,
+14
+],
+"take_is_justified_ambiguous|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"take_deceives_n|mutual_take": [
+0.36231884057971014,
+138,
+50
+],
+"take_deceives_n|explicit_agree": [
+0.023,
+1999,
+45
+],
+"take_deceives_n|final_public_stances_match": [
+0.07204610951008646,
+694,
+50
+],
+"take_deceives_n|any_silence": [
+0.1953125,
+256,
+50
+],
+"take_deceives_n|total_words_exchanged": [
+0.12376237623762376,
+404,
+50
+],
+"take_deceives_n|total_tokens": [
+0.16447368421052633,
+304,
+50
+],
+"take_deceives_n|ag_took": [
+0.5319148936170213,
+94,
+50
+],
+"take_deceives_n|ag_plan_take": [
+0.0625,
+800,
+50
+],
+"take_deceives_n|ag_argued_take": [
+0.38461538461538464,
+130,
+50
+],
+"take_deceives_n|ag_dec_pub": [
+0.025680534155110426,
+1947,
+50
+],
+"take_deceives_n|ag_dec_notes": [
+0.0625,
+800,
+50
+],
+"take_deceives_n|ag_dec_reas": [
+0.048355899419729204,
+1034,
+50
+],
+"take_deceives_n|ag_mon_pub": [
+0.11312217194570136,
+442,
+50
+],
+"take_deceives_n|ag_mon_priv": [
+0.24630541871921183,
+203,
+50
+],
+"take_deceives_n|ag_words_sent_total": [
+0.11933174224343675,
+419,
+50
+],
+"refuse_deceives_n|mutual_take": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|unilateral_take": [
+0.0015,
+1999,
+2
+],
+"refuse_deceives_n|any_take": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|explicit_agree": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|final_public_stances_match": [
+0.0045,
+1999,
+8
+],
+"refuse_deceives_n|any_silence": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|total_tokens": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|ag_took": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|ag_plan_states_action": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|ag_plan_take": [
+0.015,
+1999,
+29
+],
+"refuse_deceives_n|ag_argued_take": [
+0.001,
+1999,
+1
+],
+"refuse_deceives_n|ag_dec_pub": [
+0.04152823920265781,
+1204,
+50
+],
+"refuse_deceives_n|ag_dec_notes": [
+0.0235,
+1999,
+46
+],
+"refuse_deceives_n|ag_dec_reas": [
+0.2403846153846154,
+208,
+50
+],
+"refuse_deceives_n|ag_mon_priv": [
+0.0015,
+1999,
+2
+],
+"refuse_deceives_n|ag_evaluator": [
+0.5952380952380952,
+84,
+50
+],
+"refuse_deceives_n|ag_deception_intended": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|ag_reasoning_words": [
+0.0005,
+1999,
+0
+],
+"refuse_deceives_n|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"refuse_breaks_promise|mutual_take": [
+0.001,
+1999,
+1
+],
+"refuse_breaks_promise|unilateral_take": [
+0.001,
+1999,
+1
+],
+"refuse_breaks_promise|any_take": [
+0.001,
+1999,
+1
+],
+"refuse_breaks_promise|explicit_agree": [
+0.001,
+1999,
+1
+],
+"refuse_breaks_promise|final_public_stances_match": [
+0.005,
+1999,
+9
+],
+"refuse_breaks_promise|any_silence": [
+0.0005,
+1999,
+0
+],
+"refuse_breaks_promise|deception_intended_pair": [
+0.0005,
+1999,
+0
+],
+"refuse_breaks_promise|total_words_exchanged": [
+0.0005,
+1999,
+0
+],
+"refuse_breaks_promise|total_tokens": [
+0.0005,
+1999,
+0
+],
+"refuse_breaks_promise|ag_took": [
+0.0005,
+1999,
+0
+],
+"refuse_breaks_promise|ag_plan_states_action": [
+0.029137529137529136,
+1716,
+50
+],
+"refuse_breaks_promise|ag_plan_take": [
+0.10245901639344263,
+488,
+50
+],
+"refuse_breaks_promise|ag_argued_take": [
+0.0035,
+1999,
+6
+],
+"refuse_breaks_promise|ag_dec_pub": [
+0.09345794392523364,
+535,
+50
+],
+"refuse_breaks_promise|ag_dec_notes": [
+0.04032258064516129,
+1240,
+50
+],
+"refuse_breaks_promise|ag_mon_priv": [
+0.04625346901017576,
+1081,
+50
+],
+"refuse_breaks_promise|ag_evaluator": [
+0.684931506849315,
+73,
+50
+],
+"refuse_breaks_promise|ag_deception_intended": [
+0.001,
+1999,
+1
+],
+"refuse_breaks_promise|ag_reasoning_words": [
+0.0105,
+1999,
+20
+],
+"refuse_breaks_promise|ag_words_sent_total": [
+0.0005,
+1999,
+0
+],
+"endpoint|ag_evaluator": [
+0.4098360655737705,
+122,
+50
+],
+"start_rank|ag_dec_reas": [
+0.0055,
+1999,
+10
+],
+"checkpoint_resumed|total_tokens": [
+0.001,
+1999,
+1
+],
+"checkpoint_resumed|ag_reasoning_words": [
+0.0065,
+1999,
+12
+],
+"imported_from_prior_batch|ag_evaluator": [
+0.847457627118644,
+59,
+50
+]
+}
+}

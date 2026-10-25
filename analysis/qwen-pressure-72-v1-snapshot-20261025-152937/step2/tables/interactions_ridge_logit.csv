@@ -1,0 +1,31 @@
+outcome,factor_a,factor_b,deviance_drop_minus_df,extra_df,p_param_boot,boot_draws,min_cell_n,aliased,note,q_bh
+any_take,scenario_diagnostic,pairing,145.2838774685265,10,0.009900990099009901,100,156,False,involves a scenario-level factor: p somewhat optimistic,0.03712871287128713
+mutual_take,scenario_diagnostic,pairing,133.6003747077566,10,0.009900990099009901,100,156,False,involves a scenario-level factor: p somewhat optimistic,0.03712871287128713
+any_take,scenario_diagnostic,setting_id,109.45315548881626,14,0.009900990099009901,100,116,False,scenario-level x scenario-level: parametric bootstrap ignores scenario clustering (optimistic),0.03712871287128713
+mutual_take,scenario_diagnostic,setting_id,81.52623022768012,14,0.009900990099009901,100,116,False,scenario-level x scenario-level: parametric bootstrap ignores scenario clustering (optimistic),0.03712871287128713
+any_take,level,pairing,65.61077154895384,20,0.009900990099009901,100,83,False,,0.03712871287128713
+mutual_take,level,pairing,54.276784584702,20,0.009900990099009901,100,83,False,,0.03712871287128713
+mutual_take,setting_id,pairing,21.018804542171893,35,0.009900990099009901,100,54,False,involves a scenario-level factor: p somewhat optimistic,0.03712871287128713
+any_take,scenario_diagnostic,level,16.56588708763684,8,0.009900990099009901,100,195,False,involves a scenario-level factor: p somewhat optimistic,0.03712871287128713
+mutual_take,setting_id,level,12.765802827751031,28,0.0297029702970297,100,63,False,involves a scenario-level factor: p somewhat optimistic,0.081008100810081
+any_take,setting_id,pairing,12.353483823258102,35,0.04950495049504951,100,54,False,involves a scenario-level factor: p somewhat optimistic,0.10608203677510608
+mutual_take,scenario_diagnostic,level,12.286008699277772,8,0.019801980198019802,100,195,False,involves a scenario-level factor: p somewhat optimistic,0.0594059405940594
+any_take,setting_id,level,12.06590127299387,28,0.019801980198019802,100,63,False,involves a scenario-level factor: p somewhat optimistic,0.0594059405940594
+any_take,level,endpoint,7.12573685918278,4,0.039603960396039604,100,85,False,endpoint = collection time (confounded),0.09139375476009139
+any_take,scenario_diagnostic,monitoring,4.9035233107315435,2,0.039603960396039604,100,485,False,involves a scenario-level factor: p somewhat optimistic,0.09139375476009139
+mutual_take,level,endpoint,1.4729694446391477,4,0.1782178217821782,100,85,False,endpoint = collection time (confounded),0.3564356435643564
+mutual_take,scenario_diagnostic,monitoring,1.2216244143064614,2,0.2079207920792079,100,485,False,involves a scenario-level factor: p somewhat optimistic,0.3795379537953795
+mutual_take,scenario_diagnostic,endpoint,0.7506505230790026,2,0.22772277227722773,100,146,False,endpoint = collection time (confounded),0.3795379537953795
+any_take,setting_id,endpoint,0.18660264714071673,7,0.297029702970297,100,43,False,endpoint = collection time (confounded),0.4689942678478374
+any_take,monitoring,endpoint,0.14438779169768168,1,0.22772277227722773,100,227,False,endpoint = collection time (confounded),0.3795379537953795
+any_take,scenario_diagnostic,endpoint,-0.03487724705655637,2,0.3465346534653465,100,146,False,endpoint = collection time (confounded),0.486048604860486
+mutual_take,pairing,endpoint,-0.11848028725671611,5,0.3564356435643564,100,69,False,endpoint = collection time (confounded),0.486048604860486
+any_take,level,monitoring,-0.21493895261664875,4,0.32673267326732675,100,291,False,,0.486048604860486
+mutual_take,monitoring,endpoint,-0.7937321489075657,1,0.7029702970297029,100,227,False,endpoint = collection time (confounded),0.8111195734958111
+any_take,pairing,endpoint,-1.1003611970236307,5,0.4158415841584158,100,69,False,endpoint = collection time (confounded),0.5424020662935858
+any_take,setting_id,monitoring,-1.6302383408424248,7,0.5841584158415841,100,178,False,involves a scenario-level factor: p somewhat optimistic,0.7301980198019802
+mutual_take,level,monitoring,-1.7551342202441447,4,0.6336633663366337,100,291,False,,0.7603960396039604
+mutual_take,pairing,monitoring,-2.4726658922354545,5,0.7722772277227723,100,230,False,,0.8380480905233381
+mutual_take,setting_id,endpoint,-3.1073443451450657,7,0.7821782178217822,100,43,False,endpoint = collection time (confounded),0.8380480905233381
+mutual_take,setting_id,monitoring,-3.6482455634804865,7,0.8316831683168316,100,178,False,involves a scenario-level factor: p somewhat optimistic,0.8603618982587913
+any_take,pairing,monitoring,-3.936625885203739,5,0.9108910891089109,100,230,False,,0.9108910891089109

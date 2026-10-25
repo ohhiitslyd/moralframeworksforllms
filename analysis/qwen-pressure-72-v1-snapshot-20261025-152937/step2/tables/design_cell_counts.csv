@@ -1,0 +1,164 @@
+# pairing x pairing_rule (association 1.00; started trials)
+pairing,authority,nondeception,welfare
+A-A,504,0,0
+A-none,491,0,0
+D-D,0,508,0
+D-none,0,505,0
+W-W,0,0,532
+W-none,0,0,546
+
+# pairing x matched_vs_mixed (association 1.00; started trials)
+pairing,matched,mixed
+A-A,504,0
+A-none,0,491
+D-D,508,0
+D-none,0,505
+W-W,532,0
+W-none,0,546
+
+# take_is_justified_ambiguous x refuse_breaks_promise (association 0.96; started trials)
+take_is_justified_ambiguous,0,1
+0,2145,0
+1,49,892
+
+# scenario_diagnostic x refuse_deceives_n (association 0.87; started trials)
+scenario_diagnostic,0,1,2
+authority,945,97,0
+nondeception,0,901,123
+welfare,973,47,0
+
+# level x welfare_if_take_designer (association 0.86; started trials)
+level,higher,lower,similar
+1,7,608,0
+2,8,11,592
+3,619,7,0
+4,607,9,0
+5,609,9,0
+
+# scenario_diagnostic x refuse_breaks_promise (association 0.83; started trials)
+scenario_diagnostic,0,1
+authority,1042,0
+nondeception,179,845
+welfare,973,47
+
+# take_principal_present x n_principals (association 0.83; started trials)
+take_principal_present,1,2,3,4,5
+0,2322,83,7,0,0
+1,0,466,133,67,8
+
+# scenario_diagnostic x take_is_justified_ambiguous (association 0.80; started trials)
+scenario_diagnostic,0,1
+authority,993,49
+nondeception,179,845
+welfare,973,47
+
+# refuse_deceives_n x refuse_breaks_promise (association 0.76; started trials)
+refuse_deceives_n,0,1
+0,1918,0
+1,238,807
+2,38,85
+
+# soft_take_principal_present x n_principals (association 0.74; started trials)
+soft_take_principal_present,1,2,3,4,5
+0,2322,476,29,0,0
+1,0,73,111,67,8
+
+# take_is_justified_ambiguous x refuse_deceives_n (association 0.72; started trials)
+take_is_justified_ambiguous,0,1,2
+0,1869,238,38
+1,49,807,85
+
+# rank_stated_in_level_text x n_principals (association 0.62; started trials)
+rank_stated_in_level_text,1,2,3,4,5
+0,2322,426,55,10,8
+1,0,123,85,57,0
+
+# level x take_principal_present (association 0.61; started trials)
+level,0,1
+1,615,0
+2,601,10
+3,572,54
+4,503,113
+5,121,497
+
+# take_principal_present x rank_stated_in_level_text (association 0.58; started trials)
+take_principal_present,0,1
+0,2412,0
+1,409,265
+
+# level x n_principals (association 0.56; started trials)
+level,1,2,3,4,5
+1,615,0,0,0,0
+2,544,67,0,0,0
+3,558,15,53,0,0
+4,503,40,55,18,0
+5,102,427,32,49,8
+
+# endpoint x imported_from_prior_batch (association 0.49; started trials)
+endpoint,0.0,1.0
+Modal-A,355,136
+Modal-B,2595,0
+
+# soft_take_principal_present x rank_stated_in_level_text (association 0.45; started trials)
+soft_take_principal_present,0,1
+0,2692,135
+1,129,130
+
+# take_deceives_n x refuse_breaks_promise (association 0.43; started trials)
+take_deceives_n,0,1
+1,2194,675
+2,0,217
+
+# welfare_if_take_designer x take_principal_present (association 0.42; started trials)
+welfare_if_take_designer,0,1
+higher,1186,664
+lower,644,0
+similar,582,10
+
+# take_is_justified_ambiguous x take_deceives_n (association 0.42; started trials)
+take_is_justified_ambiguous,1,2
+0,2145,0
+1,724,217
+
+# scenario_diagnostic x soft_take_principal_present (association 0.40; started trials)
+scenario_diagnostic,0,1
+authority,792,250
+nondeception,1024,0
+welfare,1011,9
+
+# scenario_diagnostic x take_deceives_n (association 0.39; started trials)
+scenario_diagnostic,1,2
+authority,1042,0
+nondeception,807,217
+welfare,1020,0
+
+# scenario_diagnostic x n_principals (association 0.36; started trials)
+scenario_diagnostic,1,2,3,4,5
+authority,612,225,130,67,8
+nondeception,858,156,10,0,0
+welfare,852,168,0,0,0
+
+# take_principal_present x soft_take_principal_present (association 0.35; started trials)
+take_principal_present,0,1
+0,2332,80
+1,495,179
+
+# welfare_if_take_designer x n_principals (association 0.34; started trials)
+welfare_if_take_designer,1,2,3,4,5
+higher,1162,473,140,67,8
+lower,635,9,0,0,0
+similar,525,67,0,0,0
+
+# take_deceives_n x refuse_deceives_n (association 0.33; started trials)
+take_deceives_n,0,1,2
+1,1918,828,123
+2,0,217,0
+
+# level x rank_stated_in_level_text (association 0.31; started trials)
+level,0,1
+1,615,0
+2,611,0
+3,589,37
+4,540,76
+5,466,152
+
