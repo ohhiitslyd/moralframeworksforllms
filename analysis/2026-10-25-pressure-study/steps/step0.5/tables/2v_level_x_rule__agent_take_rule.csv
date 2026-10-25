@@ -1,0 +1,16 @@
+level,rule,n,agent_take_rule
+1,authority,283,0.0035
+1,nondeception,283,0.1201
+1,welfare,282,0.1064
+2,authority,282,0.0177
+2,nondeception,286,0.1888
+2,welfare,282,0.2730
+3,authority,282,0.0709
+3,nondeception,281,0.2278
+3,welfare,280,0.4607
+4,authority,284,0.1514
+4,nondeception,284,0.2641
+4,welfare,284,0.6585
+5,authority,286,0.5420
+5,nondeception,280,0.4107
+5,welfare,284,0.8239

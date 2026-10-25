@@ -1,0 +1,10 @@
+diagnostic,rule,n,agent_take_rule
+authority,authority,472,0.2733
+authority,nondeception,473,0.1121
+authority,welfare,470,0.4894
+nondeception,authority,476,0.1176
+nondeception,nondeception,469,0.5586
+nondeception,welfare,469,0.5267
+welfare,authority,469,0.0832
+welfare,nondeception,472,0.0572
+welfare,welfare,473,0.3805

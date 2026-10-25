@@ -1,0 +1,16 @@
+level,diagnostic,n,mutual_take
+1,authority,283,0.0283
+1,nondeception,283,0.1201
+1,welfare,282,0.0142
+2,authority,287,0.0941
+2,nondeception,282,0.2624
+2,welfare,281,0.0498
+3,authority,281,0.2278
+3,nondeception,280,0.3179
+3,welfare,282,0.1241
+4,authority,283,0.3604
+4,nondeception,286,0.4336
+4,welfare,283,0.1625
+5,authority,281,0.5979
+5,nondeception,283,0.6290
+5,welfare,286,0.3776

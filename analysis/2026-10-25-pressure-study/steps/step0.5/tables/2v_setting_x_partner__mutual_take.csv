@@ -1,0 +1,17 @@
+setting,partner,n,mutual_take
+family,no rule,262,0.3244
+family,same rule,265,0.3547
+hospital,no rule,267,0.2360
+hospital,same rule,265,0.2868
+military,no rule,266,0.1729
+military,same rule,266,0.2895
+religious,no rule,265,0.1849
+religious,same rule,266,0.3045
+school,no rule,266,0.1391
+school,same rule,265,0.2604
+situational,no rule,264,0.2879
+situational,same rule,268,0.3246
+social_club,no rule,261,0.1341
+social_club,same rule,268,0.2948
+volunteer,no rule,262,0.1832
+volunteer,same rule,267,0.2734

@@ -1,0 +1,17 @@
+setting,partner,n,lone_take
+family,no rule,262,0.1183
+family,same rule,265,0.0566
+hospital,no rule,267,0.0637
+hospital,same rule,265,0.0226
+military,no rule,266,0.0789
+military,same rule,266,0.0414
+religious,no rule,265,0.1245
+religious,same rule,266,0.0150
+school,no rule,266,0.1053
+school,same rule,265,0.0528
+situational,no rule,264,0.0871
+situational,same rule,268,0.0224
+social_club,no rule,261,0.1379
+social_club,same rule,268,0.0448
+volunteer,no rule,262,0.0649
+volunteer,same rule,267,0.0300

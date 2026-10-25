@@ -1,0 +1,7 @@
+monitoring,diagnostic,n,mutual_take
+unwatched,authority,706,0.2663
+unwatched,nondeception,711,0.3769
+unwatched,welfare,708,0.1681
+watched,authority,709,0.2553
+watched,nondeception,703,0.3286
+watched,welfare,706,0.1246

@@ -1,0 +1,4 @@
+rule,n,mutual_take,lone_take,both_refuse,agent_take_rule,agent_take_partner
+welfare,1412,0.4271,0.0503,0.5227,0.4653,0.4391
+nondeception,1414,0.1994,0.0721,0.7284,0.2419,0.2291
+authority,1417,0.1341,0.0769,0.7890,0.1581,0.1870

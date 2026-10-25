@@ -1,0 +1,16 @@
+level,rule,n,mutual_take
+1,authority,283,0.0000
+1,nondeception,283,0.0707
+1,welfare,282,0.0922
+2,authority,282,0.0106
+2,nondeception,286,0.1469
+2,welfare,282,0.2482
+3,authority,282,0.0603
+3,nondeception,281,0.1957
+3,welfare,280,0.4143
+4,authority,284,0.1338
+4,nondeception,284,0.2324
+4,welfare,284,0.5915
+5,authority,286,0.4615
+5,nondeception,280,0.3536
+5,welfare,284,0.7852

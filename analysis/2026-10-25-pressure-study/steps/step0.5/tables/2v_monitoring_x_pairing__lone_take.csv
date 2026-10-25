@@ -1,0 +1,13 @@
+monitoring,pairing,n,lone_take
+unwatched,A-A,358,0.0363
+unwatched,A-none,352,0.1335
+unwatched,D-D,353,0.0368
+unwatched,D-none,352,0.1051
+unwatched,W-W,356,0.0309
+unwatched,W-none,354,0.0480
+watched,A-A,355,0.0366
+watched,A-none,352,0.1023
+watched,D-D,354,0.0424
+watched,D-none,355,0.1042
+watched,W-W,354,0.0311
+watched,W-none,348,0.0920

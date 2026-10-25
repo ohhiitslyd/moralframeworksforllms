@@ -1,0 +1,17 @@
+setting,partner,n,agent_take_rule
+family,no rule,262,0.3702
+family,same rule,265,0.3811
+hospital,no rule,267,0.2472
+hospital,same rule,265,0.3019
+military,no rule,266,0.2180
+military,same rule,266,0.3120
+religious,no rule,265,0.2453
+religious,same rule,266,0.3045
+school,no rule,266,0.2256
+school,same rule,265,0.2906
+situational,no rule,264,0.3144
+situational,same rule,268,0.3358
+social_club,no rule,261,0.2452
+social_club,same rule,268,0.3134
+volunteer,no rule,262,0.2137
+volunteer,same rule,267,0.2921

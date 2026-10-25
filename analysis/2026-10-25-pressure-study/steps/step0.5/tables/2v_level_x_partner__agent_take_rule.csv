@@ -1,0 +1,11 @@
+level,partner,n,agent_take_rule
+1,no rule,423,0.0662
+1,same rule,425,0.0871
+2,no rule,421,0.1425
+2,same rule,429,0.1772
+3,no rule,417,0.1990
+3,same rule,426,0.3052
+4,no rule,427,0.3115
+4,same rule,425,0.4047
+5,no rule,425,0.5765
+5,same rule,425,0.6094
