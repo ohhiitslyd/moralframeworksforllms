@@ -34,6 +34,12 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <li>a <strong>parameter → outcome relationship report</strong>: design check, univariate summaries, association matrices, single-factor and two-factor heat maps, and statistics;</li>
 <li>a <strong>curated findings summary</strong>: a few headline relationships, supporting results, and footnotes, written for a reader new to the project.</li>
 </ol>
+<p><strong>Authority.</strong>
+- <strong>Method:</strong> the step prompts in the prompt library are authoritative for how to do each stage:
+  - <a href="../prompt-library/analysis/step1-extract-organize-augment.html">Step 1</a>: extract, organise, augment
+  - <a href="../prompt-library/analysis/step2-analyze-and-report.html">Step 2</a>: analyse and report
+  - <a href="../prompt-library/analysis/step3-findings-briefing.html">Step 3</a>: findings briefing and paper kit
+- <strong>This document</strong> defines the stages, the file contracts and the schema. The summaries below must not contradict the step prompts. Where they appear to, the step prompt wins.</p>
 <p>Each stage has a <strong>deterministic part</strong>, a script that anyone can rerun, and a <strong>judgement part</strong> for an analyst or AI agent: validating heuristics, choosing what matters, and writing it up. The stages talk to each other only through files, so you can rerun any stage without the ones before it.</p>
 <pre><code>results/&lt;run&gt;/                         Stage 1: Metrics           Stage 2: Relationships       Stage 3: Findings
   manifest.json  (pack + config)  ──▶  trial_metrics.csv     ──▶  REPORT.md (+ .html)     ──▶  SUMMARY.md (+ .html)
@@ -90,7 +96,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <h2 id="stage-1-per-trial-metrics">Stage 1: Per-trial metrics</h2>
 <h3 id="deliverables">Deliverables</h3>
 <ul>
-<li><code>trial_metrics.csv</code>: one row per planned trial, <strong>including failures</strong>. Failures keep their input columns, have blank outputs, and fill an <code>error</code> column.</li>
+<li><code>trial_metrics.csv</code>: one row per <strong>planned</strong> trial, <strong>including failed, running and never-started trials</strong>. Those rows keep their inputs plus status, outcome (+ description) and error. Everything else is blank.</li>
 <li><code>metrics_schema.json</code>: machine-readable column roles (see the schema section below).</li>
 <li><code>trial_metrics_dictionary.md</code> (+ <code>.html</code>): every column with a plain-language description, its type and allowed values, how it's computed (source field, rule, keywords or regexes), its validation result, and its known limitations. Columns are grouped into sections. The dictionary also lists metrics that were considered but not included, with the reason.</li>
 <li>The generator script, which must be rerunnable.</li>
@@ -132,7 +138,12 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <h3 id="rules">Rules</h3>
 <ul>
 <li><strong>Prefer deterministic extraction</strong> from <code>result.json</code> and <code>events.jsonl</code>. Where you must use keyword or regex heuristics, document the exact patterns in the dictionary.</li>
-<li><strong>Validate every heuristic column</strong> against 10–20 transcripts you have read: a tuning set plus a held-out set. Report precision, recall and agreement in the dictionary and in the schema.</li>
+<li><strong>Validate every heuristic column.</strong></li>
+<li><strong>Samples:</strong> tune on one sample, then test on a <strong>held-out sample enriched for positives</strong> (at least 10 positives where possible), labelled <strong>blind to the experimental arm</strong>.</li>
+<li><strong>What to report:</strong> k/n with Wilson intervals, overall and for each arm of every manipulated factor, in both the dictionary and the schema.</li>
+<li><strong>Differential error:</strong> flag it when error differs between arms.</li>
+<li><strong>No LLM judge</strong> without a cost estimate and approval.</li>
+<li><strong>Prompt echo:</strong> remove words copied from the agent's own prompt (e.g. a manipulated notice) before counting vocabulary, and report <code>_echo</code> / <code>_novel</code> counts.</li>
 <li><strong>Leave out columns you can't compute reliably.</strong> List them as "considered, not included", with the reason.</li>
 <li><strong>Formatting:</strong> snake_case names, booleans as 0/1, blanks for missing values.</li>
 <li><strong>Sanity check:</strong> outcome counts must match the run's <code>README.md</code> / <code>summary.json</code>.</li>
@@ -153,14 +164,19 @@ hr { border: 0; border-top: 1px solid var(--border); }
   &quot;derived_from&quot;: [&quot;last_public_stance_a&quot;, &quot;final_action_a&quot;],
   &quot;by_construction_with&quot;: [&quot;peer_deception_a&quot;],
   &quot;heuristic&quot;: true,
-  &quot;validation&quot;: {&quot;precision&quot;: 1.0, &quot;n_checked&quot;: 7},
+  &quot;randomisation_level&quot;: &quot;agent&quot;,
+  &quot;validation&quot;: {&quot;k&quot;: 9, &quot;n&quot;: 12, &quot;wilson95&quot;: [0.47, 0.91], &quot;positives_in_heldout&quot;: 10, &quot;per_arm&quot;: {&quot;watched&quot;: &quot;5/6&quot;, &quot;unwatched&quot;: &quot;4/6&quot;}},
   &quot;label&quot;: &quot;Said refuse in public, then took&quot;
 }
 </code></pre>
 <ul>
 <li><strong><code>section</code></strong>: <code>input</code> | <code>outcome</code> | <code>agent</code> | <code>pair</code> | <code>meta</code>.</li>
 <li><strong><code>role</code></strong>: <code>id</code> | <code>parameter</code> | <code>outcome</code> | <code>description</code> | <code>meta</code>.</li>
-<li><strong><code>type</code></strong>: <code>numeric</code> | <code>ordinal</code> | <code>categorical</code> | <code>binary</code> | <code>text</code>.</li>
+<li><strong><code>type</code></strong>: <code>numeric</code> | <code>ordinal</code> (with level order) | <code>categorical</code> | <code>binary</code> | <code>text</code> | <code>empty</code> | <code>constant</code>. Declared rather than inferred, so it stays stable across runs.</li>
+<li><strong><code>randomisation_level</code></strong>: <code>scenario</code> | <code>episode</code> | <code>agent</code> | <code>none</code>. This is the level at which a parameter varies. Stage 2 permutes and bootstraps at this level, and reports the effective n.</li>
+<li><strong><code>source_key_missing</code></strong>: true when the pack or CSV lacked the field. The column is then blank and never guessed.</li>
+<li><strong>Top-level <code>run_status</code></strong>: <code>complete</code> | <code>partial</code>, plus <code>snapshot_time</code> and the source of the counts.</li>
+<li><strong>Pair key:</strong> <code>cell_id</code> with <code>paired_by</code> (the manipulated column) when the design matches trials across a manipulation.</li>
 <li><strong><code>level</code></strong>: <code>trial</code> | <code>agent</code>. Agent-level columns are paired by their <code>_a</code> / <code>_b</code> suffix.</li>
 <li><strong><code>description_column</code></strong>: points from an identifier to its plain-language column.</li>
 <li><strong><code>subset</code></strong>: states the denominator when a metric only applies to some trials. For example, "agents whose plan said refuse".</li>
@@ -173,8 +189,22 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <h3 id="step-0-type-and-frame">Step 0: Type and frame</h3>
 <ul>
 <li><strong>Type every variable from the schema.</strong> Record missing values, the number of levels, and the min, median and max count per level.</li>
-<li><strong>Clustering.</strong> Agent-level rows are clustered in pairs. Use an episode-level summary or a cluster-aware permutation (shuffle whole episodes) for agent-level tests, and say which. If neither is possible, say the p-values are optimistic.</li>
+<li><strong>Clustering.</strong></li>
+<li>Reshape the <code>_a</code> / <code>_b</code> columns to long format (one row per agent).</li>
+<li>Permute whole episodes for episode-level parameters, and permute within episodes for agent-level parameters (such as each agent's criterion in mixed pairings).</li>
+<li>Treat scenario or template as a stratum.</li>
+<li>Get intervals for effect sizes from a cluster bootstrap.</li>
+<li>If a cluster-aware method isn't possible, say the p-values are optimistic.</li>
 <li><strong>Flag columns related by construction</strong> (from the schema) and columns that rely on heuristics.</li>
+</ul>
+<h3 id="step-0b-pre-registration-and-the-primary-test">Step 0b: Pre-registration and the primary test</h3>
+<ul>
+<li><strong>Write <code>PREREG.md</code> before computing any outcome-by-condition numbers.</strong> It contains the primary hypothesis, outcome, test, α, unit of analysis, and expected direction. Everything else is exploratory, with BH correction.</li>
+<li><strong>Paired designs.</strong> If the design pairs trials across a manipulation (<code>cell_id</code>), the primary test is paired: McNemar, or a paired sign-flip permutation.</li>
+<li>Report the discordant counts and the minimum detectable effect.</li>
+<li>Repeat the test within each endpoint or time block.</li>
+<li>Run a sensitivity analysis that treats failures as each outcome.</li>
+<li><strong>Interim snapshots.</strong> Label every output PRELIMINARY.</li>
 </ul>
 <h3 id="step-1-design-check-parameter-parameter">Step 1: Design check (parameter × parameter)</h3>
 <p>Purpose: find <strong>confounding and aliasing</strong> before interpreting any outcome.
@@ -197,13 +227,15 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <p>For every (parameter, outcome) pair:
 - <strong>Effect size:</strong>
   - categorical parameter, binary outcome: Cramér's V, plus the max−min rate across levels
-  - categorical parameter, numeric outcome: ε², plus the max−min difference in medians
+  - categorical parameter, numeric outcome: √ε² (η-like, so it's on the same scale as V and |ρ| for ranking), plus the max−min difference in medians
   - ordinal or numeric parameter: Spearman ρ
-- <strong>Test:</strong> a permutation test (≥2,000 shuffles, fixed seed, cluster-aware where needed), or Fisher's exact test for 2×2 tables.
+- <strong>Test:</strong> screen with Fisher's exact test for 2×2 tables and asymptotic or exact tests elsewhere, at each parameter's randomisation level.
+  - <strong>BH family:</strong> parameter × outcome pairs, with by-construction pairs removed before m is counted.
+  - <strong>Confirmation:</strong> confirm BH survivors with a sequential (Besag–Clifford) permutation test, and report the shuffle count and the floor 1/(B+1).
 - <strong>Multiple comparisons:</strong> Benjamini–Hochberg q-values across all pairs.
 - <strong>Screening table</strong>, sorted by effect size, with columns: effect, interval or p, q, minimum cell n, clean or confounded, by-construction flag, heuristic flag.
 - <strong>One heat map per key parameter:</strong> rows are the parameter's levels, columns are outcomes, and cells hold the rate or median with n.
-  - Colour is normalised per column, and the raw value is always printed.
+  - Colour uses an absolute scale by default (rates 0–1). If colour is normalised per column, non-significant cells are marked, and the raw value is always printed.
   - Pair-level and agent-level blocks are separated.
   - Cells with q &lt; 0.05 are marked, and confounded cells are hatched.
 - <strong>For the top single-parameter relationships</strong> (q &lt; 0.05, minimum cell n ≥ 10, up to ~10), draw level-by-outcome charts with intervals. Repeat the comparison <strong>within</strong> the levels of any confounding parameter.</p>
@@ -216,8 +248,8 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <h3 id="step-5-two-parameter-interactions-2d-heat-maps">Step 5: Two-parameter interactions (2D heat maps)</h3>
 <ul>
 <li><strong>Candidates</strong> are parameter pairs that aren't aliased and have adequate cell counts.</li>
-<li><strong>Rank them by interaction strength,</strong> meaning the improvement of A×B over the additive A+B model, not by main effects.</li>
-<li><strong>Draw the top 6–10,</strong> plus any view that is central to the research question. Rows are A, columns are B, and colour is the outcome on an <strong>absolute</strong> scale. Each cell shows its value and k/n, and small cells are greyed out.</li>
+<li><strong>Rank them by interaction strength, not by main effects.</strong> For binary outcomes, use the likelihood-ratio (deviance) improvement of A×B over additive A+B on the <strong>logit</strong> scale; for numeric outcomes, use the same on the rank scale. Penalise by the extra degrees of freedom, and get a permutation p-value.</li>
+<li><strong>Draw only the pairs that pass (at most 6–10),</strong> plus any view that is central to the research question. If none pass, say so. Rows are A, columns are B, and colour is the outcome on an <strong>absolute</strong> scale. Each cell shows its value and k/n, and small cells are greyed out.</li>
 <li><strong>Describe each in words,</strong> e.g. "B matters only when A = …".</li>
 </ul>
 <h3 id="step-6-rank-candidates-for-stage-3">Step 6: Rank candidates for Stage 3</h3>
@@ -269,7 +301,10 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <li><strong>Revisit earlier findings.</strong> If an earlier run was analysed, say for each finding whether it held up, got stronger, got weaker or reversed. Include a "what changed" section.</li>
 <li><strong>Align with the research questions.</strong> Map each headline finding to the research question or judging criterion it addresses.</li>
 </ol>
-<p>Deliverable: <code>SUMMARY.md</code> (+ <code>.html</code>).</p>
+<p>Deliverables, in full in the <a href="../prompt-library/analysis/step3-findings-briefing.html">Step 3 prompt</a>:
+- <code>claims_ledger.csv</code>
+- <code>SUMMARY.md</code> (+ <code>.html</code>): 60-second briefing, headline findings with "so what" and theory of change, non-claims, threats to validity, judge lens, and next steps ranked by score lift per hour
+- <code>paper-outline.md</code>: titles, abstract draft, figure plan with captions, limitations and dual-use bullets</p>
 <hr />
 <h2 id="guardrails-learned-on-this-project">Guardrails learned on this project</h2>
 <ul>
