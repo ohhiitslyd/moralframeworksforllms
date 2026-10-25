@@ -1,0 +1,10 @@
+instr_cat,diagnostic,n,scenes,mutual_take,any_take,rule_agent_take,partner_take
+explicit,authority,386,19,0.536,0.663,0.601,0.598
+explicit,nondeception,188,13,0.803,0.878,0.824,0.856
+explicit,welfare,166,14,0.361,0.518,0.476,0.404
+none,authority,758,17,0.145,0.181,0.164,0.162
+none,nondeception,1179,24,0.26,0.358,0.312,0.306
+none,welfare,1188,24,0.093,0.128,0.109,0.112
+soft,authority,271,10,0.192,0.207,0.207,0.192
+soft,nondeception,47,3,0.872,0.957,0.894,0.936
+soft,welfare,60,5,0.617,0.633,0.633,0.617

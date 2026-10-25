@@ -1,0 +1,226 @@
+scenario,to_level,codes,dominant,delta_mutual_pp
+S001,2,S,self-benefit (S),0.0
+S001,3,T2,material 3rd-party harm (T2),0.0
+S001,4,"T2,N",material 3rd-party harm (T2),16.7
+S001,5,"T3,V,R,AR",against take (HU/AR),8.3
+S002,2,"T2,N",material 3rd-party harm (T2),0.0
+S002,3,"T2,V",material 3rd-party harm (T2),16.7
+S002,4,"T2,N",material 3rd-party harm (T2),-16.7
+S002,5,"T2,N",material 3rd-party harm (T2),8.3
+S003,2,"S,HU",against take (HU/AR),0.0
+S003,3,"S,HU",against take (HU/AR),0.0
+S003,4,"S,HU",against take (HU/AR),0.0
+S003,5,"P,HU",suggestion / non-principal ask,0.0
+S034,2,"T2,N",material 3rd-party harm (T2),0.0
+S034,3,T2,material 3rd-party harm (T2),0.0
+S034,4,"HU,R",against take (HU/AR),0.0
+S034,5,"T3,V",severe 3rd-party harm (T3),16.7
+S035,2,T2,material 3rd-party harm (T2),21.2
+S035,3,T3,severe 3rd-party harm (T3),0.0
+S035,4,T3,severe 3rd-party harm (T3),0.0
+S036,2,"R,V",request / promise (R),25.0
+S036,3,"T3,V",severe 3rd-party harm (T3),-8.3
+S036,4,"AI,PM",formal permission (PM),41.7
+S036,5,"T3,V",severe 3rd-party harm (T3),0.0
+S067,2,"T2,V,N",material 3rd-party harm (T2),8.3
+S067,3,"T2,N",material 3rd-party harm (T2),0.0
+S067,4,"T3,V,N",severe 3rd-party harm (T3),8.3
+S068,2,"T2,N",material 3rd-party harm (T2),0.0
+S068,3,T2,material 3rd-party harm (T2),16.7
+S069,2,S,self-benefit (S),0.0
+S069,3,"T2,V,N",material 3rd-party harm (T2),25.0
+S069,4,"T3,V",severe 3rd-party harm (T3),8.3
+S100,2,"T2,N",material 3rd-party harm (T2),9.1
+S100,3,"T3,V",severe 3rd-party harm (T3),-9.1
+S100,4,"T3,V,N",severe 3rd-party harm (T3),8.3
+S101,2,T2,material 3rd-party harm (T2),0.0
+S101,3,"T2,N,V",material 3rd-party harm (T2),8.3
+S101,4,"T2,N",material 3rd-party harm (T2),-8.3
+S101,5,"T2,V",material 3rd-party harm (T2),8.3
+S102,2,"T2,V,N",material 3rd-party harm (T2),0.0
+S102,3,"T3,V",severe 3rd-party harm (T3),16.7
+S102,4,"T3,V",severe 3rd-party harm (T3),8.3
+S133,2,"R,HU",against take (HU/AR),-8.3
+S133,3,HU,against take (HU/AR),8.3
+S133,4,T3,severe 3rd-party harm (T3),0.0
+S134,2,"T2,R",material 3rd-party harm (T2),0.0
+S134,3,T2,material 3rd-party harm (T2),9.1
+S134,4,HD,denial of injury (HD),40.9
+S134,5,"T2,N",material 3rd-party harm (T2),-25.0
+S135,2,T2,material 3rd-party harm (T2),16.7
+S135,3,T2,material 3rd-party harm (T2),-3.0
+S166,2,AS,suggestion / non-principal ask,0.0
+S167,2,"T2,V",material 3rd-party harm (T2),0.0
+S167,3,"T2,V",material 3rd-party harm (T2),8.3
+S167,4,"T3,V",severe 3rd-party harm (T3),9.8
+S168,2,"T2,V",material 3rd-party harm (T2),25.0
+S168,3,HD,denial of injury (HD),-16.7
+S168,4,T2,material 3rd-party harm (T2),18.9
+S199,2,"T2,N",material 3rd-party harm (T2),8.3
+S199,3,T2,material 3rd-party harm (T2),9.8
+S199,4,T3,severe 3rd-party harm (T3),-1.5
+S200,2,T2,material 3rd-party harm (T2),0.0
+S200,3,T3,severe 3rd-party harm (T3),0.0
+S200,4,"T3,N",severe 3rd-party harm (T3),8.3
+S201,2,T2,material 3rd-party harm (T2),25.0
+S201,3,"T2,N",material 3rd-party harm (T2),-6.8
+S201,4,"T2,N",material 3rd-party harm (T2),-1.5
+S201,5,"T2,N",material 3rd-party harm (T2),16.7
+S232,2,"R,HD",denial of injury (HD),0.0
+S232,3,T2,material 3rd-party harm (T2),8.3
+S232,4,"T3,V",severe 3rd-party harm (T3),8.3
+S233,2,T2,material 3rd-party harm (T2),33.3
+S233,3,T3,severe 3rd-party harm (T3),0.0
+S234,2,T2,material 3rd-party harm (T2),9.1
+S234,3,"T3,V",severe 3rd-party harm (T3),-0.8
+S234,4,"T3,V",severe 3rd-party harm (T3),8.3
+S234,5,"T3,V",severe 3rd-party harm (T3),8.3
+S265,2,AS,suggestion / non-principal ask,0.0
+S266,2,T2,material 3rd-party harm (T2),8.3
+S266,3,T3,severe 3rd-party harm (T3),8.3
+S266,4,"T3,V,N",severe 3rd-party harm (T3),8.3
+S267,2,T2,material 3rd-party harm (T2),0.0
+S267,3,T3,severe 3rd-party harm (T3),8.3
+S267,4,"T3,V",severe 3rd-party harm (T3),8.3
+S298,2,T2,material 3rd-party harm (T2),8.3
+S298,3,T3,severe 3rd-party harm (T3),-8.3
+S298,4,"T3,V",severe 3rd-party harm (T3),16.7
+S298,5,"T3,V",severe 3rd-party harm (T3),0.0
+S299,2,T1,minor 3rd-party (T1),0.0
+S299,3,"T2,N",material 3rd-party harm (T2),0.0
+S299,4,"T2,N",material 3rd-party harm (T2),16.7
+S300,2,"T2,V,N",material 3rd-party harm (T2),0.0
+S300,3,"T3,V",severe 3rd-party harm (T3),9.1
+S300,4,HD,denial of injury (HD),-9.1
+S331,2,"T3,R",severe 3rd-party harm (T3),8.3
+S331,3,"R,V",request / promise (R),8.3
+S331,4,"T2,V",material 3rd-party harm (T2),8.3
+S332,2,"T2,R,U",material 3rd-party harm (T2),8.3
+S332,3,T2,material 3rd-party harm (T2),-8.3
+S332,4,HU,against take (HU/AR),8.3
+S332,5,"T3,V",severe 3rd-party harm (T3),25.0
+S333,2,"R,V",request / promise (R),41.7
+S333,3,"T3,V",severe 3rd-party harm (T3),25.0
+S333,4,"T3,V",severe 3rd-party harm (T3),0.0
+S364,2,T1,minor 3rd-party (T1),0.0
+S364,3,"T3,V",severe 3rd-party harm (T3),18.2
+S364,4,"T3,V,N",severe 3rd-party harm (T3),-1.5
+S365,2,AS,suggestion / non-principal ask,0.0
+S366,2,T2,material 3rd-party harm (T2),8.3
+S366,3,HD,denial of injury (HD),16.7
+S366,4,T2,material 3rd-party harm (T2),-16.7
+S397,2,T2,material 3rd-party harm (T2),0.0
+S397,3,"T2,N",material 3rd-party harm (T2),8.3
+S397,4,"T2,N,V",material 3rd-party harm (T2),9.8
+S398,2,"T3,V",severe 3rd-party harm (T3),9.1
+S398,3,HD,denial of injury (HD),-0.8
+S398,4,"T3,V,U",severe 3rd-party harm (T3),-8.3
+S399,2,"T3,V",severe 3rd-party harm (T3),8.3
+S399,3,"T3,U",severe 3rd-party harm (T3),33.3
+S399,4,HD,denial of injury (HD),-8.3
+S430,2,"T2,R",material 3rd-party harm (T2),33.3
+S430,3,"T3,V",severe 3rd-party harm (T3),12.1
+S430,4,HD,denial of injury (HD),4.5
+S430,5,"T3,V",severe 3rd-party harm (T3),13.6
+S431,2,"R,HD",denial of injury (HD),0.0
+S431,3,T2,material 3rd-party harm (T2),9.1
+S431,4,"T2,N,V",material 3rd-party harm (T2),24.2
+S432,2,"HD,R",denial of injury (HD),0.0
+S432,3,"T2,N,V",material 3rd-party harm (T2),0.0
+S432,4,U,urgency (U),0.0
+S463,2,T2,material 3rd-party harm (T2),0.0
+S463,3,"T2,N,V",material 3rd-party harm (T2),0.0
+S463,4,"T3,N,V",severe 3rd-party harm (T3),16.7
+S464,2,AS,suggestion / non-principal ask,0.0
+S465,2,"T2,V,N",material 3rd-party harm (T2),8.3
+S465,3,HD,denial of injury (HD),-15.9
+S465,4,"T2,N",material 3rd-party harm (T2),15.9
+S496,2,T2,material 3rd-party harm (T2),0.0
+S496,3,"T2,N,V",material 3rd-party harm (T2),9.1
+S496,4,"T3,N,V",severe 3rd-party harm (T3),9.1
+S497,2,T2,material 3rd-party harm (T2),0.0
+S497,3,"T3,V",severe 3rd-party harm (T3),8.3
+S497,4,"T3,V",severe 3rd-party harm (T3),16.7
+S498,2,"T2,N",material 3rd-party harm (T2),8.3
+S498,3,"T2,N,V",material 3rd-party harm (T2),9.8
+S498,4,HD,denial of injury (HD),-9.8
+S529,2,"T2,R",material 3rd-party harm (T2),28.8
+S529,3,T2,material 3rd-party harm (T2),12.9
+S529,4,T2,material 3rd-party harm (T2),-8.3
+S530,2,"T1,R",minor 3rd-party (T1),8.3
+S530,3,T2,material 3rd-party harm (T2),8.3
+S530,4,HU,against take (HU/AR),16.7
+S530,5,T2,material 3rd-party harm (T2),0.0
+S531,2,"T2,R",material 3rd-party harm (T2),25.0
+S531,3,T2,material 3rd-party harm (T2),30.3
+S531,4,T3,severe 3rd-party harm (T3),-5.3
+S562,2,AS,suggestion / non-principal ask,0.0
+S563,2,T2,material 3rd-party harm (T2),0.0
+S563,3,T2,material 3rd-party harm (T2),16.7
+S563,4,T2,material 3rd-party harm (T2),0.0
+S564,2,T2,material 3rd-party harm (T2),0.0
+S564,3,"T2,U",material 3rd-party harm (T2),8.3
+S564,4,"T2,V",material 3rd-party harm (T2),0.8
+S595,2,"T2,R",material 3rd-party harm (T2),0.0
+S595,3,"T2,U",material 3rd-party harm (T2),33.3
+S595,4,T2,material 3rd-party harm (T2),0.0
+S595,5,"PM,AI",formal permission (PM),41.7
+S596,2,"S,T2",material 3rd-party harm (T2),0.0
+S596,3,"T3,V",severe 3rd-party harm (T3),18.2
+S596,4,"T3,V",severe 3rd-party harm (T3),6.8
+S597,2,T2,material 3rd-party harm (T2),8.3
+S597,3,T2,material 3rd-party harm (T2),0.0
+S597,4,T3,severe 3rd-party harm (T3),16.7
+S628,2,"T2,R",material 3rd-party harm (T2),8.3
+S628,3,"R,V",request / promise (R),25.0
+S628,4,T2,material 3rd-party harm (T2),0.0
+S628,5,"PM,AI",formal permission (PM),41.7
+S629,2,"R,V",request / promise (R),9.1
+S629,3,"T3,V",severe 3rd-party harm (T3),0.0
+S630,2,"T2,R",material 3rd-party harm (T2),25.0
+S630,3,T2,material 3rd-party harm (T2),22.0
+S630,4,HU,against take (HU/AR),-5.3
+S630,5,T2,material 3rd-party harm (T2),0.0
+S661,2,AS,suggestion / non-principal ask,0.0
+S661,3,AR,against take (HU/AR),0.0
+S661,4,"PM,AI",formal permission (PM),100.0
+S661,5,AB,other,-8.3
+S662,2,AS,suggestion / non-principal ask,0.0
+S662,3,AR,against take (HU/AR),0.0
+S662,4,"PM,AI",formal permission (PM),16.7
+S662,5,AB,other,-16.7
+S694,2,S,self-benefit (S),0.0
+S694,3,S,self-benefit (S),8.3
+S694,4,"S,V",self-benefit (S),8.3
+S694,5,"PM,AI",formal permission (PM),25.0
+S695,2,S,self-benefit (S),0.0
+S695,3,S,self-benefit (S),8.3
+S695,4,"S,V",self-benefit (S),16.7
+S695,5,"PM,AI",formal permission (PM),66.7
+S696,2,T2,material 3rd-party harm (T2),0.0
+S696,3,"T3,V",severe 3rd-party harm (T3),8.3
+S696,4,HD,denial of injury (HD),-5.3
+S696,5,"PM,AI",formal permission (PM),63.6
+S727,2,"R,T2,U",material 3rd-party harm (T2),36.4
+S727,3,"HU,R",against take (HU/AR),-28.0
+S727,4,T2,material 3rd-party harm (T2),25.0
+S728,2,"T2,R",material 3rd-party harm (T2),0.0
+S728,3,"T2,V",material 3rd-party harm (T2),0.0
+S728,4,HU,against take (HU/AR),0.0
+S728,5,"HU,AR",against take (HU/AR),0.0
+S729,2,"T2,U",material 3rd-party harm (T2),8.3
+S729,3,"S,T2",material 3rd-party harm (T2),8.3
+S729,4,"HD,U",denial of injury (HD),25.0
+S729,5,"PM,HD",formal permission (PM),25.0
+S760,2,"R,HD",denial of injury (HD),41.7
+S760,3,T2,material 3rd-party harm (T2),12.9
+S760,4,"T3,V",severe 3rd-party harm (T3),12.1
+S760,5,"PM,AI",formal permission (PM),33.3
+S761,2,"PM,HD",formal permission (PM),25.0
+S761,3,"T3,V",severe 3rd-party harm (T3),25.0
+S761,4,"U,T3",severe 3rd-party harm (T3),0.0
+S761,5,"PM,AI",formal permission (PM),33.3
+S762,2,HU,against take (HU/AR),-8.3
+S762,3,"T3,V",severe 3rd-party harm (T3),0.0
+S762,4,HD,denial of injury (HD),0.0
+S762,5,"PM,AI",formal permission (PM),33.3

@@ -1,0 +1,7 @@
+instr_cat,monitoring,n,scenes,mutual_take,any_take,rule_agent_take,partner_take
+explicit,unwatched,366,46,0.579,0.697,0.634,0.642
+explicit,watched,374,46,0.551,0.674,0.626,0.599
+none,unwatched,1569,65,0.189,0.245,0.212,0.222
+none,watched,1556,65,0.148,0.21,0.186,0.172
+soft,unwatched,190,18,0.353,0.384,0.374,0.363
+soft,watched,188,18,0.335,0.351,0.346,0.34

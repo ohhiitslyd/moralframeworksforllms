@@ -1,0 +1,503 @@
+{
+ "category_counts_scene_level": {
+  "explicit": {
+   "1": 0,
+   "2": 1,
+   "3": 6,
+   "4": 10,
+   "5": 46
+  },
+  "none": {
+   "1": 65,
+   "2": 64,
+   "3": 64,
+   "4": 59,
+   "5": 13
+  },
+  "soft": {
+   "1": 7,
+   "2": 7,
+   "3": 2,
+   "4": 3,
+   "5": 13
+  }
+ },
+ "rates_by_category": {
+  "n": {
+   "explicit": 740,
+   "soft": 378,
+   "none": 3125
+  },
+  "scenes": {
+   "explicit": 46,
+   "soft": 18,
+   "none": 65
+  },
+  "mutual_take": {
+   "explicit": 0.565,
+   "soft": 0.344,
+   "none": 0.169
+  },
+  "any_take": {
+   "explicit": 0.685,
+   "soft": 0.368,
+   "none": 0.228
+  },
+  "rule_agent_take": {
+   "explicit": 0.63,
+   "soft": 0.36,
+   "none": 0.199
+  },
+  "partner_take": {
+   "explicit": 0.62,
+   "soft": 0.352,
+   "none": 0.197
+  }
+ },
+ "share_of_mutual_takes": {
+  "mutual_takes": {
+   "explicit": 418,
+   "soft": 130,
+   "none": 527
+  },
+  "share": {
+   "explicit": 0.389,
+   "soft": 0.121,
+   "none": 0.49
+  }
+ },
+ "share_by_rule": {
+  "explicit": {
+   "authority": 156,
+   "nondeception": 66,
+   "welfare": 196
+  },
+  "soft": {
+   "authority": 34,
+   "nondeception": 44,
+   "welfare": 52
+  },
+  "none": {
+   "authority": 0,
+   "nondeception": 172,
+   "welfare": 355
+  },
+  "share_no_explicit": {
+   "authority": 0.179,
+   "nondeception": 0.766,
+   "welfare": 0.675
+  }
+ },
+ "forest_mutual": [
+  {
+   "term": "const",
+   "label": "const",
+   "coef": -6.63,
+   "OR": 0.0,
+   "ci_lo_logodds": -8.918,
+   "ci_hi_logodds": -5.53,
+   "OR_ci_lo": 0.0,
+   "OR_ci_hi": 0.0
+  },
+  {
+   "term": "is_W",
+   "label": "welfare-rule agent A",
+   "coef": 4.379,
+   "OR": 79.76,
+   "ci_lo_logodds": 3.848,
+   "ci_hi_logodds": 6.164,
+   "OR_ci_lo": 46.9,
+   "OR_ci_hi": 475.33
+  },
+  {
+   "term": "is_D",
+   "label": "honesty-rule agent A",
+   "coef": 3.212,
+   "OR": 24.84,
+   "ci_lo_logodds": 2.361,
+   "ci_hi_logodds": 4.865,
+   "OR_ci_lo": 10.6,
+   "OR_ci_hi": 129.67
+  },
+  {
+   "term": "b_none",
+   "label": "partner has no rule",
+   "coef": -1.059,
+   "OR": 0.35,
+   "ci_lo_logodds": -1.426,
+   "ci_hi_logodds": -0.84,
+   "OR_ci_lo": 0.24,
+   "OR_ci_hi": 0.43
+  },
+  {
+   "term": "tp_harm_refuse_sev",
+   "label": "3rd-party harm of refusing (per severity step)",
+   "coef": 0.781,
+   "OR": 2.18,
+   "ci_lo_logodds": 0.479,
+   "ci_hi_logodds": 1.157,
+   "OR_ci_lo": 1.61,
+   "OR_ci_hi": 3.18
+  },
+  {
+   "term": "vuln",
+   "label": "vulnerable person named",
+   "coef": -0.117,
+   "OR": 0.89,
+   "ci_lo_logodds": -1.036,
+   "ci_hi_logodds": 0.643,
+   "OR_ci_lo": 0.35,
+   "OR_ci_hi": 1.9
+  },
+  {
+   "term": "promise",
+   "label": "promise / confidentiality request",
+   "coef": 1.237,
+   "OR": 3.45,
+   "ci_lo_logodds": 0.422,
+   "ci_hi_logodds": 2.226,
+   "OR_ci_lo": 1.53,
+   "OR_ci_hi": 9.26
+  },
+  {
+   "term": "perm_doc",
+   "label": "formal permission document",
+   "coef": 4.872,
+   "OR": 130.57,
+   "ci_lo_logodds": 3.758,
+   "ci_hi_logodds": 7.723,
+   "OR_ci_lo": 42.86,
+   "OR_ci_hi": 2259.73
+  },
+  {
+   "term": "suggest_or_peer",
+   "label": "soft authority (suggestion / non-principal ask)",
+   "coef": -13.201,
+   "OR": 0.0,
+   "ci_lo_logodds": -14.11,
+   "ci_hi_logodds": -11.628,
+   "OR_ci_lo": 0.0,
+   "OR_ci_hi": 0.0
+  },
+  {
+   "term": "harm_down",
+   "label": "denial-of-injury fact",
+   "coef": 0.289,
+   "OR": 1.33,
+   "ci_lo_logodds": -0.565,
+   "ci_hi_logodds": 1.121,
+   "OR_ci_lo": 0.57,
+   "OR_ci_hi": 3.07
+  },
+  {
+   "term": "self_benefit",
+   "label": "self-benefit to agents",
+   "coef": 0.05,
+   "OR": 1.05,
+   "ci_lo_logodds": -0.708,
+   "ci_hi_logodds": 0.752,
+   "OR_ci_lo": 0.49,
+   "OR_ci_hi": 2.12
+  },
+  {
+   "term": "against_take",
+   "label": "fact against take / refuse re-affirmed",
+   "coef": -0.638,
+   "OR": 0.53,
+   "ci_lo_logodds": -1.73,
+   "ci_hi_logodds": 0.397,
+   "OR_ci_lo": 0.18,
+   "OR_ci_hi": 1.49
+  },
+  {
+   "term": "unwatched",
+   "label": "unwatched notice",
+   "coef": 0.39,
+   "OR": 1.48,
+   "ci_lo_logodds": 0.251,
+   "ci_hi_logodds": 0.57,
+   "OR_ci_lo": 1.29,
+   "OR_ci_hi": 1.77
+  }
+ ],
+ "forest_take_a": [
+  {
+   "term": "const",
+   "label": "const",
+   "coef": -6.441,
+   "OR": 0.0,
+   "ci_lo_logodds": -8.273,
+   "ci_hi_logodds": -5.647,
+   "OR_ci_lo": 0.0,
+   "OR_ci_hi": 0.0
+  },
+  {
+   "term": "is_W",
+   "label": "welfare-rule agent A",
+   "coef": 4.309,
+   "OR": 74.37,
+   "ci_lo_logodds": 3.71,
+   "ci_hi_logodds": 5.882,
+   "OR_ci_lo": 40.85,
+   "OR_ci_hi": 358.53
+  },
+  {
+   "term": "is_D",
+   "label": "honesty-rule agent A",
+   "coef": 3.308,
+   "OR": 27.33,
+   "ci_lo_logodds": 2.619,
+   "ci_hi_logodds": 5.046,
+   "OR_ci_lo": 13.72,
+   "OR_ci_hi": 155.4
+  },
+  {
+   "term": "b_none",
+   "label": "partner has no rule",
+   "coef": -0.632,
+   "OR": 0.53,
+   "ci_lo_logodds": -0.836,
+   "ci_hi_logodds": -0.457,
+   "OR_ci_lo": 0.43,
+   "OR_ci_hi": 0.63
+  },
+  {
+   "term": "tp_harm_refuse_sev",
+   "label": "3rd-party harm of refusing (per severity step)",
+   "coef": 0.752,
+   "OR": 2.12,
+   "ci_lo_logodds": 0.475,
+   "ci_hi_logodds": 1.143,
+   "OR_ci_lo": 1.61,
+   "OR_ci_hi": 3.14
+  },
+  {
+   "term": "vuln",
+   "label": "vulnerable person named",
+   "coef": -0.152,
+   "OR": 0.86,
+   "ci_lo_logodds": -0.928,
+   "ci_hi_logodds": 0.547,
+   "OR_ci_lo": 0.4,
+   "OR_ci_hi": 1.73
+  },
+  {
+   "term": "promise",
+   "label": "promise / confidentiality request",
+   "coef": 1.431,
+   "OR": 4.18,
+   "ci_lo_logodds": 0.755,
+   "ci_hi_logodds": 2.363,
+   "OR_ci_lo": 2.13,
+   "OR_ci_hi": 10.62
+  },
+  {
+   "term": "perm_doc",
+   "label": "formal permission document",
+   "coef": 4.722,
+   "OR": 112.38,
+   "ci_lo_logodds": 3.485,
+   "ci_hi_logodds": 8.199,
+   "OR_ci_lo": 32.62,
+   "OR_ci_hi": 3637.31
+  },
+  {
+   "term": "suggest_or_peer",
+   "label": "soft authority (suggestion / non-principal ask)",
+   "coef": -1.465,
+   "OR": 0.23,
+   "ci_lo_logodds": -13.205,
+   "ci_hi_logodds": -0.376,
+   "OR_ci_lo": 0.0,
+   "OR_ci_hi": 0.69
+  },
+  {
+   "term": "harm_down",
+   "label": "denial-of-injury fact",
+   "coef": 0.25,
+   "OR": 1.28,
+   "ci_lo_logodds": -0.623,
+   "ci_hi_logodds": 1.088,
+   "OR_ci_lo": 0.54,
+   "OR_ci_hi": 2.97
+  },
+  {
+   "term": "self_benefit",
+   "label": "self-benefit to agents",
+   "coef": -0.05,
+   "OR": 0.95,
+   "ci_lo_logodds": -0.749,
+   "ci_hi_logodds": 0.623,
+   "OR_ci_lo": 0.47,
+   "OR_ci_hi": 1.86
+  },
+  {
+   "term": "against_take",
+   "label": "fact against take / refuse re-affirmed",
+   "coef": -0.519,
+   "OR": 0.6,
+   "ci_lo_logodds": -1.332,
+   "ci_hi_logodds": 0.21,
+   "OR_ci_lo": 0.26,
+   "OR_ci_hi": 1.23
+  },
+  {
+   "term": "unwatched",
+   "label": "unwatched notice",
+   "coef": 0.24,
+   "OR": 1.27,
+   "ci_lo_logodds": 0.12,
+   "ci_hi_logodds": 0.383,
+   "OR_ci_lo": 1.13,
+   "OR_ci_hi": 1.47
+  }
+ ],
+ "transition_by_ingredient": {
+  "size": {
+   "formal permission (PM)": 13,
+   "request / promise (R)": 5,
+   "material 3rd-party harm (T2)": 98,
+   "severe 3rd-party harm (T3)": 55,
+   "self-benefit (S)": 8,
+   "denial of injury (HD)": 16,
+   "minor 3rd-party (T1)": 3,
+   "urgency (U)": 1,
+   "suggestion / non-principal ask": 8,
+   "against take (HU/AR)": 16,
+   "other": 2
+  },
+  "mean": {
+   "formal permission (PM)": 42.1,
+   "request / promise (R)": 21.8,
+   "material 3rd-party harm (T2)": 7.6,
+   "severe 3rd-party harm (T3)": 7.6,
+   "self-benefit (S)": 5.2,
+   "denial of injury (HD)": 3.9,
+   "minor 3rd-party (T1)": 2.8,
+   "urgency (U)": 0.0,
+   "suggestion / non-principal ask": 0.0,
+   "against take (HU/AR)": -0.5,
+   "other": -12.5
+  },
+  "std": {
+   "formal permission (PM)": 22.7,
+   "request / promise (R)": 13.8,
+   "material 3rd-party harm (T2)": 11.3,
+   "severe 3rd-party harm (T3)": 9.1,
+   "self-benefit (S)": 6.2,
+   "denial of injury (HD)": 18.1,
+   "minor 3rd-party (T1)": 4.8,
+   "urgency (U)": NaN,
+   "suggestion / non-principal ask": 0.0,
+   "against take (HU/AR)": 9.8,
+   "other": 5.9
+  }
+ },
+ "plan_profile": {
+  "both planned take": {
+   "authority": 18,
+   "nondeception": 59,
+   "welfare": 97,
+   "All": 174
+  },
+  "neither planned take (refuse/unclear)": {
+   "authority": 1,
+   "nondeception": 58,
+   "welfare": 116,
+   "All": 175
+  },
+  "one planned take, other refuse/unclear": {
+   "authority": 15,
+   "nondeception": 99,
+   "welfare": 194,
+   "All": 308
+  },
+  "All": {
+   "authority": 34,
+   "nondeception": 216,
+   "welfare": 407,
+   "All": 657
+  }
+ },
+ "persuasion_flags": [
+  {
+   "no_explicit_mutual_takes": 657,
+   "any_flip_recorded": 32,
+   "refuser_moved_to_take": 32,
+   "conversation_changed_outcome": 32,
+   "refuse_to_take_flip_a_or_b": 66,
+   "first_take_proposer_both": 217
+  }
+ ],
+ "monitoring_paired": [
+  {
+   "paired_cells": 1721,
+   "watched_rate": 0.166,
+   "unwatched_rate": 0.207,
+   "unwatched_only_take": 102,
+   "watched_only_take": 31
+  }
+ ],
+ "models": [
+  {
+   "outcome": "mutual_take",
+   "model": "ingredients",
+   "McFadden_R2": 0.3686,
+   "AIC": 2161.2
+  },
+  {
+   "outcome": "mutual_take",
+   "model": "ingredients + level",
+   "McFadden_R2": 0.3774,
+   "AIC": 2133.4
+  },
+  {
+   "outcome": "mutual_take",
+   "model": "ingredients + log words",
+   "McFadden_R2": 0.3885,
+   "AIC": 2095.9
+  },
+  {
+   "outcome": "mutual_take",
+   "model": "level only",
+   "McFadden_R2": 0.257,
+   "AIC": 2522.4
+  },
+  {
+   "outcome": "mutual_take",
+   "model": "controls only",
+   "McFadden_R2": 0.1536,
+   "AIC": 2870.2
+  },
+  {
+   "outcome": "take_a",
+   "model": "ingredients",
+   "McFadden_R2": 0.3535,
+   "AIC": 2389.9
+  },
+  {
+   "outcome": "take_a",
+   "model": "ingredients + level",
+   "McFadden_R2": 0.3627,
+   "AIC": 2358.4
+  },
+  {
+   "outcome": "take_a",
+   "model": "ingredients + log words",
+   "McFadden_R2": 0.3703,
+   "AIC": 2330.4
+  },
+  {
+   "outcome": "take_a",
+   "model": "level only",
+   "McFadden_R2": 0.2437,
+   "AIC": 2775.5
+  },
+  {
+   "outcome": "take_a",
+   "model": "controls only",
+   "McFadden_R2": 0.1468,
+   "AIC": 3128.0
+  }
+ ]
+}

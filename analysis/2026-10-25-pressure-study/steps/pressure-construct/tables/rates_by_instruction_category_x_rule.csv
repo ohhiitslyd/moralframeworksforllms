@@ -1,0 +1,10 @@
+instr_cat,rule_a,n,scenes,mutual_take,any_take,rule_agent_take,partner_take
+explicit,authority,249,46,0.627,0.819,0.747,0.699
+explicit,nondeception,244,46,0.27,0.389,0.303,0.357
+explicit,welfare,247,46,0.794,0.842,0.834,0.802
+none,authority,1043,65,0.0,0.054,0.001,0.053
+none,nondeception,1044,65,0.165,0.233,0.214,0.184
+none,welfare,1038,65,0.342,0.397,0.382,0.356
+soft,authority,125,18,0.272,0.312,0.296,0.288
+soft,nondeception,126,18,0.349,0.365,0.357,0.357
+soft,welfare,127,18,0.409,0.425,0.425,0.409

@@ -1,0 +1,4 @@
+instr_cat,n,scenes,mutual_take,any_take,rule_agent_take,partner_take
+explicit,740,46,0.565,0.685,0.63,0.62
+soft,378,18,0.344,0.368,0.36,0.352
+none,3125,65,0.169,0.228,0.199,0.197

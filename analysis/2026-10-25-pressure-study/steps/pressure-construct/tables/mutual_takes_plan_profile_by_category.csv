@@ -1,0 +1,5 @@
+instr_cat,both planned take,neither planned take (refuse/unclear),"one planned take, other refuse/unclear",All
+explicit,152,94,172,418
+none,130,156,241,527
+soft,44,19,67,130
+All,326,269,480,1075
