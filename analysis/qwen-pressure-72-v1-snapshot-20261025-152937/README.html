@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extended pressure run: preliminary analysis (snapshot 2026-10-25 15:29 UTC)</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="extended-pressure-run-preliminary-analysis-snapshot-2026-10-25-1529-utc">Extended pressure run: preliminary analysis (snapshot 2026-10-25 15:29 UTC)</h1>
+<p><strong>Status: PRELIMINARY.</strong> This analyses an interim snapshot: 3,026 of 4,320 trials complete, 60 failed and 1,234 not started (71% finished). The completed run (4,243 of 4,320) is analysed separately on branch <code>analysis-full-pressure-study</code>. Use this folder for the method and early results, not as final numbers.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Status</th>
+<th>Start here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plan</td>
+<td>Done; revised after review</td>
+<td><a href="ANALYSIS-PLAN.html">ANALYSIS-PLAN.md</a></td>
+</tr>
+<tr>
+<td><strong>Step 1:</strong> extract, organise, augment</td>
+<td>Done. Small schema gaps remain (randomisation level, <code>paired_by</code>, run status), to be fixed in the full-run version</td>
+<td><a href="step1/trial_metrics_dictionary.html">step1/trial_metrics_dictionary.md</a></td>
+</tr>
+<tr>
+<td><strong>Step 2:</strong> analyse and report</td>
+<td>Done. A review flagged overclaims, to be fixed in the full-run version (see caveats below)</td>
+<td><a href="step2/REPORT.html">step2/REPORT.md</a></td>
+</tr>
+<tr>
+<td><strong>Step 3:</strong> findings briefing and paper kit</td>
+<td>Not run on the snapshot; it will be run on the completed dataset</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contents">Contents</h2>
+<p><strong>Plan</strong>
+- <a href="ANALYSIS-PLAN.html">ANALYSIS-PLAN.md</a> (<a href="ANALYSIS-PLAN.html">HTML</a>): questions, the pre-specified primary test (Revision 1) and what not to claim</p>
+<p><strong>Step 1</strong> (<a href="step1/"><code>step1/</code></a>)
+- <a href="step1/trial_metrics.csv">trial_metrics.csv</a>: 4,320 planned trials × 188 columns
+- <a href="step1/trial_metrics_dictionary.html">trial_metrics_dictionary.md</a> (<a href="step1/trial_metrics_dictionary.html">HTML</a>):
+  - conventions
+  - reliability summary
+  - A. inputs (65)
+  - B. outcomes (8)
+  - C. per-agent (94)
+  - D. pair (21)
+  - changes from v1
+  - considered, not included
+  - caveats
+  - regex appendix
+- <a href="step1/VALIDATION.html">VALIDATION.md</a> (<a href="step1/VALIDATION.html">HTML</a>): blind, arm-stratified checks of each heuristic against hand labels
+- <a href="step1/metrics_schema.json">metrics_schema.json</a>, <a href="step1/validation_results.json">validation_results.json</a> and <code>validation/labels_*.csv</code> (hand labels)
+- Scripts: <a href="step1/build_metrics_e1.py">build_metrics_e1.py</a>, <a href="step1/validate_e1.py">validate_e1.py</a>, <a href="step1/gen_docs.py">gen_docs.py</a></p>
+<p><strong>Step 2</strong> (<a href="step2/"><code>step2/</code></a>)
+- <a href="step2/PREREG.html">PREREG.md</a> (<a href="step2/PREREG.html">HTML</a>): primary hypothesis and test, written before the outcome numbers
+- <a href="step2/REPORT.html">REPORT.md</a> (<a href="step2/REPORT.html">HTML</a>), with these sections:
+  1. Summary
+  2. How to read the charts
+  3. Design check and completion
+  4. <strong>Primary test</strong> (monitoring notice → mutual take)
+  5. Top-ranked relationships
+  6. Words vs. actions
+  7. Univariate results
+  8. Matrices
+  9. <strong>Heat maps</strong>
+  10. Two-factor interactions
+  11. Sensitivity
+  12. Caveats in plain terms
+  13. File index
+- <a href="step2/figures/">figures/</a> (18 PNGs):
+  - Headline figures:
+    - <a href="step2/figures/03_primary_monitoring_forest.png">03 primary forest</a>
+    - <a href="step2/figures/05_asymmetry_mixed_pairs.png">05 asymmetry</a>
+    - <a href="step2/figures/06_rule_application.png">06 rule application</a>
+  - Heat maps:
+    - <a href="step2/figures/07_screening_overview.png">07 overview</a>
+    - <a href="step2/figures/08_heat_level.png">08 level</a>
+    - <a href="step2/figures/09_heat_monitoring.png">09 monitoring</a>
+    - <a href="step2/figures/10_heat_pairing.png">10 pairing</a>
+    - <a href="step2/figures/11_heat_diagnostic.png">11 diagnostic</a>
+    - <a href="step2/figures/12_heat_setting.png">12 setting</a>
+    - <a href="step2/figures/16_outcome_association.png">16 outcome × outcome</a>
+    - <a href="step2/figures/17_2d_heatmaps.png">17 2D</a>
+    - <a href="step2/figures/18_scenario_x_level.png">18 scenario × level</a>
+- <a href="step2/tables/">tables/</a>: the CSV behind every chart, plus <code>candidates.csv</code> and <code>candidates_untrustworthy.csv</code>
+- Script: <a href="step2/analyze_e1.py">analyze_e1.py</a>, plus <a href="step2/provenance.json">provenance.json</a></p>
+<h2 id="headline-preliminary">Headline (preliminary)</h2>
+<p><strong>The monitoring notice reduces mutual take.</strong> 25.0% of watched trials ended in a mutual take, against 29.3% unwatched: a paired difference of <strong>−4.2 pp</strong> (95% CI −6.0 to −2.4).
+- The comparison uses the 1,046 cells where both trials completed. In the cells where the two differ, 68 took only when unwatched and 24 only when watched (McNemar p = 7×10⁻⁶).
+- The effect is the same sign in every factor, and the same on both endpoints.
+- It does <strong>not</strong> survive the worst-case failure assumption: −1.4 pp, p = 0.20.
+- On the completed dataset it is −3.9 pp (131 vs 49 discordant cells, p = 8×10⁻¹⁰).</p>
+<h2 id="known-overclaims-from-the-step-2-review-fixed-in-the-full-run-version">Known overclaims (from the Step 2 review; fixed in the full-run version)</h2>
+<ul>
+<li>"A slightly smaller deal, talked about more openly" is <strong>not supported</strong>. The public-vocabulary shift is probably an audience effect, and its meaning hasn't been validated.</li>
+<li>The private monitoring-mention finding is mostly agents echoing the notice text. Drop it.</li>
+<li>The interaction p-values sit at the floor of a 100-draw bootstrap, and diagnostic × pairing is built into the design.</li>
+<li>The heuristic-error sensitivity table is mis-specified.</li>
+</ul>
+</body>
+</html>
