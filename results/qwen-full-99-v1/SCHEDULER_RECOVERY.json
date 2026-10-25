@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-24T12:55:38.707187+00:00",
+  "reason": "Three unreturned non-streaming requests stalled approximately 12 minutes despite healthy /models. Worker stopped to switch transport and improve scheduling.",
+  "interrupted_episodes": [
+    "experimental-welfare-t1-off-s1",
+    "experimental-welfare-t1-on-s2"
+  ],
+  "policy": "Reuse every persisted response exactly, issue only requests with no persisted response. Never regenerate completed outcomes. Raw events remain append-only.",
+  "new_transport": "streaming with 120-second read inactivity timeout; no automatic API retries",
+  "episode_workers": 8,
+  "shared_request_limit": 4,
+  "experiment_changes": "none: prompts, model, seeds, temperature, token budget, rounds and scoring unchanged",
+  "separate_probe": "streaming-probe.json is a transport compatibility probe, excluded from study outcomes and reported separately"
+}

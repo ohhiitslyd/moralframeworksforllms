@@ -1,0 +1,29 @@
+{
+  "run_id": "S04-L1-A-none-s1",
+  "spec": {
+    "run_id": "S04-L1-A-none-s1",
+    "scenario": "S04",
+    "level": 1,
+    "pairing": "A-none",
+    "a": "authority",
+    "b": "none",
+    "seed": 1,
+    "control": false
+  },
+  "backend": "openai",
+  "endpoint": {
+    "backend": "openai",
+    "base_url": "https://router.huggingface.co/v1",
+    "model": "Qwen/Qwen3-32B:nscale"
+  },
+  "started_at": "2026-10-24T17:01:39.975622+00:00",
+  "status": "failed",
+  "scores": null,
+  "error": "ValueError: JSONDecodeError: Extra data: line 6 column 1 (char 280)",
+  "reasoning_missing": [],
+  "finished_at": "2026-10-24T17:03:07.552036+00:00",
+  "usage": {
+    "calls_returned": 6,
+    "total_tokens": 6493
+  }
+}

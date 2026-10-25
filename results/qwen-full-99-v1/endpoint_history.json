@@ -1,0 +1,201 @@
+[
+  {
+    "changed_at": "2026-10-24T13:05:18.975131+00:00",
+    "from": {
+      "backend": "openai",
+      "base_url": "https://elmekaouihaitham--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-eager16k"
+    },
+    "to": {
+      "backend": "openai",
+      "base_url": "https://router.huggingface.co/v1",
+      "model": "Qwen/Qwen3-32B:nscale"
+    },
+    "reason": "Explicit user-authorized endpoint switch; same study",
+    "original_signature": "5b0a3b890279ca47ddb6b804b965538ca759577b48cb3d21b0f23a3795bc0423",
+    "new_signature": "9a460b6b3e5059582da0f35413869513508fbe75b40ab496a36e1458f01dc116",
+    "preserved_cases": [
+      {
+        "run_id": "experimental-none-t0p5-off-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t0p5-off-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t0p5-off-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t0p5-on-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t0p5-on-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t0p5-on-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t1-off-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t1-off-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t1-off-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t1-on-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t1-on-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t1-on-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t2-off-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t2-off-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t2-off-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t2-on-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t2-on-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t2-on-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t4-off-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t4-off-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t4-off-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t4-on-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t4-on-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-none-t4-on-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t0p5-off-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t0p5-off-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t0p5-off-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t0p5-on-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t0p5-on-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t0p5-on-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t1-off-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t1-off-s2",
+        "status": "running"
+      },
+      {
+        "run_id": "experimental-welfare-t1-off-s3",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t1-on-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t1-on-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "experimental-welfare-t1-on-s3",
+        "status": "running"
+      },
+      {
+        "run_id": "experimental-welfare-t2-off-s1",
+        "status": "running"
+      },
+      {
+        "run_id": "experimental-welfare-t2-off-s2",
+        "status": "running"
+      },
+      {
+        "run_id": "experimental-welfare-t2-off-s3",
+        "status": "running"
+      },
+      {
+        "run_id": "experimental-welfare-t2-on-s1",
+        "status": "running"
+      },
+      {
+        "run_id": "experimental-welfare-t2-on-s2",
+        "status": "running"
+      },
+      {
+        "run_id": "experimental-welfare-t2-on-s3",
+        "status": "running"
+      },
+      {
+        "run_id": "positive-none-t2-on-s1",
+        "status": "complete"
+      },
+      {
+        "run_id": "positive-none-t2-on-s2",
+        "status": "complete"
+      },
+      {
+        "run_id": "positive-none-t2-on-s3",
+        "status": "complete"
+      }
+    ],
+    "policy": "Preserve every recorded response; only unreturned and future calls use the new endpoint. Provider weights/revision may differ; report as a mixed-provider study."
+  }
+]

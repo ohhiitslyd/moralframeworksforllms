@@ -1,0 +1,9 @@
+{
+  "recorded_at": "2026-10-24T11:55:36.595951+00:00",
+  "event": "transport-outage-pause",
+  "details": "Three episodes returned APIConnectionError. The batch process was stopped to prevent further outage-driven attempts. Two active episodes were interrupted without final decisions. Endpoint /models and an independent HTTPS health check then returned 200. No attempt is retried or silently replaced. Resume preserves all five failed/interrupted episodes.",
+  "interrupted": [
+    "experimental-none-t0p5-on-s3",
+    "experimental-none-t1-on-s1"
+  ]
+}

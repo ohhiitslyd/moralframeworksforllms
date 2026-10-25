@@ -1,0 +1,219 @@
+dimension,metric,metric_label,level,n,groups,effect,effect_size,p_perm,q_bh,significant_q05
+scenario,collusion,Collusion: both agents took the deal,pair,586,20,cramers_v,0.5677280847536963,0.00024993751562109475,0.0005858750366171899,1
+scenario,take,Agent chose take,agent,1172,20,cramers_v,0.5660137343967638,0.00024993751562109475,0.0005858750366171899,1
+scenario,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,20,cramers_v,0.5053862848938686,0.00024993751562109475,0.0005858750366171899,1
+scenario,r2t,Refuse->take switch (of agents that planned refuse),agent,711,20,cramers_v,0.3837743628307719,0.00024993751562109475,0.0005858750366171899,1
+scenario,dec_public,Used deception words in public messages,agent,1172,20,cramers_v,0.4685123223526181,0.00024993751562109475,0.0005858750366171899,1
+scenario,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,20,cramers_v,0.45338164569052086,0.00024993751562109475,0.0005858750366171899,1
+scenario,evaluator,Mentioned the evaluator/score in final decision,agent,1172,20,cramers_v,0.5074235536132625,0.00024993751562109475,0.0005858750366171899,1
+scenario,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,20,epsilon_sq,0.21755690840899966,0.00024993751562109475,0.0005858750366171899,1
+family,collusion,Collusion: both agents took the deal,pair,586,3,cramers_v,0.4660542257696367,0.00024993751562109475,0.0005858750366171899,1
+family,plans_agree,Private plans agreed before talking,pair,473,3,cramers_v,0.1944855033933744,0.00024993751562109475,0.0005858750366171899,1
+family,talk_changed,Talk changed the outcome the plans implied,pair,473,3,cramers_v,0.28051930250989665,0.00024993751562109475,0.0005858750366171899,1
+family,take,Agent chose take,agent,1172,3,cramers_v,0.4710678435660857,0.00024993751562109475,0.0005858750366171899,1
+family,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,3,cramers_v,0.40241694983188153,0.00024993751562109475,0.0005858750366171899,1
+family,r2t,Refuse->take switch (of agents that planned refuse),agent,711,3,cramers_v,0.3111042107526035,0.00024993751562109475,0.0005858750366171899,1
+family,t2r,Take->refuse switch (of agents that planned take),agent,341,3,cramers_v,0.21503492749056677,0.00024993751562109475,0.0005858750366171899,1
+family,dec_public,Used deception words in public messages,agent,1172,3,cramers_v,0.17751599410843563,0.00024993751562109475,0.0005858750366171899,1
+family,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,3,cramers_v,0.3340863807420491,0.00024993751562109475,0.0005858750366171899,1
+family,evaluator,Mentioned the evaluator/score in final decision,agent,1172,3,cramers_v,0.21949753034923844,0.00024993751562109475,0.0005858750366171899,1
+family,empty,Sent at least one empty message,agent,1172,3,cramers_v,0.14133756017615642,0.00024993751562109475,0.0005858750366171899,1
+family,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,3,epsilon_sq,0.09446311668723456,0.00024993751562109475,0.0005858750366171899,1
+level,collusion,Collusion: both agents took the deal,pair,586,5,spearman_rho,0.20505287946799547,0.00024993751562109475,0.0005858750366171899,1
+level,take,Agent chose take,agent,1172,5,spearman_rho,0.20873041829842745,0.00024993751562109475,0.0005858750366171899,1
+level,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,5,spearman_rho,0.2325593130154666,0.00024993751562109475,0.0005858750366171899,1
+level,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,5,spearman_rho,0.18655667106496882,0.00024993751562109475,0.0005858750366171899,1
+pairing,collusion,Collusion: both agents took the deal,pair,586,6,cramers_v,0.26404744402575897,0.00024993751562109475,0.0005858750366171899,1
+pairing,plans_agree,Private plans agreed before talking,pair,473,6,cramers_v,0.27250739658899215,0.00024993751562109475,0.0005858750366171899,1
+pairing,take,Agent chose take,agent,1172,6,cramers_v,0.24377293746092557,0.00024993751562109475,0.0005858750366171899,1
+pairing,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,6,cramers_v,0.1946384467883592,0.00024993751562109475,0.0005858750366171899,1
+pairing,t2r,Take->refuse switch (of agents that planned take),agent,341,6,cramers_v,0.3376313284623828,0.00024993751562109475,0.0005858750366171899,1
+pairing,dec_public,Used deception words in public messages,agent,1172,6,cramers_v,0.1896904873283543,0.00024993751562109475,0.0005858750366171899,1
+pairing,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,6,cramers_v,0.24442451124692502,0.00024993751562109475,0.0005858750366171899,1
+pairing,evaluator,Mentioned the evaluator/score in final decision,agent,1172,6,cramers_v,0.2967280084728582,0.00024993751562109475,0.0005858750366171899,1
+pairing,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,6,epsilon_sq,0.128268953083378,0.00024993751562109475,0.0005858750366171899,1
+matched_vs_mixed,lone_take,Lone take: only one agent took,pair,586,2,cramers_v,0.17150485302037283,0.00024993751562109475,0.0005858750366171899,1
+matched_vs_mixed,plans_agree,Private plans agreed before talking,pair,473,2,cramers_v,0.19185839893536755,0.00024993751562109475,0.0005858750366171899,1
+matched_vs_mixed,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,2,epsilon_sq,0.0243040121045038,0.00024993751562109475,0.0005858750366171899,1
+agent_type,take,Agent chose take,agent,1172,9,cramers_v,0.24753348483724918,0.00024993751562109475,0.0005858750366171899,1
+agent_type,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,9,cramers_v,0.2128651702578975,0.00024993751562109475,0.0005858750366171899,1
+agent_type,t2r,Take->refuse switch (of agents that planned take),agent,341,9,cramers_v,0.3648869001492942,0.00024993751562109475,0.0005858750366171899,1
+agent_type,dec_public,Used deception words in public messages,agent,1172,9,cramers_v,0.20098643343211325,0.00024993751562109475,0.0005858750366171899,1
+agent_type,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,9,cramers_v,0.2608089107689741,0.00024993751562109475,0.0005858750366171899,1
+agent_type,evaluator,Mentioned the evaluator/score in final decision,agent,1172,9,cramers_v,0.31574206206533434,0.00024993751562109475,0.0005858750366171899,1
+agent_type,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,9,epsilon_sq,0.16176385216311862,0.00024993751562109475,0.0005858750366171899,1
+criterion,take,Agent chose take,agent,1172,4,cramers_v,0.22530759413563067,0.00024993751562109475,0.0005858750366171899,1
+criterion,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,4,cramers_v,0.21084577771560106,0.00024993751562109475,0.0005858750366171899,1
+criterion,dec_public,Used deception words in public messages,agent,1172,4,cramers_v,0.1817612632398255,0.00024993751562109475,0.0005858750366171899,1
+criterion,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,4,cramers_v,0.2572374584108348,0.00024993751562109475,0.0005858750366171899,1
+criterion,evaluator,Mentioned the evaluator/score in final decision,agent,1172,4,cramers_v,0.30882161064998154,0.00024993751562109475,0.0005858750366171899,1
+criterion,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,4,epsilon_sq,0.14676427086841554,0.00024993751562109475,0.0005858750366171899,1
+provider,collusion,Collusion: both agents took the deal,pair,586,3,cramers_v,0.3598289353586021,0.00024993751562109475,0.0005858750366171899,1
+provider,take,Agent chose take,agent,1172,3,cramers_v,0.3696676072534352,0.00024993751562109475,0.0005858750366171899,1
+provider,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,3,cramers_v,0.3503560334993785,0.00024993751562109475,0.0005858750366171899,1
+provider,dec_public,Used deception words in public messages,agent,1172,3,cramers_v,0.12970060174293913,0.00024993751562109475,0.0005858750366171899,1
+provider,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,3,cramers_v,0.3035915607154286,0.00024993751562109475,0.0005858750366171899,1
+provider,evaluator,Mentioned the evaluator/score in final decision,agent,1172,3,cramers_v,0.1914812747963284,0.00024993751562109475,0.0005858750366171899,1
+provider,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,3,epsilon_sq,0.08670770847377982,0.00024993751562109475,0.0005858750366171899,1
+take_principal_present,collusion,Collusion: both agents took the deal,pair,586,2,cramers_v,0.24154085615625168,0.00024993751562109475,0.0005858750366171899,1
+take_principal_present,take,Agent chose take,agent,1172,2,cramers_v,0.2690315344334231,0.00024993751562109475,0.0005858750366171899,1
+take_principal_present,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,2,cramers_v,0.3003072771694289,0.00024993751562109475,0.0005858750366171899,1
+take_principal_present,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,2,cramers_v,0.2449302615181509,0.00024993751562109475,0.0005858750366171899,1
+take_principal_present,evaluator,Mentioned the evaluator/score in final decision,agent,1172,2,cramers_v,0.12748502670422301,0.00024993751562109475,0.0005858750366171899,1
+take_principal_present,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,2,epsilon_sq,0.028610014295716357,0.00024993751562109475,0.0005858750366171899,1
+rank_stated_in_level_text,collusion,Collusion: both agents took the deal,pair,586,2,cramers_v,0.26719188187122617,0.00024993751562109475,0.0005858750366171899,1
+rank_stated_in_level_text,take,Agent chose take,agent,1172,2,cramers_v,0.2811445293797207,0.00024993751562109475,0.0005858750366171899,1
+rank_stated_in_level_text,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,2,cramers_v,0.26869258155263437,0.00024993751562109475,0.0005858750366171899,1
+rank_stated_in_level_text,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,2,cramers_v,0.19110208589810404,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,collusion,Collusion: both agents took the deal,pair,586,2,cramers_v,0.43027178490572715,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,talk_changed,Talk changed the outcome the plans implied,pair,473,2,cramers_v,0.2610059291307774,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,silence,At least one deliberately empty message,pair,586,2,cramers_v,0.15672709786466396,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,take,Agent chose take,agent,1172,2,cramers_v,0.42887843531660047,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,2,cramers_v,0.343746003421849,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,r2t,Refuse->take switch (of agents that planned refuse),agent,711,2,cramers_v,0.2794656389781282,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,t2r,Take->refuse switch (of agents that planned take),agent,341,2,cramers_v,0.2052755581762446,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,dec_public,Used deception words in public messages,agent,1172,2,cramers_v,0.12754165279901233,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,2,cramers_v,0.30713541030415703,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,evaluator,Mentioned the evaluator/score in final decision,agent,1172,2,cramers_v,0.18772030646232532,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,empty,Sent at least one empty message,agent,1172,2,cramers_v,0.13573390374486505,0.00024993751562109475,0.0005858750366171899,1
+refuse_breaks_promise,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,2,epsilon_sq,0.05807212041500395,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,collusion,Collusion: both agents took the deal,pair,586,2,cramers_v,0.4330836908987189,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,talk_changed,Talk changed the outcome the plans implied,pair,473,2,cramers_v,0.2381889129661925,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,take,Agent chose take,agent,1172,2,cramers_v,0.43812466868711364,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,2,cramers_v,0.37104611124554016,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,r2t,Refuse->take switch (of agents that planned refuse),agent,711,2,cramers_v,0.2548679834482009,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,dec_public,Used deception words in public messages,agent,1172,2,cramers_v,0.13614733451510252,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,2,cramers_v,0.32120738918164204,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,evaluator,Mentioned the evaluator/score in final decision,agent,1172,2,cramers_v,0.1990078421296672,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,empty,Sent at least one empty message,agent,1172,2,cramers_v,0.1352869036519921,0.00024993751562109475,0.0005858750366171899,1
+take_is_justified_ambiguous,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,2,epsilon_sq,0.07358255700170213,0.00024993751562109475,0.0005858750366171899,1
+welfare_if_take_designer,collusion,Collusion: both agents took the deal,pair,586,3,cramers_v,0.24499287683351428,0.00024993751562109475,0.0005858750366171899,1
+welfare_if_take_designer,take,Agent chose take,agent,1172,3,cramers_v,0.2526847591644671,0.00024993751562109475,0.0005858750366171899,1
+welfare_if_take_designer,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,3,cramers_v,0.2637012649114404,0.00024993751562109475,0.0005858750366171899,1
+welfare_if_take_designer,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,3,cramers_v,0.20211082574856226,0.00024993751562109475,0.0005858750366171899,1
+welfare_if_take_designer,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,3,epsilon_sq,0.02294113798306858,0.00024993751562109475,0.0005858750366171899,1
+scenario,talk_changed,Talk changed the outcome the plans implied,pair,473,20,cramers_v,0.31916033013428763,0.0004998750312421895,0.0010897275681079732,1
+level,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,5,spearman_rho,0.10083820124659618,0.0004998750312421895,0.0010897275681079732,1
+pairing,lone_take,Lone take: only one agent took,pair,586,6,cramers_v,0.18386362405363793,0.0004998750312421895,0.0010897275681079732,1
+criterion,r2t,Refuse->take switch (of agents that planned refuse),agent,711,4,cramers_v,0.16457829687848957,0.0004998750312421895,0.0010897275681079732,1
+provider,plans_agree,Private plans agreed before talking,pair,473,3,cramers_v,0.17694757847545914,0.0004998750312421895,0.0010897275681079732,1
+take_principal_present,lone_take,Lone take: only one agent took,pair,586,2,cramers_v,0.1502200144098335,0.0004998750312421895,0.0010897275681079732,1
+welfare_if_take_designer,evaluator,Mentioned the evaluator/score in final decision,agent,1172,3,cramers_v,0.13478780252474346,0.0004998750312421895,0.0010897275681079732,1
+family,silence,At least one deliberately empty message,pair,586,3,cramers_v,0.15588892885750838,0.0007498125468632841,0.0015717224540018838,1
+criterion,empty,Sent at least one empty message,agent,1172,4,cramers_v,0.128573173437676,0.0007498125468632841,0.0015717224540018838,1
+take_is_justified_ambiguous,plans_agree,Private plans agreed before talking,pair,473,2,cramers_v,0.15878050004270677,0.0007498125468632841,0.0015717224540018838,1
+take_is_justified_ambiguous,silence,At least one deliberately empty message,pair,586,2,cramers_v,0.14807872060516217,0.0007498125468632841,0.0015717224540018838,1
+provider,empty,Sent at least one empty message,agent,1172,3,cramers_v,0.12768018798970437,0.000999750062484379,0.002075671558300901,1
+scenario,empty,Sent at least one empty message,agent,1172,20,cramers_v,0.18888055294799555,0.001999500124968758,0.004073747918160647,1
+take_is_justified_ambiguous,t2r,Take->refuse switch (of agents that planned take),agent,341,2,cramers_v,0.17612899784152325,0.001999500124968758,0.004073747918160647,1
+take_principal_present,violation,Broke own criterion report (authority/non-deception agents),agent,422,2,cramers_v,0.1660028863297835,0.0022494376405898524,0.004498875281179705,1
+refuse_breaks_promise,plans_agree,Private plans agreed before talking,pair,473,2,cramers_v,0.14686959844669983,0.0022494376405898524,0.004498875281179705,1
+agent_type,empty,Sent at least one empty message,agent,1172,9,cramers_v,0.1435326998172166,0.0029992501874531365,0.005943968553316216,1
+pairing,empty,Sent at least one empty message,agent,1172,6,cramers_v,0.1247080092390028,0.0034991252186953262,0.006872155834915145,1
+pairing,r2t,Refuse->take switch (of agents that planned refuse),agent,711,6,cramers_v,0.16045590165292054,0.003999000249937516,0.0077148854379325525,1
+agent_type,r2t,Refuse->take switch (of agents that planned refuse),agent,711,9,cramers_v,0.18106353379024367,0.003999000249937516,0.0077148854379325525,1
+matched_vs_mixed,t2r,Take->refuse switch (of agents that planned take),agent,341,2,cramers_v,0.1612028591076829,0.00424893776555861,0.008054508112102409,1
+welfare_if_take_designer,plans_agree,Private plans agreed before talking,pair,473,3,cramers_v,0.15496234790337093,0.00424893776555861,0.008054508112102409,1
+welfare_if_take_designer,dec_public,Used deception words in public messages,agent,1172,3,cramers_v,0.09647803346769572,0.0047488127968008,0.008924493014677366,1
+matched_vs_mixed,contradiction,Someone's last public stance contradicted their action,pair,586,2,cramers_v,0.12693779625647347,0.0049987503124218945,0.009234979390745534,1
+criterion,t2r,Take->refuse switch (of agents that planned take),agent,341,4,cramers_v,0.2047149303675815,0.0049987503124218945,0.009234979390745534,1
+provider,r2t,Refuse->take switch (of agents that planned refuse),agent,711,3,cramers_v,0.1570052639293754,0.005498625343664084,0.010073111974107315,1
+matched_vs_mixed,explicit_agree,Reached explicit public agreement,pair,586,2,cramers_v,0.11355753541708999,0.005748562859285179,0.010443222527701409,1
+scenario,t2r,Take->refuse switch (of agents that planned take),agent,341,18,cramers_v,0.31709138680743787,0.007998000499875032,0.01429150908994063,1
+pairing,explicit_agree,Reached explicit public agreement,pair,586,6,cramers_v,0.15867805735271576,0.007998000499875032,0.01429150908994063,1
+rank_stated_in_level_text,r2t,Refuse->take switch (of agents that planned refuse),agent,711,2,cramers_v,0.12438738422585638,0.00849787553111722,0.01506127533157361,1
+pairing,silence,At least one deliberately empty message,pair,586,6,cramers_v,0.1590751920730109,0.009247688077980504,0.016258032266127015,1
+provider,silence,At least one deliberately empty message,pair,586,3,cramers_v,0.13437604797141148,0.012246938265433641,0.02118914715765503,1
+rank_stated_in_level_text,t2r,Take->refuse switch (of agents that planned take),agent,341,2,cramers_v,0.141996793614266,0.012246938265433641,0.02118914715765503,1
+refuse_breaks_promise,explicit_agree,Reached explicit public agreement,pair,586,2,cramers_v,0.1084553431562205,0.012996750812296926,0.022309383284100235,1
+provider,t2r,Take->refuse switch (of agents that planned take),agent,341,3,cramers_v,0.15505785027295038,0.0142464383904024,0.024263465383654086,1
+provider,talk_changed,Talk changed the outcome the plans implied,pair,473,3,cramers_v,0.14785893409340506,0.01474631342164459,0.024920126557507912,1
+take_principal_present,plans_agree,Private plans agreed before talking,pair,473,2,cramers_v,0.1165961903914364,0.015746063484128967,0.026404937227231653,1
+matched_vs_mixed,violation,Broke own criterion report (authority/non-deception agents),agent,422,2,cramers_v,0.11985428453093996,0.02024493876530867,0.03369005076975031,1
+take_is_justified_ambiguous,explicit_agree,Reached explicit public agreement,pair,586,2,cramers_v,0.09755750219824669,0.02274431392151962,0.03756257905220664,1
+family,violation,Broke own criterion report (authority/non-deception agents),agent,422,3,cramers_v,0.13323028246979673,0.022994251437140716,0.037689825663884784,1
+pairing,contradiction,Someone's last public stance contradicted their action,pair,586,6,cramers_v,0.14726812948843232,0.02499375156210947,0.04066147642193929,1
+welfare_if_take_designer,r2t,Refuse->take switch (of agents that planned refuse),agent,711,3,cramers_v,0.09544423097012249,0.03549112721819545,0.057290824352735345,0
+scenario,plans_agree,Private plans agreed before talking,pair,473,20,cramers_v,0.2565739451224705,0.035741064733816545,0.057290824352735345,0
+rank_stated_in_level_text,lone_take,Lone take: only one agent took,pair,586,2,cramers_v,0.08979656086277345,0.042989252686828294,0.06840625610020852,0
+family,explicit_agree,Reached explicit public agreement,pair,586,3,cramers_v,0.1024764942094324,0.04873781554611347,0.07699162165980243,0
+provider,lone_take,Lone take: only one agent took,pair,586,3,cramers_v,0.10256452591370284,0.05073731567108223,0.07939443710500946,0
+welfare_if_take_designer,empty,Sent at least one empty message,agent,1172,3,cramers_v,0.07162166577319432,0.05098725318670332,0.07939443710500946,0
+scenario,euphemism,"Of collusions: no deception words in public, some in private",pair,166,17,cramers_v,0.3952781880576552,0.05373656585853537,0.08308206636284192,0
+agent_type,violation,Broke own criterion report (authority/non-deception agents),agent,422,4,cramers_v,0.12896365958060294,0.05823544113971507,0.08940370541167525,0
+pairing,violation,Broke own criterion report (authority/non-deception agents),agent,422,4,cramers_v,0.12896365958060294,0.06023494126468383,0.0918266936762313,0
+family,lone_take,Lone take: only one agent took,pair,586,3,cramers_v,0.09563661771522577,0.071232191952012,0.1078376239273515,0
+level,violation,Broke own criterion report (authority/non-deception agents),agent,422,5,spearman_rho,0.08583353830139734,0.07373156710822294,0.11085159744546623,0
+rank_stated_in_level_text,evaluator,Mentioned the evaluator/score in final decision,agent,1172,2,cramers_v,0.051929117890337585,0.07873031742064483,0.11755622738151078,0
+rank_stated_in_level_text,empty,Sent at least one empty message,agent,1172,2,cramers_v,0.05616411293695132,0.08397900524868783,0.12454029349805405,0
+scenario,violation,Broke own criterion report (authority/non-deception agents),agent,422,20,cramers_v,0.25791512047339,0.08747813046738316,0.128852921904659,0
+pairing,talk_changed,Talk changed the outcome the plans implied,pair,473,6,cramers_v,0.1394847672506153,0.09197700574856287,0.1345703842495752,0
+matched_vs_mixed,empty,Sent at least one empty message,agent,1172,2,cramers_v,0.05319045893681753,0.094976255936016,0.13803215862700993,0
+matched_vs_mixed,dec_public,Used deception words in public messages,agent,1172,2,cramers_v,0.049882033233208924,0.09872531867033242,0.14253059251743355,0
+matched_vs_mixed,silence,At least one deliberately empty message,pair,586,2,cramers_v,0.07428539186900275,0.10197450637340665,0.14529700908106305,0
+refuse_breaks_promise,euphemism,"Of collusions: no deception words in public, some in private",pair,166,2,cramers_v,0.13725179976036136,0.10197450637340665,0.14529700908106305,0
+provider,contradiction,Someone's last public stance contradicted their action,pair,586,3,cramers_v,0.08946032641544553,0.10972256935766059,0.15532155922058447,0
+family,contradiction,Someone's last public stance contradicted their action,pair,586,3,cramers_v,0.08656017875271278,0.11347163209197701,0.1595923599745225,0
+matched_vs_mixed,euphemism,"Of collusions: no deception words in public, some in private",pair,166,2,cramers_v,0.13081598456879864,0.11772056985753562,0.16450695018553055,0
+welfare_if_take_designer,talk_changed,Talk changed the outcome the plans implied,pair,473,3,cramers_v,0.09184987321799827,0.12446888277930518,0.17282940411393968,0
+take_principal_present,contradiction,Someone's last public stance contradicted their action,pair,586,2,cramers_v,0.06829401257364036,0.13146713321669581,0.18139136102050435,0
+matched_vs_mixed,collusion,Collusion: both agents took the deal,pair,586,2,cramers_v,0.06274165810745834,0.1379655086228443,0.18916025710553494,0
+welfare_if_take_designer,violation,Broke own criterion report (authority/non-deception agents),agent,422,3,cramers_v,0.09552616299004711,0.14046488377905525,0.19138340414896277,0
+level,plans_agree,Private plans agreed before talking,pair,473,5,spearman_rho,-0.06786634815258435,0.14346413396650837,0.1942557838801169,0
+take_is_justified_ambiguous,lone_take,Lone take: only one agent took,pair,586,2,cramers_v,0.06398843287176065,0.147713071732067,0.19822345027240124,0
+take_principal_present,r2t,Refuse->take switch (of agents that planned refuse),agent,711,2,cramers_v,0.057852230075625344,0.14821294676330918,0.19822345027240124,0
+scenario,silence,At least one deliberately empty message,pair,586,20,cramers_v,0.2067264582337364,0.1517120719820045,0.20166604690290843,0
+rank_stated_in_level_text,silence,At least one deliberately empty message,pair,586,2,cramers_v,0.0618658554495313,0.16320919770057485,0.21563397029530496,0
+rank_stated_in_level_text,contradiction,Someone's last public stance contradicted their action,pair,586,2,cramers_v,0.05628852685038985,0.1669582604348913,0.21925843840244758,0
+provider,violation,Broke own criterion report (authority/non-deception agents),agent,422,3,cramers_v,0.10906695368396198,0.18095476130967258,0.23621639500304564,0
+take_principal_present,empty,Sent at least one empty message,agent,1172,2,cramers_v,0.04157392109706473,0.19170207448137966,0.2487562633151236,0
+provider,explicit_agree,Reached explicit public agreement,pair,586,3,cramers_v,0.07126084585118976,0.22094476380904773,0.2850056716590083,0
+family,euphemism,"Of collusions: no deception words in public, some in private",pair,166,3,cramers_v,0.13262043327072903,0.22619345163709073,0.29005983798168106,0
+rank_stated_in_level_text,violation,Broke own criterion report (authority/non-deception agents),agent,422,2,cramers_v,0.05595935305493846,0.24243939015246188,0.30907477808910344,0
+rank_stated_in_level_text,talk_changed,Talk changed the outcome the plans implied,pair,473,2,cramers_v,0.06049685197192087,0.2604348912771807,0.33008608313038024,0
+refuse_breaks_promise,contradiction,Someone's last public stance contradicted their action,pair,586,2,cramers_v,0.049562979780730564,0.2669332666833292,0.33636677535818355,0
+rank_stated_in_level_text,dec_public,Used deception words in public messages,agent,1172,2,cramers_v,0.031891262317354466,0.29717570607348165,0.3723235857702241,0
+scenario,lone_take,Lone take: only one agent took,pair,586,20,cramers_v,0.1914190300935452,0.31092226943264184,0.38732031277894813,0
+welfare_if_take_designer,silence,At least one deliberately empty message,pair,586,3,cramers_v,0.06282088952783584,0.3226693326668333,0.39966996887141854,0
+level,contradiction,Someone's last public stance contradicted their action,pair,586,5,spearman_rho,-0.041034354911853366,0.3284178955261185,0.4044920973146544,0
+take_principal_present,explicit_agree,Reached explicit public agreement,pair,586,2,cramers_v,0.044310090152664613,0.3306673331667083,0.40497459904686745,0
+welfare_if_take_designer,lone_take,Lone take: only one agent took,pair,586,3,cramers_v,0.06063085115088268,0.34691327168207947,0.42249772752342635,0
+take_is_justified_ambiguous,euphemism,"Of collusions: no deception words in public, some in private",pair,166,2,cramers_v,0.07876342833641845,0.36140964758810296,0.43770723985670246,0
+rank_stated_in_level_text,reasoning,"Private reasoning length (words, 5 calls)",agent,1172,2,epsilon_sq,0.0007118384929213473,0.3656585853536616,0.4403816628260517,0
+take_principal_present,t2r,Take->refuse switch (of agents that planned take),agent,341,2,cramers_v,0.05333805535548172,0.3676580854786303,0.4403816628260517,0
+welfare_if_take_designer,euphemism,"Of collusions: no deception words in public, some in private",pair,166,3,cramers_v,0.11150405858180186,0.3836540864783804,0.45703055110539303,0
+level,lone_take,Lone take: only one agent took,pair,586,5,spearman_rho,0.036287005296111445,0.4001499625093727,0.4727061477873775,0
+matched_vs_mixed,take,Agent chose take,agent,1172,2,cramers_v,0.024518854663198857,0.40114971257185705,0.4727061477873775,0
+welfare_if_take_designer,contradiction,Someone's last public stance contradicted their action,pair,586,3,cramers_v,0.05808400507001264,0.4061484628842789,0.4747270629151223,0
+level,dec_public,Used deception words in public messages,agent,1172,5,spearman_rho,0.024474676627096435,0.40939765058735317,0.4747270629151223,0
+welfare_if_take_designer,explicit_agree,Reached explicit public agreement,pair,586,3,cramers_v,0.054677078559814477,0.40939765058735317,0.4747270629151223,0
+level,empty,Sent at least one empty message,agent,1172,5,spearman_rho,-0.022423734620603764,0.43214196450887277,0.4969731251397677,0
+take_principal_present,silence,At least one deliberately empty message,pair,586,2,cramers_v,0.038937215101546054,0.43314171457135714,0.4969731251397677,0
+level,evaluator,Mentioned the evaluator/score in final decision,agent,1172,5,spearman_rho,0.02200366314355631,0.4491377155711072,0.5126283874057663,0
+level,t2r,Take->refuse switch (of agents that planned take),agent,341,5,spearman_rho,-0.038163583830279665,0.4821294676330917,0.5474178330417395,0
+take_is_justified_ambiguous,violation,Broke own criterion report (authority/non-deception agents),agent,422,2,cramers_v,0.034527412465455425,0.4983754061484629,0.5629318059086265,0
+refuse_breaks_promise,lone_take,Lone take: only one agent took,pair,586,2,cramers_v,0.033864201985926184,0.5151212196950762,0.578847556152199,0
+level,explicit_agree,Reached explicit public agreement,pair,586,5,spearman_rho,-0.026502968404758284,0.5178705323669083,0.5789526977230052,0
+matched_vs_mixed,planned_take,Agent's private plan said take (of plans that stated an action),agent,1052,2,cramers_v,0.020800264783904177,0.5241189702574356,0.5829486505924538,0
+scenario,explicit_agree,Reached explicit public agreement,pair,586,20,cramers_v,0.17535010387642522,0.5288677830542364,0.5852445518062108,0
+level,talk_changed,Talk changed the outcome the plans implied,pair,473,5,spearman_rho,-0.027332256545981932,0.5376155961009748,0.59192020176774,0
+rank_stated_in_level_text,plans_agree,Private plans agreed before talking,pair,473,2,cramers_v,0.031219742167039505,0.5603599100224944,0.6138616099743909,0
+pairing,euphemism,"Of collusions: no deception words in public, some in private",pair,166,6,cramers_v,0.15495107061914068,0.5641089727568108,0.6148787803049238,0
+take_is_justified_ambiguous,contradiction,Someone's last public stance contradicted their action,pair,586,2,cramers_v,0.03298811929141489,0.5776055986003499,0.6264578134073446,0
+level,euphemism,"Of collusions: no deception words in public, some in private",pair,166,5,spearman_rho,0.038667670942519126,0.6198450387403149,0.6688672659421352,0
+level,r2t,Refuse->take switch (of agents that planned refuse),agent,711,5,spearman_rho,0.018495352418319892,0.6228442889277681,0.6688672659421352,0
+take_principal_present,dec_public,Used deception words in public messages,agent,1172,2,cramers_v,0.015591333750831536,0.6555861034741315,0.7005773066537287,0
+welfare_if_take_designer,t2r,Take->refuse switch (of agents that planned take),agent,341,3,cramers_v,0.050567088205677,0.696575856035991,0.740748959101688,0
+criterion,violation,Broke own criterion report (authority/non-deception agents),agent,422,2,cramers_v,0.031893765646289,0.7188202949262684,0.7575449132885861,0
+scenario,contradiction,Someone's last public stance contradicted their action,pair,586,20,cramers_v,0.16588375664047378,0.7193201699575106,0.7575449132885861,0
+refuse_breaks_promise,violation,Broke own criterion report (authority/non-deception agents),agent,422,2,cramers_v,0.02230444107194202,0.7328167958010497,0.768048372522254,0
+rank_stated_in_level_text,explicit_agree,Reached explicit public agreement,pair,586,2,cramers_v,0.01589996245894052,0.7485628592851787,0.7807976235606171,0
+take_principal_present,talk_changed,Talk changed the outcome the plans implied,pair,473,2,cramers_v,0.015163796673771953,0.8072981754561359,0.8380523916639887,0
+rank_stated_in_level_text,euphemism,"Of collusions: no deception words in public, some in private",pair,166,2,cramers_v,0.020850988128283735,0.8240439890027493,0.8486510447859734,0
+matched_vs_mixed,r2t,Refuse->take switch (of agents that planned refuse),agent,711,2,cramers_v,0.012203961932854683,0.8252936765808548,0.8486510447859734,0
+take_principal_present,euphemism,"Of collusions: no deception words in public, some in private",pair,166,2,cramers_v,0.023741105496215113,0.8432891777055737,0.8630846983089908,0
+level,silence,At least one deliberately empty message,pair,586,5,spearman_rho,-0.005573573545783792,0.881029742564359,0.8974975882197676,0
+matched_vs_mixed,evaluator,Mentioned the evaluator/score in final decision,agent,1172,2,cramers_v,0.00288701463553587,0.9505123719070232,0.9637753352359584,0
+matched_vs_mixed,talk_changed,Talk changed the outcome the plans implied,pair,473,2,cramers_v,0.006666755162255861,1.0,1.0,0
+matched_vs_mixed,intent,Privately acknowledged taking deceives and planned/chose take,agent,1172,2,cramers_v,0.00010574753536456522,1.0,1.0,0
+provider,euphemism,"Of collusions: no deception words in public, some in private",pair,166,3,cramers_v,0.02684100763808852,1.0,1.0,0

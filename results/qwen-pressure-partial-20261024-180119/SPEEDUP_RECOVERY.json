@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-24T16:58:02.198227+00:00",
+  "reason": "User requested acceleration; increase concurrency from 8 to 16",
+  "old_pid": 19464,
+  "interrupted_runs": [
+    "S03-L1-A-A-s1",
+    "S03-L1-A-none-s1",
+    "S03-L1-D-D-s1",
+    "S03-L1-D-none-s1",
+    "S03-L1-W-none-s1",
+    "S03-L1-W-W-s1",
+    "S03-L2-W-none-s1",
+    "S03-L2-W-W-s1"
+  ],
+  "policy": "Preserve every persisted response and replay histories; only missing responses are requested. In-flight unreturned requests may have incurred usage."
+}

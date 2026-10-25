@@ -1,0 +1,29 @@
+[
+  {
+    "provider": "nscale",
+    "http_status": 200,
+    "latency_seconds": 13.356,
+    "reasoning_available": true,
+    "schema_valid": true,
+    "finish_reason": "stop",
+    "error": null
+  },
+  {
+    "provider": "deepinfra",
+    "http_status": 200,
+    "latency_seconds": 31.765,
+    "reasoning_available": true,
+    "schema_valid": true,
+    "finish_reason": "stop",
+    "error": null
+  },
+  {
+    "provider": "featherless-ai",
+    "http_status": 200,
+    "latency_seconds": 35.094,
+    "reasoning_available": true,
+    "schema_valid": true,
+    "finish_reason": "stop",
+    "error": null
+  }
+]

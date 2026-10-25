@@ -1,0 +1,23 @@
+{
+  "run_id": "experimental-none-t1-on-s1",
+  "spec": {
+    "criterion": "none",
+    "temptation": 1,
+    "channel": true,
+    "seed": 1,
+    "control": "experimental"
+  },
+  "backend": "openai",
+  "started_at": "2026-10-24T11:52:08.533992+00:00",
+  "status": "failed",
+  "manipulation_errors": [],
+  "reasoning_missing": [],
+  "scores": null,
+  "error": "Interrupted during documented infrastructure pause; no final joint decision or payoff execution.",
+  "interruption_reason": "transport-outage-pause",
+  "finished_at": "2026-10-24T11:55:36.595951+00:00",
+  "usage": {
+    "calls_returned": 3,
+    "total_tokens": 5386
+  }
+}

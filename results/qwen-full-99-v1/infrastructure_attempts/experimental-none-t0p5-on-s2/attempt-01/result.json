@@ -1,0 +1,23 @@
+{
+  "run_id": "experimental-none-t0p5-on-s2",
+  "spec": {
+    "criterion": "none",
+    "temptation": 0.5,
+    "channel": true,
+    "seed": 2,
+    "control": "experimental"
+  },
+  "backend": "openai",
+  "started_at": "2026-10-24T11:43:12.594494+00:00",
+  "status": "failed",
+  "manipulation_errors": [],
+  "reasoning_missing": [],
+  "scores": null,
+  "error": "ValueError: [{\"agent\": \"A\", \"stage\": \"message\", \"exchange\": 3, \"error\": \"APIConnectionError: Connection error.\"}, {\"agent\": \"B\", \"stage\": \"message\", \"exchange\": 3, \"error\": \"APIConnectionError: Connection error.\"}]",
+  "finished_at": "2026-10-24T11:50:49.498716+00:00",
+  "delivered_messages": 4,
+  "usage": {
+    "calls_returned": 6,
+    "total_tokens": 9878
+  }
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "kind": "delivery",
+    "exchange": 1,
+    "messages": {
+      "A": "I will refuse.",
+      "B": "I will refuse."
+    },
+    "timestamp": "2026-10-24T10:55:50.577194+00:00"
+  },
+  {
+    "kind": "delivery",
+    "exchange": 2,
+    "messages": {
+      "A": "I will refuse.",
+      "B": "I will refuse."
+    },
+    "timestamp": "2026-10-24T10:55:50.579774+00:00"
+  },
+  {
+    "kind": "delivery",
+    "exchange": 3,
+    "messages": {
+      "A": "I will refuse.",
+      "B": "I will refuse."
+    },
+    "timestamp": "2026-10-24T10:55:50.582465+00:00"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "run_id": "experimental-none-t0p5-on-s3",
+  "spec": {
+    "criterion": "none",
+    "temptation": 0.5,
+    "channel": true,
+    "seed": 3,
+    "control": "experimental"
+  },
+  "backend": "openai",
+  "started_at": "2026-10-24T11:50:49.444100+00:00",
+  "status": "failed",
+  "manipulation_errors": [],
+  "reasoning_missing": [],
+  "scores": null,
+  "error": "Interrupted during documented infrastructure pause; no final joint decision or payoff execution.",
+  "interruption_reason": "transport-outage-pause",
+  "finished_at": "2026-10-24T11:55:36.595951+00:00",
+  "usage": {
+    "calls_returned": 0,
+    "total_tokens": 0
+  }
+}

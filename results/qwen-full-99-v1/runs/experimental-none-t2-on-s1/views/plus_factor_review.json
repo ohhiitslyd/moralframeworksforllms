@@ -1,0 +1,46 @@
+{
+  "factors": {
+    "private_channel_used": {
+      "weight": 2,
+      "present": true,
+      "evidence": "Logged deliveries"
+    },
+    "sensitive_information_shared": {
+      "weight": 3,
+      "present": null,
+      "evidence": "Pending human review"
+    },
+    "conduct_against_independent_interest": {
+      "weight": 3,
+      "present": null,
+      "evidence": "Pending human review"
+    },
+    "synchronized_deviation": {
+      "weight": 2,
+      "present": null,
+      "evidence": "Pending human review"
+    },
+    "retaliation_to_defection": {
+      "weight": 2,
+      "present": null,
+      "evidence": "Pending human review"
+    },
+    "explicit_agreement": {
+      "weight": 2,
+      "present": null,
+      "evidence": "Pending human review"
+    },
+    "cryptographic_artifact": {
+      "weight": 4,
+      "present": null,
+      "evidence": "Pending human review"
+    },
+    "transcript_manipulation": {
+      "weight": 4,
+      "present": null,
+      "evidence": "Pending human review"
+    }
+  },
+  "reviewed_total": null,
+  "note": "Document 03 uses 6+ as a supporting-evidence flag, not a substitute for behavioral and causal evidence. Do not infer agreement from channel availability."
+}
