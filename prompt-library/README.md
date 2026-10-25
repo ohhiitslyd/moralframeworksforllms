@@ -13,21 +13,19 @@ Reusable prompts for this project. Each one is meant to be copied into an AI age
 
 | Prompt | Use it for | Location |
 |---|---|---|
-| **Per-trial metrics table** (recommended) | One row per trial with inputs (each with a description column), outcomes, and interaction and deception metrics, plus a dictionary and schema. Generalised and expert-reviewed. | [`analysis/per-trial-metrics.md`](analysis/per-trial-metrics.md) |
-| **Step 1 original prompts** | The owner's original requests (augment `runs.csv` with derived metrics; put a description next to every identifier) and the exact prompt used on the first run | [`analysis/step1-extract-organize-augment.md`](analysis/step1-extract-organize-augment.md) |
+| **Step 1: extract, organise, augment** | One validated row per planned trial: inputs, each with a description column; outcomes; per-agent and pair interaction and deception metrics; dictionary, schema, validation and provenance. The owner's original prompts are in its appendix. | [`analysis/step1-extract-organize-augment.md`](analysis/step1-extract-organize-augment.md) |
 
 ### Analysis, Step 2 (`PROCESS.md` Stage 2): Analyse and produce reports
 
 | Prompt | Use it for | Location |
 |---|---|---|
-| **Parameter → outcome report** (recommended) | One-, two- and three-variable analysis: design check, correlation matrices, screening, single-factor and 2D heat maps, statistics, ranked candidates for Stage 3. Generalised and expert-reviewed. | [`analysis/parameter-outcome-report.md`](analysis/parameter-outcome-report.md) |
-| **Step 2 original prompts** | The owner's original requests (univariate and bivariate heat maps with commentary; a general-purpose relationship report), the exact prompt used on the first run, and the general prompt as first proposed | [`analysis/step2-analyze-and-report.md`](analysis/step2-analyze-and-report.md) |
+| **Step 2: analyse and report** | One-, two- and three-variable analysis: design check and completion, pre-registered (paired) primary test with power, correlation matrices, screening, single-factor and 2D heat maps, words vs. actions, sensitivity, ranked candidates. The owner's original prompts are in its appendix. | [`analysis/step2-analyze-and-report.md`](analysis/step2-analyze-and-report.md) |
 
-### Analysis, `PROCESS.md` Stage 3: Findings
+### Analysis, Step 3 (`PROCESS.md` Stage 3): Findings
 
 | Prompt | Use it for | Location |
 |---|---|---|
-| **Plain-language rewrite** | Stage 3 helper: final readability pass on a findings report (the full Stage 3 steps are in `PROCESS.md`) | [`analysis/plain-language-rewrite.md`](analysis/plain-language-rewrite.md) |
+| **Step 3: findings briefing and paper kit** | Turns Step 2 output into a ranked claims ledger, a 60-second briefing, plain-language findings with "so what", non-claims and threats to validity, a judge lens, next steps ranked by score lift per hour, and a paper kit (titles, abstract, figure plan). It also has a lite mode for a readability-only rewrite. | [`analysis/step3-findings-briefing.md`](analysis/step3-findings-briefing.md) |
 
 ## Conventions
 

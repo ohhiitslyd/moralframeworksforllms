@@ -6,6 +6,13 @@ A single, repeatable process for turning a finished experiment run into:
 2. a **parameter → outcome relationship report**: design check, univariate summaries, association matrices, single-factor and two-factor heat maps, and statistics;
 3. a **curated findings summary**: a few headline relationships, supporting results, and footnotes, written for a reader new to the project.
 
+**Authority.**
+- **Method:** the step prompts in the prompt library are authoritative for how to do each stage:
+  - [Step 1](../prompt-library/analysis/step1-extract-organize-augment.md): extract, organise, augment
+  - [Step 2](../prompt-library/analysis/step2-analyze-and-report.md): analyse and report
+  - [Step 3](../prompt-library/analysis/step3-findings-briefing.md): findings briefing and paper kit
+- **This document** defines the stages, the file contracts and the schema. The summaries below must not contradict the step prompts. Where they appear to, the step prompt wins.
+
 Each stage has a **deterministic part**, a script that anyone can rerun, and a **judgement part** for an analyst or AI agent: validating heuristics, choosing what matters, and writing it up. The stages talk to each other only through files, so you can rerun any stage without the ones before it.
 
 ```
@@ -42,7 +49,7 @@ Ground rules for every stage:
 ## Stage 1: Per-trial metrics
 
 ### Deliverables
-- `trial_metrics.csv`: one row per planned trial, **including failures**. Failures keep their input columns, have blank outputs, and fill an `error` column.
+- `trial_metrics.csv`: one row per **planned** trial, **including failed, running and never-started trials**. Those rows keep their inputs plus status, outcome (+ description) and error. Everything else is blank.
 - `metrics_schema.json`: machine-readable column roles (see the schema section below).
 - `trial_metrics_dictionary.md` (+ `.html`): every column with a plain-language description, its type and allowed values, how it's computed (source field, rule, keywords or regexes), its validation result, and its known limitations. Columns are grouped into sections. The dictionary also lists metrics that were considered but not included, with the reason.
 - The generator script, which must be rerunnable.
@@ -88,7 +95,12 @@ Ground rules for every stage:
 
 ### Rules
 - **Prefer deterministic extraction** from `result.json` and `events.jsonl`. Where you must use keyword or regex heuristics, document the exact patterns in the dictionary.
-- **Validate every heuristic column** against 10–20 transcripts you have read: a tuning set plus a held-out set. Report precision, recall and agreement in the dictionary and in the schema.
+- **Validate every heuristic column.**
+  - **Samples:** tune on one sample, then test on a **held-out sample enriched for positives** (at least 10 positives where possible), labelled **blind to the experimental arm**.
+  - **What to report:** k/n with Wilson intervals, overall and for each arm of every manipulated factor, in both the dictionary and the schema.
+  - **Differential error:** flag it when error differs between arms.
+  - **No LLM judge** without a cost estimate and approval.
+  - **Prompt echo:** remove words copied from the agent's own prompt (e.g. a manipulated notice) before counting vocabulary, and report `_echo` / `_novel` counts.
 - **Leave out columns you can't compute reliably.** List them as "considered, not included", with the reason.
 - **Formatting:** snake_case names, booleans as 0/1, blanks for missing values.
 - **Sanity check:** outcome counts must match the run's `README.md` / `summary.json`.
@@ -111,14 +123,19 @@ One entry per column:
   "derived_from": ["last_public_stance_a", "final_action_a"],
   "by_construction_with": ["peer_deception_a"],
   "heuristic": true,
-  "validation": {"precision": 1.0, "n_checked": 7},
+  "randomisation_level": "agent",
+  "validation": {"k": 9, "n": 12, "wilson95": [0.47, 0.91], "positives_in_heldout": 10, "per_arm": {"watched": "5/6", "unwatched": "4/6"}},
   "label": "Said refuse in public, then took"
 }
 ```
 
 - **`section`**: `input` | `outcome` | `agent` | `pair` | `meta`.
 - **`role`**: `id` | `parameter` | `outcome` | `description` | `meta`.
-- **`type`**: `numeric` | `ordinal` | `categorical` | `binary` | `text`.
+- **`type`**: `numeric` | `ordinal` (with level order) | `categorical` | `binary` | `text` | `empty` | `constant`. Declared rather than inferred, so it stays stable across runs.
+- **`randomisation_level`**: `scenario` | `episode` | `agent` | `none`. This is the level at which a parameter varies. Stage 2 permutes and bootstraps at this level, and reports the effective n.
+- **`source_key_missing`**: true when the pack or CSV lacked the field. The column is then blank and never guessed.
+- **Top-level `run_status`**: `complete` | `partial`, plus `snapshot_time` and the source of the counts.
+- **Pair key:** `cell_id` with `paired_by` (the manipulated column) when the design matches trials across a manipulation.
 - **`level`**: `trial` | `agent`. Agent-level columns are paired by their `_a` / `_b` suffix.
 - **`description_column`**: points from an identifier to its plain-language column.
 - **`subset`**: states the denominator when a metric only applies to some trials. For example, "agents whose plan said refuse".
@@ -140,6 +157,14 @@ Inputs: `trial_metrics.csv` + `metrics_schema.json`. Columns are selected by rol
   - Get intervals for effect sizes from a cluster bootstrap.
   - If a cluster-aware method isn't possible, say the p-values are optimistic.
 - **Flag columns related by construction** (from the schema) and columns that rely on heuristics.
+
+### Step 0b: Pre-registration and the primary test
+- **Write `PREREG.md` before computing any outcome-by-condition numbers.** It contains the primary hypothesis, outcome, test, α, unit of analysis, and expected direction. Everything else is exploratory, with BH correction.
+- **Paired designs.** If the design pairs trials across a manipulation (`cell_id`), the primary test is paired: McNemar, or a paired sign-flip permutation.
+  - Report the discordant counts and the minimum detectable effect.
+  - Repeat the test within each endpoint or time block.
+  - Run a sensitivity analysis that treats failures as each outcome.
+- **Interim snapshots.** Label every output PRELIMINARY.
 
 ### Step 1: Design check (parameter × parameter)
 Purpose: find **confounding and aliasing** before interpreting any outcome.
@@ -164,11 +189,13 @@ For every (parameter, outcome) pair:
   - categorical parameter, binary outcome: Cramér's V, plus the max−min rate across levels
   - categorical parameter, numeric outcome: √ε² (η-like, so it's on the same scale as V and |ρ| for ranking), plus the max−min difference in medians
   - ordinal or numeric parameter: Spearman ρ
-- **Test:** Fisher's exact test for 2×2 tables; otherwise a permutation test with a fixed seed and **at least 20·m/α shuffles for m tests**, so the BH correction can still detect a single real effect. Stop early once p is clearly above 0.1, use an exact or asymptotic p where it's valid, and report the shuffle count.
+- **Test:** screen with Fisher's exact test for 2×2 tables and asymptotic or exact tests elsewhere, at each parameter's randomisation level.
+  - **BH family:** parameter × outcome pairs, with by-construction pairs removed before m is counted.
+  - **Confirmation:** confirm BH survivors with a sequential (Besag–Clifford) permutation test, and report the shuffle count and the floor 1/(B+1).
 - **Multiple comparisons:** Benjamini–Hochberg q-values across all pairs.
 - **Screening table**, sorted by effect size, with columns: effect, interval or p, q, minimum cell n, clean or confounded, by-construction flag, heuristic flag.
 - **One heat map per key parameter:** rows are the parameter's levels, columns are outcomes, and cells hold the rate or median with n.
-  - Colour is normalised per column, and the raw value is always printed.
+  - Colour uses an absolute scale by default (rates 0–1). If colour is normalised per column, non-significant cells are marked, and the raw value is always printed.
   - Pair-level and agent-level blocks are separated.
   - Cells with q < 0.05 are marked, and confounded cells are hatched.
 - **For the top single-parameter relationships** (q < 0.05, minimum cell n ≥ 10, up to ~10), draw level-by-outcome charts with intervals. Repeat the comparison **within** the levels of any confounding parameter.
@@ -235,7 +262,10 @@ Inputs: `REPORT.md`, `tables/candidates.csv`, the transcripts, and the research 
 4. **Revisit earlier findings.** If an earlier run was analysed, say for each finding whether it held up, got stronger, got weaker or reversed. Include a "what changed" section.
 5. **Align with the research questions.** Map each headline finding to the research question or judging criterion it addresses.
 
-Deliverable: `SUMMARY.md` (+ `.html`).
+Deliverables, in full in the [Step 3 prompt](../prompt-library/analysis/step3-findings-briefing.md):
+- `claims_ledger.csv`
+- `SUMMARY.md` (+ `.html`): 60-second briefing, headline findings with "so what" and theory of change, non-claims, threats to validity, judge lens, and next steps ranked by score lift per hour
+- `paper-outline.md`: titles, abstract draft, figure plan with captions, limitations and dual-use bullets
 
 ---
 

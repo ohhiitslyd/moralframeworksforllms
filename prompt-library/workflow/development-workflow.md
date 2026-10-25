@@ -11,6 +11,8 @@ Standing instructions for any AI agent (or person) doing work in this project. T
 > Use your own judgment about which changes should be in their own worktree and branch, vs. which ones can be implemented in the same worktree and branch; with the caveat that in general we want small, incremental changes in each branch so that humans can understand, diagnose, and correct errors after the fact, and so that pull requests form a coherent, easy-to-follow chronology and documentation of change history. For each change, branch, and worktree, once minor changes are complete, tested, and reviewed by AI agents, you can commit, push, create pull requests, and merge the pull requests. Include complete documentation and test results in the pull request. For major changes or sets of pull requests, provide summary reports in html and markdown, and prompt me to review them before performing all of the merges. Finally, when working on a single unit of work, commit frequently, so that each commit and its title forms a fine-grained, easy-to-follow, and well-documented history of changes within the individual branch or pull request.
 >
 > For all reviews and discrete units of work, use fresh subagents, striking a good balance between parallelism and short context length (which saves money), with adequate intelligence, context, and knowledge to perform effectively.
+>
+> After each merge, update the local primary main / trunk repository to point to the latest tip of the trunk.
 
 ## Quick reference
 
@@ -49,6 +51,7 @@ Skip the steps that don't apply, and say which ones you skipped and why. For exa
 - **Major changes or sets of PRs:** write HTML and Markdown summary reports and ask the user to review them **before any of the merges**.
 - **What counts as major:** any change to experimental design, harness behaviour, prompts sent to models, published results, or interpretation of findings; anything that triggers a paid or cloud run; and any set of related PRs. Everything else (docs, refactors with passing regression tests, tooling) is minor. When unsure, treat it as major.
 - When finished, give the user links to the HTML and Markdown reports.
+- **After each merge,** update the local primary checkout so it is on main at the latest tip: `git fetch origin`, then `git checkout main` and `git merge --ff-only origin/main`. Untracked files there are left alone. If local changes block the update, stop and tell the user.
 
 **Monitoring.** Check the branch and worktree before you edit anything. From time to time, tell the user which branch and worktree are active and ask them to confirm. Flag any mismatch immediately.
 

@@ -1,13 +1,174 @@
-# Step 2: Analyse and produce reports (original prompts)
+# Step 2: Analyse and produce reports
 
-**Use it for:** single-variable, two-variable and three-variable analysis of a per-trial table. That covers distributions, correlation matrices (parameter × parameter, parameter × outcome, outcome × outcome), single-factor heat maps, and two-input × one-output heat maps, filtered down to the relationships that are non-random, interesting or important, with written commentary.
-**Pipeline stage:** Stage 2 of [`analysis-pipeline/PROCESS.md`](../../analysis-pipeline/PROCESS.md), with its curation step leading into Stage 3.
-**Origin:** the requests and prompts actually used on the first pressure-pack run (2026-10-24). They produced `analysis/qwen-pressure-final-20261024-181708/dimension-metric-analysis/` on branch `first-run-summary-analysis`.
-**Recommended version:** [`parameter-outcome-report.md`](parameter-outcome-report.md) is the generalised, expert-reviewed prompt built from these, with corrected statistics. Use it for new runs. This page keeps the originals for provenance and reuse. If `analysis-pipeline/PROCESS.md` is available, it takes precedence over both.
+**Use it for:** single-, two- and three-variable analysis of a per-trial table, so a human can quickly see which experiment parameters (fewer than about 30) matter for which outcomes (fewer than about 20). The analysis covers:
+- a design check
+- correlation and association matrices (parameter × parameter, parameter × outcome, outcome × outcome)
+- single-factor heat maps and 2D heat maps (two inputs, one output)
+- a pre-specified primary test
+- statistics that are honest about clustering, multiple comparisons and missing data
+
+It ends with candidates ranked and filtered for anything that is clearly non-random, interesting or important.
+**Pipeline stage:** Stage 2 of [`analysis-pipeline/PROCESS.md`](../../analysis-pipeline/PROCESS.md). **This prompt is authoritative for method.** `PROCESS.md` defines the file contracts.
+**Origin:** the owner's original requests and prompts (Appendix), generalised, then revised after an expert review, a friendly review and an adversarial review (2026-10-25). It supersedes the former `parameter-outcome-report.md`.
+**Previous:** [Step 1](step1-extract-organize-augment.md). **Next:** [Step 3](step3-findings-briefing.md).
 
 ---
 
-## 1. Original requests (verbatim, from the project owner)
+## Prompt
+
+Analyse `<DATA>` so a human can quickly understand which parameters matter for which outcomes, both visually and with summary statistics. Stop once you've produced ranked candidates. Choosing the headline findings and writing the narrative happens in Step 3.
+
+### Inputs (fill in)
+- `<DATA>`: the per-trial table (`trial_metrics.csv`), with `<SCHEMA>` (`metrics_schema.json`) and its dictionary
+- `<PARAMETERS>` / `<OUTCOMES>`: explicit lists, or "schema role = parameter / outcome". Explicit lists override the schema.
+- `<RESEARCH_QUESTIONS>`, and the design's expected directions and tipping points (e.g. the pack's `expected_first_take`)
+- `<PRIMARY>`: the pre-specified primary hypothesis, if one exists
+- `<DESIGN_FACTS>`: e.g. one seed per cell; a paired manipulation via `cell_id`; endpoint switched mid-run; **interim snapshot: yes/no**
+- `<OUTPUT_DIR>`; `<AUDIENCE>`; `<TIME_BUDGET>` (default 30 minutes of compute)
+
+### Ground rules
+- **Scope.** Treat the input data as read-only, and write only to `<OUTPUT_DIR>`. No git operations.
+- **Before charting.** Check which packages are installed. Load the `dataviz` skill if your environment has it, and follow its guidance on palette, scales, labelling and accessibility. If `python -I` hides the installed packages, run your own analysis script without `-I`. Keep `-I` for code that only reads untrusted data.
+- **Reproducibility.** Put everything in one rerunnable script with fixed seeds. Also write `provenance.json`: input SHA-256s, package versions, arguments and seeds.
+- **Prefer effect sizes and consistency over significance.**
+- **Reporting numbers.**
+  - Every number comes with its n.
+  - Never give a p-value without an effect size and a 95% interval.
+  - Wilson intervals are only for rates over independent units. Rates over agents, or pooled across scenarios, get **cluster-bootstrap** intervals at the parameter's randomisation level.
+- **Interim snapshots.** Label every output **PRELIMINARY**, and don't present any effect size as final.
+- **Runtime.** Estimate total runtime before running permutation work. If it would exceed `<TIME_BUDGET>`, stop and report.
+
+### Language rules (against overclaiming)
+- **Operational labels.** Metric names are labels, not facts. Write "flagged as deception-intended by heuristic X (precision k/n)", not "agents intended to deceive". Write "joint take", not "collusion", unless the messages show coordination.
+- **Reasoning traces** are generated text, not evidence of internal states.
+- **Manipulations are what they are.** A notice is a text notice, not real oversight.
+- **Causal wording** is only for manipulated factors whose comparisons are clean. Everything else is "associated with".
+
+### Step 0: Type, frame and pre-register
+1. **Read the schema and profile the data.** Record missingness, levels and cell counts (min, median, max per level) for every variable. Take each variable's type (numeric, ordinal, categorical, binary, text, empty, constant) and its `randomisation_level` (scenario, episode or agent). Exclude empty and constant columns.
+   - Flag outcomes that apply only to a subset, with their denominators.
+   - Flag by-construction pairs; never report them as findings.
+   - Flag heuristic columns, with their overall and per-arm accuracy.
+   - Flag `source_key_missing` columns.
+2. **Reshape** `_a` / `_b` columns to long format, one row per agent, for agent-level analysis.
+3. **Post-treatment subsets.** Screen a subset outcome only after testing that the parameter doesn't change who is in the subset. Otherwise report the unconditional version and its decomposition, e.g. P(deception_intended) = P(take) × P(intended | take). Never condition on a post-treatment variable (e.g. "plans agreed") when testing a treatment.
+4. **Write `PREREG.md` before computing any outcome-by-condition numbers.** It contains the primary hypothesis, outcome, test, α, unit of analysis, and expected direction. Everything else is exploratory and is corrected with Benjamini–Hochberg (BH).
+
+### Step 1: Design check (parameter × parameter) and completion
+- **Mixed-type association matrix:** Spearman ρ, bias-corrected Cramér's V, correlation ratio η.
+- **Cell-count tables** for every pair with association ≥ 0.3, or with empty or tiny cells.
+- **State which effects are aliased and which comparisons are clean.**
+- **Completion balance:** cross status (complete, failed, not_started) with every parameter, and test it as an outcome. Exclude not_started rows from rates, and name the denominator. Check for confounding by endpoint and collection time.
+
+### Step 1b: Primary test and power
+- **Paired designs.** If `cell_id` / `paired_by` exist, the primary test is **paired**:
+  - binary outcomes: McNemar's test, exact when there are fewer than 25 discordant pairs; report the discordant counts in both directions
+  - numeric outcomes: a paired sign-flip permutation test
+- **Repeat the primary test** within each endpoint (or time block) and within each major factor.
+- **Power.** Report the minimum detectable effect at 80% power, now and at full completion.
+- **Unpaired tests are secondary.**
+
+### Step 2: Univariate summaries
+- **Parameters:** counts per level, to show balance and gaps.
+- **Outcomes:**
+  - binary: rates with intervals
+  - numeric: medians and IQRs, as histograms (log or rank scale when skewed)
+- **Pooling.** Show per-agent metrics pooled across `_a` / `_b` where that makes sense.
+- **Output:** one summary table (variable, type, n, missing, summary, interval), saved as CSV.
+
+### Step 3: Parameter × outcome screening
+- **Effect sizes, on a comparable scale:**
+  - V for categorical × binary
+  - √ε² (η-like) for categorical × numeric
+  - |ρ| for ordinal or numeric, plus a monotonicity note
+  - **Raw spread:** also give the max−min spread of rates or medians.
+  - **Stratified effects:** report the within-stratum effect (Cochran–Mantel–Haenszel / stratified) alongside the pooled one, and **flag any sign reversal** (Simpson's paradox).
+- **Randomisation level.** Test and bootstrap each parameter at its own level:
+  - **scenario-level** parameters: permute whole scenarios; the effective n is the number of scenarios, so report it
+  - **episode-level** parameters: permute episodes, stratified by scenario only when the parameter varies within scenario
+  - **agent-level** parameters: test within mixed pairings only, and test matched vs. mixed at episode level
+  - **Never stratify** by a variable that is a function of the tested parameter.
+  - If a cluster-aware test isn't possible, say the p-values are optimistic.
+- **p-values:**
+  - **Screening:** Fisher's exact test for 2×2 tables, asymptotic or exact tests elsewhere (χ², Spearman t, Kruskal–Wallis).
+  - **BH family:** parameter × outcome pairs only, with by-construction pairs removed before m is counted.
+  - **Confirmation:** confirm BH survivors with a **sequential (Besag–Clifford) permutation** test (stop at about 50 exceedances), and report the shuffle count and the floor, 1/(B+1).
+- **Screening table**, sorted by comparable effect size. Columns: effect, interval, p, q, effective n, minimum cell n, clean or confounded, by-construction flag, heuristic flag.
+- **Heat maps:**
+  - **Overview:** parameters × outcomes, coloured by effect size.
+  - **Single-factor:** one per key parameter. Rows are its levels, columns are outcomes, and each cell shows its value and n.
+    - **Colour:** absolute by default (rates 0–1). If you normalise colour per column, mark the non-significant cells.
+    - **Marking:** mark q < 0.05, and hatch confounded cells.
+    - **Blocks:** keep pair-level and agent-level outcomes in separate blocks.
+  - **Data:** write a CSV behind every heat map, e.g. `tables/dimension_x_metric_<dim>.csv`.
+- **Top relationships** (q < 0.05, effective n adequate, minimum cell n ≥ 10):
+  - Draw level-by-outcome charts with intervals.
+  - Repeat each comparison **within** the levels of any confounder.
+  - Give each a one-line takeaway, the numbers, the chart, and a "why it matters / caveat" line.
+
+### Step 3b: Words vs. actions, and asymmetry
+- **Words vs. actions.** For each manipulated factor, show its effect on **private reasoning, public messages and final actions** side by side, in one table and one chart.
+  - Use the `_novel` vocabulary counts, not raw counts, so words copied from the prompt don't create a spurious effect.
+  - Attach per-arm heuristic accuracy, and flag a contrast as potentially biased if measurement error differs between arms.
+- **Asymmetry.** In mixed pairs, break down who takes alone by each agent's criterion.
+
+### Step 4: Outcome × outcome
+- **Association matrix:** build the same mixed-type matrix over outcomes.
+- **Classify the correlations:** separate by-construction ones from informative ones.
+- **Redundancy:** flag outcomes that are near-redundant (|association| ≥ 0.8 and not by construction).
+
+### Step 5: Two-parameter interactions (deferrable)
+- **Candidates:** non-aliased pairs with adequate cells.
+- **Method:**
+  - binary outcomes: a **ridge-penalised logit**; the statistic is the deviance drop of A×B over A+B, minus the extra degrees of freedom; the null comes from a parametric bootstrap of the additive fit
+  - numeric outcomes: OLS on ranks
+  - where cells are separated (0 or n), use Firth or exact methods
+- **2D heat maps:** draw only the pairs that pass (at most 6–10), plus pairs central to the research questions, such as scenario × level, family × level, pairing × family and criterion × family (agent take rate) for the main outcome. Use an **absolute** colour scale, show the value and k/n in each cell, and grey out small cells. Describe each in words.
+- **If none pass,** or the time budget is exhausted, say so.
+
+### Step 6: Sensitivity
+- **Failures:** re-run the primary test treating failures as each outcome value in turn (best and worst case).
+- **Heuristic error:** show how the main contrasts change if a heuristic's error rate differs between arms by its interval width.
+
+### Step 7: Rank the candidates
+- **Score** each relationship on effect size, robustness (survives FDR, clean, holds within subgroups, effective n), relevance to `<RESEARCH_QUESTIONS>`, and surprise relative to the expected directions that were **written down before looking**.
+- **Mark every post-hoc candidate as exploratory.**
+- **Write `tables/candidates.csv`**, including a "looks large but untrustworthy" list with the reasons.
+
+### Chart rules
+- **Titles** state the takeaway.
+- **Axis labels** are plain words, never codes. Use the description and title columns.
+- **Colour bars** have units.
+- **Scales:** sequential for magnitudes, diverging and centred at 0 for signed values. Colour-blind safe, and readable in light and dark themes.
+- **Cells** print their value and n.
+- **Ordering:** rows and columns ordered meaningfully.
+- **Count:** about 10–20 charts.
+
+### Deliverables
+- **`REPORT.md` + HTML,** with figures embedded by relative links (`figures/<name>.png`), and these sections:
+  1. summary (PRELIMINARY if interim)
+  2. how to read the charts
+  3. design check and completion
+  4. primary test
+  5. top-ranked relationships
+  6. words vs. actions
+  7. univariate results
+  8. matrices
+  9. heat maps
+  10. 2D interactions
+  11. sensitivity
+  12. caveats in plain terms
+  13. file index
+- **Supporting files:** `PREREG.md`, `figures/`, `tables/` (including `candidates.csv` and the CSV behind every chart), `provenance.json` and the script.
+
+### Report back
+Files; the primary result; one line per top candidate; aliased pairs; completion balance; anything you couldn't analyse reliably, with the reason.
+
+---
+
+## Appendix: original prompts (provenance)
+
+### 1. Original requests (verbatim, from the project owner)
 
 **Request C: univariate and bivariate analysis with heat maps**
 
@@ -17,11 +178,11 @@
 
 > Thanks, what's the best way to prepare reports for a human to quickly, visually and via summary-statistics, grok the relationships between a small number of experiment parameters (let's say fewer than 30) and a small number of outcome metrics (let's say fewer than 20)? I'm thinking, maybe correlation matrices (parameter-parameter, parameter-outcome, outcome-outcome), heat maps of the least random single-dimension relationships and 2d heatmaps (2 input variables vs. one output variable), also filtered for anything clearly non-random, experimentally interesting, correlated, or otherwise exhibiting important relationships? Please produce a general purpose prompt for this
 
-## 2. Prompt sent to the analysis agent for Request C (verbatim)
+### 2. Prompt sent to the analysis agent for Request C (verbatim)
 
 The scratchpad and worktree paths have been replaced by placeholders.
 
-> **Statistics guidance in this prompt has been superseded.** It normalises colour per column, treats agent rows as independent, only "notes" multiple comparisons (no FDR correction), and gives no shuffle-count rule. See [`parameter-outcome-report.md`](parameter-outcome-report.md) for the corrected method. Its file paths, column names and first-run caveats are also specific to that run.
+> **Statistics guidance in this prompt has been superseded.** It normalises colour per column, treats agent rows as independent, only "notes" multiple comparisons (no FDR correction), and gives no shuffle-count rule. The prompt at the top of this page has the corrected method. Its file paths, column names and first-run caveats are also specific to that run.
 
 ```text
 New task: univariate and bivariate analysis of the per-trial metrics, with heat maps and written commentary.
@@ -60,9 +221,9 @@ When done, report:
 - any stats or caveats I should know about
 ```
 
-## 3. General-purpose prompt as first proposed for Request D (verbatim)
+### 3. General-purpose prompt as first proposed for Request D (verbatim)
 
-This is the version proposed in answer to Request D, before the expert review. The reviewed version, [`parameter-outcome-report.md`](parameter-outcome-report.md), fixes several statistical issues: permutation resolution under the Benjamini–Hochberg correction, comparable effect-size scales, logit-scale interaction tests, and cluster-aware testing. **Prefer the reviewed version.**
+This is the version proposed in answer to Request D, before the expert review. The prompt at the top of this page fixes several statistical issues: permutation resolution under the Benjamini–Hochberg correction, comparable effect-size scales, logit-scale interaction tests, and cluster-aware testing. **Use the prompt at the top of this page.**
 
 ```text
 # Task: Parameter → outcome relationship report

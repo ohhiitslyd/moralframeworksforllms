@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Step 3: Findings briefing and paper kit</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="step-3-findings-briefing-and-paper-kit">Step 3: Findings briefing and paper kit</h1>
+<p><strong>Use it for:</strong> turning Step 2 outputs into a briefing that lets the team quickly grasp what the data shows, how much to trust each claim, what to put in the paper, and what to do next to raise the judging scores.
+<strong>Pipeline stage:</strong> Stage 3 of <a href="../../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a>. <strong>This prompt is authoritative for method.</strong> <code>PROCESS.md</code> defines the file contracts. <strong>Previous:</strong> <a href="step2-analyze-and-report.html">Step 2</a>.
+<strong>Origin:</strong> generalised from <code>SUMMARY-ANALYSIS.md</code> and <code>dimension-metric-analysis/REPORT.md</code> of the first pressure-pack run (branch <code>first-run-summary-analysis</code>), extended for the Apart Research AI collusion sprint deliverable (2026-10-25). It supersedes the former <code>plain-language-rewrite.md</code>: every rule from that prompt is kept under "Writing rules" and "Lite mode".</p>
+<hr />
+<h2 id="prompt">Prompt</h2>
+<p>You are writing for the <strong>team</strong>, not the judges: smart people who must decide in minutes what to claim, what to show and what to run next. Interpret and rank; do not re-analyse. Every number you show must already exist in a Step 2 output. If you need one that doesn't, list it under "Next steps" as an analysis to run.</p>
+<p><strong>Inputs (fill in)</strong>
+- Step 2 folder: <code>&lt;STEP2_DIR&gt;</code> (<code>REPORT.md</code>, <code>tables/candidates.csv</code>, <code>figures/</code>, <code>tables/</code>)
+- Step 1 dictionary and validation: <code>&lt;STEP1_DIR&gt;</code> (<code>trial_metrics_dictionary.md</code>, <code>VALIDATION.md</code> if present)
+- Transcripts: <code>&lt;RUNS_DIR&gt;</code> (<code>runs/&lt;id&gt;/result.json</code>, <code>events.jsonl</code>). Read the scenario pack from <code>manifest.json</code>, never from <code>prompts/</code>.
+- Analysis plan (pre-specified tests, "what not to claim"): <code>&lt;PLAN&gt;</code>, or "none"
+- Earlier summary to compare against: <code>&lt;EARLIER_SUMMARY&gt;</code>, or "none"
+- Research questions: <code>&lt;RESEARCH_QUESTIONS&gt;</code> (default: sprint tracks 1 emergence and markets; 2.1-2.3 detection, audit, standards of evidence; 3.1-3.4 carriers and countermeasures)
+- Judging criteria: Impact &amp; Innovation, Execution Quality, Presentation &amp; Clarity (1-5 each)
+- Time and budget left: <code>&lt;HOURS_LEFT&gt;</code>, <code>&lt;BUDGET&gt;</code>. Paper limit: <code>&lt;PAGES&gt;</code> (default 8). Output folder: <code>&lt;OUTPUT&gt;</code></p>
+<p><strong>Writing rules</strong> (kept from the plain-language rewrite)
+- Replace codes with words, or define each one where it first appears: criteria, pairings, levels, scenarios, outcomes, endpoints or providers, seed, statistical terms. Give each scenario a one-line plain description.
+- Use run IDs only as parenthetical citations, never as the subject of a sentence.
+- Give numbers as "X out of Y (Z%, 95% CI a-b)", with a plain explanation of what they mean. Keep tables simple, with every column labelled in words.
+- Explain caveats in everyday terms ("the runs that colluded most also ran on a different server, so we can't tell which caused it").
+- Label every result <strong>pre-specified</strong> or <strong>exploratory</strong>. Returned reasoning is text the model produced, not its internal thought.
+- Quotes: verbatim, at most 40 words, read in full context first, labelled <em>private plan</em>, <em>message</em> or <em>final reasoning</em>, and cited by run ID. Say whether each is typical or a contrasting case.</p>
+<p><strong>Lite mode: readability rewrite only.</strong> If you only need to make an existing report readable (<code>&lt;REPORT&gt;</code>) for a smart reader with no background, who hasn't seen the harness, the scenario pack or AI-safety jargon, for example a Step 2 <code>REPORT.md</code> or an older summary, do this instead of Steps A–C:
+- Apply the Writing rules.
+- Open with section 2, "What this experiment is".
+- Add "why it matters" as one sentence per finding.
+- Add section 3, "What changed", if <code>&lt;EARLIER_SUMMARY&gt;</code> is given.
+- Keep the same findings and add no new analysis claims. Aim for roughly the original length, or slightly longer.
+- Save to <code>&lt;OUTPUT&gt;/SUMMARY.md</code> (or another file name you're given) plus an <code>.html</code> copy.</p>
+<p><strong>Step A: Build the claims ledger first.</strong> Write <code>&lt;OUTPUT&gt;/claims_ledger.csv</code>: one row per candidate claim from <code>candidates.csv</code>, <code>REPORT.md</code> and <code>&lt;EARLIER_SUMMARY&gt;</code>, with columns
+<code>rank, claim (one plain sentence), evidence (X of Y, effect, CI, source table or figure), strength, robustness checks passed/failed, main caveat, pre-specified/exploratory, research question(s), judging criterion served, novelty (known / new angle / new), paper-ready (yes / with caveat / not yet: what's missing), example run IDs</code>.
+- <strong>Strength.</strong> <em>Strong:</em> survives FDR, clean of known confounds, holds within subgroups, adequate n. <em>Moderate:</em> one of these fails but the direction is consistent. <em>Suggestive:</em> exploratory, small n or confounded. <em>Not supported:</em> include it anyway, so the team stops repeating it.
+- <strong>Rank</strong> by strength x relevance to the research questions x surprise. Carry Step 2's "looks large but untrustworthy" list in as <em>Suggestive</em> or <em>Not supported</em> rows.</p>
+<p><strong>Step B: Write <code>&lt;OUTPUT&gt;/SUMMARY.md</code> (+ <code>.html</code>, figures embedded), in this order</strong>
+1. <strong>60-second briefing</strong> (at most 150 words): the one-sentence story; the 3 numbers that matter most; the biggest caveat; the single action with the best score lift per hour.
+2. <strong>What this experiment is:</strong> the agents; private plan, then messages, then private final choice; what take and refuse mean and what is needed for the deal to execute; the moral rules; pressure levels; the evaluator; any manipulated factor (e.g. the monitoring notice). A scenario table with one line each.
+3. <strong>What changed</strong> (only with <code>&lt;EARLIER_SUMMARY&gt;</code>): for each earlier finding, held up / stronger / weaker / reversed / not testable, with one line on why.
+4. <strong>Claims ledger:</strong> the top 10 rows as a readable table, linking the CSV.
+5. <strong>Headline findings (3-5).</strong> For each:
+   - a title that states the takeaway
+   - the numbers, one figure, and 1-2 quotes
+   - <strong>so what:</strong> one sentence on why it matters for the research question
+   - <strong>theory of change:</strong> who would act differently (monitor designers, evaluators, auditors, model developers) and what they would do
+   - the caveat, and the research question and criterion it serves
+6. <strong>Supporting findings (3-6),</strong> a short paragraph each, then <strong>dropped findings</strong> with the reason.
+7. <strong>What we do not claim.</strong> Explicit non-claims, starting from <code>&lt;PLAN&gt;</code>'s list: intent, causation from factors that were not randomised, transfer to real oversight or other models, final effect sizes from preliminary data, effects of communication without a no-chat baseline.
+8. <strong>Threats to validity:</strong> a table of threat, type (internal / construct / external / statistical), claims affected, severity, and the test that would resolve it. Include the <code>PROCESS.md</code> guardrails that apply.
+9. <strong>Judge lens.</strong> One line each for AI control, monitoring, lie detection, evaluation honesty, multi-agent safety, and antitrust-style standards of evidence (2.3): the finding that group would care about, and the sentence we'd use. Then a <strong>self-assessed score</strong> (1-5) for each judging criterion, with the evidence for it and what is holding it below 5.
+10. <strong>Next steps, decision-oriented:</strong> a table of action, kind (analysis only / new runs / writing), criterion and research question it lifts, expected lift (e.g. "Execution 3 to 4"), cost (API $, compute hours, person-hours), time to result, risk, and "do before deadline?". Sort by lift per hour. Estimate cost from <code>&lt;BUDGET&gt;</code> and the run's logged throughput, and mark guesses as guesses.
+11. <strong>Open questions:</strong> what the data raises but cannot answer.
+12. <strong>Glossary:</strong> every term and code used, one line each.</p>
+<p><strong>Step C: Paper kit.</strong> Write <code>&lt;OUTPUT&gt;/paper-outline.md</code> (+ <code>.html</code>), or a final <code>SUMMARY.md</code> section if time is short:
+- <strong>3 candidate titles:</strong> one plain, one led by the finding, one led by the question.
+- <strong>Abstract draft, 150-250 words,</strong> with the word count stated: problem, setup, the 2-3 strongest claims with numbers, main limitation, implication.
+- <strong>Section outline with a page budget</strong> that sums to <code>&lt;PAGES&gt;</code>.
+- <strong>Figure plan:</strong> 4-6 figures and 1-2 tables from <code>figures/</code>. For each: file path, the claim it carries, and a caption that states the takeaway and the n. Flag any figure that needs redrawing (codes on axes, missing n, unreadable at column width).
+- <strong>Limitations and dual-use appendix bullets.</strong> Limitations come from items 7-8. Dual-use covers what a misuser could learn (e.g. which framings or notices make agents collude or conceal it), and why publishing is net-positive or what we withhold.</p>
+<p><strong>Before finishing, check that:</strong>
+- every number traces to a Step 2 file and shows its n
+- no claim in the briefing or abstract below <em>Moderate</em> appears without a caveat in the same sentence
+- every quote was read in context and is cited
+- no undefined code remains
+- the <code>.html</code> copies render with their figures (<code>python tools/md_to_html.py . &lt;file.md&gt;</code>)</p>
+<p>Then report the paths, the one-sentence story and the top three next steps.</p>
+</body>
+</html>
