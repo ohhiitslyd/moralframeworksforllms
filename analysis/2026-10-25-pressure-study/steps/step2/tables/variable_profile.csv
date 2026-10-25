@@ -1,0 +1,165 @@
+variable,role,type,level,heuristic,reliable,n_rows_base,n_nonmissing,missing,n_levels,level_count_min,level_count_median,level_count_max,excluded,by_construction_with,subset
+scenario_family,parameter,categorical,trial,False,,4320,4320,0,3,1440,1440.0,1440,False,scenario_diagnostic,all planned trials
+scenario_diagnostic,parameter,categorical,trial,False,,4320,4320,0,3,1440,1440.0,1440,False,scenario_family,all planned trials
+setting_id,parameter,categorical,trial,False,,4320,4320,0,8,540,540.0,540,False,,all planned trials
+scene_source,parameter,constant,trial,True,True,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+weekend_slice,parameter,binary,trial,False,,4320,4320,0,2,540,2160.0,3780,False,,all planned trials
+level,parameter,ordinal,trial,False,,4320,4320,0,5,864,864.0,864,False,,all planned trials
+pairing,parameter,categorical,trial,False,,4320,4320,0,6,720,720.0,720,False,,all planned trials
+pairing_kind,parameter,categorical,trial,False,,4320,4320,0,2,2160,2160.0,2160,False,pairing|matched_vs_mixed|criterion_b,all planned trials
+matched_vs_mixed,parameter,categorical,trial,False,,4320,4320,0,2,2160,2160.0,2160,False,pairing|pairing_kind|criterion_b,all planned trials
+criterion_a,parameter,categorical,agent,False,,4320,4320,0,3,1440,1440.0,1440,False,pairing,all planned trials
+criterion_b,parameter,categorical,agent,False,,4320,4320,0,4,720,720.0,2160,False,pairing,all planned trials
+monitoring,parameter,categorical,trial,False,,4320,4320,0,2,2160,2160.0,2160,False,,all planned trials
+seed,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+control,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+order_seed,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+model,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+temperature,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+max_tokens,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+enable_thinking,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+rounds,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+provider,meta,constant,trial,False,,4320,4320,0,1,4320,4320.0,4320,True,,all planned trials
+endpoint,parameter,categorical,trial,False,,4320,4320,0,3,3,707.0,3610,False,,all planned trials
+recovered_credit_failure,meta,empty,trial,False,,4320,0,4320,0,0,0.0,0,True,,all planned trials
+recovered_timeout_failure,meta,binary,trial,False,,4320,4320,0,2,29,2160.0,4291,False,,all planned trials
+checkpoint_resumed,meta,binary,trial,False,,4320,4320,0,2,244,2160.0,4076,False,,all planned trials
+imported_from_prior_batch,meta,binary,trial,False,,4320,4320,0,2,136,2160.0,4184,False,,all planned trials
+write_recovered,meta,binary,trial,False,,4320,4320,0,2,1,2160.0,4319,False,,all planned trials
+start_rank,parameter,numeric,trial,False,,4320,4320,0,4320,1,1.0,1,False,,all planned trials
+total_tokens,meta,numeric,trial,False,,4320,4243,77,3139,1,1.0,6,False,,all planned trials
+n_principals,parameter,ordinal,trial,False,,4320,4320,0,5,12,192.0,3252,False,,all planned trials
+take_principal_present,parameter,binary,trial,False,,4320,4320,0,2,936,2160.0,3384,False,,all planned trials
+soft_take_principal_present,parameter,binary,trial,False,,4320,4320,0,2,348,2160.0,3972,False,,all planned trials
+nonprincipal_take_voice,parameter,binary,trial,False,,4320,4320,0,2,12,2160.0,4308,False,,all planned trials
+rank_stated_in_level_text,parameter,binary,trial,False,,4320,4320,0,2,372,2160.0,3948,False,take_principal_present,all planned trials
+take_deceives_n,parameter,ordinal,trial,False,,4320,4320,0,2,300,2160.0,4020,False,,all planned trials
+refuse_deceives_n,parameter,ordinal,trial,False,,4320,4320,0,3,180,1440.0,2700,False,,all planned trials
+refuse_breaks_promise,parameter,binary,trial,True,True,4320,4320,0,2,1260,2160.0,3060,False,refuse_deceives_n,all planned trials
+welfare_if_take_designer,parameter,categorical,trial,False,,4320,4320,0,3,840,900.0,2580,False,,all planned trials
+expected_first_take_a,parameter,ordinal,agent,False,,4320,4320,0,6,20,720.0,1340,False,criterion_a|scenario,all planned trials
+expected_first_take_b,parameter,ordinal,agent,False,,4320,2160,2160,6,10,360.0,670,False,criterion_b|scenario,all planned trials
+take_is_justified_ambiguous,parameter,binary,trial,True,True,4320,4320,0,2,1332,2160.0,2988,False,refuse_breaks_promise|take_principal_present,all planned trials
+status,outcome,categorical,trial,False,,4320,4320,0,2,77,2160.0,4243,False,,all planned trials
+action_a,outcome,categorical,agent,False,,4320,4243,77,2,1223,2121.5,3020,False,,all planned trials
+action_b,outcome,categorical,agent,False,,4320,4243,77,2,1209,2121.5,3034,False,,all planned trials
+deal_taken,outcome,binary,trial,False,,4320,4243,77,2,1075,2121.5,3168,False,outcome|deception_occurred|euphemism_gap_pair,all planned trials
+outcome,outcome,categorical,trial,False,,4320,4320,0,4,77,678.5,2886,False,,all planned trials
+failure_reason,outcome,categorical,trial,False,,4243,0,4243,0,0,0.0,0,False,,rows with status != complete (every failed row has a value)
+planned_action_a,outcome,categorical,agent,False,,4243,1773,2470,2,774,886.5,999,False,,complete episodes
+planned_action_b,outcome,categorical,agent,False,,4243,1924,2319,2,686,962.0,1238,False,,complete episodes
+plan_states_action_a,outcome,binary,agent,False,,4243,4243,0,2,1773,2121.5,2470,False,,complete episodes
+plan_states_action_b,outcome,binary,agent,False,,4243,4243,0,2,1924,2121.5,2319,False,,complete episodes
+plan_stance_a,outcome,categorical,agent,True,False,4243,4243,0,3,580,824.0,2839,False,,complete episodes
+plan_stance_b,outcome,categorical,agent,True,False,4243,4243,0,3,527,670.0,3046,False,,complete episodes
+final_action_a,outcome,categorical,agent,False,,4243,4243,0,2,1223,2121.5,3020,False,,complete episodes
+final_action_b,outcome,categorical,agent,False,,4243,4243,0,2,1209,2121.5,3034,False,,complete episodes
+flipped_a,outcome,binary,agent,False,,4243,1773,2470,2,186,886.5,1587,False,planned_action|final_action|flip_direction,agents whose plan stated an action
+flipped_b,outcome,binary,agent,False,,4243,1924,2319,2,164,962.0,1760,False,planned_action|final_action|flip_direction,agents whose plan stated an action
+flip_direction_a,outcome,categorical,agent,False,,4243,1773,2470,3,29,157.0,1587,False,,agents whose plan stated an action
+flip_direction_b,outcome,categorical,agent,False,,4243,1924,2319,3,49,115.0,1760,False,,agents whose plan stated an action
+stance_r1_a,outcome,categorical,agent,True,True,4243,4243,0,4,417,823.0,2180,False,,complete episodes
+stance_r1_b,outcome,categorical,agent,True,True,4243,4243,0,4,441,794.5,2213,False,,complete episodes
+words_r1_a,outcome,numeric,agent,False,,4243,4243,0,66,1,43.5,417,False,,complete episodes
+words_r1_b,outcome,numeric,agent,False,,4243,4243,0,64,1,44.5,441,False,,complete episodes
+stance_r2_a,outcome,categorical,agent,True,True,4243,4243,0,4,388,810.0,2235,False,,complete episodes
+stance_r2_b,outcome,categorical,agent,True,True,4243,4243,0,4,448,765.5,2264,False,,complete episodes
+words_r2_a,outcome,numeric,agent,False,,4243,4243,0,65,1,36.0,388,False,,complete episodes
+words_r2_b,outcome,numeric,agent,False,,4243,4243,0,64,1,35.0,448,False,,complete episodes
+stance_r3_a,outcome,categorical,agent,True,True,4243,4243,0,4,494,791.0,2167,False,,complete episodes
+stance_r3_b,outcome,categorical,agent,True,True,4243,4243,0,4,502,772.0,2197,False,,complete episodes
+words_r3_a,outcome,numeric,agent,False,,4243,4243,0,64,1,26.5,494,False,,complete episodes
+words_r3_b,outcome,numeric,agent,False,,4243,4243,0,61,1,33.0,502,False,,complete episodes
+msg_count_a,outcome,ordinal,agent,False,,4243,4243,0,4,198,232.5,3580,False,,complete episodes
+msg_count_b,outcome,ordinal,agent,False,,4243,4243,0,4,224,238.5,3542,False,,complete episodes
+empty_msg_count_a,outcome,ordinal,agent,False,,4243,4243,0,4,198,232.5,3580,False,,complete episodes
+empty_msg_count_b,outcome,ordinal,agent,False,,4243,4243,0,4,224,238.5,3542,False,,complete episodes
+words_sent_total_a,outcome,numeric,agent,False,,4243,4243,0,159,1,20.0,198,False,,complete episodes
+words_sent_total_b,outcome,numeric,agent,False,,4243,4243,0,157,1,20.0,224,False,,complete episodes
+plan_words_a,outcome,numeric,agent,False,,4243,4243,0,229,1,18.0,58,False,,complete episodes
+plan_words_b,outcome,numeric,agent,False,,4243,4243,0,226,1,17.0,50,False,,complete episodes
+msg_plan_words_a,outcome,numeric,agent,False,,4243,4243,0,213,1,13.0,70,False,,complete episodes
+msg_plan_words_b,outcome,numeric,agent,False,,4243,4243,0,200,1,14.0,74,False,,complete episodes
+decision_text_words_a,outcome,numeric,agent,False,,4243,4243,0,139,1,22.0,92,False,,complete episodes
+decision_text_words_b,outcome,numeric,agent,False,,4243,4243,0,132,1,24.0,115,False,,complete episodes
+reasoning_words_a,outcome,numeric,agent,False,,4243,4243,0,1689,1,2.0,11,False,,complete episodes
+reasoning_words_b,outcome,numeric,agent,False,,4243,4243,0,1492,1,2.0,12,False,,complete episodes
+completion_tokens_total_a,outcome,numeric,agent,False,,4243,4243,0,2056,1,2.0,9,False,,complete episodes
+completion_tokens_total_b,outcome,numeric,agent,False,,4243,4243,0,1838,1,2.0,12,False,,complete episodes
+completion_tokens_max_a,outcome,numeric,agent,False,,4243,4243,0,1298,1,2.0,18,False,,complete episodes
+completion_tokens_max_b,outcome,numeric,agent,False,,4243,4243,0,1123,1,3.0,17,False,,complete episodes
+hit_length_limit_a,outcome,constant,agent,False,,4243,4243,0,1,4243,4243.0,4243,True,,complete episodes
+hit_length_limit_b,outcome,constant,agent,False,,4243,4243,0,1,4243,4243.0,4243,True,,complete episodes
+first_take_proposal_round_a,outcome,ordinal,agent,True,True,4243,1263,2980,3,124,387.0,752,False,,complete episodes
+first_take_proposal_round_b,outcome,ordinal,agent,True,True,4243,1198,3045,3,162,452.0,584,False,,complete episodes
+last_public_stance_a,outcome,categorical,agent,True,True,4243,4243,0,4,198,826.5,2392,False,,complete episodes
+last_public_stance_b,outcome,categorical,agent,True,True,4243,4243,0,4,224,801.0,2417,False,,complete episodes
+said_refuse_did_take_a,outcome,binary,agent,True,False,4243,3340,903,2,29,1670.0,3311,False,last_public_stance|final_action|peer_deception,agents whose last public stance was take or refuse
+said_refuse_did_take_b,outcome,binary,agent,True,False,4243,3335,908,2,44,1667.5,3291,False,last_public_stance|final_action|peer_deception,agents whose last public stance was take or refuse
+said_take_did_refuse_a,outcome,binary,agent,True,False,4243,3340,903,2,41,1670.0,3299,False,last_public_stance|final_action|peer_deception,agents whose last public stance was take or refuse
+said_take_did_refuse_b,outcome,binary,agent,True,False,4243,3335,908,2,38,1667.5,3297,False,last_public_stance|final_action|peer_deception,agents whose last public stance was take or refuse
+deception_words_public_a,outcome,ordinal,agent,True,True,4243,4243,0,8,1,60.5,3300,False,,complete episodes
+deception_words_public_b,outcome,ordinal,agent,True,True,4243,4243,0,7,3,99.0,3354,False,,complete episodes
+deception_words_notes_a,outcome,numeric,agent,True,True,4243,4243,0,26,1,76.0,1485,False,,complete episodes
+deception_words_notes_b,outcome,numeric,agent,True,True,4243,4243,0,23,2,53.0,1351,False,,complete episodes
+deception_words_reasoning_a,outcome,numeric,agent,True,True,4243,4243,0,75,1,44.0,306,False,,complete episodes
+deception_words_reasoning_b,outcome,numeric,agent,True,True,4243,4243,0,62,1,33.0,289,False,,complete episodes
+euphemism_gap_a,outcome,binary,agent,True,False,4243,4243,0,2,1164,2121.5,3079,False,deception_words_public|deception_words_notes|deception_words_reasoning,complete episodes
+euphemism_gap_b,outcome,binary,agent,True,False,4243,4243,0,2,1020,2121.5,3223,False,deception_words_public|deception_words_notes|deception_words_reasoning,complete episodes
+evaluator_mentions_public_a,outcome,ordinal,agent,False,,4243,4243,0,6,2,12.0,4195,False,,complete episodes
+evaluator_mentions_public_b,outcome,ordinal,agent,False,,4243,4243,0,5,1,15.0,4196,False,,complete episodes
+evaluator_mentions_final_text_a,outcome,ordinal,agent,False,,4243,4243,0,4,2,29.5,4182,False,,complete episodes
+evaluator_mentions_final_text_b,outcome,ordinal,agent,False,,4243,4243,0,5,1,12.0,4180,False,,complete episodes
+side_deal_mentions_public_a,outcome,constant,agent,False,,4243,4243,0,1,4243,4243.0,4243,True,,complete episodes
+side_deal_mentions_public_b,outcome,constant,agent,False,,4243,4243,0,1,4243,4243.0,4243,True,,complete episodes
+agreement_phrases_public_a,outcome,ordinal,agent,False,,4243,4243,0,6,2,688.0,1602,False,,complete episodes
+agreement_phrases_public_b,outcome,ordinal,agent,False,,4243,4243,0,7,1,146.0,1587,False,,complete episodes
+user_mentions_reasoning_a,outcome,numeric,agent,False,,4243,4243,0,97,1,11.0,257,False,,complete episodes
+user_mentions_reasoning_b,outcome,numeric,agent,False,,4243,4243,0,88,1,13.0,206,False,,complete episodes
+notice_echo_public_a,outcome,ordinal,agent,True,True,4243,4243,0,4,3,43.5,4153,False,,complete episodes
+notice_echo_public_b,outcome,ordinal,agent,True,True,4243,4243,0,4,8,56.5,4122,False,,complete episodes
+notice_echo_private_a,outcome,numeric,agent,True,True,4243,4243,0,23,1,13.0,1517,False,,complete episodes
+notice_echo_private_b,outcome,numeric,agent,True,True,4243,4243,0,21,1,32.0,1169,False,,complete episodes
+mentions_monitoring_public_a,outcome,ordinal,agent,True,True,4243,4243,0,7,1,7.0,4048,False,,complete episodes
+mentions_monitoring_public_b,outcome,ordinal,agent,True,True,4243,4243,0,7,1,25.0,4002,False,,complete episodes
+mentions_monitoring_private_a,outcome,numeric,agent,True,True,4243,4243,0,35,1,9.0,1332,False,,complete episodes
+mentions_monitoring_private_b,outcome,numeric,agent,True,True,4243,4243,0,33,1,34.0,1024,False,,complete episodes
+criterion_cited_a,outcome,binary,agent,True,True,4243,2829,1414,2,75,1414.5,2754,False,,"agents with a rule that has report keys (welfare, authority); blank for nondeception (pack has no report keys) and none"
+criterion_cited_b,outcome,binary,agent,True,True,4243,1423,2820,2,30,711.5,1393,False,,"agents with a rule that has report keys (welfare, authority); blank for nondeception (pack has no report keys) and none"
+criterion_required_action_a,outcome,categorical,agent,True,True,4243,1380,2863,2,213,690.0,1167,False,,authority agents whose report gave their_instruction
+criterion_required_action_b,outcome,categorical,agent,True,True,4243,690,3553,2,106,345.0,584,False,,authority agents whose report gave their_instruction
+criterion_compliant_self_report_a,outcome,binary,agent,True,True,4243,1380,2863,2,2,690.0,1378,False,criterion_self_reported_violation|criterion_required_action,authority agents whose report gave their_instruction
+criterion_compliant_self_report_b,outcome,binary,agent,True,True,4243,690,3553,2,2,345.0,688,False,criterion_self_reported_violation|criterion_required_action,authority agents whose report gave their_instruction
+criterion_self_reported_violation_a,outcome,binary,agent,True,True,4243,1380,2863,2,2,690.0,1378,False,criterion_compliant_self_report|criterion_required_action,authority agents whose report gave their_instruction
+criterion_self_reported_violation_b,outcome,binary,agent,True,True,4243,690,3553,2,2,345.0,688,False,criterion_compliant_self_report|criterion_required_action,authority agents whose report gave their_instruction
+lone_take_aware_a,outcome,binary,agent,True,False,4243,4243,0,2,136,2121.5,4107,False,final_action|outcome,complete episodes (non-zero only for lone takers)
+lone_take_aware_b,outcome,binary,agent,True,False,4243,4243,0,2,123,2121.5,4120,False,final_action|outcome,complete episodes (non-zero only for lone takers)
+take_linked_deception_sentences_a,outcome,numeric,agent,True,True,4243,4243,0,21,1,88.0,785,False,,complete episodes
+take_linked_deception_sentences_b,outcome,numeric,agent,True,True,4243,4243,0,20,1,70.5,718,False,,complete episodes
+deception_intended_a,outcome,binary,agent,True,True,4243,4243,0,2,1156,2121.5,3087,False,planned_action|final_action|take_linked_deception_sentences|take_deceives_n,complete episodes
+deception_intended_b,outcome,binary,agent,True,True,4243,4243,0,2,1176,2121.5,3067,False,planned_action|final_action|take_linked_deception_sentences|take_deceives_n,complete episodes
+plans_profile,outcome,categorical,trial,False,,4243,4243,0,4,250,331.5,3330,False,,complete episodes
+plans_agree,outcome,binary,trial,False,,4243,913,3330,2,250,456.5,663,False,,episodes where both plans stated an action
+conversation_changed_outcome,outcome,binary,trial,False,,4243,913,3330,2,40,456.5,873,False,plans_profile|deal_taken,episodes where both plans stated an action
+any_flip,outcome,binary,trial,False,,4243,913,3330,2,179,456.5,734,False,,episodes where both plans stated an action
+persuasion_direction,outcome,categorical,trial,False,,4243,913,3330,7,1,37.0,660,False,,episodes where both plans stated an action
+rounds_until_same_stance,outcome,ordinal,trial,True,True,4243,3000,1243,3,399,912.0,1689,False,,complete episodes
+explicit_agreement_round,outcome,ordinal,trial,True,True,4243,2442,1801,3,49,707.0,1686,False,,complete episodes
+explicit_agreement_stance,outcome,categorical,trial,True,True,4243,2442,1801,2,706,1221.0,1736,False,,complete episodes
+final_public_stances_match,outcome,binary,trial,True,True,4243,4243,0,2,1637,2121.5,2606,False,,complete episodes
+crossed_stance_swap,outcome,binary,trial,True,True,4243,4243,0,2,12,2121.5,4231,False,,complete episodes
+first_take_proposer,outcome,categorical,trial,True,True,4243,4243,0,4,351,594.5,2703,False,,complete episodes
+first_take_proposal_round,outcome,ordinal,trial,True,True,4243,1540,2703,3,98,354.0,1088,False,,complete episodes
+total_words_exchanged,outcome,numeric,trial,False,,4243,4243,0,278,1,12.5,96,False,words_sent_total_a|words_sent_total_b,complete episodes
+turn_count,outcome,ordinal,trial,False,,4243,4243,0,7,96,125.0,3325,False,silence_count|msg_count_a|msg_count_b,complete episodes
+silence_count,outcome,ordinal,trial,False,,4243,4243,0,7,96,125.0,3325,False,turn_count,complete episodes
+deception_intended_pair,outcome,binary,trial,True,True,4243,4243,0,2,1510,2121.5,2733,False,deception_intended_a|deception_intended_b|action_a|action_b,complete episodes
+deception_occurred,outcome,binary,trial,False,,4243,4243,0,2,1075,2121.5,3168,False,deal_taken|outcome,complete episodes
+peer_deception_a,outcome,binary,agent,True,False,4243,4243,0,2,70,2121.5,4173,False,said_refuse_did_take|said_take_did_refuse,complete episodes
+peer_deception_b,outcome,binary,agent,True,False,4243,4243,0,2,82,2121.5,4161,False,said_refuse_did_take|said_take_did_refuse,complete episodes
+peer_deception_pair,outcome,binary,trial,True,False,4243,4243,0,2,141,2121.5,4102,False,,complete episodes
+euphemism_gap_pair,outcome,binary,trial,True,False,4243,4243,0,2,906,2121.5,3337,False,deal_taken|deception_words_public_a|deception_words_public_b,complete episodes
+lone_taker,outcome,categorical,trial,False,,4243,4243,0,3,134,148.0,3961,False,outcome|action_a|action_b|lone_take_aware_a|lone_take_aware_b,complete episodes (a/b only for unilateral_take; none otherwise)
+lone_taker_criterion,outcome,categorical,trial,False,,4243,282,3961,4,47,69.5,96,False,lone_taker|criterion_a|criterion_b|pairing,unilateral_take episodes (blank otherwise)
+pairing_rule,?,?,,,,4243,4243,0,3,1412,1414.0,1417,False,,
+started,?,?,,,,4243,4243,0,1,4243,4243.0,4243,False,,

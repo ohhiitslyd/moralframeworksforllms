@@ -1,0 +1,51 @@
+{
+ "power": {
+  "pairs_now": 2083.0,
+  "cells_planned": 2160,
+  "discordance_rate": 0.08641382621219396,
+  "mde_paired_now": 0.018034535505155252,
+  "mde_paired_full": 0.0177105270072959,
+  "mde_unpaired_now": 0.03744377356443719,
+  "mde_unpaired_full": 0.03707794983758055
+ },
+ "p_endpoint_x_monitoring": 0.3353352476554312,
+ "heterogeneity_p_conditional_OR_scale": {
+  "Diagnostic:": 0.11487257022784458,
+  "Pairing:": 0.6424490756184504,
+  "Level:": 0.6661840458895565,
+  "Pair type:": 0.7036374860856929
+ },
+ "tipping_point": {
+  "watched_failures": 42,
+  "unwatched_failures": 35,
+  "k_needed": null,
+  "share_needed": NaN,
+  "ratio_to_watched_base_rate": NaN,
+  "watched_complete_take_rate": 0.2360717658168083,
+  "p_at_k0": 2.0606463459289753e-07,
+  "p_at_all": 0.03446238848479156
+ },
+ "dose_response": {
+  "discordant_pairs": 180,
+  "slope_log_OR_per_level": 0.09910924920195828,
+  "slope_se": 0.12995884044099346,
+  "slope_wald_lo": -0.15561007806238886,
+  "slope_wald_hi": 0.35382857646630544,
+  "slope_boot_lo": -0.1773381971602219,
+  "slope_boot_hi": 0.4073307637206568,
+  "slope_boot_draws": 2000,
+  "OR_ratio_per_level": 1.1041869245099876,
+  "p_LR_trend": 0.44334331687500306,
+  "cond_OR_at_level3": 0.3542097814510939,
+  "p_LR_level_categorical": 0.658977751447479,
+  "LR_level": 2.4202119426924185,
+  "df_level": 4,
+  "p_LR_diagnostic_categorical": 0.11697170339001729,
+  "LR_diagnostic": 4.291646449605025,
+  "df_diagnostic": 2,
+  "p_LR_pairing_categorical": 0.6497442279420037,
+  "LR_pairing": 3.3267800713210818,
+  "df_pairing": 5
+ },
+ "missing_message_fisher_among_failures": 0.6506324076757595
+}

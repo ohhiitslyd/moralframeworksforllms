@@ -1,0 +1,82 @@
+{
+ "script": "analyze_full.py",
+ "script_sha256": "d4f26a2fa6e1de04c5331f502094f33d5c9b0d2bd0df509f2258f19c8acbd713",
+ "workers_module_sha256": "1c1d9c3891e2453a93214caaeda3a87e14761a70d67ffe2f91c24d06ef8cdf58",
+ "run_at_utc": "2026-10-25T20:22:44.668717+00:00",
+ "label": "FINAL-DATA (completed run: all 4,320 planned trials terminal; 4,243 complete, 77 failed)",
+ "arguments": {
+  "data": "C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study\\analysis\\2026-10-25-pressure-study\\steps\\step1\\trial_metrics.csv",
+  "schema": "C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study\\analysis\\2026-10-25-pressure-study\\steps\\step1\\metrics_schema.json",
+  "out": "C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study\\analysis\\2026-10-25-pressure-study\\steps\\step2",
+  "fresh": false
+ },
+ "inputs": {
+  "C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study\\analysis\\2026-10-25-pressure-study\\steps\\step1\\trial_metrics.csv": "1574958f145e9e62456d4b9dbcf8691534783a618ec86c0bce530b537169c342",
+  "C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study\\analysis\\2026-10-25-pressure-study\\steps\\step1\\metrics_schema.json": "5a8c3760bb56068a69e7cbc21afe596eba5259d9db816df9eff1b123bc535fd4",
+  "PREREG.md": "59cbb13b406e07f16ba5365c18450b1c1e84f9cd1c262031a9475616591c677f"
+ },
+ "packages": {
+  "python": "3.14.3",
+  "numpy": "2.4.6",
+  "pandas": "3.0.3",
+  "matplotlib": "3.11.2",
+  "scipy": "not installed (tests implemented in-script)"
+ },
+ "seeds": {
+  "numpy_default_rng": 20261025,
+  "shared_cluster_draws": [
+   20261025,
+   7
+  ],
+  "interactions": [
+   20261025,
+   99,
+   "task index"
+  ],
+  "permutations": [
+   20261025,
+   "param index",
+   "outcome index"
+  ]
+ },
+ "settings": {
+  "B_BOOT_SCREEN": 200,
+  "B_BOOT_MAIN": 2000,
+  "B_PERM_MAX": 1999,
+  "H_EXCEED": 50,
+  "B_SIGNFLIP": 5000,
+  "B_INTER": 1000,
+  "RIDGE": 1.0,
+  "randomisation_source": "schema randomisation_level"
+ },
+ "cpu": "launched via tools/run_reserved.py (RESERVED_CPUS=0,1,2,3); RESERVED_WORKERS=8; BLAS threads = 1",
+ "runtime_seconds": 323.7,
+ "log": [
+  "Loading C:\\Users\\Tom\\hackathon2\\hackathon-lying-agent-experiment-analysis-full-pressure-study\\analysis\\2026-10-25-pressure-study\\steps\\step1\\trial_metrics.csv",
+  "complete rows 4243 | label: FINAL-DATA (completed run: all 4,320 planned trials terminal; 4,243 complete, 77 failed)",
+  "endpoints (collection order): ['Modal-A', 'Modal-B', 'Modal-A+Modal-B'] main: Modal-B",
+  "randomisation levels from: schema randomisation_level",
+  "parameters 21 outcomes 27",
+  "source_key_missing columns: ['scene_source', 'provider', 'recovered_credit_failure', 'deal_taken']",
+  "completion: min q 0.8602540763546042",
+  "TIPPING POINT {'watched_failures': 42, 'unwatched_failures': 35, 'k_needed': None, 'share_needed': nan, 'ratio_to_watched_base_rate': nan, 'watched_complete_take_rate': np.float64(0.2360717658168083), 'p_at_k0': 2.0606463459289753e-07, 'p_at_all': 0.03446238848479156}",
+  "PRIMARY {'pairs': np.int64(2083), 'watched_only_take': np.int64(49), 'unwatched_only_take': np.int64(131), 'diff_w_minus_u': np.float64(-0.03936629860777724), 'newcombe_lo': np.float64(-0.051936194707449174), 'newcombe_hi': np.float64(-0.026872235960889806), 'cluster_boot_lo': np.float64(-0.05288525132275132), 'cluster_boot_hi': np.float64(-0.026542485442268896), 'risk_ratio_w_over_u': np.float64(0.855379188712522), 'p_exact': np.float64(8.018118540359953e-10), 'p_chi2_cc': np.float64(1.5663312921022165e-09)}",
+  "POWER {'pairs_now': np.int64(2083), 'cells_planned': 2160, 'discordance_rate': np.float64(0.08641382621219396), 'mde_paired_now': np.float64(0.018034535505155252), 'mde_paired_full': np.float64(0.0177105270072959), 'mde_unpaired_now': 0.03744377356443719, 'mde_unpaired_full': 0.03707794983758055} ep x mon p 0.3353352476554312 HET {'Diagnostic:': np.float64(0.11487257022784458), 'Pairing:': np.float64(0.6424490756184504), 'Level:': np.float64(0.6661840458895565), 'Pair type:': np.float64(0.7036374860856929)}",
+  "DOSE-RESPONSE {'discordant_pairs': 180, 'slope_log_OR_per_level': np.float64(0.09910924920195828), 'slope_se': np.float64(0.12995884044099346), 'slope_wald_lo': np.float64(-0.15561007806238886), 'slope_wald_hi': np.float64(0.35382857646630544), 'slope_boot_lo': -0.1773381971602219, 'slope_boot_hi': 0.4073307637206568, 'slope_boot_draws': 2000, 'OR_ratio_per_level': 1.1041869245099876, 'p_LR_trend': np.float64(0.44334331687500306), 'cond_OR_at_level3': 0.3542097814510939, 'p_LR_level_categorical': np.float64(0.658977751447479), 'LR_level': np.float64(2.4202119426924185), 'df_level': 4, 'p_LR_diagnostic_categorical': np.float64(0.11697170339001729), 'LR_diagnostic': np.float64(4.291646449605025), 'df_diagnostic': 2, 'p_LR_pairing_categorical': np.float64(0.6497442279420037), 'LR_pairing': np.float64(3.3267800713210818), 'df_pairing': 5}",
+  "words vs actions done 29.629928827285767",
+  "asymmetry + rule application done 32.038368940353394",
+  "screening ... 32.1",
+  "screening pairs 567 BH survivors 344 141.9",
+  "Besag-Clifford: 344 survivors; cap 1999 shuffles each, stop at 50 exceedances (<= 687656 statistics; measured ~3 s per survivor single-threaded, i.e. ~15 min without cache)",
+  "permutation cache entries reused: 344",
+  "permutation tasks to run: 0 on 8 worker(s)",
+  "permutations done 0.2 s",
+  "heat maps done 162.6",
+  "top relationships done 167.2",
+  "interactions: 30 tests x 1000 cluster-resampled parametric-bootstrap draws on 8 worker(s)",
+  "interactions done 131.4 s; passing (q<.05): 4",
+  "candidates 357 trustworthy 56 BH family m = 355",
+  "REPORT.md written",
+  "done 323.7 s"
+ ]
+}
