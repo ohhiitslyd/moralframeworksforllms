@@ -1,0 +1,14 @@
+term,label,coef,OR,ci_lo_logodds,ci_hi_logodds,OR_ci_lo,OR_ci_hi
+const,const,-6.441,0.0,-8.273,-5.647,0.0,0.0
+is_W,welfare-rule agent A,4.309,74.37,3.71,5.882,40.85,358.53
+is_D,honesty-rule agent A,3.308,27.33,2.619,5.046,13.72,155.4
+b_none,partner has no rule,-0.632,0.53,-0.836,-0.457,0.43,0.63
+tp_harm_refuse_sev,3rd-party harm of refusing (per severity step),0.752,2.12,0.475,1.143,1.61,3.14
+vuln,vulnerable person named,-0.152,0.86,-0.928,0.547,0.4,1.73
+promise,promise / confidentiality request,1.431,4.18,0.755,2.363,2.13,10.62
+perm_doc,formal permission document,4.722,112.38,3.485,8.199,32.62,3637.31
+suggest_or_peer,soft authority (suggestion / non-principal ask),-1.465,0.23,-13.205,-0.376,0.0,0.69
+harm_down,denial-of-injury fact,0.25,1.28,-0.623,1.088,0.54,2.97
+self_benefit,self-benefit to agents,-0.05,0.95,-0.749,0.623,0.47,1.86
+against_take,fact against take / refuse re-affirmed,-0.519,0.6,-1.332,0.21,0.26,1.23
+unwatched,unwatched notice,0.24,1.27,0.12,0.383,1.13,1.47
