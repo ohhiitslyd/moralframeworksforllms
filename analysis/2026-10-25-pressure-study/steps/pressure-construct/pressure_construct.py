@@ -585,7 +585,7 @@ for col, lab, colr in series:
     ax.plot(levels, by_level[col] * 100, marker="o", ms=5, lw=2, color=colr, label=lab)
     ax.annotate(lab, (5.08, by_level[col].iloc[-1] * 100), fontsize=8, color=C["ink2"], va="center")
 ax.set_xlim(0.8, 6.9); ax.set_ylim(-2, 102); ax.set_xticks(levels)
-ax.set_xlabel("Pressure level"); ax.set_ylabel("% of the 72 scenes whose cumulative text contains it")
+ax.set_xlabel("Justification level"); ax.set_ylabel("% of the 72 scenes whose cumulative text contains it")
 ax.set_title("What the 'pressure' level actually adds (content coding of all 72 x 5 level texts)", loc="left", fontsize=11)
 ax.grid(axis="x", visible=False)
 fig.tight_layout(); fig.savefig(FIG / "fig1_ingredients_by_level.png"); plt.close(fig)
@@ -600,7 +600,7 @@ for v, lab, colr in [(0, "no take-instructing principal", C["blue"]), (1, "a pri
         axes[0].annotate(f"n={int(rr['size'])}", (rr.level, rr['mean'] * 100 + 2.5), fontsize=7, ha="center", color=C["ink2"])
 axes[0].plot(levels, lv.values * 100, color=C["ink2"], lw=1, ls="--", label="all trials")
 axes[0].set_title("Mutual take by level, split by principal endorsement", loc="left", fontsize=10)
-axes[0].set_xlabel("Pressure level"); axes[0].set_ylabel("Mutual take (%)"); axes[0].set_xticks(levels); axes[0].legend(fontsize=8, frameon=False)
+axes[0].set_xlabel("Justification level"); axes[0].set_ylabel("Mutual take (%)"); axes[0].set_xticks(levels); axes[0].legend(fontsize=8, frameon=False)
 g2 = df.groupby(["level", "tp_harm_refuse_sev"]).mutual_take.agg(["mean", "size"]).reset_index()
 cols_sev = {0: SEQ_BLUE[1], 1: SEQ_BLUE[2], 2: SEQ_BLUE[4], 3: SEQ_BLUE[6]}
 for sev in range(4):
@@ -608,7 +608,7 @@ for sev in range(4):
     if len(gg):
         axes[1].plot(gg.level, gg["mean"] * 100, marker="o", lw=2, color=cols_sev[sev], label=f"3rd-party harm of refusing = {['none','minor','material','severe'][sev]}")
 axes[1].set_title("...split by coded severity of harm-to-others if refuse", loc="left", fontsize=10)
-axes[1].set_xlabel("Pressure level"); axes[1].set_xticks(levels); axes[1].legend(fontsize=8, frameon=False)
+axes[1].set_xlabel("Justification level"); axes[1].set_xticks(levels); axes[1].legend(fontsize=8, frameon=False)
 for a in axes: a.grid(axis="x", visible=False)
 fig.tight_layout(); fig.savefig(FIG / "fig2_take_by_level_split.png"); plt.close(fig)
 
@@ -624,7 +624,7 @@ for ax, dg in zip(axes, ["welfare", "nondeception", "authority"]):
             ax.plot(f, y[f - 1], marker="o", ms=5, color=C["orange"], alpha=0.9, zorder=3)
     m = df[df.diagnostic == dg].groupby("level").mutual_take.mean() * 100
     ax.plot(levels, m.values, color=C["ink"], lw=2.5, label="family mean")
-    ax.set_title(f"{dg} scenes (n={len(sub)})", loc="left", fontsize=10); ax.set_xticks(levels); ax.set_xlabel("Pressure level")
+    ax.set_title(f"{dg} scenes (n={len(sub)})", loc="left", fontsize=10); ax.set_xticks(levels); ax.set_xlabel("Justification level")
     ax.grid(axis="x", visible=False)
 axes[0].set_ylabel("Mutual take (%), 12 trials per scene x level")
 axes[0].plot([], [], marker="o", color=C["orange"], ls="", label="first level with a take-instructing principal")
@@ -650,7 +650,7 @@ cl = {"S003": C["red"], "S728": C["orange"], "S661": C["violet"], "S662": C["mag
 for s, colr in cl.items():
     ax.plot(levels, sc_rates.loc[s].values * 100, marker="o", lw=2, color=colr, label=f"{s} {scen[s]['title']}")
 ax.plot(levels, lv.values * 100, color=C["ink2"], lw=1.2, ls="--", label="all 72 scenes")
-ax.set_xticks(levels); ax.set_xlabel("Pressure level"); ax.set_ylabel("Mutual take (%)")
+ax.set_xticks(levels); ax.set_xlabel("Justification level"); ax.set_ylabel("Mutual take (%)")
 ax.set_title("Scenes whose ladder is NOT a clean 'more reason to take' ladder", loc="left", fontsize=11)
 ax.legend(fontsize=7.5, frameon=False); ax.grid(axis="x", visible=False)
 fig.tight_layout(); fig.savefig(FIG / "fig5_control_like_scenes.png"); plt.close(fig)
@@ -659,7 +659,7 @@ fig.tight_layout(); fig.savefig(FIG / "fig5_control_like_scenes.png"); plt.close
 fig, ax = plt.subplots(figsize=(6.5, 3.8))
 ax.plot(levels, by_level.pressure_words, marker="o", lw=2, color=C["blue"], label="'Stakes' block words")
 ax.plot(levels, by_level.stakes_block_words, marker="o", lw=2, color=C["violet"], label="Stakes + principals words")
-ax.set_xticks(levels); ax.set_xlabel("Pressure level"); ax.set_ylabel("Mean words (72 scenes)")
+ax.set_xticks(levels); ax.set_xlabel("Justification level"); ax.set_ylabel("Mean words (72 scenes)")
 ax.set_title("Level text is cumulative: length rises with level", loc="left", fontsize=11); ax.legend(frameon=False, fontsize=8); ax.grid(axis="x", visible=False)
 fig.tight_layout(); fig.savefig(FIG / "fig6_prompt_length.png"); plt.close(fig)
 
@@ -716,7 +716,7 @@ for ax, fam, lab in zip(axes, ["welfare", "nondeception", "authority"], ["welfar
         ax.plot(g.index, g["mean"] * 100, marker="o", lw=2, color=colr, label=name)
         for L, rr in g.iterrows():
             ax.annotate(f"{int(rr['size'])}", (L, rr["mean"] * 100 + 3), fontsize=7, ha="center", color=C["ink2"])
-    ax.set_title(lab, loc="left", fontsize=10); ax.set_xticks(levels); ax.set_xlabel("Pressure level"); ax.grid(axis="x", visible=False)
+    ax.set_title(lab, loc="left", fontsize=10); ax.set_xticks(levels); ax.set_xlabel("Justification level"); ax.grid(axis="x", visible=False)
 axes[0].set_ylabel("Mutual take (%)  [small numbers = trials]"); axes[0].legend(fontsize=8, frameon=False, loc="upper left")
 fig.suptitle("Same level, different ingredient: the level curve by rule family, split by whether a principal has instructed take", x=0.01, ha="left", fontsize=11)
 fig.tight_layout(); fig.savefig(FIG / "fig7_family_by_principal.png"); plt.close(fig)
