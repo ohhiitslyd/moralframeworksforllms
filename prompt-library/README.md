@@ -9,11 +9,23 @@ Reusable prompts for this project. Each one is meant to be copied into an AI age
 | **Batch runs and major compute** | Review simulations, batch jobs and analyses for performance, reliability, parallelism, cost and experimental design; estimate cost and get approval before paid runs; MSSQ scheduling with longest jobs first; check alignment with the sprint's criteria and research questions | [`workflow/batch-runs-and-compute.md`](workflow/batch-runs-and-compute.md) |
 | **Experiment analysis process** | The end-to-end process from a finished run to findings (Stages 1–3) and the contract between the stages | [`analysis-pipeline/PROCESS.md`](../analysis-pipeline/PROCESS.md) |
 
+### Analysis, Step 0.5 (highest value, run first): Raw heat maps
+
+| Prompt | Use it for | Location |
+|---|---|---|
+| **Step 0.5: raw heat maps** | Minutes-fast first look. One- and two-variable heat maps of raw outcome rates straight from `runs.csv`: rate and n in every cell, absolute scale, CSV behind every chart. Reference script in `analysis/tools/`. | [`analysis/step0.5-raw-heatmaps.md`](analysis/step0.5-raw-heatmaps.md) |
+
 ### Analysis, Step 1 (`PROCESS.md` Stage 1): Extract, organise and augment raw results
 
 | Prompt | Use it for | Location |
 |---|---|---|
 | **Step 1: extract, organise, augment** | One validated row per planned trial: inputs, each with a description column; outcomes; per-agent and pair interaction and deception metrics; dictionary, schema, validation and provenance. The owner's original prompts are in its appendix. | [`analysis/step1-extract-organize-augment.md`](analysis/step1-extract-organize-augment.md) |
+
+### Analysis, Step 1.5 (right after Step 1): Derived-metric heat maps
+
+| Prompt | Use it for | Location |
+|---|---|---|
+| **Step 1.5: derived-metric heat maps** | Heat maps of every engineered outcome from Step 1 (interaction, vocabulary, plan vs. action, deception flags) by every factor. Schema-driven, with unreliable heuristics marked ⚠. Reference script in `analysis/tools/`. | [`analysis/step1.5-derived-heatmaps.md`](analysis/step1.5-derived-heatmaps.md) |
 
 ### Analysis, Step 2 (`PROCESS.md` Stage 2): Analyse and produce reports
 
