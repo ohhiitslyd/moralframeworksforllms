@@ -1,0 +1,49 @@
+variable,label,role,type,n,missing,summary,interval,interval_method,heuristic,subset
+monitoring,Monitoring notice,parameter,bin,4320,0,watched: 2160; unwatched: 2160,,"counts over 4,320 planned trials",,
+level,Pressure level,parameter,ord,4320,0,1: 864; 2: 864; 3: 864; 4: 864; 5: 864,,"counts over 4,320 planned trials",,
+pairing,Pairing,parameter,cat,4320,0,W-W: 720; W-none: 720; D-D: 720; D-none: 720; A-A: 720; A-none: 720,,"counts over 4,320 planned trials",,
+pairing_rule,Rule in the pairing (W/D/A),parameter,cat,4320,0,welfare: 1440; nondeception: 1440; authority: 1440,,"counts over 4,320 planned trials",,
+matched_vs_mixed,Matched vs. mixed pair,parameter,bin,4320,0,matched: 2160; mixed: 2160,,"counts over 4,320 planned trials",,
+scenario_diagnostic,Scenario diagnostic (= family),parameter,cat,4320,0,welfare: 1440; nondeception: 1440; authority: 1440,,"counts over 4,320 planned trials",,
+setting_id,Social setting,parameter,cat,4320,0,hospital: 540; religious: 540; military: 540; school: 540; volunteer: 540; social_club: 540; family: 540; situational: 540,,"counts over 4,320 planned trials",,
+weekend_slice,Pilot-slice scene,parameter,bin,4320,0,0: 3780; 1: 540,,"counts over 4,320 planned trials",,
+welfare_if_take_designer,Designer's welfare-if-take,parameter,cat,4320,0,higher: 2580; lower: 900; similar: 840,,"counts over 4,320 planned trials",,
+take_principal_present,A principal instructs take,parameter,bin,4320,0,0: 3384; 1: 936,,"counts over 4,320 planned trials",,
+soft_take_principal_present,A principal suggests take,parameter,bin,4320,0,0: 3972; 1: 348,,"counts over 4,320 planned trials",,
+rank_stated_in_level_text,Rank stated in level text,parameter,bin,4320,0,0: 3948; 1: 372,,"counts over 4,320 planned trials",,
+n_principals,Number of principal statements,parameter,ord,4320,0,1: 3252; 2: 780; 3: 192; 4: 84; 5: 12,,"counts over 4,320 planned trials",,
+take_is_justified_ambiguous,Take arguably justified,parameter,bin,4320,0,0: 2988; 1: 1332,,"counts over 4,320 planned trials",,
+take_deceives_n,Parties misled by take,parameter,ord,4320,0,1: 4020; 2: 300,,"counts over 4,320 planned trials",,
+refuse_deceives_n,Parties misled by refuse,parameter,ord,4320,0,0: 2700; 1: 1440; 2: 180,,"counts over 4,320 planned trials",,
+refuse_breaks_promise,Refusing breaks a promise,parameter,bin,4320,0,0: 3060; 1: 1260,,"counts over 4,320 planned trials",,
+endpoint,Serving endpoint (collection order),parameter,bin,4320,0,Modal-B: 3610; Modal-A: 707; Modal-A+Modal-B: 3,,"counts over 4,320 planned trials",,
+start_rank,Execution order (start rank),parameter,num,4320,0,1438: 1; 3709: 1; 581: 1; 3397: 1; 1199: 1; 2039: 1; 2437: 1; 3186: 1; 549: 1; 3084: 1 ...,,"counts over 4,320 planned trials",,
+checkpoint_resumed,Episode resumed from checkpoint,parameter,bin,4320,0,0: 4076; 1: 244,,"counts over 4,320 planned trials",,
+imported_from_prior_batch,Imported from earlier batch,parameter,bin,4320,0,0: 4184; 1: 136,,"counts over 4,320 planned trials",,
+mutual_take,Mutual take (both agents took),outcome (pair),binary,4243,0,1075/4243 = 25.3%,24.0%-26.7%,Wilson (episodes),,all complete
+unilateral_take,Lone take (exactly one took),outcome (pair),binary,4243,0,282/4243 = 6.6%,5.9%-7.4%,Wilson (episodes),,all complete
+any_take,Any take (at least one took),outcome (pair),binary,4243,0,1357/4243 = 32.0%,30.6%-33.4%,Wilson (episodes),,all complete
+explicit_agree,Explicit public agreement reached,outcome (pair),binary,4243,0,2442/4243 = 57.6%,56.1%-59.0%,Wilson (episodes),stance: marginal,all complete
+final_public_stances_match,Final public stances match,outcome (pair),binary,4243,0,2606/4243 = 61.4%,59.9%-62.9%,Wilson (episodes),stance: marginal,both last stances classifiable
+any_silence,At least one empty message,outcome (pair),binary,4243,0,918/4243 = 21.6%,20.4%-22.9%,Wilson (episodes),,all complete
+plans_agree,Private plans agreed (both plans state an action),outcome (pair),binary,913,3330,663/913 = 72.6%,69.6%-75.4%,Wilson (episodes),,both plans state an action
+deception_intended_pair,"Deception-intended flag, either agent",outcome (pair),binary,4243,0,1510/4243 = 35.6%,34.2%-37.0%,Wilson (episodes),marginal; arm-differential,all complete
+peer_deception_pair,"Said one thing, did another (either agent)",outcome (pair),binary,4243,0,141/4243 = 3.3%,2.8%-3.9%,Wilson (episodes),UNRELIABLE,all complete
+total_words_exchanged,Public words exchanged (both agents),outcome (pair),numeric,4243,0,"median 126, IQR 90-162",range 0-328,,,all complete
+total_tokens,Total tokens used,outcome (pair),numeric,4243,0,"median 14500, IQR 13250-15790",range 10473-23427,,,all complete
+ag_took,Agent took,"outcome (agent, pooled A/B)",binary,8486,0,2432/8486 = 28.7%,24.0%-33.2%,scenario-cluster bootstrap (agents),,all agents
+ag_plan_states_action,Plan states an action,"outcome (agent, pooled A/B)",binary,8486,0,3697/8486 = 43.6%,40.7%-46.3%,scenario-cluster bootstrap (agents),,all agents
+ag_plan_take,Plan said take (of plans with an action),"outcome (agent, pooled A/B)",binary,3697,4789,1460/3697 = 39.5%,35.2%-43.7%,scenario-cluster bootstrap (agents),,plans with an action line
+ag_flipped,Changed planned action,"outcome (agent, pooled A/B)",binary,3697,4789,350/3697 = 9.5%,8.3%-10.7%,scenario-cluster bootstrap (agents),,plans with an action line
+ag_argued_take,Argued for take in public (some round),"outcome (agent, pooled A/B)",binary,8486,0,2461/8486 = 29.0%,24.7%-33.3%,scenario-cluster bootstrap (agents),stance: marginal,all agents
+ag_dec_pub,Deception words in public messages,"outcome (agent, pooled A/B)",binary,8486,0,1832/8486 = 21.6%,17.8%-25.5%,scenario-cluster bootstrap (agents),,all agents
+ag_dec_notes,Deception words in private notes,"outcome (agent, pooled A/B)",binary,8486,0,5650/8486 = 66.6%,61.2%-71.3%,scenario-cluster bootstrap (agents),,all agents
+ag_dec_reas,Deception words in reasoning,"outcome (agent, pooled A/B)",binary,8486,0,8126/8486 = 95.8%,94.4%-97.0%,scenario-cluster bootstrap (agents),,all agents
+ag_mon_pub,Mentions monitoring in public,"outcome (agent, pooled A/B)",binary,8486,0,436/8486 = 5.1%,4.1%-6.2%,scenario-cluster bootstrap (agents),,all agents
+ag_mon_priv,Mentions monitoring in private,"outcome (agent, pooled A/B)",binary,8486,0,6130/8486 = 72.2%,68.1%-76.3%,scenario-cluster bootstrap (agents),,all agents
+ag_evaluator,Mentions evaluator / score in decision,"outcome (agent, pooled A/B)",binary,8486,0,124/8486 = 1.5%,0.0%-3.6%,scenario-cluster bootstrap (agents),,all agents
+ag_deception_intended,Deception-intended flag (agent),"outcome (agent, pooled A/B)",binary,8486,0,2332/8486 = 27.5%,23.7%-31.7%,scenario-cluster bootstrap (agents),marginal; arm-differential,all agents
+ag_said_other,"Said one thing, did another (agent)","outcome (agent, pooled A/B)",binary,6675,1811,152/6675 = 2.3%,1.9%-2.7%,scenario-cluster bootstrap (agents),UNRELIABLE,last stance classifiable
+ag_lone_aware,Lone taker aware peer refused,"outcome (agent, pooled A/B)",binary,282,8204,259/282 = 91.8%,88.6%-94.9%,scenario-cluster bootstrap (agents),UNRELIABLE,lone takers
+ag_reasoning_words,Reasoning length (words),outcome (agent),numeric,8486,0,"median 1784, IQR 1560-2104",range 930-6473,,,all agents
+ag_words_sent_total,Public words sent (agent),outcome (agent),numeric,8486,0,"median 63, IQR 44-82",range 0-205,,,all agents

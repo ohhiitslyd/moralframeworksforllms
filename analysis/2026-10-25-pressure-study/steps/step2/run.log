@@ -1,0 +1,33 @@
+[run_reserved] CPUs [0, 1, 2, 3] reserved; 8 logical CPUs available
+Loading C:\Users\Tom\hackathon2\hackathon-lying-agent-experiment-analysis-full-pressure-study\analysis\2026-10-25-pressure-study\steps\step1\trial_metrics.csv
+complete rows 4243 | label: FINAL-DATA (completed run: all 4,320 planned trials terminal; 4,243 complete, 77 failed)
+endpoints (collection order): ['Modal-A', 'Modal-B', 'Modal-A+Modal-B'] main: Modal-B
+randomisation levels from: schema randomisation_level
+parameters 21 outcomes 27
+source_key_missing columns: ['scene_source', 'provider', 'recovered_credit_failure', 'deal_taken']
+analyze_full.py:670: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  k = fail_tab.sum(0) if reason == "(any failure)" else fail_tab.loc[reason]
+analyze_full.py:682: Pandas4Warning: Starting with pandas version 4.0 all arguments of sum will be keyword-only.
+  _tot = fail_tab.sum(0)
+completion: min q 0.8602540763546042
+analyze_full.py:917: Pandas4Warning: Starting with pandas version 4.0 all arguments of all will be keyword-only.
+  _ok = _ps.notna().all(1)
+TIPPING POINT {'watched_failures': 42, 'unwatched_failures': 35, 'k_needed': None, 'share_needed': nan, 'ratio_to_watched_base_rate': nan, 'watched_complete_take_rate': np.float64(0.2360717658168083), 'p_at_k0': 2.0606463459289753e-07, 'p_at_all': 0.03446238848479156}
+PRIMARY {'pairs': np.int64(2083), 'watched_only_take': np.int64(49), 'unwatched_only_take': np.int64(131), 'diff_w_minus_u': np.float64(-0.03936629860777724), 'newcombe_lo': np.float64(-0.051936194707449174), 'newcombe_hi': np.float64(-0.026872235960889806), 'cluster_boot_lo': np.float64(-0.05288525132275132), 'cluster_boot_hi': np.float64(-0.026542485442268896), 'risk_ratio_w_over_u': np.float64(0.855379188712522), 'p_exact': np.float64(8.018118540359953e-10), 'p_chi2_cc': np.float64(1.5663312921022165e-09)}
+POWER {'pairs_now': np.int64(2083), 'cells_planned': 2160, 'discordance_rate': np.float64(0.08641382621219396), 'mde_paired_now': np.float64(0.018034535505155252), 'mde_paired_full': np.float64(0.0177105270072959), 'mde_unpaired_now': 0.03744377356443719, 'mde_unpaired_full': 0.03707794983758055} ep x mon p 0.3353352476554312 HET {'Diagnostic:': np.float64(0.11487257022784458), 'Pairing:': np.float64(0.6424490756184504), 'Level:': np.float64(0.6661840458895565), 'Pair type:': np.float64(0.7036374860856929)}
+DOSE-RESPONSE {'discordant_pairs': 180, 'slope_log_OR_per_level': np.float64(0.09910924920195828), 'slope_se': np.float64(0.12995884044099346), 'slope_wald_lo': np.float64(-0.15561007806238886), 'slope_wald_hi': np.float64(0.35382857646630544), 'slope_boot_lo': -0.1773381971602219, 'slope_boot_hi': 0.4073307637206568, 'slope_boot_draws': 2000, 'OR_ratio_per_level': 1.1041869245099876, 'p_LR_trend': np.float64(0.44334331687500306), 'cond_OR_at_level3': 0.3542097814510939, 'p_LR_level_categorical': np.float64(0.658977751447479), 'LR_level': np.float64(2.4202119426924185), 'df_level': 4, 'p_LR_diagnostic_categorical': np.float64(0.11697170339001729), 'LR_diagnostic': np.float64(4.291646449605025), 'df_diagnostic': 2, 'p_LR_pairing_categorical': np.float64(0.6497442279420037), 'LR_pairing': np.float64(3.3267800713210818), 'df_pairing': 5}
+words vs actions done 30.111680507659912
+asymmetry + rule application done 31.859519720077515
+screening ... 32.0
+screening pairs 567 BH survivors 344 138.6
+Besag-Clifford: 344 survivors; cap 1999 shuffles each, stop at 50 exceedances (<= 687656 statistics; measured ~3 s per survivor single-threaded, i.e. ~15 min without cache)
+permutation cache entries reused: 344
+permutation tasks to run: 0 on 8 worker(s)
+permutations done 0.2 s
+heat maps done 159.2
+top relationships done 163.8
+interactions: 30 tests x 1000 cluster-resampled parametric-bootstrap draws on 8 worker(s)
+interactions done 126.8 s; passing (q<.05): 4
+candidates 357 trustworthy 56 BH family m = 355
+REPORT.md written
+done 332.7 s
