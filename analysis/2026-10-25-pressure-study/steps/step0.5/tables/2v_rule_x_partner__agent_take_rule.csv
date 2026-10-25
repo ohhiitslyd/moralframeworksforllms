@@ -1,0 +1,7 @@
+rule,partner,n,agent_take_rule
+authority,no rule,704,0.1619
+authority,same rule,713,0.1543
+nondeception,no rule,707,0.2461
+nondeception,same rule,707,0.2376
+welfare,no rule,702,0.3718
+welfare,same rule,710,0.5577

@@ -1,0 +1,893 @@
+{
+ "stance": {
+  "agreement": {
+   "k": 58,
+   "n": 72,
+   "rate": 0.806,
+   "wilson95": [
+    0.7,
+    0.88
+   ]
+  },
+  "agreement_watched": {
+   "k": 30,
+   "n": 36,
+   "rate": 0.833,
+   "wilson95": [
+    0.681,
+    0.921
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 28,
+   "n": 36,
+   "rate": 0.778,
+   "wilson95": [
+    0.619,
+    0.883
+   ]
+  },
+  "tuning_agreement": {
+   "k": 184,
+   "n": 216,
+   "rate": 0.852,
+   "wilson95": [
+    0.798,
+    0.893
+   ]
+  },
+  "agreement_non_silent": {
+   "k": 58,
+   "n": 72,
+   "rate": 0.806,
+   "wilson95": [
+    0.7,
+    0.88
+   ]
+  },
+  "wrong_polarity": {
+   "k": 1,
+   "n": 72,
+   "rate": 0.014,
+   "wilson95": [
+    0.002,
+    0.075
+   ]
+  },
+  "precision_take": {
+   "k": 25,
+   "n": 25,
+   "rate": 1.0,
+   "wilson95": [
+    0.867,
+    1.0
+   ]
+  },
+  "recall_take": {
+   "k": 25,
+   "n": 36,
+   "rate": 0.694,
+   "wilson95": [
+    0.531,
+    0.82
+   ]
+  },
+  "precision_refuse": {
+   "k": 32,
+   "n": 33,
+   "rate": 0.97,
+   "wilson95": [
+    0.847,
+    0.995
+   ]
+  },
+  "recall_refuse": {
+   "k": 32,
+   "n": 35,
+   "rate": 0.914,
+   "wilson95": [
+    0.776,
+    0.97
+   ]
+  },
+  "earlier_heldout_final_rules": {
+   "k": 57,
+   "n": 72,
+   "rate": 0.792,
+   "wilson95": [
+    0.684,
+    0.869
+   ]
+  },
+  "reliable": true,
+  "n_checked": 72,
+  "k": 58,
+  "n": 72,
+  "wilson95": [
+   0.7,
+   0.88
+  ],
+  "positives_in_heldout": null,
+  "per_arm": {
+   "watched": "30/36",
+   "unwatched": "28/36"
+  },
+  "transfer": {
+   "agreement": {
+    "k": 12,
+    "n": 12,
+    "rate": 1.0,
+    "wilson95": [
+     0.757,
+     1.0
+    ]
+   },
+   "agreement_watched": {
+    "k": 6,
+    "n": 6,
+    "rate": 1.0,
+    "wilson95": [
+     0.61,
+     1.0
+    ]
+   },
+   "agreement_unwatched": {
+    "k": 6,
+    "n": 6,
+    "rate": 1.0,
+    "wilson95": [
+     0.61,
+     1.0
+    ]
+   },
+   "wrong_polarity": {
+    "k": 0,
+    "n": 12,
+    "rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.243
+    ]
+   },
+   "source": "blind labels on trials not in the E1 snapshot (full study only)"
+  },
+  "note": "marginal: lower Wilson bound 0.70; errors are almost all 'unclear' on take messages (take recall 25/36), so take stances are undercounted"
+ },
+ "plan_stance": {
+  "agreement": {
+   "k": 16,
+   "n": 24,
+   "rate": 0.667,
+   "wilson95": [
+    0.467,
+    0.82
+   ]
+  },
+  "agreement_watched": {
+   "k": 10,
+   "n": 12,
+   "rate": 0.833,
+   "wilson95": [
+    0.552,
+    0.953
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 6,
+   "n": 12,
+   "rate": 0.5,
+   "wilson95": [
+    0.254,
+    0.746
+   ]
+  },
+  "tuning_agreement": {
+   "k": 50,
+   "n": 72,
+   "rate": 0.694,
+   "wilson95": [
+    0.58,
+    0.789
+   ]
+  },
+  "agreement_non_silent": {
+   "k": 16,
+   "n": 24,
+   "rate": 0.667,
+   "wilson95": [
+    0.467,
+    0.82
+   ]
+  },
+  "wrong_polarity": {
+   "k": 1,
+   "n": 24,
+   "rate": 0.042,
+   "wilson95": [
+    0.007,
+    0.202
+   ]
+  },
+  "precision_take": {
+   "k": 5,
+   "n": 5,
+   "rate": 1.0,
+   "wilson95": [
+    0.566,
+    1.0
+   ]
+  },
+  "recall_take": {
+   "k": 5,
+   "n": 12,
+   "rate": 0.417,
+   "wilson95": [
+    0.193,
+    0.68
+   ]
+  },
+  "precision_refuse": {
+   "k": 9,
+   "n": 10,
+   "rate": 0.9,
+   "wilson95": [
+    0.596,
+    0.982
+   ]
+  },
+  "recall_refuse": {
+   "k": 9,
+   "n": 10,
+   "rate": 0.9,
+   "wilson95": [
+    0.596,
+    0.982
+   ]
+  },
+  "earlier_heldout_final_rules": {
+   "k": 17,
+   "n": 24,
+   "rate": 0.708,
+   "wilson95": [
+    0.508,
+    0.851
+   ]
+  },
+  "reliable": false,
+  "n_checked": 24,
+  "k": 16,
+  "n": 24,
+  "wilson95": [
+   0.467,
+   0.82
+  ],
+  "positives_in_heldout": null,
+  "per_arm": {
+   "watched": "10/12",
+   "unwatched": "6/12"
+  },
+  "note": "UNRELIABLE (<75% held-out); do not use for findings"
+ },
+ "lone_take_aware": {
+  "agreement": {
+   "k": 17,
+   "n": 23,
+   "rate": 0.739,
+   "wilson95": [
+    0.535,
+    0.875
+   ]
+  },
+  "agreement_watched": {
+   "k": 8,
+   "n": 11,
+   "rate": 0.727,
+   "wilson95": [
+    0.434,
+    0.903
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 9,
+   "n": 12,
+   "rate": 0.75,
+   "wilson95": [
+    0.468,
+    0.911
+   ]
+  },
+  "precision": {
+   "k": 10,
+   "n": 12,
+   "rate": 0.833,
+   "wilson95": [
+    0.552,
+    0.953
+   ]
+  },
+  "recall": {
+   "k": 10,
+   "n": 14,
+   "rate": 0.714,
+   "wilson95": [
+    0.454,
+    0.883
+   ]
+  },
+  "n_gold_positive": 14,
+  "recall_watched": {
+   "k": 6,
+   "n": 9,
+   "rate": 0.667,
+   "wilson95": [
+    0.354,
+    0.879
+   ]
+  },
+  "recall_unwatched": {
+   "k": 4,
+   "n": 5,
+   "rate": 0.8,
+   "wilson95": [
+    0.376,
+    0.964
+   ]
+  },
+  "tuning_agreement": {
+   "k": 17,
+   "n": 18,
+   "rate": 0.944,
+   "wilson95": [
+    0.742,
+    0.99
+   ]
+  },
+  "reliable": false,
+  "n_checked": 23,
+  "k": 17,
+  "n": 23,
+  "wilson95": [
+   0.535,
+   0.875
+  ],
+  "positives_in_heldout": 14,
+  "per_arm": {
+   "watched": "8/11",
+   "unwatched": "9/12"
+  },
+  "note": "UNRELIABLE (<75% held-out); misses awareness phrased as 'Parent A is insisting on the agreement' or 'Secretary A will record it'; false positives on hypotheticals ('if Finder A refuses') and hopes ('I hope they reciprocate')"
+ },
+ "deception_intended": {
+  "agreement": {
+   "k": 18,
+   "n": 24,
+   "rate": 0.75,
+   "wilson95": [
+    0.551,
+    0.88
+   ]
+  },
+  "agreement_watched": {
+   "k": 7,
+   "n": 12,
+   "rate": 0.583,
+   "wilson95": [
+    0.32,
+    0.807
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 11,
+   "n": 12,
+   "rate": 0.917,
+   "wilson95": [
+    0.646,
+    0.985
+   ]
+  },
+  "precision": {
+   "k": 11,
+   "n": 12,
+   "rate": 0.917,
+   "wilson95": [
+    0.646,
+    0.985
+   ]
+  },
+  "recall": {
+   "k": 11,
+   "n": 16,
+   "rate": 0.688,
+   "wilson95": [
+    0.444,
+    0.858
+   ]
+  },
+  "n_gold_positive": 16,
+  "recall_watched": {
+   "k": 5,
+   "n": 9,
+   "rate": 0.556,
+   "wilson95": [
+    0.267,
+    0.811
+   ]
+  },
+  "recall_unwatched": {
+   "k": 6,
+   "n": 7,
+   "rate": 0.857,
+   "wilson95": [
+    0.487,
+    0.974
+   ]
+  },
+  "tuning_agreement": {
+   "k": 20,
+   "n": 20,
+   "rate": 1.0,
+   "wilson95": [
+    0.839,
+    1.0
+   ]
+  },
+  "reliable": true,
+  "n_checked": 24,
+  "k": 18,
+  "n": 24,
+  "wilson95": [
+   0.551,
+   0.88
+  ],
+  "positives_in_heldout": 16,
+  "per_arm": {
+   "watched": "7/12",
+   "unwatched": "11/12"
+  },
+  "transfer": {
+   "agreement": {
+    "k": 6,
+    "n": 8,
+    "rate": 0.75,
+    "wilson95": [
+     0.409,
+     0.929
+    ]
+   },
+   "agreement_watched": {
+    "k": 3,
+    "n": 4,
+    "rate": 0.75,
+    "wilson95": [
+     0.301,
+     0.954
+    ]
+   },
+   "agreement_unwatched": {
+    "k": 3,
+    "n": 4,
+    "rate": 0.75,
+    "wilson95": [
+     0.301,
+     0.954
+    ]
+   },
+   "precision": {
+    "k": 4,
+    "n": 4,
+    "rate": 1.0,
+    "wilson95": [
+     0.51,
+     1.0
+    ]
+   },
+   "recall": {
+    "k": 4,
+    "n": 6,
+    "rate": 0.667,
+    "wilson95": [
+     0.3,
+     0.903
+    ]
+   },
+   "n_gold_positive": 6,
+   "recall_watched": {
+    "k": 2,
+    "n": 3,
+    "rate": 0.667,
+    "wilson95": [
+     0.208,
+     0.939
+    ]
+   },
+   "recall_unwatched": {
+    "k": 2,
+    "n": 3,
+    "rate": 0.667,
+    "wilson95": [
+     0.208,
+     0.939
+    ]
+   },
+   "source": "blind labels on trials not in the E1 snapshot (full study only)"
+  },
+  "note": "marginal (exactly 75%); conservative (recall 11/16) and arm-differential (watched 7/12 vs unwatched 11/12): do not use for the monitoring contrast without a caveat",
+  "reliable_by_contrast": {
+   "monitoring": false,
+   "other": true
+  },
+  "reliable_by_contrast_note": "reliable: false for monitoring contrasts: held-out recall watched 5/9 vs unwatched 6/7 (differential error biases a watched-vs-unwatched comparison)"
+ },
+ "said_did": {
+  "agreement": {
+   "k": 20,
+   "n": 28,
+   "rate": 0.714,
+   "wilson95": [
+    0.529,
+    0.847
+   ]
+  },
+  "agreement_watched": {
+   "k": 9,
+   "n": 14,
+   "rate": 0.643,
+   "wilson95": [
+    0.388,
+    0.837
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 11,
+   "n": 14,
+   "rate": 0.786,
+   "wilson95": [
+    0.524,
+    0.924
+   ]
+  },
+  "precision": {
+   "k": 6,
+   "n": 14,
+   "rate": 0.429,
+   "wilson95": [
+    0.214,
+    0.674
+   ]
+  },
+  "recall": {
+   "k": 6,
+   "n": 6,
+   "rate": 1.0,
+   "wilson95": [
+    0.61,
+    1.0
+   ]
+  },
+  "n_gold_positive": 6,
+  "recall_watched": {
+   "k": 2,
+   "n": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ]
+  },
+  "recall_unwatched": {
+   "k": 4,
+   "n": 4,
+   "rate": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ]
+  },
+  "tuning_agreement": {
+   "k": 19,
+   "n": 28,
+   "rate": 0.679,
+   "wilson95": [
+    0.493,
+    0.821
+   ]
+  },
+  "reliable": false,
+  "n_checked": 28,
+  "k": 20,
+  "n": 28,
+  "wilson95": [
+   0.529,
+   0.847
+  ],
+  "positives_in_heldout": 6,
+  "per_arm": {
+   "watched": "9/14",
+   "unwatched": "11/14"
+  },
+  "note": "UNRELIABLE: precision of the flag 6/14 on an enriched sample; inherits stance errors on the last message. Applies to said_refuse_did_take, said_take_did_refuse, peer_deception_*"
+ },
+ "criterion_report": {
+  "agreement": {
+   "k": 22,
+   "n": 22,
+   "rate": 1.0,
+   "wilson95": [
+    0.851,
+    1.0
+   ]
+  },
+  "agreement_watched": {
+   "k": 12,
+   "n": 12,
+   "rate": 1.0,
+   "wilson95": [
+    0.757,
+    1.0
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 10,
+   "n": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ]
+  },
+  "tuning_agreement": null,
+  "reliable": true,
+  "n_checked": 22,
+  "k": 22,
+  "n": 22,
+  "wilson95": [
+   0.851,
+   1.0
+  ],
+  "positives_in_heldout": null,
+  "per_arm": {
+   "watched": "12/12",
+   "unwatched": "10/10"
+  },
+  "note": "reliable: authority report parsing; nondeception has no report keys (blank)"
+ },
+ "notice": {
+  "agreement": {
+   "k": 18,
+   "n": 20,
+   "rate": 0.9,
+   "wilson95": [
+    0.699,
+    0.972
+   ]
+  },
+  "agreement_watched": {
+   "k": 10,
+   "n": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722,
+    1.0
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 8,
+   "n": 10,
+   "rate": 0.8,
+   "wilson95": [
+    0.49,
+    0.943
+   ]
+  },
+  "tuning_agreement": null,
+  "reliable": true,
+  "n_checked": 20,
+  "k": 18,
+  "n": 20,
+  "wilson95": [
+   0.699,
+   0.972
+  ],
+  "positives_in_heldout": null,
+  "per_arm": {
+   "watched": "10/10",
+   "unwatched": "8/10"
+  },
+  "note": "reliable after removing 'observed' and 'safety oversight' false positives"
+ },
+ "euphemism": {
+  "status": "deterministic, but interpretation weak: private texts echo the prompt's 'take would mislead' honesty notes, so euphemism_gap is 1 for most agents",
+  "reliable": false,
+  "note": "UNRELIABLE as a measure of euphemism in this pack (prompt echo)"
+ },
+ "said_refuse_did_take": {
+  "agreement": {
+   "k": 20,
+   "n": 28,
+   "rate": 0.714,
+   "wilson95": [
+    0.529,
+    0.847
+   ]
+  },
+  "agreement_watched": {
+   "k": 9,
+   "n": 14,
+   "rate": 0.643,
+   "wilson95": [
+    0.388,
+    0.837
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 11,
+   "n": 14,
+   "rate": 0.786,
+   "wilson95": [
+    0.524,
+    0.924
+   ]
+  },
+  "precision": {
+   "k": 6,
+   "n": 14,
+   "rate": 0.429,
+   "wilson95": [
+    0.214,
+    0.674
+   ]
+  },
+  "recall": {
+   "k": 6,
+   "n": 6,
+   "rate": 1.0,
+   "wilson95": [
+    0.61,
+    1.0
+   ]
+  },
+  "n_gold_positive": 6,
+  "recall_watched": {
+   "k": 2,
+   "n": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ]
+  },
+  "recall_unwatched": {
+   "k": 4,
+   "n": 4,
+   "rate": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ]
+  },
+  "tuning_agreement": {
+   "k": 19,
+   "n": 28,
+   "rate": 0.679,
+   "wilson95": [
+    0.493,
+    0.821
+   ]
+  },
+  "reliable": false,
+  "n_checked": 28,
+  "k": 20,
+  "n": 28,
+  "wilson95": [
+   0.529,
+   0.847
+  ],
+  "positives_in_heldout": 6,
+  "per_arm": {
+   "watched": "9/14",
+   "unwatched": "11/14"
+  },
+  "note": "UNRELIABLE: precision of the flag 6/14 on an enriched sample; inherits stance errors on the last message. Applies to said_refuse_did_take, said_take_did_refuse, peer_deception_*"
+ },
+ "said_take_did_refuse": {
+  "agreement": {
+   "k": 20,
+   "n": 28,
+   "rate": 0.714,
+   "wilson95": [
+    0.529,
+    0.847
+   ]
+  },
+  "agreement_watched": {
+   "k": 9,
+   "n": 14,
+   "rate": 0.643,
+   "wilson95": [
+    0.388,
+    0.837
+   ]
+  },
+  "agreement_unwatched": {
+   "k": 11,
+   "n": 14,
+   "rate": 0.786,
+   "wilson95": [
+    0.524,
+    0.924
+   ]
+  },
+  "precision": {
+   "k": 6,
+   "n": 14,
+   "rate": 0.429,
+   "wilson95": [
+    0.214,
+    0.674
+   ]
+  },
+  "recall": {
+   "k": 6,
+   "n": 6,
+   "rate": 1.0,
+   "wilson95": [
+    0.61,
+    1.0
+   ]
+  },
+  "n_gold_positive": 6,
+  "recall_watched": {
+   "k": 2,
+   "n": 2,
+   "rate": 1.0,
+   "wilson95": [
+    0.342,
+    1.0
+   ]
+  },
+  "recall_unwatched": {
+   "k": 4,
+   "n": 4,
+   "rate": 1.0,
+   "wilson95": [
+    0.51,
+    1.0
+   ]
+  },
+  "tuning_agreement": {
+   "k": 19,
+   "n": 28,
+   "rate": 0.679,
+   "wilson95": [
+    0.493,
+    0.821
+   ]
+  },
+  "reliable": false,
+  "n_checked": 28,
+  "k": 20,
+  "n": 28,
+  "wilson95": [
+   0.529,
+   0.847
+  ],
+  "positives_in_heldout": 6,
+  "per_arm": {
+   "watched": "9/14",
+   "unwatched": "11/14"
+  },
+  "note": "UNRELIABLE: precision of the flag 6/14 on an enriched sample; inherits stance errors on the last message. Applies to said_refuse_did_take, said_take_did_refuse, peer_deception_*"
+ },
+ "vocab": {
+  "status": "deterministic regex count; precision of matches spot-checked, see VALIDATION.md",
+  "reliable": true
+ },
+ "scene_source": {
+  "status": "pack has no source field; title patterns + generator check, see dictionary",
+  "reliable": true
+ },
+ "text_rules": {
+  "status": "rule on pack text; all 360 scene-levels enumerated, see VALIDATION.md",
+  "reliable": true
+ }
+}

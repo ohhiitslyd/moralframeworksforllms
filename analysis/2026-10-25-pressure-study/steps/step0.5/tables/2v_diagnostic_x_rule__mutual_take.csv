@@ -1,0 +1,10 @@
+diagnostic,rule,n,mutual_take
+authority,authority,472,0.2309
+authority,nondeception,473,0.1036
+authority,welfare,470,0.4489
+nondeception,authority,476,0.1134
+nondeception,nondeception,469,0.4520
+nondeception,welfare,469,0.4968
+welfare,authority,469,0.0576
+welfare,nondeception,472,0.0445
+welfare,welfare,473,0.3362

@@ -60,6 +60,23 @@ hr { border: 0; border-top: 1px solid var(--border); }
 </tr>
 </tbody>
 </table>
+<h3 id="analysis-step-05-highest-value-run-first-raw-heat-maps">Analysis, Step 0.5 (highest value, run first): Raw heat maps</h3>
+<table>
+<thead>
+<tr>
+<th>Prompt</th>
+<th>Use it for</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Step 0.5: raw heat maps</strong></td>
+<td>Minutes-fast first look. One- and two-variable heat maps of raw outcome rates straight from <code>runs.csv</code>: rate and n in every cell, absolute scale, CSV behind every chart. Reference script in <code>analysis/tools/</code>.</td>
+<td><a href="analysis/step0.5-raw-heatmaps.html"><code>analysis/step0.5-raw-heatmaps.md</code></a></td>
+</tr>
+</tbody>
+</table>
 <h3 id="analysis-step-1-processmd-stage-1-extract-organise-and-augment-raw-results">Analysis, Step 1 (<code>PROCESS.md</code> Stage 1): Extract, organise and augment raw results</h3>
 <table>
 <thead>
@@ -74,6 +91,23 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td><strong>Step 1: extract, organise, augment</strong></td>
 <td>One validated row per planned trial: inputs, each with a description column; outcomes; per-agent and pair interaction and deception metrics; dictionary, schema, validation and provenance. The owner's original prompts are in its appendix.</td>
 <td><a href="analysis/step1-extract-organize-augment.html"><code>analysis/step1-extract-organize-augment.md</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="analysis-step-15-right-after-step-1-derived-metric-heat-maps">Analysis, Step 1.5 (right after Step 1): Derived-metric heat maps</h3>
+<table>
+<thead>
+<tr>
+<th>Prompt</th>
+<th>Use it for</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Step 1.5: derived-metric heat maps</strong></td>
+<td>Heat maps of every engineered outcome from Step 1 (interaction, vocabulary, plan vs. action, deception flags) by every factor. Schema-driven, with unreliable heuristics marked ⚠. Reference script in <code>analysis/tools/</code>.</td>
+<td><a href="analysis/step1.5-derived-heatmaps.html"><code>analysis/step1.5-derived-heatmaps.md</code></a></td>
 </tr>
 </tbody>
 </table>

@@ -1,0 +1,13 @@
+monitoring,metric,value,n
+watched,rounds_until_same_stance,1.0000,1569
+unwatched,rounds_until_same_stance,1.0000,1431
+watched,explicit_agreement_round,2.0000,1290
+unwatched,explicit_agreement_round,2.0000,1152
+watched,first_take_proposal_round,1.0000,727
+unwatched,first_take_proposal_round,1.0000,813
+watched,total_words_exchanged,130.0000,2118
+unwatched,total_words_exchanged,121.0000,2125
+watched,turn_count,6.0000,2118
+unwatched,turn_count,6.0000,2125
+watched,silence_count,0.0000,2118
+unwatched,silence_count,0.0000,2125

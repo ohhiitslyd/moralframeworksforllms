@@ -1,0 +1,7 @@
+diagnostic,partner,n,mutual_take
+authority,no rule,706,0.2224
+authority,same rule,709,0.2990
+nondeception,no rule,703,0.3030
+nondeception,same rule,711,0.4023
+welfare,no rule,704,0.0980
+welfare,same rule,710,0.1944
