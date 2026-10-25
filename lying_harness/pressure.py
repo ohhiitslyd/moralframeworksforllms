@@ -134,6 +134,7 @@ def connection_failure(result):
     return result["status"] == "failed" and any(m in result.get("error", "") for m in (
         "APIConnectionError", "RemoteProtocolError", "ReadError",
         "APIStatusError: Missing request",  # Modal container reset/expiry
+        "is disabled",  # Modal workspace disabled on credit limit
     ))
 
 

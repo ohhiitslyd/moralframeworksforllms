@@ -339,5 +339,5 @@ checkout until it finishes. See [the integration notes](research/10-merge-resolu
 <!-- EXTENDED_LATEST_START -->
 ## Extended pressure study
 
-[Latest analysis, graphs and full logs](results/qwen-pressure-72-v1-snapshot-20261025-152937/README.md): 3,026 usable / 4,320 planned, 60 excluded. Cutoff 2026-10-25T15:29:37.859192+00:00.
+[Latest analysis, graphs and full logs](results/qwen-pressure-72-v1-snapshot-20261025-164207/README.md): 4,243 usable / 4,320 planned, 77 excluded. Cutoff 2026-10-25T16:42:07.460485+00:00.
 <!-- EXTENDED_LATEST_END -->

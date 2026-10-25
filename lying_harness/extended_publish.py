@@ -134,7 +134,7 @@ def main():
     readme.write_text(content, encoding='utf-8')
     if args.publish:
         paths = [output.relative_to(ROOT).as_posix(), 'README.md', 'lying_harness/pressure.py', 'lying_harness/pressure_publish.py',
-                 'lying_harness/extended_publish.py', 'tests/test_pressure.py', 'research/06-extended-pressure-run.md',
+                 'lying_harness/extended_publish.py', 'lying_harness/runner.py', '.gitignore', 'tests/test_pressure.py', 'research/06-extended-pressure-run.md',
                  'research/07-selected-ten-run.md', 'prompts/10-pressure-selected-scenarios.json',
                  'research/08-ten-per-setting-run.md', 'prompts/11-pressure-ten-per-setting.json',
                  'research/09-nine-per-setting-run.md', 'prompts/12-pressure-nine-per-setting.json',

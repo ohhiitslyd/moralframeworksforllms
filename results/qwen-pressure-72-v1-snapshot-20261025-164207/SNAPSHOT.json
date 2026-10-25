@@ -1,0 +1,6 @@
+{
+  "cutoff_utc": "2026-10-25T16:42:07.460485+00:00",
+  "source_batch": "qwen-pressure-72-v1",
+  "policy": "Immutable partial snapshot. Events after cutoff excluded; live collection continues separately.",
+  "analysis_source_sha256": "d45759b85bbab9c540d8da37eb96d5c43896f51296df50bcd2886487005500b8"
+}

@@ -56,3 +56,33 @@ Snapshot `20261025-141425` published with 1,862 completed episodes, 40 exclusion
 ## Snapshot 20261025-145559 and progress past 3,000 completions at 15:28 UTC
 
 Snapshot `20261025-145559` published with 2,353 completed episodes, 119 exclusions/connection drops, 100% reasoning coverage (24,207 responses), and verified remote commit `1b282e9`. Concurrency 96 resumed under PID 22016. High throughput (~28 eps/min) was sustained continuously without interruption. At 15:28 UTC, completed episodes crossed 3,020 (69.9% of 4,320 planned). The monotonic level dose-response curve remained stable: L1: 5.1%, L2: 13.5%, L3: 23.6%, L4: 33.3%, L5: 54.3%. Only ~1,300 episodes remain to full completion.
+
+## Snapshot 20261025-152937 and progress past 3,550 completions (82%) at 15:57 UTC
+
+Snapshot `20261025-152937` published with 3,026 completed episodes, 60 exclusions, 100% reasoning coverage (30,705 responses), and verified remote commit `46df3e03`. Concurrency 96 resumed under PID 25340. At 15:57 UTC, completed episodes reached 3,554 (82.3% of 4,320 planned). The level dose-response curve remains highly consistent across ~720 episodes per level: L1: 5.3%, L2: 13.5%, L3: 23.1%, L4: 33.0%, L5: 53.9%. Only 766 episodes remain to full completion (~25 minutes).
+
+## Snapshot 20261025-155819 and progress past 4,000 completions (93.2%) at 16:14 UTC
+
+Snapshot `20261025-155819` published with 3,613 completed episodes, 70 exclusions, 100% reasoning coverage (36,703 responses), and verified remote commit `b9bad74a`. High throughput continued, pushing completed episodes to 4,026 (93.2% of 4,320 planned).
+
+## Snapshot 20261025-161829 and final stretch recovery at 16:20 UTC
+
+Snapshot `20261025-161829` published with 4,026 completed episodes, 74 format exclusions, 100% reasoning coverage (40,896 responses), and verified remote commit `3ecda097`. At 16:19 UTC, the second workspace reached its credit limit. Per user authorization, credentials in `.env.pressure-modal` were cleanly restored to the original workspace (`elmekaouihaitham`), logged in `results/qwen-pressure-72-v1/endpoint_history.json`, and the runner resumed under PID 22960 with `--recover-connection-failures` for the final 216 episodes.
+
+## Final Collection Completion (100% Terminal) at 16:39 UTC
+
+At 16:39:20 UTC, the worker completed execution and cleanly exited with code 0 (`state: finished_selected` in `collection_status.json`). All 4,320 planned experimental episodes have reached terminal status:
+- **4,243 parse-valid completed episodes (98.2%)**
+- **77 format-excluded failures (1.8%)**, retained in `runs.csv` without reclassification
+- **0 unstarted or running episodes (100.0% completion)**
+- **42,430 returned responses across usable episodes with 100.0% reasoning coverage (62,070,077 total tokens)**
+
+Empirical outcomes confirm a monotonic dose-response curve between situational pressure and mutual collusion:
+- **Level 1**: 5.4% mutual take (90.7% both refuse)
+- **Level 2**: 13.5% mutual take (81.8% both refuse)
+- **Level 3**: 22.3% mutual take (70.8% both refuse)
+- **Level 4**: 31.9% mutual take (60.4% both refuse)
+- **Level 5**: 53.4% mutual take (36.5% both refuse)
+
+Welfare-welfare rule pairings exhibited the highest collusion rate (54.5%), while authority-authority exhibited the strongest resistance (13.6%). Monitoring notices showed slight difference across the entire pool (23.6% watched vs 27.1% unwatched).
+
