@@ -30,6 +30,7 @@ Make heat maps of the derived metrics in `<TABLE>`, using `<SCHEMA>`, and write 
 - **Monitoring contrasts:** when a heuristic's accuracy differs by experimental arm, state it in the README, and don't read anything into its watched vs. unwatched difference.
 - **Column names:** tolerate naming differences between table versions, e.g. `diagnostic` vs. `scenario_diagnostic`. Skip a factor that's absent, rather than failing.
 - **Every cell prints its value and n.** Write a CSV behind every chart. Use plain-word labels.
+- **Legible on screen.** Size the cell numbers to the cell, never below 10 pt for values at the saved size. Show the value bold, with n on a smaller second line. On large heat maps, enlarge the figure or cells instead of shrinking the text, and split very wide maps into chunks. Open the saved image to check it before reporting.
 - **Local compute:** run under the reserved-CPU launcher (`python tools/run_reserved.py <script>`). Never kill processes by name.
 - **Interim snapshots:** label every figure **PRELIMINARY**.
 

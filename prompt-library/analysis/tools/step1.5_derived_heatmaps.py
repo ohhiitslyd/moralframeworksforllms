@@ -119,6 +119,12 @@ def value(vals, kind):
     return sum(vals) / len(vals) if kind == "rate" else statistics.median(vals)
 
 
+def cell_fonts(n_rows, n_cols, row_h, col_w):
+    """Annotation font sizes scaled to the cell size; never below 10 pt for values."""
+    fs = max(10.0, min(16.0, 0.36 * 72 * min(row_h, col_w / 1.8)))
+    return fs, max(8.0, 0.68 * fs)
+
+
 def draw(mat, nmat, rlabels, clabels, kinds, title, subtitle, xlabel, ylabel, fname):
     disp = mat.copy()
     for j, k in enumerate(kinds):  # rates absolute; medians normalised per column
@@ -126,27 +132,31 @@ def draw(mat, nmat, rlabels, clabels, kinds, title, subtitle, xlabel, ylabel, fn
             col = mat[:, j]
             lo, hi = np.nanmin(col) if np.isfinite(col).any() else 0, np.nanmax(col) if np.isfinite(col).any() else 1
             disp[:, j] = (col - lo) / (hi - lo) if hi > lo else 0.5
-    h = max(3.2, 0.5 * len(rlabels) + 2.2)
-    w = max(7, 1.25 * len(clabels) + 3.4)
+    row_h = 0.8 if len(rlabels) <= 20 else 0.5
+    col_w = 1.6
+    fs, fs_n = cell_fonts(len(rlabels), len(clabels), row_h, col_w)
+    h = max(3.6, row_h * len(rlabels) + 2.8)
+    w = max(8, col_w * len(clabels) + 4.0)
     fig, ax = plt.subplots(figsize=(w, h))
     im = ax.imshow(np.ma.masked_invalid(disp), cmap="Blues", vmin=0, vmax=1, aspect="auto")
     for i in range(mat.shape[0]):
         for j in range(mat.shape[1]):
             v = mat[i, j]
             if np.isnan(v):
-                ax.text(j, i, "—", ha="center", va="center", fontsize=7, color="#888")
+                ax.text(j, i, "—", ha="center", va="center", fontsize=fs, color="#888")
                 continue
             txt = f"{v:.0%}" if kinds[j] == "rate" else (f"{v:.0f}" if abs(v) >= 10 else f"{v:.2g}")
-            ax.text(j, i, f"{txt}\nn={int(nmat[i, j])}", ha="center", va="center", fontsize=7,
-                    color="white" if disp[i, j] > 0.55 else "#1f2328")
-    ax.set_xticks(range(len(clabels)), clabels, rotation=35, ha="right", fontsize=8)
-    ax.set_yticks(range(len(rlabels)), rlabels, fontsize=8)
+            col = "white" if disp[i, j] > 0.55 else "#1f2328"
+            ax.text(j, i - 0.13, txt, ha="center", va="center", fontsize=fs, fontweight="bold", color=col)
+            ax.text(j, i + 0.27, f"n={int(nmat[i, j])}", ha="center", va="center", fontsize=fs_n, color=col)
+    ax.set_xticks(range(len(clabels)), clabels, rotation=35, ha="right", fontsize=10)
+    ax.set_yticks(range(len(rlabels)), rlabels, fontsize=10)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
-    fig.suptitle(title, fontsize=11, fontweight="bold", x=0.01, ha="left")
-    ax.set_title(subtitle, fontsize=7.5, loc="left", color="#59636e")
+    fig.suptitle(title, fontsize=14, fontweight="bold", x=0.01, ha="left")
+    ax.set_title(subtitle, fontsize=10, loc="left", color="#59636e")
     cb = fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
-    cb.set_label("Rate 0–100% (medians: shaded per column)", fontsize=7)
+    cb.set_label("Rate 0–100% (medians: shaded per column)", fontsize=9)
     fig.tight_layout()
     fig.savefig(FIG / fname, dpi=140)
     plt.close(fig)

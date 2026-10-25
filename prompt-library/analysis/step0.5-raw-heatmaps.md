@@ -23,6 +23,7 @@ Make raw heat maps for the run in `<RESULTS_DIR>`, and write them to `<OUTPUT_DI
 - **Use `runs.csv` only.** No derived metrics, no transcripts, no LLM calls.
 - **Denominator:** rates are among **complete** trials, and the denominator is stated. Report how many trials are complete, failed and not started.
 - **Every cell prints its rate and n.**
+- **Legible on screen.** Size the cell numbers to the cell, never below 10 pt for values at the saved size. Show the value bold, with n on a smaller second line. On large heat maps, enlarge the figure or cells instead of shrinking the text, and split very wide maps into chunks. Open the saved image to check it before reporting.
 - **Colour:** an **absolute** 0–100% scale. Use one sequential colour map for everything.
 - **Plain-word labels** from the pack: e.g. "Welfare + no rule", not `W-none`. Rows and columns go in a meaningful order (level 1→5, a fixed pairing order).
 - **Data files:** write a CSV behind every chart.
