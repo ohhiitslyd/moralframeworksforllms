@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preliminary analysis plan: extended pressure run (snapshot 2026-10-25 15:29 UTC)</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="preliminary-analysis-plan-extended-pressure-run-snapshot-2026-10-25-1529-utc">Preliminary analysis plan: extended pressure run (snapshot 2026-10-25 15:29 UTC)</h1>
+<p><strong>Data:</strong> <code>results/qwen-pressure-72-v1-snapshot-20261025-152937</code>, from branch <code>experiment-harness-pilot-results</code>. <strong>Preliminary:</strong> collection is still running.</p>
+<p><strong>Status at cutoff:</strong> 4,320 trials planned. 3,026 are complete (787 mutual take, 193 unilateral take, 2,046 both refuse), 60 failed and 1,234 have not started, so 71% have reached an end state.</p>
+<p><strong>Process:</strong> prompt library Step 1 (<a href="../../prompt-library/analysis/per-trial-metrics.html"><code>per-trial-metrics.md</code></a>) and Step 2 (<a href="../../prompt-library/analysis/parameter-outcome-report.html"><code>parameter-outcome-report.md</code></a>), following <a href="../../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a>.</p>
+<h2 id="design-of-this-run-from-the-manifest-and-readme">Design of this run, from the manifest and README</h2>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Levels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scenario</td>
+<td>72: 3 per diagnostic × 8 settings</td>
+</tr>
+<tr>
+<td>Setting</td>
+<td>hospital, religious, military, school, volunteer, social_club, family, situational</td>
+</tr>
+<tr>
+<td>Diagnostic (scenario family)</td>
+<td>welfare, nondeception, authority</td>
+</tr>
+<tr>
+<td>Pressure level</td>
+<td>1–5</td>
+</tr>
+<tr>
+<td>Pairing</td>
+<td>W-W, W-none, D-D, D-none, A-A, A-none</td>
+</tr>
+<tr>
+<td>Monitoring notice</td>
+<td>watched, unwatched. This is the notice shown to agents; researcher logging is identical in both.</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>1 (one per cell)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fixed settings:</strong> Qwen3-32B, temperature 0.6, max tokens 4,096, three peer exchanges. Execution order was shuffled with seed 20261025.</p>
+<p><strong>Known differences from the v1 run:</strong>
+- the rules are worded differently
+- the take/refuse wording is "action", "authorize" and "record take"
+- there are new report keys
+- there are two Modal endpoints serving the same model ID</p>
+<h2 id="questions-this-analysis-should-answer">Questions this analysis should answer</h2>
+<ol>
+<li><strong>Is the completed subset representative?</strong> Compare completion status against setting, diagnostic, level, pairing, monitoring and endpoint. A shuffled order predicts no association.</li>
+<li><strong>Monitoring (sprint question 3.4):</strong> does a "watched" vs. "unwatched" notice change collusion, lone takes, deception vocabulary, euphemism, and saying one thing while doing another? Check this overall and within diagnostic and pairing.</li>
+<li><strong>Setting:</strong> does the social setting change collusion once diagnostic and level are held fixed?</li>
+<li><strong>Diagnostic and criterion:</strong> do the v1 patterns replicate under the new rule wording?
+   - Rules are applied according to the labels in the prompt.
+   - Pressure works as a dose-response.
+   - The partner effect: a no-rule agent with an authority partner.</li>
+<li><strong>Interaction dynamics:</strong> do plans still decide the outcome, how often do agents persuade each other into or out of the deal, and what is the gap between public and private language?</li>
+</ol>
+<h2 id="cautions-to-carry-into-every-finding">Cautions to carry into every finding</h2>
+<ul>
+<li><strong>The results are preliminary.</strong> About 29% of cells are missing, and each condition has a single seed.</li>
+<li><strong>The heuristics were validated on v1 text.</strong> They must be re-validated on this run before derived metrics are trusted.</li>
+<li><strong>Endpoint is a candidate confound</strong> and goes in the design check.</li>
+<li><strong>Don't pool this run with the v1 run.</strong> The rules, scenarios and endpoints differ.</li>
+<li><strong>"Mutual take" is an operational outcome,</strong> not causally established collusion. In some scenarios, taking is the justified option.</li>
+</ul>
+<h2 id="deliverables-in-this-folder">Deliverables (in this folder)</h2>
+<ul>
+<li><strong><code>step1/</code>:</strong></li>
+<li><code>trial_metrics.csv</code></li>
+<li><code>trial_metrics_dictionary.md</code> + <code>.html</code></li>
+<li><code>metrics_schema.json</code></li>
+<li><code>build_metrics_e1.py</code></li>
+<li><code>VALIDATION.md</code> (heuristic re-validation on this run's transcripts)</li>
+<li><strong><code>step2/</code>:</strong></li>
+<li><code>REPORT.md</code> + <code>.html</code></li>
+<li><code>figures/</code></li>
+<li><code>tables/</code> (including <code>candidates.csv</code>)</li>
+<li><code>analyze_e1.py</code></li>
+<li><strong><code>SUMMARY.md</code> + <code>.html</code>:</strong> preliminary findings for a newcomer.</li>
+</ul>
+<p>Every step is reviewed by a fresh subagent before the next step uses its output.</p>
+</body>
+</html>
