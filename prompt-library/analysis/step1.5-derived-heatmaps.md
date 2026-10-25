@@ -5,6 +5,8 @@
 **Origin:** owner request (2026-10-25): *"add step 1.5 for any derived / engineered feature output variables."* The reference implementation is [`tools/step1.5_derived_heatmaps.py`](tools/step1.5_derived_heatmaps.py). On a 3,026-episode table it produced 71 figures in about 90 seconds.
 **Previous:** [Step 0.5](step0.5-raw-heatmaps.md) (raw outcomes) and Step 1.
 
+**Reference script:** [`tools/step1.5_derived_heatmaps.py`](tools/step1.5_derived_heatmaps.py) is specific to the 2026-10-25 pressure study's Step 1 table. Pass `--table`, `--schema` and `--out` explicitly, because its defaults assume that run's folder layout. Adapt `FACTORS` / `ALIASES` for other designs.
+
 ---
 
 ## Prompt

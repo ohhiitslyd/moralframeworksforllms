@@ -5,6 +5,8 @@
 **Origin:** owner request (2026-10-25): *"raw heat maps for 1-variable and 2-variable vs. output metric pairs … This is the highest value item."* The reference implementation is [`tools/step0.5_raw_heatmaps.py`](tools/step0.5_raw_heatmaps.py). On the completed pressure study it produced 65 figures in about 1 minute.
 **Next:** [Step 1](step1-extract-organize-augment.md), and [Step 3](step3-findings-briefing.md) for an early draft.
 
+**Reference script:** [`tools/step0.5_raw_heatmaps.py`](tools/step0.5_raw_heatmaps.py) is specific to the 2026-10-25 pressure study (its factor and outcome names follow that `runs.csv`). Run it with `--results <RESULTS_DIR> --out <OUTPUT_DIR>`, and adapt `FACTORS` / `OUTCOMES` for other designs.
+
 ---
 
 ## Prompt

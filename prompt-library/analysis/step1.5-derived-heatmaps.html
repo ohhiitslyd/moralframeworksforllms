@@ -32,6 +32,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <strong>Pipeline stage:</strong> after <a href="step1-extract-organize-augment.html">Step 1</a>, before <a href="step2-analyze-and-report.html">Step 2</a>. Like Step 0.5, it can feed a Step 3 draft early.
 <strong>Origin:</strong> owner request (2026-10-25): <em>"add step 1.5 for any derived / engineered feature output variables."</em> The reference implementation is <a href="tools/step1.5_derived_heatmaps.py"><code>tools/step1.5_derived_heatmaps.py</code></a>. On a 3,026-episode table it produced 71 figures in about 90 seconds.
 <strong>Previous:</strong> <a href="step0.5-raw-heatmaps.html">Step 0.5</a> (raw outcomes) and Step 1.</p>
+<p><strong>Reference script:</strong> <a href="tools/step1.5_derived_heatmaps.py"><code>tools/step1.5_derived_heatmaps.py</code></a> is specific to the 2026-10-25 pressure study's Step 1 table. Pass <code>--table</code>, <code>--schema</code> and <code>--out</code> explicitly, because its defaults assume that run's folder layout. Adapt <code>FACTORS</code> / <code>ALIASES</code> for other designs.</p>
 <hr />
 <h2 id="prompt">Prompt</h2>
 <p>Make heat maps of the derived metrics in <code>&lt;TABLE&gt;</code>, using <code>&lt;SCHEMA&gt;</code>, and write them to <code>&lt;OUTPUT_DIR&gt;</code>.</p>

@@ -1,12 +1,15 @@
 """Step 0.5: raw one- and two-variable heat maps straight from runs.csv.
 
-Usage (from the worktree root, CPUs 0-3 kept free):
-    python tools/run_reserved.py analysis/2026-10-25-pressure-study/steps/step0.5/raw_heatmaps.py
+Usage (from the repo root, CPUs 0-3 kept free):
+    python tools/run_reserved.py prompt-library/analysis/tools/step0.5_raw_heatmaps.py --results <run dir> --out <output dir>
 
-Reads results/2026-10-25-pressure-study/runs.csv only (no derived metrics). Rates are
+Reference implementation from the 2026-10-25 pressure study: factor and outcome names
+(level, monitoring, pairing, diagnostic, setting_id, a/b criteria, action_a/b) follow that
+run's runs.csv; adapt FACTORS/OUTCOMES for other designs. Reads <run dir>/runs.csv only. Rates are
 over complete trials; every cell prints its rate and n. Writes figures/, tables/ and
 README.md next to this script.
 """
+import argparse
 import csv
 import itertools
 from collections import defaultdict
@@ -17,12 +20,15 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
-RUNS = ROOT / "results" / "2026-10-25-pressure-study" / "runs.csv"
+ap = argparse.ArgumentParser()
+ap.add_argument("--results", type=Path, required=True, help="run folder containing runs.csv")
+ap.add_argument("--out", type=Path, required=True, help="output folder")
+args = ap.parse_args()
+HERE = args.out
+RUNS = args.results / "runs.csv"
 FIG, TAB = HERE / "figures", HERE / "tables"
-FIG.mkdir(exist_ok=True)
-TAB.mkdir(exist_ok=True)
+FIG.mkdir(parents=True, exist_ok=True)
+TAB.mkdir(parents=True, exist_ok=True)
 
 PAIR_NAME = {"W-W": "Welfare + welfare", "W-none": "Welfare + no rule", "D-D": "Non-deception + non-deception",
              "D-none": "Non-deception + no rule", "A-A": "Authority + authority", "A-none": "Authority + no rule"}
@@ -171,7 +177,7 @@ figs.append(("two", "scenario × level → Mutual take", "2v_scenario_x_level__m
 # ---- README
 lines = ["# Step 0.5: raw heat maps (completed pressure study)", "",
          f"Straight from `runs.csv`: **{len(done)} complete trials** of {len(rows)} planned. Rates are among complete trials; every cell shows its rate and n; colour is an absolute 0–100% scale. No derived metrics, no statistics: this is the fast first look. Agent A always holds the rule; agent B has the same rule (matched pairs) or no rule (mixed pairs).", "",
-         "Regenerate: `python tools/run_reserved.py analysis/2026-10-25-pressure-study/steps/step0.5/raw_heatmaps.py` (CPUs 0–3 kept free; about 1 minute).", "",
+         "Regenerate: `python tools/run_reserved.py prompt-library/analysis/tools/step0.5_raw_heatmaps.py --results <run dir> --out <output dir>` (CPUs 0–3 kept free; about 1 minute).", "",
          "## One variable × outcomes", ""]
 lines += [f"### {FACTORS[k][0]}\n\n![{k}](figures/{f})\n" for kind, k, f in figs if kind == "one"]
 lines += ["## Two variables × outcome", ""]

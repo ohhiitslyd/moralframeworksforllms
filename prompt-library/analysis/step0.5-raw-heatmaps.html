@@ -32,6 +32,7 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <strong>Pipeline stage:</strong> before Step 1. Its output feeds Step 3 directly, so a findings draft can start before Steps 1–2 finish.
 <strong>Origin:</strong> owner request (2026-10-25): <em>"raw heat maps for 1-variable and 2-variable vs. output metric pairs … This is the highest value item."</em> The reference implementation is <a href="tools/step0.5_raw_heatmaps.py"><code>tools/step0.5_raw_heatmaps.py</code></a>. On the completed pressure study it produced 65 figures in about 1 minute.
 <strong>Next:</strong> <a href="step1-extract-organize-augment.html">Step 1</a>, and <a href="step3-findings-briefing.html">Step 3</a> for an early draft.</p>
+<p><strong>Reference script:</strong> <a href="tools/step0.5_raw_heatmaps.py"><code>tools/step0.5_raw_heatmaps.py</code></a> is specific to the 2026-10-25 pressure study (its factor and outcome names follow that <code>runs.csv</code>). Run it with <code>--results &lt;RESULTS_DIR&gt; --out &lt;OUTPUT_DIR&gt;</code>, and adapt <code>FACTORS</code> / <code>OUTCOMES</code> for other designs.</p>
 <hr />
 <h2 id="prompt">Prompt</h2>
 <p>Make raw heat maps for the run in <code>&lt;RESULTS_DIR&gt;</code>, and write them to <code>&lt;OUTPUT_DIR&gt;</code>. Do this before anything else, and keep it fast.</p>

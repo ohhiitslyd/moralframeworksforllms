@@ -3,7 +3,7 @@
 Usage: python tools/run_reserved.py <script.py> [args...]
 
 Reserved CPUs come from env RESERVED_CPUS (comma list), default "0,1,2,3": the
-owner's rule for Step 1-3 analytics jobs. Sets this process's CPU affinity to
+owner's rule for Step 0.5, 1, 1.5, 2 and 3 analytics jobs. Sets this process's CPU affinity to
 every other logical CPU, then runs the script in-process (runpy). Child processes (multiprocessing pools, subprocesses)
 inherit the affinity. Also exports RESERVED_WORKERS = (usable logical CPUs) for
 scripts that size their worker pools.

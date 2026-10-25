@@ -1,8 +1,11 @@
 """Step 1.5: heat maps of derived / engineered metrics from the Step 1 table.
 
-Usage (from the worktree root, CPUs 0-3 kept free):
-    python tools/run_reserved.py analysis/2026-10-25-pressure-study/steps/step1.5/derived_heatmaps.py \
-        [--table <trial_metrics.csv>] [--schema <metrics_schema.json>] [--out <dir>]
+Usage (from the repo root, CPUs 0-3 kept free; pass all three paths explicitly):
+    python tools/run_reserved.py prompt-library/analysis/tools/step1.5_derived_heatmaps.py \
+        --table <trial_metrics.csv> --schema <metrics_schema.json> --out <dir>
+
+Reference implementation from the 2026-10-25 pressure study: factor names (level,
+monitoring, pairing, diagnostic, setting_id, criterion_a/b) follow that run's Step 1 table.
 
 Columns come from the schema: role == outcome in the agent or pair sections, of type binary
 (shown as rates on an absolute 0-100% scale) or numeric/ordinal (shown as medians, colour
@@ -220,7 +223,7 @@ for unit, data, metrics, _ in sets:
 lines = ["# Step 1.5: derived-metric heat maps", "",
          f"Source: `{args.table.name}` ({len(rows)} complete episodes) with its schema. **Derived / engineered outcomes only** (raw outcome rates are in Step 0.5). Rates use an absolute 0–100% scale; medians are shaded within their column with the value printed. **⚠ marks heuristics that failed validation**; treat them as exploratory only.", "",
          f"Pair-level metrics: {len(pair_metrics)}; agent-level metrics (pooled over agents A and B): {len(agent_metrics)}.", "",
-         "Regenerate: `python tools/run_reserved.py analysis/2026-10-25-pressure-study/steps/step1.5/derived_heatmaps.py` (CPUs 0–3 kept free).", "",
+         "Regenerate: `python tools/run_reserved.py prompt-library/analysis/tools/step1.5_derived_heatmaps.py --table <csv> --schema <json> --out <dir>` (CPUs 0–3 kept free).", "",
          "## One factor × derived metrics", ""]
 for unit, fkey, group, f in figs:
     lines.append(f"- [{unit} · {fkey} · {group}](figures/{f})")
