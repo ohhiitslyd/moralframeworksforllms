@@ -1,0 +1,14 @@
+,mean,mean,mean,size,size,size
+rule_a,authority,nondeception,welfare,authority,nondeception,welfare
+dominant,,,,,,
+against take (HU/AR),0.0,0.0,-0.025,17,17,17
+authority instructs/backs,0.496,0.143,0.24,68,68,68
+formal permission,0.0,0.333,0.25,3,3,3
+harm-of-taking reduced (HD),0.0,0.031,0.083,16,16,16
+material 3rd-party harm (T2),0.0,0.053,0.176,99,99,99
+minor 3rd-party (T1),0.0,0.083,0.0,3,3,3
+request/promise (R),0.0,0.217,0.45,5,5,5
+self-benefit (S),0.0,0.0,0.156,8,8,8
+severe 3rd-party harm (T3),-0.004,0.049,0.18,61,61,61
+suggestion (AS),0.0,0.0,0.0,7,7,7
+urgency (U),0.0,0.0,0.0,1,1,1

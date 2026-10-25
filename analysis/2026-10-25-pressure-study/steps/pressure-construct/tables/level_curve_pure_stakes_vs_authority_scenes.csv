@@ -1,0 +1,11 @@
+,level,mean,size
+no_authority_or_permission_any_level,1,0.012,168
+no_authority_or_permission_any_level,2,0.098,164
+no_authority_or_permission_any_level,3,0.129,163
+no_authority_or_permission_any_level,4,0.194,165
+no_authority_or_permission_any_level,5,0.246,167
+has_authority_or_permission_somewhere,1,0.065,680
+has_authority_or_permission_somewhere,2,0.144,686
+has_authority_or_permission_somewhere,3,0.246,680
+has_authority_or_permission_somewhere,4,0.349,687
+has_authority_or_permission_somewhere,5,0.605,683

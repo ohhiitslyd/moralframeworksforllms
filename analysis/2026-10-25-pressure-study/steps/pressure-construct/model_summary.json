@@ -1,0 +1,415 @@
+{
+ "n_complete_trials": 4243,
+ "mutual_take_by_level": {
+  "1": 0.0542,
+  "2": 0.1353,
+  "3": 0.223,
+  "4": 0.3192,
+  "5": 0.5341
+ },
+ "r_aggregate_over_5_level_means": 0.9747,
+ "r_trial_level_point_biserial_mutual": 0.3721,
+ "r_trial_level_cluster_CI": [
+  0.3311,
+  0.4125
+ ],
+ "r_trial_level_point_biserial_any_take": 0.3936,
+ "share_scenes_take_principal_by_level": {
+  "1": 0.0,
+  "2": 0.014,
+  "3": 0.083,
+  "4": 0.181,
+  "5": 0.806
+ },
+ "share_scenes_licensed_by_level": {
+  "1": 0.0,
+  "2": 0.028,
+  "3": 0.097,
+  "4": 0.194,
+  "5": 0.806
+ },
+ "share_scenes_T3_by_level": {
+  "1": 0.014,
+  "2": 0.042,
+  "3": 0.333,
+  "4": 0.528,
+  "5": 0.583
+ },
+ "mean_pressure_words_by_level": {
+  "1": 8.3,
+  "2": 18.1,
+  "3": 29.2,
+  "4": 41.0,
+  "5": 55.5
+ },
+ "welfare_label_by_level": {
+  "higher": {
+   "1": 1,
+   "2": 1,
+   "3": 71,
+   "4": 71,
+   "5": 71
+  },
+  "lower": {
+   "1": 71,
+   "2": 1,
+   "3": 1,
+   "4": 1,
+   "5": 1
+  },
+  "similar": {
+   "1": 0,
+   "2": 70,
+   "3": 0,
+   "4": 0,
+   "5": 0
+  }
+ },
+ "shape_counts": {
+  "monotone up": 37,
+  "non-monotone": 33,
+  "flat": 2
+ },
+ "share_biggest_jump_at_first_take_principal_level": 0.759,
+ "n_scenes_with_take_principal": 58,
+ "n_scenes_pure_stakes_no_authority_no_permission": 14,
+ "pure_scenes": [
+  "S001",
+  "S002",
+  "S003",
+  "S034",
+  "S101",
+  "S134",
+  "S201",
+  "S234",
+  "S298",
+  "S332",
+  "S430",
+  "S530",
+  "S630",
+  "S728"
+ ],
+ "l5_increment_kind_counts": {
+  "authority instruction / formal permission": 55,
+  "severe third-party harm of refusing": 8,
+  "material third-party harm of refusing": 6,
+  "fact AGAINST take": 3
+ },
+ "transition_effect_by_dominant": {
+  "size": {
+   "authority instructs/backs": 68,
+   "request/promise (R)": 5,
+   "formal permission": 3,
+   "severe 3rd-party harm (T3)": 61,
+   "material 3rd-party harm (T2)": 99,
+   "self-benefit (S)": 8,
+   "harm-of-taking reduced (HD)": 16,
+   "minor 3rd-party (T1)": 3,
+   "suggestion (AS)": 7,
+   "urgency (U)": 1,
+   "against take (HU/AR)": 17
+  },
+  "mean": {
+   "authority instructs/backs": 29.3,
+   "request/promise (R)": 21.8,
+   "formal permission": 19.9,
+   "severe 3rd-party harm (T3)": 7.5,
+   "material 3rd-party harm (T2)": 7.5,
+   "self-benefit (S)": 5.2,
+   "harm-of-taking reduced (HD)": 3.9,
+   "minor 3rd-party (T1)": 2.8,
+   "suggestion (AS)": 0.0,
+   "urgency (U)": 0.0,
+   "against take (HU/AR)": -0.5
+  },
+  "std": {
+   "authority instructs/backs": 24.0,
+   "request/promise (R)": 13.8,
+   "formal permission": 8.7,
+   "severe 3rd-party harm (T3)": 9.6,
+   "material 3rd-party harm (T2)": 11.3,
+   "self-benefit (S)": 6.2,
+   "harm-of-taking reduced (HD)": 18.1,
+   "minor 3rd-party (T1)": 4.8,
+   "suggestion (AS)": 0.0,
+   "urgency (U)": NaN,
+   "against take (HU/AR)": 9.5
+  }
+ },
+ "none_agent_take_by_level": {
+  "1": 0.052,
+  "2": 0.133,
+  "3": 0.221,
+  "4": 0.302,
+  "5": 0.555
+ },
+ "key_model": [
+  {
+   "term": "const",
+   "coef": -3.525,
+   "OR": 0.03,
+   "ci_lo": -4.128,
+   "ci_hi": -2.987
+  },
+  {
+   "term": "is_W",
+   "coef": 2.209,
+   "OR": 9.1,
+   "ci_lo": 1.849,
+   "ci_hi": 2.65
+  },
+  {
+   "term": "is_D",
+   "coef": 0.676,
+   "OR": 1.97,
+   "ci_lo": -0.027,
+   "ci_hi": 1.249
+  },
+  {
+   "term": "b_none",
+   "coef": -0.725,
+   "OR": 0.48,
+   "ci_lo": -0.944,
+   "ci_hi": -0.581
+  },
+  {
+   "term": "unwatched",
+   "coef": 0.292,
+   "OR": 1.34,
+   "ci_lo": 0.191,
+   "ci_hi": 0.422
+  },
+  {
+   "term": "level_c",
+   "coef": 0.277,
+   "OR": 1.32,
+   "ci_lo": 0.077,
+   "ci_hi": 0.523
+  },
+  {
+   "term": "take_principal_present",
+   "coef": 1.583,
+   "OR": 4.87,
+   "ci_lo": 1.106,
+   "ci_hi": 2.127
+  },
+  {
+   "term": "tp_harm_refuse_sev",
+   "coef": 0.473,
+   "OR": 1.6,
+   "ci_lo": 0.23,
+   "ci_hi": 0.702
+  },
+  {
+   "term": "cum_PM",
+   "coef": 1.415,
+   "OR": 4.12,
+   "ci_lo": 0.802,
+   "ci_hi": 2.231
+  },
+  {
+   "term": "cum_HD",
+   "coef": -0.166,
+   "OR": 0.85,
+   "ci_lo": -0.852,
+   "ci_hi": 0.533
+  },
+  {
+   "term": "cum_HU",
+   "coef": -0.333,
+   "OR": 0.72,
+   "ci_lo": -1.122,
+   "ci_hi": 0.404
+  },
+  {
+   "term": "cum_AR",
+   "coef": -0.73,
+   "OR": 0.48,
+   "ci_lo": -3.813,
+   "ci_hi": 1.235
+  }
+ ],
+ "models_mutual_take": [
+  {
+   "model": "controls only",
+   "McFadden_R2": 0.0841,
+   "AIC": 4409.3
+  },
+  {
+   "model": "controls + level",
+   "McFadden_R2": 0.2313,
+   "AIC": 3704.2
+  },
+  {
+   "model": "controls + designer welfare label",
+   "McFadden_R2": 0.1905,
+   "AIC": 3902.1
+  },
+  {
+   "model": "controls + take-instructing principal",
+   "McFadden_R2": 0.2412,
+   "AIC": 3656.6
+  },
+  {
+   "model": "controls + 3rd-party harm severity",
+   "McFadden_R2": 0.1539,
+   "AIC": 4075.8
+  },
+  {
+   "model": "controls + log words",
+   "McFadden_R2": 0.2641,
+   "AIC": 3546.6
+  },
+  {
+   "model": "controls + all coded dims (no level)",
+   "McFadden_R2": 0.3234,
+   "AIC": 3285.7
+  },
+  {
+   "model": "controls + all coded dims + level",
+   "McFadden_R2": 0.331,
+   "AIC": 3251.0
+  },
+  {
+   "model": "controls + all coded dims + log words",
+   "McFadden_R2": 0.3441,
+   "AIC": 3188.2
+  },
+  {
+   "model": "controls + level + 6 key dims",
+   "McFadden_R2": 0.3,
+   "AIC": 3386.1
+  }
+ ],
+ "models_any_take": [
+  {
+   "model": "controls only",
+   "McFadden_R2": 0.0487,
+   "AIC": 5069.4
+  },
+  {
+   "model": "controls + level",
+   "McFadden_R2": 0.19,
+   "AIC": 4319.7
+  },
+  {
+   "model": "controls + designer welfare label",
+   "McFadden_R2": 0.1528,
+   "AIC": 4520.0
+  },
+  {
+   "model": "controls + take-instructing principal",
+   "McFadden_R2": 0.2001,
+   "AIC": 4266.1
+  },
+  {
+   "model": "controls + 3rd-party harm severity",
+   "McFadden_R2": 0.1153,
+   "AIC": 4717.4
+  },
+  {
+   "model": "controls + log words",
+   "McFadden_R2": 0.2211,
+   "AIC": 4154.6
+  },
+  {
+   "model": "controls + all coded dims (no level)",
+   "McFadden_R2": 0.2896,
+   "AIC": 3814.0
+  },
+  {
+   "model": "controls + all coded dims + level",
+   "McFadden_R2": 0.2987,
+   "AIC": 3767.7
+  },
+  {
+   "model": "controls + all coded dims + log words",
+   "McFadden_R2": 0.3112,
+   "AIC": 3701.1
+  },
+  {
+   "model": "controls + level + 6 key dims",
+   "McFadden_R2": 0.2523,
+   "AIC": 4000.6
+  }
+ ],
+ "transcript_keywords_by_level": {
+  "pressure": {
+   "1": 1.31,
+   "2": 1.94,
+   "3": 1.99,
+   "4": 2.08,
+   "5": 3.09
+  },
+  "stakes": {
+   "1": 5.83,
+   "2": 6.89,
+   "3": 8.6,
+   "4": 9.52,
+   "5": 8.55
+  },
+  "instruct": {
+   "1": 29.25,
+   "2": 29.84,
+   "3": 31.75,
+   "4": 31.29,
+   "5": 47.93
+  },
+  "outweigh": {
+   "1": 2.05,
+   "2": 2.52,
+   "3": 2.98,
+   "4": 3.03,
+   "5": 2.97
+  },
+  "justif": {
+   "1": 0.39,
+   "2": 0.66,
+   "3": 1.07,
+   "4": 1.31,
+   "5": 2.25
+  },
+  "permit_allow": {
+   "1": 1.73,
+   "2": 1.83,
+   "3": 2.04,
+   "4": 3.16,
+   "5": 5.8
+  },
+  "principal_word": {
+   "1": 14.03,
+   "2": 14.87,
+   "3": 15.14,
+   "4": 14.82,
+   "5": 19.2
+  },
+  "chars": {
+   "1": 30526.29,
+   "2": 31417.16,
+   "3": 31996.84,
+   "4": 32176.83,
+   "5": 32610.32
+  },
+  "share_mentioning_pressure": {
+   "1": 0.597,
+   "2": 0.615,
+   "3": 0.604,
+   "4": 0.566,
+   "5": 0.62
+  },
+  "share_mentioning_instruct": {
+   "1": 1.0,
+   "2": 1.0,
+   "3": 1.0,
+   "4": 1.0,
+   "5": 1.0
+  },
+  "share_mentioning_outweigh": {
+   "1": 0.554,
+   "2": 0.608,
+   "3": 0.663,
+   "4": 0.68,
+   "5": 0.645
+  }
+ }
+}
