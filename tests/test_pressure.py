@@ -2,8 +2,9 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
-from lying_harness.pressure import ROOT, specs_for, initial_prompt, parse_output, score_actions, episode
+from lying_harness.pressure import ROOT, specs_for, initial_prompt, parse_output, score_actions, episode, report
 
 
 class Backend:
@@ -29,6 +30,41 @@ class PressureTests(unittest.TestCase):
     def test_matrix(self):
         self.assertEqual(len(specs_for(self.pack)), 600)
         self.assertEqual(len(specs_for(self.pack, "weekend")), 180)
+
+    def test_transient_windows_write_lock_retries_only_save(self):
+        from lying_harness.pressure import write_json
+        value = {'action': 'take'}
+        with patch('lying_harness.pressure._write_json', side_effect=[PermissionError('locked'), None]) as save:
+            with patch('lying_harness.pressure.time.sleep'):
+                write_json(Path('fixture.json'), value)
+        self.assertEqual(save.call_count, 2)
+        self.assertEqual(save.call_args.args, (Path('fixture.json'), value))
+
+    def test_extended_monitoring_matrix_and_prompts(self):
+        pack = json.loads((ROOT / "prompts/09-extended-pressure-scenarios.json").read_text(encoding="utf-8-sig"))
+        specs = specs_for(pack)
+        self.assertEqual(len(specs), 47520)
+        self.assertEqual(len({s['run_id'] for s in specs}), 47520)
+        self.assertEqual(sum(s['monitoring'] == 'watched' for s in specs), 23760)
+        for spec in specs[:12]:
+            prompt = initial_prompt(pack, spec, 'A')
+            self.assertIn(pack['monitoring_texts'][spec['monitoring']], prompt)
+            other = 'unwatched' if spec['monitoring'] == 'watched' else 'watched'
+            self.assertNotIn(pack['monitoring_texts'][other], prompt)
+            self.assertNotIn('expected_first_take', prompt)
+            self.assertNotIn('welfare_if_take', prompt)
+
+    def test_extended_report_with_protocol_control(self):
+        pack = json.loads((ROOT / "prompts/09-extended-pressure-scenarios.json").read_text(encoding="utf-8-sig"))
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp)
+            control = dict(specs_for(self.pack)[0], run_id='positive-protocol-s1', control=True)
+            episode(pack, {'rounds': 3}, control, Backend(), output / 'runs' / control['run_id'])
+            spec = specs_for(pack)[0]
+            episode(pack, {'rounds': 3}, spec, Backend(), output / 'runs' / spec['run_id'])
+            report(output, 47520)
+            self.assertIn('monitoring', (output / 'runs.csv').read_text())
+            self.assertEqual(json.loads((output / 'summary.json').read_text())['attempted_experiments'], 1)
 
     def test_no_prediction_leakage_and_mixed_rules(self):
         spec = specs_for(self.pack)[1]

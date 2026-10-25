@@ -363,3 +363,10 @@ choose and calibrate that judge on controls before examining the main outcomes.
 The next scientific decision is whether this simple game elicits enough natural
 variation to measure a tipping curve, or whether richer task choices are needed.
 Do not assume the full experiment must produce a threshold.
+
+
+<!-- EXTENDED_LATEST_START -->
+## Extended pressure study
+
+[Latest analysis, graphs and full logs](results/qwen-pressure-72-v1-snapshot-20261025-115759/README.md): 221 usable / 4,320 planned, 3 excluded. Cutoff 2026-10-25T11:57:59.692818+00:00.
+<!-- EXTENDED_LATEST_END -->
