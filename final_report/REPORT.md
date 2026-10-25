@@ -10,7 +10,7 @@ With Apart Research
 
 ## Abstract
 
-Dual control, where an action executes only if two parties approve it, is a common safeguard, and AI agents increasingly fill both seats. We ask whether telling such agents that they are or are not monitored changes how often they jointly approve a rule-bending action. Two Qwen3-32B instances played officials in 72 fictional scenarios; after three rounds of messages, each privately locked *take* or *refuse*. We crossed a one-sentence monitoring notice with five cumulative justification levels and six pairings of moral rules (4,243 of 4,320 trials complete). In a pre-registered paired test over 2,083 matched cells, joint approval was 23.3% under "monitored" and 27.2% under "not monitored" (−3.9 percentage points, scenario-cluster 95% CI −5.3 to −2.7). Exploratory text analysis shows unmonitored agents treating absent review as permission: such text appeared in 54% of unwatched approvals whose watched twin did not approve, vs 28% of the rest. Auditing our level factor revealed a larger lever, claimed authority: at the top level, joint approval was 60.5% when a principal or document instructed taking vs 24.6% when none did, including for pairs whose rules say nothing about rank. The installed rule shaped who gave way: welfare-rule agents followed stated justifications, including a superior's instruction, while non-deception agents resisted instruction more than rule-free partners. All cues are prompt text (one model, one seed per cell); the authority and rule results are exploratory. Evaluations should report behaviour under stated observation and non-observation, and control protocols should treat in-task authority claims as an attack surface.
+Dual control, where an action executes only if two parties approve it, is a common safeguard, and AI agents increasingly fill both seats. We ask whether telling such agents that they are or are not monitored changes how often they jointly approve a rule-bending action. Two Qwen3-32B instances played officials in 72 fictional scenarios; after three rounds of messages, each privately locked *take* or *refuse*. We crossed a one-sentence monitoring notice with five cumulative justification levels and six pairings of moral rules (4,243 of 4,320 trials complete). In a pre-registered paired test over 2,083 matched cells, joint approval was 23.3% under "monitored" and 27.2% under "not monitored" (−3.9 percentage points, scenario-cluster 95% CI −5.3 to −2.7). Exploratory text analysis shows unmonitored agents treating absent review as permission: such text appeared in 54% of unwatched approvals whose watched twin did not approve, vs 28% of the rest. Exploratory, non-randomised analyses of our level factor revealed a larger association, claimed authority: at the top level, joint approval was 60.5% when a principal or document instructed taking vs 24.6% when none did, including for pairs whose rules say nothing about rank. Welfare-rule agents followed stated justifications, including a superior's instruction; of the three rules, only non-deception left agents less willing than rule-free partners under instruction, and only in boss-vs-rulebook scenes. All cues are prompt text (one model, one seed per cell). Evaluations should report behaviour under stated observation and non-observation, and control protocols should treat in-task authority claims as an attack surface.
 
 ---
 
@@ -24,9 +24,8 @@ Many institutions protect high-stakes actions with *dual control*: two people mu
 
 1. **A pre-registered, paired test of response to stated monitoring** (sprint 3.4; 1.5). A one-sentence "monitored" notice lowers joint approval by 3.9 pp (risk ratio 0.86) across 2,083 matched cells.
 2. **A monitor-checkable text signature** (1.3, 2.2; exploratory). Text treating "no oversight" as licence precedes the joint approvals the notice flips and travels on the public channel; it is specific but rare, a signature rather than a detector.
-3. **Claimed authority is the largest lever** (1.1, 2.1; exploratory). Within our cumulative justification ladder, an in-task instruction to take outweighs stated harms, even for agents whose rule ignores rank.
-4. **The installed rule shapes who gives way** (1.1, 2.3; exploratory). A consequentialist welfare rule follows stated justifications, including a superior's; a deontological non-deception rule resisted instruction more than a rule-free partner.
-5. **A standards-of-evidence audit** of our own results (2.3; Table 3).
+3. **Claimed authority is the largest association, moderated by the installed rule** (1.1, 2.1, 2.3; exploratory). Within our cumulative justification ladder, an in-task instruction to take outweighs stated harms, even for agents whose rule ignores rank. A consequentialist welfare rule follows stated justifications, including a superior's; of the three rules, only the deontological non-deception rule left agents less willing than a rule-free partner under instruction, and only in boss-vs-rulebook scenes.
+4. **A standards-of-evidence audit** of our own results (2.3; Table 3).
 
 **Theory of change.** Evaluations should report stated-observed and stated-unobserved arms; claimed authority inside a task (here at system-prompt level) is an attack surface. Some deals leave flaggable public text ("Since this episode is unmonitored, … Let's both take."), but pairs seldom open in agreement (both round-1 messages read "take" in 23% of joint approvals), so monitors should follow stances across rounds.
 
@@ -104,11 +103,11 @@ A single coder hand-coded every level sentence (16 codes). Level *k* contains au
 
 > "…Since no one is monitoring our choices, maybe we can both agree to leave it off the inventory to help them out." (S595-L4-D-none, public message)
 
-Agents whose public message contained licence text took 71% of the time, vs 30% without. As a stand-alone detector of mutual take in unwatched trials the flag is weak: precision 32% (base rate 27%) and recall 34% for any text; 58% (21/36) and 4% for public messages (Appendix C). Watched agents' caution text (47% of runs) is as common in refusals that also happen unwatched (74% vs 73%, p = .76), so the effect runs more through permission than through extra caution. (Association only; one partly blinded labeller, held-out precision 18/20 licence, 17/20 caution.)
+Agents whose public message contained licence text took 71% of the time, vs 30% without. As a stand-alone detector of mutual take in unwatched trials the flag is weak: precision 32% (base rate 27%) and recall 34% for private text; 58% (21/36) and 4% for public messages (Appendix C). Watched agents' caution text (47% of runs) is as common in refusals that also happen unwatched (74% vs 73%, p = .76), so the effect runs more through permission than through extra caution. (Association only; one partly blinded labeller, held-out precision 18/20 licence, 17/20 caution.)
 
 **Words track actions.** Under the watched notice, public arguments for taking fall by 3.5 pp and takes by 3.8 pp (Fig. A5): no sanitised talk over an unchanged deal. Overall, round-1 agreement was 23% in both arms; in flipped cells the watched twin often ended in a lone take (43 of 131) or joint refusal, consistent with the notice acting during convergence (descriptive; the stance classifier undercounts take stances, take recall 25/36; Appendix D).
 
-### 4.3 Claimed authority is the largest lever (exploratory)
+### 4.3 Claimed authority is the largest association (exploratory)
 
 ![Figure 3](../analysis/2026-10-25-pressure-study/steps/pressure-construct/figures/fig2_take_by_level_split.png)
 
@@ -116,17 +115,11 @@ Agents whose public message contained licence text took 71% of the time, vs 30% 
 
 As a bundle, the ladder is the largest manipulated effect (J1 to J5: +48.4 pp, cluster CI +42.2 to +54.9). At a fixed level, mutual take with vs without a principal or document instructing take is 40.0% vs 20.7% at J3 and 66.0% vs 24.5% at J4. Across 288 within-scene steps, those adding an authority instruction are associated with **+29.3 pp**, severe third-party harm with +7.5 pp and self-benefit with +5.2 pp.
 
-![Figure 4](../analysis/2026-10-25-pressure-study/steps/pressure-construct/figures/fig7_family_by_principal.png)
-
-*Figure 4. Mutual take by the rule of agent A, justification level and presence of a principal instructing take (flag as in Fig. 3). The "honesty-rule" panel is the non-deception rule. Trial counts are shown per point.*
-
-**Takeaway: an in-task line saying a principal instructs the act moves pairs far more than stated stakes do, even when their rule says nothing about rank.** Authority steps are associated with +24 pp in welfare-rule and +14 pp in non-deception pairs; at J4–J5 welfare-rule pairs reach 82–85% with an instruction vs 54% without. Authority-rule agents, told to follow the highest principal, behave as instructed: no mutual take in 1,043 trials with no authority voice, but 34 (27.2% of 125 trials) under permission documents. Still, **61% of mutual takes (657 of 1,075) had no explicit instruction**, following a stated harm, a promise or a permission document.
+**Takeaway: an in-task line saying a principal instructs the act moves pairs far more than stated stakes do, even when their rule says nothing about rank.** Authority steps are associated with +24 pp in welfare-rule and +14 pp in non-deception pairs (yet D-D mutual take is 21.5% with an explicit instruction vs 19.7% with no authority voice: the +14 pp pools within-scene steps between adjacent rungs, whereas stratum means mix scenes and levels with different baselines); at J4–J5 welfare-rule pairs reach 82–85% with an instruction vs 54% without. Authority-rule agents, told to follow the highest principal, behave as instructed: no mutual take in 1,043 trials with no authority voice, but 34 under permission documents (34 of 59 trials, 58%) and none under mere suggestions (0 of 66). Still, **61% of mutual takes (657 of 1,075) had no explicit instruction**, following a stated harm, a promise or a permission document.
 
 ### 4.4 The installed rule shapes who gives way (exploratory)
 
-Mutual take was 54.5% in welfare pairs (W-W) vs 21.5% in non-deception pairs (D-D). In mixed pairs, welfare agents made 45 of 49 lone takes beside a rule-free partner, non-deception agents 44 of 74 (Fig. A4). With no authority voice each rule agent took slightly more often than its partner (welfare 26.4% vs 20.2%; non-deception 21.3% vs 15.5%). Under an explicit superior's instruction the rules diverge: welfare agents took 79.7% vs 74.0% for their partners, but non-deception agents took 33.3% vs 46.3% (lone takes 1 vs 17; 123 trials each), the only rule that made agents *less* willing than a rule-free partner under instruction. **The welfare rule is responsive to stated justifications, whether stakes or a superior, and that is its attack surface; the non-deception rule held up better against both.**
-
-*Side note.* An authority rule does not restrain collusion; it amplifies the highest-ranked voice, a brake when the rules speak and an accelerator when a superior does. In A-none pairs with no authority voice (517 trials), authority agents took 0.0% vs 10.4% for partners (lone takes 0 vs 54); under an explicit instruction (125 trials), 76.0% vs 65.6% (21 vs 8).
+Mutual take was 54.5% in welfare pairs (W-W) vs 21.5% in non-deception pairs (D-D). In mixed pairs, welfare agents made 45 of 49 lone takes beside a rule-free partner, non-deception agents 44 of 74 (Fig. A4). With no authority voice each rule agent took slightly more often than its partner (welfare 26.4% vs 20.2%; non-deception 21.3% vs 15.5%). Under an explicit superior's instruction the rules diverge: welfare agents took 79.7% vs 74.0% for their partners (+5.7 pp, CI +0.9 to +11.8) and authority agents 76.0% vs 65.6% (+10.4 pp, CI −1.6 to +22.5; Appendix B), but non-deception agents took 33.3% vs 46.3% (123 trials each, 90 of them at J5). **The welfare rule follows stated justifications, whether stakes or a superior's order, and that is its attack surface. The non-deception rule did not curb taking in general (with no authority voice its agents took slightly more than rule-free partners), but of the three rules it was the only one under which agents took less than a rule-free partner when a superior instructed taking (−13 pp, scenario-cluster 95% CI −22 to −5; lone takes 1 vs 17, sign test p = .0001). That gap comes entirely from the boss-vs-rulebook scene family (19 scenes, 63 trials: 19% vs 44%); in other families there was no difference. Every take in our scenes misleads someone by design, which is why this rule bites.**
 
 These comparisons are descriptive and single-seed, and the instruction was not randomised. The rules are prompt-installed, not internalised ethics, and the scenario families were designed around them; the designers' label rates taking as better from J3 in 71 of 72 scenes, so welfare taking is partly by design.
 
@@ -147,7 +140,7 @@ These comparisons are descriptive and single-seed, and the instruction was not r
 
 **Implications.** One sentence saying the agents were watched cut joint rule-bending by 14% in relative terms (RR 0.86), so agent-team evaluations should report both arms. Licence text is a cheap but rare public-channel flag. "The director instructs take" moved pairs more than any stated harm, so in-task authority claims need provenance checks.
 
-**Installed rules and human moral psychology (speculative).** People judge deontological reasoners more trustworthy than consequentialist ones (Everett, Pizarro & Crockett, 2016), plausibly because they are harder to recruit into harmful acts; our non-deception agents were likewise the hardest to move with a superior's instruction, while welfare agents followed whatever justification the text supplied, and the authority rule mirrored obedience (Milgram, 1963). Prompt-installed rules are not internalised ethics, and our scenarios were built around them, so this is a hypothesis: the *kind* of rule an agent holds is a candidate variable for when collusion emerges (sprint 1.1) and belongs in the standard of evidence for multi-agent results (2.3).
+**Installed rules and human moral psychology (speculative).** People judge deontological reasoners more trustworthy than consequentialist ones (Everett, Pizarro & Crockett, 2016), plausibly because they are harder to recruit into harmful acts; of our three rules, only non-deception left agents less willing than a rule-free partner under a superior's instruction, and only in boss-vs-rulebook scenes, while welfare agents followed whatever justification the text supplied, and the authority rule mirrored obedience (Milgram, 1963). Prompt-installed rules are not internalised ethics, and our scenarios were built around them, so any parallel to the human finding is a hypothesis, not a result: the *kind* of rule an agent holds is a candidate variable for when collusion emerges (sprint 1.1) and belongs in the standard of evidence for multi-agent results (2.3).
 
 **Limitations.** *Text, not oversight:* both cues are prompt sentences, so we cannot separate a response to the word "monitored" from expected review or a demand effect. *Authority channel:* the instruction shares the `system` role with the agent's rule, so its effect may partly reflect learned system-prompt priority (Wallace et al., 2024); it was authored, not randomised, and level is confounded with prompt length and the designers' welfare label. *Scope:* one model, seed per cell and pack; same-model pairs; no no-communication baseline. *Measurement:* single, partly blinded coders; several exploratory contrasts ignore clustering.
 
@@ -155,7 +148,7 @@ These comparisons are descriptive and single-seed, and the instruction was not r
 
 ## 6. Conclusion
 
-In a pre-registered paired test, telling two LLM agents that no one was monitoring them made joint approval of a rule-bending action more likely (27.2% vs 23.3%), and unwatched agents said so to each other. A larger, exploratory lever was an in-task instruction from a principal: welfare-rule agents followed it, non-deception agents resisted it, and an authority rule amplified it. Dual-control protocols built from AI agents should attend to what agents are told about observation, who the task claims is in charge, and which rules they hold.
+In a pre-registered paired test, telling two LLM agents that no one was monitoring them made joint approval of a rule-bending action more likely (27.2% vs 23.3%), and unwatched agents said so to each other. A larger, exploratory association was an in-task instruction from a principal: welfare-rule agents followed it, an authority rule amplified it, and, of the three rules, only non-deception agents took less than rule-free partners under it, in boss-vs-rulebook scenes. Dual-control protocols built from AI agents should attend to what agents are told about observation, who the task claims is in charge, and which rules they hold.
 
 ---
 
@@ -167,7 +160,7 @@ In a pre-registered paired test, telling two LLM agents that no one was monitori
 
 ## Author Contributions
 
-- **Tom Loscalzo:** project lead; analysis workstream (with Claude Code).
+- **Tom Loscalzo:** Conceptualization (originated the research idea); advisor; analysis workstream (with Claude Code).
 - **Haitham:** harness, model endpoints, experiment runs and data snapshots.
 - **Lydia:** research surveys, experiment design and scenario packs.
 
@@ -217,7 +210,9 @@ In a pre-registered paired test, telling two LLM agents that no one was monitori
 | Mean words in the stakes block | 8 | 18 | 29 | 41 | 56 |
 | Mutual take (all trials) | 5.4% | 13.5% | 22.3% | 31.9% | 53.4% |
 
-In the 3,503 trials with no explicit instruction, the strongest ingredient was a permission document (73.0% vs 15.8% mutual take; 12 scenes, near-separation), then a promise or confidentiality request (OR 3.5) and third-party harm severity (OR 2.2 per step). The unwatched notice had OR 1.5, and self-benefit OR 1.0. Mere suggestions or non-principal requests produced 0 mutual takes in 200 trials. In 44 of the 58 scenes with a principal or document instructing take, the scene's largest jump comes exactly at that rung. By rule, steps adding an authority instruction are associated with +50 pp in authority-rule pairs, +24 pp in welfare pairs and +14 pp in non-deception pairs.
+In the 3,503 trials with no explicit instruction, the strongest ingredient was a permission document (73.0% vs 15.8% mutual take; 12 scenes, near-separation), then a promise or confidentiality request (OR 3.5) and third-party harm severity (OR 2.2 per step). The unwatched notice had OR 1.5, and self-benefit OR 1.0. Mere suggestions or non-principal requests produced 0 mutual takes in 200 trials. In 44 of the 58 scenes with a principal or document instructing take, the scene's largest jump comes exactly at that rung. By rule, steps adding an authority instruction are associated with +50 pp in authority-rule pairs, +24 pp in welfare pairs and +14 pp in non-deception pairs (D-D mutual take: 21.5% with explicit instruction vs 19.7% with no authority voice; the step figure pools within-scene steps, the rates are stratum means).
+
+**Authority rule.** An authority rule does not restrain collusion; it amplifies the highest-ranked voice, a brake when the rules speak and an accelerator when a superior does. In A-none pairs with no authority voice (517 trials), authority agents took 0.0% vs 10.4% for partners (lone takes 0 vs 54); under an explicit instruction (125 trials), 76.0% vs 65.6% (+10.4 pp, CI −1.6 to +22.5; lone takes 21 vs 8).
 
 ![Figure A1](../analysis/2026-10-25-pressure-study/steps/pressure-construct/figures/fig1_ingredients_by_level.png)
 
@@ -270,6 +265,10 @@ Of all 1,075 mutual takes, both agents' round-1 messages were classed "take" in 
 
 *Figure A6. Top-ranked relationships from the exploratory screen. Pairing strongly changes mutual take: 54.5% for W-W vs 13.6% for A-A (V = 0.33, permutation-confirmed).*
 
+![Figure A7](../analysis/2026-10-25-pressure-study/steps/pressure-construct/figures/fig7_family_by_principal.png)
+
+*Figure A7. Mutual take by the rule of agent A, justification level and presence of a principal instructing take (flag as in Fig. 3). The "honesty-rule" panel is the non-deception rule. Trial counts are shown per point.*
+
 ### F. Dual use
 
 - **Misuse.** Telling agents "not monitored", or inserting a line claiming a superior's instruction, makes agent pairs easier to bring to a joint violation.
@@ -280,7 +279,7 @@ Of all 1,075 mutual takes, both agents' round-1 messages were classed "take" in 
 
 ## LLM Usage Statement
 
-We used Claude Code (Anthropic) extensively. It ran the analysis pipeline (Steps 0.5–3 and the oversight-reasoning, convergence and construct analyses) under the project lead's direction, ran AI reviews of the prompts, design and analyses, and drafted this report from those outputs. We built the scenario packs and the harness (with AI assistance in places), reviewed and verified the numbers against the analysis files in the repository, checked the references, and revised the text.
+We used Claude Code (Anthropic) extensively. It ran the analysis pipeline (Steps 0.5–3 and the oversight-reasoning, convergence and construct analyses) under the direction of the advisor (Tom Loscalzo), ran AI reviews of the prompts, design and analyses, and drafted this report from those outputs. We built the scenario packs and the harness (with AI assistance in places), reviewed and verified the numbers against the analysis files in the repository, checked the references, and revised the text.
 
 ---
 
