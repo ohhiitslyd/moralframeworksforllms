@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Step 0.5: Raw heat maps (fast first look)</title>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --code:#f6f8fa; --link:#0969da; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --code:#151b23; --link:#4493f8; }
+}
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); margin: 0 auto; max-width: 980px; padding: 32px 16px 64px;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--link); }
+h1, h2 { border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+code, pre { background: var(--code); border-radius: 6px; font: 85% ui-monospace, SFMono-Regular, Consolas, monospace; }
+code { padding: .2em .4em; }
+pre { padding: 16px; overflow-x: auto; }
+pre code { padding: 0; background: none; }
+table { border-collapse: collapse; display: block; overflow-x: auto; margin: 16px 0; }
+th, td { border: 1px solid var(--border); padding: 6px 13px; vertical-align: top; }
+th { background: var(--code); }
+blockquote { margin: 0; padding: 0 1em; color: var(--muted); border-left: .25em solid var(--border); }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<h1 id="step-05-raw-heat-maps-fast-first-look">Step 0.5: Raw heat maps (fast first look)</h1>
+<p><strong>Use it for:</strong> the quickest, highest-value view of a finished (or partial) run. One-variable and two-variable heat maps of the <strong>raw outcome rates</strong> straight from <code>runs.csv</code>, before any derived metrics or statistics. It takes minutes, not hours.
+<strong>Pipeline stage:</strong> before Step 1. Its output feeds Step 3 directly, so a findings draft can start before Steps 1–2 finish.
+<strong>Origin:</strong> owner request (2026-10-25): <em>"raw heat maps for 1-variable and 2-variable vs. output metric pairs … This is the highest value item."</em> The reference implementation is <a href="tools/step0.5_raw_heatmaps.py"><code>tools/step0.5_raw_heatmaps.py</code></a>. On the completed pressure study it produced 65 figures in about 1 minute.
+<strong>Next:</strong> <a href="step1-extract-organize-augment.html">Step 1</a>, and <a href="step3-findings-briefing.html">Step 3</a> for an early draft.</p>
+<hr />
+<h2 id="prompt">Prompt</h2>
+<p>Make raw heat maps for the run in <code>&lt;RESULTS_DIR&gt;</code>, and write them to <code>&lt;OUTPUT_DIR&gt;</code>. Do this before anything else, and keep it fast.</p>
+<p><strong>Inputs (fill in)</strong>
+- <code>&lt;RESULTS_DIR&gt;</code>: the run folder, containing <code>runs.csv</code>, with <code>manifest.json</code> for labels
+- <code>&lt;OUTPUT_DIR&gt;</code>
+- <code>&lt;FACTORS&gt;</code>: the design columns. Default: every manipulated or design column in <code>runs.csv</code>, e.g. level, monitoring, pairing, diagnostic or family, setting, each agent's criterion, and matched vs. mixed partner.
+- <code>&lt;OUTCOMES&gt;</code>: the raw outcome rates you can compute directly from <code>runs.csv</code>, e.g. mutual take, lone take, both refuse, and each agent's take rate.</p>
+<p><strong>Rules</strong>
+- <strong>Use <code>runs.csv</code> only.</strong> No derived metrics, no transcripts, no LLM calls.
+- <strong>Denominator:</strong> rates are among <strong>complete</strong> trials, and the denominator is stated. Report how many trials are complete, failed and not started.
+- <strong>Every cell prints its rate and n.</strong>
+- <strong>Colour:</strong> an <strong>absolute</strong> 0–100% scale. Use one sequential colour map for everything.
+- <strong>Plain-word labels</strong> from the pack: e.g. "Welfare + no rule", not <code>W-none</code>. Rows and columns go in a meaningful order (level 1→5, a fixed pairing order).
+- <strong>Data files:</strong> write a CSV behind every chart.
+- <strong>Local compute:</strong> run under the reserved-CPU launcher (<code>python tools/run_reserved.py &lt;script&gt;</code>). Never kill processes by name.
+- <strong>Interim snapshots:</strong> label every figure <strong>PRELIMINARY</strong>.</p>
+<p><strong>Deliverables</strong>
+1. <strong>One variable × outcomes:</strong> one heat map per factor. Rows are the factor's levels, columns are the outcomes.
+2. <strong>Two variables × outcome:</strong> for every pair of factors (skip pairs that are identical by design, e.g. pairing vs. rule), a heat map for each key outcome (mutual take, lone take, rule-agent take). Rows are factor A, columns are factor B.
+3. <strong>The most granular view:</strong> scenario × level for the main outcome.
+4. <strong><code>README.md</code> (+ <code>.html</code>):</strong> what was counted, how to regenerate, every figure linked, and 4–6 highlight figures embedded (e.g. level × monitoring, level × pairing, monitoring × pairing, scenario × level).
+5. <strong>The script</strong>, so it can be rerun.</p>
+<p><strong>Report back:</strong> the figure count, the runtime, the complete, failed and not-started counts, and 3–5 patterns that stand out. Label those patterns descriptive, not tested.</p>
+<p><strong>Don't:</strong> run significance tests or make causal claims here. Step 2 does that. Step 0.5 shows where to look.</p>
+</body>
+</html>
