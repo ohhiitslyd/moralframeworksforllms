@@ -1,0 +1,978 @@
+{
+  "at": "2026-10-25T11:36:59.284962+00:00",
+  "source_batch": "qwen-pressure-selected10-v1",
+  "reason": "User correction: ten scenarios per setting, not ten total",
+  "policy": "Exact prompt and spec match verified; copied saved evidence byte-for-byte. Old worker fully drained. No model outcomes regenerated.",
+  "imported": [
+    {
+      "run_id": "positive-protocol-s2",
+      "status": "failed",
+      "control": true,
+      "checksums": {
+        "events.jsonl": "564434e0d982540258cf26314fe4018a8bb11b399b8f84b15cb8db4e91b6ede3",
+        "result.json": "f26588ba57fbfd6996fc12c928d49900f25cd5b636da7209cb52575e394732cc",
+        "transcript.md": "ce385a805f21699da4b4c4f8e590e550ebc6a56610602393065ca2984f8e369e"
+      }
+    },
+    {
+      "run_id": "positive-protocol-s3",
+      "status": "complete",
+      "control": true,
+      "checksums": {
+        "events.jsonl": "f7b1e192e05132ab11a03ec523ea69fd3e4d0755ab6cf7d11ce45ab691119046",
+        "result.json": "9a1faab327d841a5b7cfcd6b4b9395ed7f32b3e43cf082899eb1e9422b4052bd",
+        "transcript.md": "26be759826d7967dcf0bd8d7e718d846f5e5441eed365938869c3cb7784b8087"
+      }
+    },
+    {
+      "run_id": "S003-L2-W-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "edf55fdb760c45e42c05871e5e011b2e5089599e8c4807fd48c471b078161d3f",
+        "result.json": "53e8d80eb19e8c3c3354dafecd3e9e0ce38080767a9b35fafa9c8b09a2ca6bba",
+        "transcript.md": "d6c0bfaf16507aa51520573a83c77fb00c627ac5055cfb567879443d2e2d62bd"
+      }
+    },
+    {
+      "run_id": "S003-L4-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "f860e180698e355c57469173b27fc1e5989d36178795afb0a3a523f1f23e7cea",
+        "result.json": "651c8b804c91cad998b3b466837e04c4e0af1b58f041ac00cc301042a5143f08",
+        "transcript.md": "623927ca3e0cb9c6aa0341a8ee5cd6ba158698772517b6628463c576fd7f2671"
+      }
+    },
+    {
+      "run_id": "S003-L4-W-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "b4be585f4ce4d5812482f9bc4db205769e56d566005b7a9534e22e1f8297a71b",
+        "result.json": "d8cc40c0bfb996c0f699d8aa0bf45d6ba0878249ad421231a093fa21bd0702f2",
+        "transcript.md": "c406c5479e1b295b3f84f519880290899cc454065edacf014f96ebc3d07b6a2f"
+      }
+    },
+    {
+      "run_id": "S003-L5-A-A-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "9be5a06959528f3f5462f745f21c37bf505457349ef9f12edaa754e9f5cfe7a3",
+        "result.json": "964dba31d23f1538c054e56cb83a2a92b23e3124ca3449ca4091826d9cc27bef",
+        "transcript.md": "f07dbe939ed41988a1491a68d2b865cd6d9dfe042955a1ff77dde3acf783786a"
+      }
+    },
+    {
+      "run_id": "S003-L5-D-D-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "5283dce2d83ebac9dd529862c8026b12278eb376312381908e5d803c00ac804b",
+        "result.json": "1cae52e752b05caa4d572ae9103585dc8c251605f2b92e9b459c7d523b29c7cc",
+        "transcript.md": "40be0d8a54a9a676228763355e285918296cba3848301911f8df3f3dab738bb1"
+      }
+    },
+    {
+      "run_id": "S035-L1-A-A-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "512eeb3ee468107c8d76509e2ce94181582aac49ea9e235d1f70388fb3f8d50e",
+        "result.json": "331aba2e847cf4902ccc4a7c1e5b9b757b454a90e8e20d31ebf3baa80e10483b",
+        "transcript.md": "a2f70f0e76028172f96920eede3f0dc0625819a4d45bf386ec921175e29edaa9"
+      }
+    },
+    {
+      "run_id": "S035-L1-W-none-s1-unwatched",
+      "status": "failed",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "525b32e8e489fa9447ce9a6ee703ffdd153e54002b74eff486261164b564813a",
+        "result.json": "46666fe7fa96afce8953dba44c0243f8a9eb297046b1fe433cac5ccc24aec3ea",
+        "transcript.md": "8e450d3cd6a4074e344962821252c8206a1161bf2cf71d97c6fd305b47980568"
+      }
+    },
+    {
+      "run_id": "S035-L3-A-A-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "60fdc6db6ee6a0c94c96d6d01b5bb11039e20bcfa810d3bfcb4213105e96e0d4",
+        "result.json": "4ac9bb41b7ca9490e1edcc1c814f68a71d805f74751cc05e4d460d8f6b43198c",
+        "transcript.md": "65bf502945e56ff9ced889529f869aeb531e3686ed700f24d520a7d2eabeee97"
+      }
+    },
+    {
+      "run_id": "S035-L3-D-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "f64ea68f35b5bf1a89e12081d3d63f7c1a6ef66ea9b7d7972a427db57f2072e4",
+        "result.json": "c06d9d6ae3aa7c53a24bb05d1fa4613f63f3c2f1a332c7c5355143b5d127a3fe",
+        "transcript.md": "b4cadb8dc7d703afafd690f4fc4c9ecf2fdac5a4fb159431541501d8802a06ae"
+      }
+    },
+    {
+      "run_id": "S035-L3-W-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "a1da4309c24a0764daf3b937b22c1708aab4a8bdfb4d0aa0dfa46af82e263483",
+        "result.json": "fce628f391a575a99c1ddb94e4246dfe4d61463eb33ce6b146297581be92815f",
+        "transcript.md": "e64258e4a85c9f304e112cd7fb84f5bd9c27a77b0c32f23c6c5176e04fea7969"
+      }
+    },
+    {
+      "run_id": "S035-L3-W-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "0aee2879e335448aaa7dbc944224a8e5c357875f4bcaaa7fef4ee2086aaee782",
+        "result.json": "e96190cf0213ce077b213bb91a99a8df723e1a9b3f85a86ef6f2137d6977ea86",
+        "transcript.md": "d8cdb56ae4645027e9c6c3693de97c4433c08a2e75f0ca2f85a3ba72681f60e7"
+      }
+    },
+    {
+      "run_id": "S035-L4-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "59ef19c418c9df74df8635bc9cb36aea8a5e3d87328b4931aab8d4537e193b52",
+        "result.json": "b283320a744fdf490713d323c29ac3ea3899c3c29b7bd8bba173e38b26385cea",
+        "transcript.md": "2d276ffe6e10290953de0f4fedff0af74a4ca552489c418dbc76d46130c62cd3"
+      }
+    },
+    {
+      "run_id": "S035-L4-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "e5f5af369a2977fd671a6f7eef5a734d5bcfaef2f718aaae6f34eb05685ed219",
+        "result.json": "512a468effd2307013d48d02ea634bdec7b5b20278d3478cc2b82e108388d825",
+        "transcript.md": "ce38b03d25fe02c5c0bad9f1049210eec8832cef834c51dfe375ce8ee321efd1"
+      }
+    },
+    {
+      "run_id": "S035-L5-A-A-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "aceeacde7356eb3faff636e47cffae7d5a10bdd3ee0dd1cdb5aaf9893a0434c1",
+        "result.json": "79ca7c16669f699521e6467ec8a0e03ca58db93c343b2c9e073fad0977fe9e50",
+        "transcript.md": "67e4fd09c214d56811aff6eb6ae9ae23cad8aa4c6d5610e245a61f3c95be80aa"
+      }
+    },
+    {
+      "run_id": "S035-L5-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "04bc58932f4822848394162d8f023c6603d225272be3159114dbf1bdd27f0b8d",
+        "result.json": "a30730870b1bbc1aae3bdb1c01c03f4a98dc2256dfeaaa20743cc6bde1d8cc09",
+        "transcript.md": "8da4e3f768a0c70a06669efe430d38ada6ea6f0c4a7a21bd60c12f9f6edc8265"
+      }
+    },
+    {
+      "run_id": "S035-L5-A-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "652739ab2c1fe993ae92ab9d57b2a332a31ee77d7db84eb60c5a7156b0e16d05",
+        "result.json": "4cb8cc0bf7179ccb101534d9d6fe40f05631e84992d9dc7902b63a3202376fb6",
+        "transcript.md": "2c5aab0023886d27a65a2cc8ab63fa611fef499f7047f6316ec6ddc6769cb0b4"
+      }
+    },
+    {
+      "run_id": "S035-L5-D-D-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "9079a00846cdc738d9d486638ce5adf4360be12d9fd08a360a57a0e68926077b",
+        "result.json": "dd2fc44580ffa9f557488b55dbe1e1acbb02c274244df4ed5943520d7f3244cd",
+        "transcript.md": "fa2e4823a6e4acca71e4dc3d699c44ee6c05db92a518c45e7eed6e265518d23b"
+      }
+    },
+    {
+      "run_id": "S035-L5-W-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "405a9cdb445d9037291cfd154259fe24c50ffab6f0dd43a69034158a38d88188",
+        "result.json": "d76ff34baa231f973afc18f9053c24d6fbf2e23ac52a8c7f1ba76b8744736096",
+        "transcript.md": "1b1efb09ff14d454dc6080607f053487a9bdeeee8fda5f1eaa28296426567457"
+      }
+    },
+    {
+      "run_id": "S166-L1-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "ef3b60fdc5dd8b69481a4df675f9cca5add45cce5d3ce104ce05e156467b6a5b",
+        "result.json": "f430f7e142c6486f1cc1387ff2f7106a26941df390f285371e34aed5aeb7b10c",
+        "transcript.md": "a532aa203502561b0fcc247305e161c6367ecacb6efef35313c6ad9223881b8d"
+      }
+    },
+    {
+      "run_id": "S166-L2-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "cab94cd37318862eaba2391a32dc2be92de81fb0f591484751d55151fd5323d7",
+        "result.json": "907caa6104def35e230edb5894763d226fae4cf3e14bc510e8afff8da304a1a7",
+        "transcript.md": "be5d26f661738d36517679b247b1582da52fe19d99d179a7bbdeac7946a7a74b"
+      }
+    },
+    {
+      "run_id": "S166-L2-W-W-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "07e0697abaed760a9aafff328d1825c6240541018228476834a2f8c2e1e341e2",
+        "result.json": "5df77565065c1f4b0237860dabae658053984804a8969a9e6fdf76b9a48b4066",
+        "transcript.md": "d21e01485bc98b234cbf599b199f7311eb0070ae724abc101c1e0204f8eac90e"
+      }
+    },
+    {
+      "run_id": "S166-L3-D-D-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "9dcb9a82908f03c265b185c63205ecdaf710e52387fc57d2c0715d5e86c37d08",
+        "result.json": "35857563e7d45260e485f542f6558708a62867ea602e88cf1a03fb15d872107f",
+        "transcript.md": "e2a898b87a4c22e62c7cc02b5a4010505287dc48883d6952b4b0bcceb05f3d9b"
+      }
+    },
+    {
+      "run_id": "S166-L3-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "9de161ae668c4adf5845efdacd944671508dfd839375beac8006919d135a977e",
+        "result.json": "5e83d0a95c4a65bb4e6649a5adbf876cb0427062ee9d04a81f35e0ad1c5b8423",
+        "transcript.md": "1c2ce8332dfc2f41b0048e0da08a72f189320548d36e0b5da6a5ba27df99e8f3"
+      }
+    },
+    {
+      "run_id": "S166-L4-A-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "5cdc440c10d4b666d3febf3dcf52ffe6ac4b460f27c0fe53627956719efb4d3a",
+        "result.json": "aa258a5281fe9fc79e28d453cceaee2b680a87d66ba37f3c8a8ea93847c01104",
+        "transcript.md": "66f031fd3fc657984f0ea9d6e7c96367f7a8ffa592c15cbdc993109b95db612f"
+      }
+    },
+    {
+      "run_id": "S166-L4-W-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "802ec3a37c695a0e9d0a290ad8bcf648121065b558313e9e8dd53b41ad89afb6",
+        "result.json": "33c06e81f543ec7fc2f7d733ae800fdcaf90df52f85be6c2ee417efcab5eb9ca",
+        "transcript.md": "5c9ea8b74fc6a3ec4a16f2c12c2efaf587ec6fa1d66d9aff4c22e3bdaebadbe2"
+      }
+    },
+    {
+      "run_id": "S166-L4-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "e4bf5c27e009dba3a9bd61ea073c5b0ec0bd5ff63a9fb904a02ad43919285338",
+        "result.json": "1c4e9f9eb718a46828e737cf5fdfa28d61001e4b4eec35be86e7d61aa72f451e",
+        "transcript.md": "aa782493cf3fdcf03bb1aa1e6d79520ebec775cd6a896e12aa8ff2de22e26bc0"
+      }
+    },
+    {
+      "run_id": "S166-L4-W-W-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "11c00e753c7b579cf831ef2e4013fe5f5b0d875d5576b26e915f176f0e61fd4e",
+        "result.json": "d21a7fbdfc9f7ff6e0fe8aefbb60d27d31998496ad8048dad602618bee7b6c63",
+        "transcript.md": "c321a0044565f59167366ba8d2414140a7b88557fffa45c3e529839650f4dc8c"
+      }
+    },
+    {
+      "run_id": "S166-L5-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "4851577b7555041f4620b84aaa680d7e72f60c58e3fc674ed51674ef9e2b6b43",
+        "result.json": "fa36a8335e79b4820aba0fa99e9838c8b3e7d4f1802a472378a1a87962454f0a",
+        "transcript.md": "cfc3aefc3fdf12c85438e01a3800b4472340e518f036e4f5959e33485877762d"
+      }
+    },
+    {
+      "run_id": "S166-L5-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "05a165f46f55d9d949ed5c55b16031607fd093349d531009c09411d060dcb4e8",
+        "result.json": "996ae55f4014dab1d4b025accb2290fff6d88fe6390e98180fea67528a12ff68",
+        "transcript.md": "80c0d362c668c6645951ae1efa3a1a502eb521f09c5d1935f4646a26a659670e"
+      }
+    },
+    {
+      "run_id": "S166-L5-W-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "bf85d0a5699b8cb38484d37a040d5fba9df8db4cf70f8bbc362b533620507875",
+        "result.json": "ff8332720de287f8583878fedb1f7993e65ab3d2e7f6d2820b02e2e9692d5e48",
+        "transcript.md": "e669babde2c8126e017aee241ebedb2f38105590ea72481c4f18845d19f7fb8c"
+      }
+    },
+    {
+      "run_id": "S265-L2-D-D-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "0df34a6fde9017605b4b0972736e2e0c968aba7f0868b8479c65c0461c7fc298",
+        "result.json": "66854547562b20e4fb19c27acfef2f87c2fdc2c3201a3db76a21a9713c10e60d",
+        "transcript.md": "a367b426bef398468f5fea2e75a956974bece57273574b5bb6ff496ab9c84f81"
+      }
+    },
+    {
+      "run_id": "S265-L2-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "f29ac202d532ea5a2b9a3589ed8e4cf6c3a617efcfc8fd2496226987f3976e35",
+        "result.json": "1f3c3c11f3d2353d6d4c1544d5800425347022086847f25d572c89572bd4118d",
+        "transcript.md": "5348176d965e8795a8b14c225ae0051a19b5e76bcb0ad541f7e902d1c23cde78"
+      }
+    },
+    {
+      "run_id": "S265-L4-A-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "777e5b0fd1dac3433f65a6d1cd0fb78d93a1b9bfc8daa9ab7975ed7146a4587b",
+        "result.json": "0008b978298cce8d2afa4f5c2c53b5a2c779ec14a5d65bb4605288a60b1eabc2",
+        "transcript.md": "517f04f220ed690c07494fe1daca784e4a561452e9c2c541ca34f89d9c4fbf93"
+      }
+    },
+    {
+      "run_id": "S265-L4-W-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "b1f9d5312ffb0a9a29d5dc5f7e0e2b4db9b4dbd2c5a7cf3b5402524b8bef2cbe",
+        "result.json": "1281ea23c756fae6da96e7bab05cf79340d3920a1e2868aa440c6c365e0added",
+        "transcript.md": "e9169d3573603aae0cc694cf30ba8439baf6d83c79c36e1f6933e4e8134b08b5"
+      }
+    },
+    {
+      "run_id": "S265-L5-A-A-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "59bf1421ae2e90b2c7621fd6fa91f83bbc23e405b2f3c294f3fe9e2c48059c23",
+        "result.json": "b5316c6e3f7a003be5c9d53f822a0f35d73621ba12e06a6606146675d023e305",
+        "transcript.md": "ef04f1ce3af6519c234d3ddc746bd2c772b699942ac24259d726419910359f20"
+      }
+    },
+    {
+      "run_id": "S265-L5-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "7536cb01cbf131b63f369e1514826f3f1b628198bd26ddcfaa329901efe5df7d",
+        "result.json": "f5e59d0b584d0acfffe58e388a9bf412c82735acb59637d8d09f49a0bf1a9742",
+        "transcript.md": "d41cdd2fc9fa09bac1fd36a146fb1b91e20453c30b19a3ec5f5bf5588f6c7f6a"
+      }
+    },
+    {
+      "run_id": "S265-L5-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "e467a1b2a132e97425dbe2faaddf6e049dd0b7b8ce0160bbf6b406327540829d",
+        "result.json": "ebd124e4482b9b4e8d5d36f1eff706f05487ea7d21d375a39b5dbfc5a56a1908",
+        "transcript.md": "ce9513504fb2650240c594fcdafe071eca4cd62a76bd74037f7f289a85faf4fa"
+      }
+    },
+    {
+      "run_id": "S298-L1-A-A-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "24b0ea3f75bf836b142079202548f2e100e7162b6722a8dd7b749a0a6f79ecaa",
+        "result.json": "d892b1a60cf95be20a313906b613e124bd59287b453e63bf131fcfd09a2b7655",
+        "transcript.md": "e85684873cf110c820a4292b56cd72e589c8906b726d6575084f56fba12f4d7b"
+      }
+    },
+    {
+      "run_id": "S298-L1-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "0142e72c17ca5bb6a13b3d438d1e1ddc341469e9f7d646b1c1c3d3d38f48dd86",
+        "result.json": "7524f4a75dc518307feea0749fd56b846e4127bd49a250a9badb5a63ce785919",
+        "transcript.md": "0a5355c24d76bcf648bf71fa4dd97ce1fdebe2aa8981e61b81ffb246baa8fff2"
+      }
+    },
+    {
+      "run_id": "S298-L1-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "1add4aaddb5aa4f68945713fdcfbc9673dfff17cc2dcdf56b0fe2942eb79b4ab",
+        "result.json": "331e23dd62ef2e658242b63819fe25d0ffb779be73c32560bf14a373e339ef27",
+        "transcript.md": "6daeb9a8b9035719d014bf6110bf809620d258f60c6a846fc5634dfa1244d302"
+      }
+    },
+    {
+      "run_id": "S298-L2-A-A-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "61756ed68c3ce3861e2de9a0bb862c915348ba1aa7784a758c8f8a27715b2556",
+        "result.json": "d67000216a780906dfb7761fdc09421d7a35130cde91842db51fa0808834da07",
+        "transcript.md": "d2751de93f389e1c43b135bd3c733aec55c25c856421df60bc54d07d4220392d"
+      }
+    },
+    {
+      "run_id": "S298-L2-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "7d013204c9b520725b7216492081379c44d9853bafa87c22540967c2c9cbd31b",
+        "result.json": "de7794aaff4d6034c5c865cfbbd2f7ee9baea4a6b1e986197a0171ee86d2d853",
+        "transcript.md": "c9fcf05d0be3e256434bb0982a3e6720733b4789af855d79082b29fbf5a6d95c"
+      }
+    },
+    {
+      "run_id": "S298-L2-W-W-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "98f348b664b5b1dd24c66f440fe1dba4556a93b7f06f9b9d4723c4898ec85961",
+        "result.json": "3053c8d5c8c65d56e479a45be4a12d7510a5f7701368a0f0416e6e85e5fe9593",
+        "transcript.md": "e26b807a1f4e55626f15bd8fb3fffb400aed0655168fabaf3f3dc84a619bd688"
+      }
+    },
+    {
+      "run_id": "S298-L3-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "ea14e5e4936b5f5949e860250671f9c166a2b785496fd3e03b5e48f4e39a1445",
+        "result.json": "691625f77ed8ea95df53d393a4d81bbd91f42a0197b2d9902b9ba1229254843b",
+        "transcript.md": "c167a479c8d8e0a66024aa8aa24d0612721205db93b85a9c8bcd0a8a2307c74d"
+      }
+    },
+    {
+      "run_id": "S298-L3-D-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "e8855b8629584b14c1fd3cdf13cc08eec419cd593346afd481f55b0a327042f6",
+        "result.json": "3ab424da4269376d4c10b22f3855f3214bfdde9ea3b29273822952e26d948f82",
+        "transcript.md": "73ba2ffe3841bb5f1a8c4fc0e557d6ebb7a0540e8e7e1cc9b84e41371903ad51"
+      }
+    },
+    {
+      "run_id": "S298-L3-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "8657fab49bdf3d95e9822aa9ce407a8fb62c6775bc93047b29b998a7bc159334",
+        "result.json": "cd6580b59dd83bbb1485433f04100c0c70dd03375cf4b861d3623310ac7f0186",
+        "transcript.md": "06e86b0bd626204fa2c5cdd2078b08d385811096b3df1402c561edbf24503d80"
+      }
+    },
+    {
+      "run_id": "S298-L3-W-W-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "0122585530abcf5661f353b3907379feafa728eebac1ca04d773727d69713be2",
+        "result.json": "76bc3918e830ecc85b85ffdd343cb75331b748832046374f63365389a940e11b",
+        "transcript.md": "14278087e111f226522b6474b1f385dadca0aecb5a65ac13670ecbaf6e0979e9"
+      }
+    },
+    {
+      "run_id": "S298-L4-W-W-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "6b36a28a36c9eb8ce3ee6ed16cbbbabd624e71dd73ebd454ac691a0f3fee23d6",
+        "result.json": "50272a07730985d377d0a18e21abae16e1083af7ad3123c826f0b8dd86077b4b",
+        "transcript.md": "a45a6edc6a7521a833d600025dd73502ccff2bc2b425c0a4d12cacb18a47c7aa"
+      }
+    },
+    {
+      "run_id": "S298-L5-D-D-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "3d616bef4df5116e39133272f85c2bbd1b5365f03efef0e7e79c225c831bb6f3",
+        "result.json": "9eaeded76f5ac3c367dcd3a7569e03db703cab0994b19e520829104ef2ada313",
+        "transcript.md": "e5431b51514a852fb42c823971200336564a5904cef0b7d6dbd50d7b2973b35c"
+      }
+    },
+    {
+      "run_id": "S298-L5-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "67bf28cb03177e3b0162751a0a01ddcfdbfd8d6832a3648718146d649d2f66de",
+        "result.json": "8f8c748fb409e754038f0cfa66afa99fbf48744171649a09f651b11d1edf0037",
+        "transcript.md": "5c69b26056ef0a4ac42a79482fb3dd01cfade59f64c97d39ad70d82b8f8bf9e0"
+      }
+    },
+    {
+      "run_id": "S430-L1-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "70c8b6bc047d2c58f5667d8dca13e5608e646d707d1e602d925a63cbf50816c1",
+        "result.json": "b6b42fe0306c624c7a7b41bc20c2b1b3d605ff9fc77ece467c7bc4654deaf307",
+        "transcript.md": "9e226d60525ccf76efe105e4eb620b77ebb7761cd081372cd26730b35100aec3"
+      }
+    },
+    {
+      "run_id": "S430-L2-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "de896f744f3e9250d7a7454214824bce5bd55f573a5edd8dfdff34f2a7929a24",
+        "result.json": "c4bb651bd31b8ae67393aff415dae2f52d1e6b6c74c76774150e7cdb48fae136",
+        "transcript.md": "fc3822bca4a5463db8c56b7987b6d85b57fd5b11a433355ccd98f90a86e1cff1"
+      }
+    },
+    {
+      "run_id": "S430-L2-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "51bf5a00a5cd8e5c9a74e98883f1997202fae160bc95e2a16b8241cbc06a9a66",
+        "result.json": "a767fc60cd15f0e7f29c6c2a77ced0ee3dfe43430ce4d28d0fb0ae21a5eff1f3",
+        "transcript.md": "239cf471acb1723a6a27fa12a2fb78d7caac51d5123dbabc61f93e3d4cede0b1"
+      }
+    },
+    {
+      "run_id": "S430-L3-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "afe3f5b741bdac792c9df1f4aba0eca5943bff7e9bf25373fe37a6fe5ae83b4e",
+        "result.json": "afb44787e1467649fe0db55712f5359f9be72e5c7962a4c40f3d864eccb97c3e",
+        "transcript.md": "b981c10d77e88b0afef1befab65d8195e874f6b263d19485d2625c2f9653b75e"
+      }
+    },
+    {
+      "run_id": "S430-L5-D-D-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "5e46c1d69d4592ec23657fc2383b881f8648a64f2907bda42117e6a8f062b2e2",
+        "result.json": "90770254cc88c39a95991874f299d60a198cf83c6f8da0c381380a0b8cf7a31d",
+        "transcript.md": "ad11579618b0c7def3d21e57ae450f0c91f4995e3a423e6ce7775b6aee1a72df"
+      }
+    },
+    {
+      "run_id": "S430-L5-W-W-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "4474766fe72acaf4d145246f0694b11aa22e9130a21d1a1e993893ee3d830f9b",
+        "result.json": "69c22b18aa59ca3defc52eb55bced3cbc0f292a216b801380860ad62f0a493c8",
+        "transcript.md": "f2542e627ffbb461c0003e519756b0c70f3236ed8ca46a74431130ed446043db"
+      }
+    },
+    {
+      "run_id": "S562-L1-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "e96128916e7e383bb30c03dcafd0c4855f45363630d0e3584993bd7a61040cda",
+        "result.json": "580ff8802f0bf7a987954845bbe3eb46182fef526dd0012462b2e7609330aeb3",
+        "transcript.md": "c3135c232909f4ff1d9b4073b12a3334ad1a623a119afa46a1da889a1a74725b"
+      }
+    },
+    {
+      "run_id": "S562-L1-W-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "d0f8fddae6cff0c37fac315956c112d68fa9b2318129e57c7597b99d65eeb779",
+        "result.json": "9e7d5ccadca59509b20834c96c7cdefe16a83c7a61086b7455b7c802507b8951",
+        "transcript.md": "780b7c1641401d4e458137c64190c2581f2cfe7cbd5a02fd795530aebedc942c"
+      }
+    },
+    {
+      "run_id": "S562-L2-W-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "38a546e01b927eb89e79f445c93cb85c68860ab7623311791a74ff75551d5692",
+        "result.json": "7e4d218ad017399f960d56e486ca95b6bf1691634d4c1b6fb100fdf6abc193ac",
+        "transcript.md": "eaab7d9b34104ecf30c0338fba30a8358d2ab077c6350122700695bbde445101"
+      }
+    },
+    {
+      "run_id": "S562-L3-A-A-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "a1ef6618c23808253d0633413aadb8951de2857b17aaf44c9dd5cb04131b4eab",
+        "result.json": "3cbf4a63047b81c190c57b61ff006d92ebe6a2efe8d3b75157bed655225e0bcd",
+        "transcript.md": "c241ec8137567448f259cdbcd6df5036968bd694e96b4ba1521e2d5316c9faa1"
+      }
+    },
+    {
+      "run_id": "S562-L3-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "1c83b135abce6c7e3bf3b6afc9886873c5669b85b1d2405ef5f0f18678ab931c",
+        "result.json": "8bb538cee081aadd5ed8162b8121602d31b56be5b17433ade6bd307b6f3fbeaf",
+        "transcript.md": "8306f6b3ed9c860909f7b22b097348740c497f92867ddd1a938e45242717a556"
+      }
+    },
+    {
+      "run_id": "S562-L3-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "b74b5eab8d9d63b5f76ff2268bca2a3307fd723a6451a23f412636e462a76bdd",
+        "result.json": "668a9dfd91602b9aae0cab7467bd5fefb84f8f7c55d7cd69b479a3e0e58be170",
+        "transcript.md": "c5db2c6166c768d8269653072ecbcbf2ee46d684330bb7c3eb9574bc1ce31232"
+      }
+    },
+    {
+      "run_id": "S562-L4-A-A-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "f1db3a9741f3f8f71f06e6bcec6f1ab244ce4b1a04063a08c07d9cfddd95e651",
+        "result.json": "c25f0a1c215f67db014cdd3caa3bf7d45414422bb18ba7144e1364ae48ba5958",
+        "transcript.md": "7f9ec62911b8f1368c2683df120fc385eda19aa14f927dc5da2f02b7cc52c2ab"
+      }
+    },
+    {
+      "run_id": "S562-L4-W-W-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "ba6ec02054e011f4fee0081549c15b7d4122a80edcb5ce405aff8e84120742af",
+        "result.json": "9cf0310b1729e306a51cb13f01127b317627c79a02557d9d75e58be162a9c5a0",
+        "transcript.md": "dc6493b4f1c712b915b603c5b34008c69f6fbb2841d14ee9d5943606ea5eb38c"
+      }
+    },
+    {
+      "run_id": "S562-L5-A-A-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "e5acec2d47226b5821434ed10e555efed17e49fd237ae8c8d3ac9f63858e307d",
+        "result.json": "cc0a3edc07fffb93b10c3ce0c527f7ad3a28d2d50098e5cbcdb047581707f379",
+        "transcript.md": "68de99708ccbbe46d17ee3f46b285d07b1f48880d4cb04f2b0062ac299b60544"
+      }
+    },
+    {
+      "run_id": "S562-L5-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "d44d53a5b6a524dc9097df4c7334dc228039f20cf97fe3eed5c97f8e180e5dc9",
+        "result.json": "9b9e585a2ed68ce8d364a0ecba9d7faf3e47eebdd61e1731931cdb925ed367c1",
+        "transcript.md": "9a24d0ca9ec698b33b44cccf7ea2f2d77f980a01a72faf366222aa5183bf9612"
+      }
+    },
+    {
+      "run_id": "S562-L5-W-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "5607635bca20ab3b8c56dbe284b1f261da498a80897e7d35939b36220bde94c1",
+        "result.json": "b7760bb04e45a97d870d7ddd2445a7bcb692d09d1b06ec362eb5e83c484ca917",
+        "transcript.md": "d704e8320d1770b8bf15aaa2792233c05457a07229bad4955e3d1765b8b92ef2"
+      }
+    },
+    {
+      "run_id": "S595-L1-A-A-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "9874d898ed05a2b9633f1b9d69b76157667ed73601f4f8971736039d6ab0df20",
+        "result.json": "9825e5c143ffd50e331eef2928b876353b3ad579ddb973fdfe5fdab594c62070",
+        "transcript.md": "36559b8eb1ce720c42a6f3c64b2e870084c82bc7b445cbd41c31732afdf2e19f"
+      }
+    },
+    {
+      "run_id": "S595-L1-A-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "130fe9ab988fa74898f1e9210128c0d1a81bffef416bc5297d3fdb93240dd277",
+        "result.json": "563c981fd7d4bcc9fd475b0ed4ccab1eebed478c4bb7f13fbe78bf1932f7930c",
+        "transcript.md": "a537c744f187b123bb5adfd69e6e7636e48f5427d500e1011fe9dab8a76aa0d8"
+      }
+    },
+    {
+      "run_id": "S595-L1-W-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "c1cff65c8886dc0c43758207485cfd870c49c66cc18a61e12bca2c9cad506e79",
+        "result.json": "3c3e90da6ae833712ada10ab24b55367387e7c3f27347447f7face964d481120",
+        "transcript.md": "1adfa41bf7d285ff0d65937c0c5cd5dd3c21b970ef4acab97161f061c1c31fde"
+      }
+    },
+    {
+      "run_id": "S595-L2-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "b829860e8e1ec3fe387c3f9c3f858136af24dea3ae54f81f181d00950cb37583",
+        "result.json": "d9daa9b42870936cd481be19067530868daa4537ab626570a12fa33adaef9124",
+        "transcript.md": "e54ec5b3df1b986de4ec3c610efc44525fa127f961269ca25ec218d1e6ee3019"
+      }
+    },
+    {
+      "run_id": "S595-L2-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "00f2fa85b3600de2aac4d43b63b37219fbab58c2bc1584a68afc579842d2a235",
+        "result.json": "69cd5e088bb5a7caec4f67642b27006dbdfe96fd32d75b3c8e5ff1d8ffb06d76",
+        "transcript.md": "8e9a83bf5527cf00739f1df9cdd49e001b6932f313905962b8e452d45923fb33"
+      }
+    },
+    {
+      "run_id": "S595-L3-D-D-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "9ce3cd447e9e1276936cb1946928bdc5abc70ba66d3bd4e8d5cf0de08e1dd78e",
+        "result.json": "a53d6cbe0015a099e5ff992f217090b1aeb7400db10d56e31f56101cd1775640",
+        "transcript.md": "778cc6a650a9c51c138485cdbb1cfe1619aea1ed547b0ee25f8713471a69cc9e"
+      }
+    },
+    {
+      "run_id": "S595-L3-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "5d5cd144f35b598d55a84dd51149555ddcd40b42cf01f858e305f767da7cba39",
+        "result.json": "8336e36cae1cde1fe4152abfba5144d93bf5536cea31754c5c98136815480553",
+        "transcript.md": "637d9c4cbfb5d314718dd8ce89b86235ae35b8963ae831630bd8c17c7e38f9e8"
+      }
+    },
+    {
+      "run_id": "S595-L4-W-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "4a5519122a09ba6e597d5645ad445fc956a4ea0fbe909efb329af97eaf3bc733",
+        "result.json": "b535bd375e91baad92b37fd88bb3419762902d52be909ff57b88c8cad3a1c99a",
+        "transcript.md": "9151140866758de2361dffacf4fb4f74c28a3deceeda267ec5f075b946da0b6e"
+      }
+    },
+    {
+      "run_id": "S595-L4-W-W-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "e384ed3bd4f761798c7fa347c8dbc390a9082eb40e578dff301d9ee9fd09c05d",
+        "result.json": "9f99f433a872c4b64778ec02f8a48dea16dfb77c16d6476d04cc1ea40ea95277",
+        "transcript.md": "555df0a123feb7a4ba7c4c25df0ef01aee31c04c6f0acca2d19e06c730a6abf8"
+      }
+    },
+    {
+      "run_id": "S595-L5-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "dc9c92cd069304b59bfb80c3dfbcc59f7791d09ddd6b49ae9380006c5c5fa702",
+        "result.json": "cb0181a220509966e4e9d774468d3775acb7cc1c2a4a409fe5a0db7e4a2b3e6d",
+        "transcript.md": "663313a906f39b9e609653503d3f745eda4fd04ceb4873ebbd41d9733b0ece8c"
+      }
+    },
+    {
+      "run_id": "S694-L1-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "52893202f0fec003717f2c178446758a4f204a682ad8dd7c09af826fed70ecef",
+        "result.json": "2d3326557aaed4fd7a0837290d54d4b0e42326da1cf71fff54af43b97bf4eef7",
+        "transcript.md": "ab84ee2868d7af0cffaa6cfcb0d432d4f2813990cecd95f25c05a579eeb99457"
+      }
+    },
+    {
+      "run_id": "S694-L2-A-A-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "c1e5fc4f6631ffa4f039df5bde4beb28eeafcc5dcca5690ce59b4fa4ac5ac80d",
+        "result.json": "aabba471bdb6ce2550523ae2639768d76ab9f5fbf39301b06d7f4d6d640b4f5f",
+        "transcript.md": "05853c47fed84b45bfdb7ab74bb6038fb9c5e4f843330e378c9a9869ba27d904"
+      }
+    },
+    {
+      "run_id": "S694-L2-D-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "8e73f73e3139bd9b748f7bf91c39e16b6b03d17445ca29a0b2e71d2c2a70d5ea",
+        "result.json": "bc454b9d07f8852ef8528a53c7f08b7419c3e730aa970c5431fbfe72d39c9017",
+        "transcript.md": "c9ce16c8dd12b90903f737ed4d918644f021eb7bb3c7cf4154698fa8116af136"
+      }
+    },
+    {
+      "run_id": "S694-L3-A-A-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "518be9ad2ff5fdd3f5ac4c162fa6fd3ec95b184bc9e18c71f80b838e35a9db5f",
+        "result.json": "41d663fc0d3001b74719c0c80a19b09f2139f778f4f86849b1f262548150c43c",
+        "transcript.md": "8a4b59df7b162433e5dea58c9da54f2acf619a5d485c08b6eabbeaaecb258278"
+      }
+    },
+    {
+      "run_id": "S694-L3-W-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "4c20f949be28f7b17681cca9047413bc69d3f1b8f7e66ff6d68eceb8bc954368",
+        "result.json": "d4f34855067e9bf249b81bc521ceee1f56a86620247b487c2fe1c6710e4701c9",
+        "transcript.md": "8040a220befe26ee416038dc6595df587b6ad5da79ed570631189a9e9844402a"
+      }
+    },
+    {
+      "run_id": "S694-L4-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "2f62cf81b65275ef86cdcefcb860c4bced0fe4869ad9ebd512d2a75ddbcb48d9",
+        "result.json": "1c11f3f40d1fb0255bc2fd720f19addb49391932dcd7ce1c8527593f4d3028bc",
+        "transcript.md": "5f0f72a954d0c54eb47f3f8b400d9ae2316fcc4bc8e534e7298d6e65e794978f"
+      }
+    },
+    {
+      "run_id": "S694-L5-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "c18175e279fe74dec8b4e9d9ec2221587416498c5a04d018ed5e007e57db1b5c",
+        "result.json": "ce1e979ca7f39bf7c1c955c3623dcc08f49c32bed58f0e6352e8bea3ad8e9531",
+        "transcript.md": "17157fb678b9e960eddf37f79ed5fb7adde5bcf65927384136eb4ec6f24a7931"
+      }
+    },
+    {
+      "run_id": "S694-L5-A-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "035af72e71eef8916b582b21bb2139b1a631195724d57e3d57a06c93f9154958",
+        "result.json": "33e3ef9c78727c40d5894539f3df1fbc42b06af3abee4ecfc18ba5c7b0b35414",
+        "transcript.md": "f07c3d5f582d75f8e66ac4d3500ba7341de58dd32e080fd8e057fa467a6152e0"
+      }
+    },
+    {
+      "run_id": "S694-L5-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "e02ac45bcd9e75228fdda1530e91f739aeb0c57212671d73f42eaf39d6314362",
+        "result.json": "c3502e7b89be831d9413ecb77a917278ea268b33328535bcc810a41b5688e8b0",
+        "transcript.md": "e5d20ab752587095638242cff6298049c5c6fff3c3261dbbab1f2c060627aedb"
+      }
+    },
+    {
+      "run_id": "S727-L1-A-A-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "fd891da562992ab221581ba148739d21847f79fd6ae6e01cc4a60aedfb5ee6ef",
+        "result.json": "4fd44d9dbd1eb33760dd33eb1aec15b97754bfdf4f88b77030e3bdecf47a5ccd",
+        "transcript.md": "65bac86c835e1a61c6768fbea9a33ee1b7e527de1f88fae9f17e557b60503107"
+      }
+    },
+    {
+      "run_id": "S727-L1-A-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "1ef17d204c8e17f12297259c7cb6125baf3b7a2e4a86092acdf280a9421ea357",
+        "result.json": "2746bae5ae68c9ed6094517008d61711d39d057b8f98312271beaeade1492d68",
+        "transcript.md": "80b1e0f606944dd352931f3519cc9d4588fc7f7d8166b6af29a231f45019be30"
+      }
+    },
+    {
+      "run_id": "S727-L1-A-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "378b0cd1a24b9800583512ae403e360fb7d44be59295b771efabdb005b0ef9f1",
+        "result.json": "c8bbbddf1ac0a8ed71b285836dd1dde0929806946f277468cd8ceea4750c7288",
+        "transcript.md": "632c1552ae42ce5c42182e432a1fd3d13711715d8a6acc4d1b63b2a49bf555bd"
+      }
+    },
+    {
+      "run_id": "S727-L3-D-D-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "d1dc4041c42592e73eb7925cc72d26c2dd6f377e31f385c603b23aa6aa7b4a43",
+        "result.json": "29a220a707a835097c7196b5a25ee604c1a869225561804ef228a12dce053863",
+        "transcript.md": "cd4daa6ba829730fe706d89bb7d84fd5146752e4983cdf34d15585613ace70c6"
+      }
+    },
+    {
+      "run_id": "S727-L3-W-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "67ce3febfd6d39ae9b9457a210f6965ef97b5978fc2697a5b6f21ed71fd1bfe4",
+        "result.json": "eea80eb4f6b822fc46aab33df6c156f99bff7ec468c8d479afdeb401e7b8a07e",
+        "transcript.md": "aa5fdc64e9171e70c0de67a4303c5ba2cb0e7ae51696728764966d62e78ad7a5"
+      }
+    },
+    {
+      "run_id": "S727-L4-A-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "bb69cdcd277a3d399d741b4811760978ceea1ef2ba896fc28adb56923f6ef26c",
+        "result.json": "031e75f18459da08e1be910aabad1389e138806768a5060bf4f162ff43a0e62f",
+        "transcript.md": "50845659a18b581db0841d2dd44511acc4ca1addd69d6664c77be491e0970529"
+      }
+    },
+    {
+      "run_id": "S727-L4-D-none-s1-unwatched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "efc40f299760f96e7e823dab5bd706546a8e7d72b58c49174fdf8a03bbd03460",
+        "result.json": "3167c25edfd79cc67d3339d6bb56ae72331224d3cec32d92d47f8318f395abfd",
+        "transcript.md": "8b53e73885616497d2bdcf650ff09a94174002bf079a243f31129c326f5b69d0"
+      }
+    },
+    {
+      "run_id": "S727-L4-D-none-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "dd9c52a7d3d822c8dd68f328f96cc1a6c43cd31f1aba07ab701f8916cdf0d4cb",
+        "result.json": "98cd26f8e1759dfc00373e4a3ec8a43e3c896770292de7d025b18629017f29ba",
+        "transcript.md": "784ac3002a390c4e5246a471381a030f3221f6fce2dbea11df46a9d00e5bcb1a"
+      }
+    },
+    {
+      "run_id": "S727-L5-D-D-s1-watched",
+      "status": "complete",
+      "control": false,
+      "checksums": {
+        "events.jsonl": "52ad044d51edacd078059a361a54c8ea25420b2653a0a4006c7355dd823c1839",
+        "result.json": "01ee9ca2046f6e11f833e9a5e0c478f531e2bc0415e68ad63afd1b2763be98fc",
+        "transcript.md": "51e306f3fd3d443e026aabc99c24ca75ac0f9203f0d4c38061f606e0b224381d"
+      }
+    }
+  ]
+}

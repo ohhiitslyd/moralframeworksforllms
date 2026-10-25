@@ -1,0 +1,28 @@
+[
+  {
+    "at": "2026-10-25T11:41:36.618309+00:00",
+    "source_sha256": "e53adbd20eaff24ff9749cf1eb657a9f8fd05d57c43cfa60eaf9064c3c6038fa",
+    "continue_on_format_failure": true,
+    "jobs": 48,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://elmekaouihaitham--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  },
+  {
+    "at": "2026-10-25T11:53:54.807218+00:00",
+    "source_sha256": "ef0375c9e62421bc4a56fe978c521640c5dc2bc98bf139a544db3167dba36d6e",
+    "continue_on_format_failure": true,
+    "jobs": 48,
+    "control_seed": 3,
+    "endpoint": {
+      "backend": "openai",
+      "base_url": "https://elmekaouihaitham--collusion-qwen3-32b-reasoning-serve.us-east.modal.run/v1",
+      "model": "Qwen--Qwen3-32B--9216db5781bf21249d130ec9da846c4624c16137+vllm0.11.2-bf16-qwen3-tp2-cudagraph16k-batch32"
+    },
+    "policy": "Preserve every attempted episode; no behavioral retries or prompt changes."
+  }
+]

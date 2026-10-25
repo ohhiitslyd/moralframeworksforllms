@@ -249,7 +249,7 @@ def report(output, planned):
              "Utilities are qualitative, so no numerical welfare arithmetic or B/H threshold is inferred. Expected tips are hypotheses and are never sent to agents.", "",
              "| Pairing | Completed | Both take |", "|---|---:|---:|"]
     if (output / "endpoint_history.json").exists():
-        lines[4:4] = ["Mixed-provider collection: HF credits were exhausted; remaining calls use the deployed Modal Qwen3-32B server. Some episodes span providers. Served weight equivalence is unverified and provider is confounded with collection order. See endpoint_history.json and per-response provenance.", ""]
+        lines[4:4] = ["Collection crossed inference endpoints. Some episodes may span endpoints. Served weight equivalence is unverified and endpoint is confounded with collection order. See endpoint_history.json and per-response provenance.", ""]
     for pairing in sorted({r["spec"]["pairing"] for r in complete}):
         group = [r for r in complete if r["spec"]["pairing"] == pairing]
         lines.append(f"| {pairing} | {len(group)} | {sum(r['scores']['deal_taken'] for r in group)} |")
@@ -268,6 +268,7 @@ def main():
     parser.add_argument("--recover-credit-failures", action="store_true")
     parser.add_argument("--recover-timeouts", action="store_true", help="Explicit checkpoint continuation after diagnosed timeout outage")
     parser.add_argument("--allow-endpoint-change", action="store_true")
+    parser.add_argument("--endpoint-change-reason", default="User-authorized endpoint switch", help="Audited reason recorded in endpoint_history.json")
     parser.add_argument("--env-file", type=Path, default=ROOT / ".env")
     parser.add_argument("--allow-source-change", action="store_true", help="Record an execution-code revision while keeping all prompts/settings frozen")
     parser.add_argument("--continue-on-format-failure", action="store_true")
@@ -323,7 +324,7 @@ def main():
             changes = json.loads(endpoint_path.read_text(encoding="utf-8")) if endpoint_path.exists() else []
             if not changes or changes[-1]["to"] != backend.metadata:
                 changes.append({"at": now(), "from": changes[-1]["to"] if changes else original["endpoint"],
-                                "to": backend.metadata, "reason": "User-authorized fallback after HF credit exhaustion",
+                                "to": backend.metadata, "reason": args.endpoint_change_reason,
                                 "limitation": "Mixed-provider study; served weights/revision are not verified identical."})
                 write_json(endpoint_path, changes)
         history_path = output / "execution_history.json"
