@@ -368,5 +368,5 @@ Do not assume the full experiment must produce a threshold.
 <!-- EXTENDED_LATEST_START -->
 ## Extended pressure study
 
-[Latest analysis, graphs and full logs](results/qwen-pressure-72-v1-snapshot-20261025-145559/README.md): 2,353 usable / 4,320 planned, 119 excluded. Cutoff 2026-10-25T14:55:59.522266+00:00.
+[Latest analysis, graphs and full logs](results/qwen-pressure-72-v1-snapshot-20261025-152937/README.md): 3,026 usable / 4,320 planned, 60 excluded. Cutoff 2026-10-25T15:29:37.859192+00:00.
 <!-- EXTENDED_LATEST_END -->

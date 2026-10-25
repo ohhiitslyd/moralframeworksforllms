@@ -52,3 +52,7 @@ Snapshot `20261025-135352` published with 1,463 completed episodes, 27 format ex
 ## Snapshot 20261025-141425 and progress to 2,353 completions at 14:54 UTC
 
 Snapshot `20261025-141425` published with 1,862 completed episodes, 40 exclusions, 100% reasoning coverage (19,101 responses), and verified remote commit `c18ef75`. Includes level collusion rate plots and distribution charts. Concurrency 96 continued, completing 491 additional episodes in ~40 minutes. At 14:54 UTC, completed episodes reached 2,353 (54.5% of 4,320 planned). A transient network drop caused 73 stream disconnections (`APIConnectionError` and `ReadError: WinError 10054`), cleanly pausing the worker. `ReadError` was added to connection failure recovery. All 73 episodes resume from saved checkpoints with `--recover-connection-failures`.
+
+## Snapshot 20261025-145559 and progress past 3,000 completions at 15:28 UTC
+
+Snapshot `20261025-145559` published with 2,353 completed episodes, 119 exclusions/connection drops, 100% reasoning coverage (24,207 responses), and verified remote commit `1b282e9`. Concurrency 96 resumed under PID 22016. High throughput (~28 eps/min) was sustained continuously without interruption. At 15:28 UTC, completed episodes crossed 3,020 (69.9% of 4,320 planned). The monotonic level dose-response curve remained stable: L1: 5.1%, L2: 13.5%, L3: 23.6%, L4: 33.3%, L5: 54.3%. Only ~1,300 episodes remain to full completion.
