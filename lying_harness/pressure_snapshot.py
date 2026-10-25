@@ -26,7 +26,7 @@ def read(path):
 def freeze(source, output):
     cutoff = datetime.now(timezone.utc).isoformat()
     output.mkdir(parents=True, exist_ok=False)
-    for name in ("manifest.json", "endpoint_history.json", "execution_history.json", "SPEEDUP_RECOVERY.json", "TIMEOUT_RECOVERY.json"):
+    for name in ("manifest.json", "endpoint_history.json", "execution_history.json", "SPEEDUP_RECOVERY.json", "TIMEOUT_RECOVERY.json", "MIGRATION.json", "MIGRATION_SOURCE_MANIFEST.json", "MIGRATION_PRIOR.json", "WRITE_RECOVERY.json"):
         if (source / name).exists():
             shutil.copyfile(source / name, output / name)
     # A result replaced after cutoff may describe an earlier episode start. Store

@@ -329,3 +329,15 @@ The current experiment is the five-setting qualitative pack, run by
 [`prompts/09-extended-pressure-scenarios.json`](prompts/09-extended-pressure-scenarios.json).
 Setting is a variable: military, school, family, social_club, or situational.
 Criteria are welfare / non-deception / authority for every setting.
+
+The eight-setting pack used by historical and ongoing collection is preserved byte-for-byte in
+[prompts/archive/harness-eight-setting](prompts/archive/harness-eight-setting/README.md).
+The five-setting pack is a new design; its scenario IDs and monitoring run IDs must not be
+used to resume an eight-setting results folder. Keep an ongoing collection on its existing
+checkout until it finishes. See [the integration notes](research/10-merge-resolution.md).
+
+<!-- EXTENDED_LATEST_START -->
+## Extended pressure study
+
+[Latest analysis, graphs and full logs](results/qwen-pressure-72-v1-snapshot-20261025-152937/README.md): 3,026 usable / 4,320 planned, 60 excluded. Cutoff 2026-10-25T15:29:37.859192+00:00.
+<!-- EXTENDED_LATEST_END -->

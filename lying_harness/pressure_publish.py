@@ -25,8 +25,8 @@ def git(*args):
 def validate(snapshot):
     summary = read(snapshot / "summary.json")
     rows = list(csv.DictReader((snapshot / "runs.csv").open(encoding="utf-8")))
-    assert len(rows) == 600 == sum(summary["statuses"].values())
-    assert sum(summary["outcomes"].values()) == summary["statuses"]["complete"]
+    assert len(rows) == summary["planned"] == sum(summary["statuses"].values())
+    assert sum(summary["outcomes"].values()) == summary["statuses"].get("complete", 0)
     cutoff = read(snapshot / "SNAPSHOT.json")["cutoff_utc"]
     secrets = [v for p in ROOT.glob(".env*") for k, v in dotenv_values(p).items()
                if v and len(v) > 10 and ("KEY" in k or "TOKEN" in k)]
