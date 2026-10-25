@@ -28,10 +28,10 @@ class PressureTests(unittest.TestCase):
         cls.pack = json.loads((ROOT / "prompts/09-extended-pressure-scenarios.json").read_text(encoding="utf-8"))
 
     def test_matrix(self):
-        self.assertEqual(len(self.pack["scenarios"]), 792)
-        self.assertEqual(len(specs_for(self.pack)), 47520)
+        self.assertEqual(len(self.pack["scenarios"]), 495)
+        self.assertEqual(len(specs_for(self.pack)), 29700)
         self.assertEqual(len(specs_for(self.pack, "weekend")), 540)
-        self.assertEqual(len(specs_for(self.pack, monitoring=["watched"])), 23760)
+        self.assertEqual(len(specs_for(self.pack, monitoring=["watched"])), 14850)
 
     def test_setting_is_a_variable(self):
         self.assertEqual(tuple(self.pack["settings"]), SETTINGS)

@@ -323,10 +323,9 @@ moral reasoning or identify the model as a philosophical type.
 
 ## Live prompts (pressure pack)
 
-The current experiment is the eight-setting qualitative pack, run by
+The current experiment is the five-setting qualitative pack, run by
 `python -m lying_harness.pressure`. Edit scenes in
 [`prompts/build_extended_pack.py`](prompts/build_extended_pack.py) and regenerate
 [`prompts/09-extended-pressure-scenarios.json`](prompts/09-extended-pressure-scenarios.json).
-Setting is a variable: hospital, religious, military, school, volunteer,
-social_club, family, or situational. Criteria are welfare / non-deception /
-authority for every setting.
+Setting is a variable: military, school, family, social_club, or situational.
+Criteria are welfare / non-deception / authority for every setting.
