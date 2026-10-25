@@ -1,0 +1,7 @@
+monitoring,rule,n,lone_take
+unwatched,authority,710,0.0845
+unwatched,nondeception,705,0.0709
+unwatched,welfare,710,0.0394
+watched,authority,707,0.0693
+watched,nondeception,709,0.0733
+watched,welfare,702,0.0613

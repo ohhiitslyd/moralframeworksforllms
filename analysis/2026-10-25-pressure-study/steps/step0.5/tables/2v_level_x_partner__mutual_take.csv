@@ -1,0 +1,11 @@
+level,partner,n,mutual_take
+1,no rule,423,0.0331
+1,same rule,425,0.0753
+2,no rule,421,0.1045
+2,same rule,429,0.1655
+3,no rule,417,0.1511
+3,same rule,426,0.2934
+4,no rule,427,0.2436
+4,same rule,425,0.3953
+5,no rule,425,0.5035
+5,same rule,425,0.5647

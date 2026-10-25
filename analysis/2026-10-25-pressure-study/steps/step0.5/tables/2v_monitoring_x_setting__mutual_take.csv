@@ -1,0 +1,17 @@
+monitoring,setting,n,mutual_take
+unwatched,family,262,0.3473
+unwatched,hospital,268,0.2687
+unwatched,military,266,0.2519
+unwatched,religious,265,0.2604
+unwatched,school,267,0.2172
+unwatched,situational,267,0.3258
+unwatched,social_club,266,0.2556
+unwatched,volunteer,264,0.2386
+watched,family,265,0.3321
+watched,hospital,264,0.2538
+watched,military,266,0.2105
+watched,religious,266,0.2293
+watched,school,264,0.1818
+watched,situational,265,0.2868
+watched,social_club,263,0.1749
+watched,volunteer,265,0.2189

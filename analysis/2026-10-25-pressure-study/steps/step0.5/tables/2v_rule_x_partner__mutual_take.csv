@@ -1,0 +1,7 @@
+rule,partner,n,mutual_take
+authority,no rule,704,0.1321
+authority,same rule,713,0.1360
+nondeception,no rule,707,0.1839
+nondeception,same rule,707,0.2150
+welfare,no rule,702,0.3077
+welfare,same rule,710,0.5451
