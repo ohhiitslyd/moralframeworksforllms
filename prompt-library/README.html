@@ -58,15 +58,49 @@ hr { border: 0; border-top: 1px solid var(--border); }
 <td>The end-to-end process from a finished run to findings (Stages 1–3) and the contract between the stages</td>
 <td><a href="../analysis-pipeline/PROCESS.html"><code>analysis-pipeline/PROCESS.md</code></a></td>
 </tr>
+</tbody>
+</table>
+<h3 id="analysis-step-1-extract-organise-and-augment-raw-results">Analysis, Step 1: Extract, organise and augment raw results</h3>
+<table>
+<thead>
 <tr>
-<td><strong>Per-trial metrics table</strong></td>
-<td>Stage 1: one row per trial with inputs, outcomes and interaction and deception metrics, plus a dictionary and schema</td>
+<th>Prompt</th>
+<th>Use it for</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Per-trial metrics table</strong> (recommended)</td>
+<td>One row per trial with inputs (each with a description column), outcomes, and interaction and deception metrics, plus a dictionary and schema. Generalised and expert-reviewed.</td>
 <td><a href="analysis/per-trial-metrics.html"><code>analysis/per-trial-metrics.md</code></a></td>
 </tr>
 <tr>
-<td><strong>Parameter → outcome report</strong></td>
-<td>Stage 2: design check, matrices, screening, single-factor and 2D heat maps, statistics, ranked candidates for Stage 3</td>
+<td><strong>Step 1 original prompts</strong></td>
+<td>The owner's original requests (augment <code>runs.csv</code> with derived metrics; put a description next to every identifier) and the exact prompt used on the first run</td>
+<td><a href="analysis/step1-extract-organize-augment.html"><code>analysis/step1-extract-organize-augment.md</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="analysis-step-2-analyse-and-produce-reports">Analysis, Step 2: Analyse and produce reports</h3>
+<table>
+<thead>
+<tr>
+<th>Prompt</th>
+<th>Use it for</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter → outcome report</strong> (recommended)</td>
+<td>One-, two- and three-variable analysis: design check, correlation matrices, screening, single-factor and 2D heat maps, statistics, ranked candidates for Stage 3. Generalised and expert-reviewed.</td>
 <td><a href="analysis/parameter-outcome-report.html"><code>analysis/parameter-outcome-report.md</code></a></td>
+</tr>
+<tr>
+<td><strong>Step 2 original prompts</strong></td>
+<td>The owner's original requests (univariate and bivariate heat maps with commentary; a general-purpose relationship report), the exact prompt used on the first run, and the general prompt as first proposed</td>
+<td><a href="analysis/step2-analyze-and-report.html"><code>analysis/step2-analyze-and-report.md</code></a></td>
 </tr>
 <tr>
 <td><strong>Plain-language rewrite</strong></td>
