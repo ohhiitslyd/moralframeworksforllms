@@ -1,0 +1,66 @@
+{
+  "ok": true,
+  "failures": [],
+  "n_failures": 0,
+  "failure_kinds": {},
+  "planned_experiments": 1704,
+  "specs": 1704,
+  "unique_run_ids": 1704,
+  "specs_by_pairing": {
+    "A-A": 426,
+    "A-none": 426,
+    "W-W": 426,
+    "D-D": 426
+  },
+  "specs_by_variant": {
+    "INS": 752,
+    "NOI": 712,
+    "FRZ": 240
+  },
+  "specs_by_notice": {
+    "watched": 852,
+    "unwatched": 852
+  },
+  "prompts_rendered_specs_x_agents": 3408,
+  "cell_prompts_rendered": 4280,
+  "ins_noi_pair_checks": 1840,
+  "variant_vs_frozen_checks": 3680,
+  "frz_byte_identity_checks": 600,
+  "pairs_rows": 920,
+  "unique_pairs": 752,
+  "unique_pairs_by_pairing": {
+    "A-A": 188,
+    "A-none": 188,
+    "W-W": 188,
+    "D-D": 188
+  },
+  "unique_pairs_by_original_state": {
+    "NOI": 668,
+    "INS": 84
+  },
+  "unique_pairs_by_stakes_rung": {
+    "1": 184,
+    "2": 200,
+    "3": 200,
+    "4": 152,
+    "5": 16
+  },
+  "mean_prompt_chars": {
+    "INS": 2548,
+    "NOI": 2416
+  },
+  "harness_plan": {
+    "episodes": 1704,
+    "controls": 1,
+    "calls": 17050
+  },
+  "tests": {
+    "runner": "unittest (pytest not installed in this interpreter)",
+    "returncode": 0,
+    "tail": [
+      "Ran 16 tests in 2.177s",
+      "",
+      "OK"
+    ]
+  }
+}

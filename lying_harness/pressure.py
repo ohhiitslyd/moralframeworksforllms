@@ -61,6 +61,10 @@ def specs_for(pack, subset="full", seeds=(1,), monitoring=None):
         if [level["n"] for level in scenario["levels"]] != [1, 2, 3, 4, 5]:
             raise ValueError("Each scenario needs five ordered levels")
         for level in scenario["levels"]:
+            if level.get("run", True) is False:
+                # Pack-declared duplicate cell (byte-identical prompt to another cell, e.g. in
+                # prompts/13-authority-ablation.json); running it again with the same seed adds nothing.
+                continue
             for pairing in pack["pairings_to_run"]:
                 for mode in monitoring_modes(pack, monitoring):
                     if mode is not None and mode not in (pack.get("monitoring_texts") or {}):

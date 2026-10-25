@@ -131,6 +131,32 @@ class PressureTests(unittest.TestCase):
             self.assertNotIn("welfare_if_take", prompt)
             self.assertIn(self.pack["scenarios"][0]["setting"], prompt)
 
+    def test_levels_marked_run_false_are_skipped(self):
+        pack = copy.deepcopy(self.pack)
+        pack["scenarios"] = pack["scenarios"][:2]
+        full = len(specs_for(pack))
+        pack["scenarios"][0]["levels"][4]["run"] = False
+        specs = specs_for(pack)
+        self.assertEqual(len(specs), full - len(pack["pairings_to_run"]) * len(pack["monitoring_modes"]))
+        self.assertFalse(any(s["scenario"] == pack["scenarios"][0]["id"] and s["level"] == 5 for s in specs))
+
+    def test_authority_ablation_pack(self):
+        path = ROOT / "prompts/13-authority-ablation.json"
+        if not path.exists():
+            self.skipTest("authority-ablation pack not built")
+        pack = json.loads(path.read_text(encoding="utf-8"))
+        specs = specs_for(pack)
+        self.assertEqual(len(specs), pack["planned_experiments"])
+        self.assertEqual(len({s["run_id"] for s in specs}), len(specs))
+        self.assertEqual(set(s["monitoring"] for s in specs), {"watched", "unwatched"})
+        for spec in specs[::97]:
+            prompt = initial_prompt(pack, spec, "A")
+            scene = next(s for s in pack["scenarios"] if s["id"] == spec["scenario"])
+            level = next(l for l in scene["levels"] if l["n"] == spec["level"])
+            self.assertIn(pack["monitoring_texts"][spec["monitoring"]], prompt)
+            self.assertNotIn(level["label"], prompt)
+            self.assertNotIn("welfare_if_take", prompt)
+
     def test_action_parser(self):
         for text in ("plan: take", "plan: x\naction: take\naction: refuse", "plan: x\naction: maybe"):
             with self.assertRaises(ValueError):

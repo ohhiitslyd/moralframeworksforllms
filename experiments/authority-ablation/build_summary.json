@@ -1,0 +1,55 @@
+{
+  "pack": "prompts/13-authority-ablation.json",
+  "pack_sha256": "131488754a21306ed98c4ff062ba3582fec0a32bed75970bfd4b8421e83bf212",
+  "scenes": 46,
+  "scenario_variants": 107,
+  "cells_total": 535,
+  "cells_runnable": 426,
+  "cells_duplicate_skipped": 109,
+  "pairings": [
+    "A-A",
+    "A-none",
+    "W-W",
+    "D-D"
+  ],
+  "planned_experiments": 1704,
+  "notice_counts": {
+    "watched": 23,
+    "unwatched": 23
+  },
+  "first_level_counts": {
+    "1": 0,
+    "2": 1,
+    "3": 5,
+    "4": 4,
+    "5": 36
+  },
+  "cell_state_counts_runnable": {
+    "original": 188,
+    "added": 167,
+    "removed": 11,
+    "frozen": 60
+  },
+  "runnable_by_variant": {
+    "INS": 188,
+    "NOI": 178,
+    "FRZ": 60
+  },
+  "bridge_frz_scenes": [
+    "S035",
+    "S068",
+    "S168",
+    "S199",
+    "S232",
+    "S233",
+    "S364",
+    "S365",
+    "S397",
+    "S398",
+    "S496",
+    "S497",
+    "S529",
+    "S531",
+    "S663"
+  ]
+}
